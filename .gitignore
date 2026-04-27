@@ -1,0 +1,10 @@
+# Exclude PHP mailer (contains SMTP credentials)
+send_mail.php
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/

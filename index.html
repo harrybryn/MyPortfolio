@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Sevilla | Full Stack Developer</title>
+    <meta name="description"
+        content="Professional portfolio of John Doe, a Software Engineer specializing in modern scalable web applications.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- Background Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="assets/logo.png" alt="Harry Sevilla Logo" class="header-logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="btn-primary btn-small">Let's Talk</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <button class="close-menu-btn" id="close-menu-btn" aria-label="Close menu">
+                <i data-lucide="x"></i>
+            </button>
+            <ul class="mobile-nav-links">
+                <li><a href="#about" class="mobile-link">About</a></li>
+                <li><a href="#skills" class="mobile-link">Skills</a></li>
+                <li><a href="#projects" class="mobile-link">Projects</a></li>
+                <li><a href="#experience" class="mobile-link">Experience</a></li>
+                <li><a href="#contact" class="mobile-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero section">
+            <div class="container hero-content">
+                <div class="hero-text fade-in-up">
+                    <p class="greeting">Hi, my name is</p>
+                    <h1 class="hero-title">Harry Sevilla.</h1>
+                    <h2 class="hero-subtitle">I build digital experiences.</h2>
+                    <p class="hero-desc">
+                        I’m currently a 3rd Year IT student at National University Baliwag, aspiring to become a Full
+                        Stack Developer. I’m passionate about building exceptional digital experiences and focused on
+                        learning to create accessible, human-centered products and elegant solutions to complex
+                        problems.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn-primary">View My Work <i data-lucide="arrow-right"
+                                class="icon-small"></i></a>
+                        <a href="#contact" class="btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="hero-visual fade-in">
+                    <div class="profile-image-container">
+                        <img src="assets/profile.png" alt="Profile Picture" class="profile-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about section">
+            <div class="container">
+                <div class="section-header fade-in-up">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="about-content">
+                    <div class="about-text fade-in-up">
+                        <p>
+                            Hello! My name is Harry, and I’m a 3rd-year IT student who enjoys creating things that live
+                            on the internet. My interest in web development started when I became an IT student three
+                            years ago, and since then I’ve been passionate about learning how the web works and creating
+                            engaging digital experiences.
+                        </p>
+                        <p>
+                            Fast-forward to today, I’ve spent my time building projects as an IT student, collaborating
+                            on academic and personal works, and growing my skills in development. My main focus these
+                            days is learning to build accessible, inclusive products and digital experiences while
+                            working toward becoming a Full Stack Developer.
+                        </p>
+                    </div>
+                    <div class="about-stats fade-in-up" style="transition-delay: 0.2s">
+                        <div class="stat-box">
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label">Years of<br>Experience</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Projects<br>Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills section">
+            <div class="container">
+                <div class="section-header fade-in-up">
+                    <h2 class="section-title">My Expertise</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card fade-in-up">
+                        <div class="skill-icon">
+                            <i data-lucide="layout"></i>
+                        </div>
+                        <h3>Frontend Development</h3>
+                        <p>Building responsive, interactive, and accessible user interfaces using modern web
+                            technologies.</p>
+                        <ul class="skill-tags">
+                            <li>React</li>
+                            <li>JavaScript</li>
+                            <li>TypeScript</li>
+                            <li>HTML5</li>
+                            <li>CSS</li>
+                            <li>Tailwind CSS</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card fade-in-up" style="transition-delay: 0.1s">
+                        <div class="skill-icon">
+                            <i data-lucide="server"></i>
+                        </div>
+                        <h3>Backend Development</h3>
+                        <p>Creating robust, scalable APIs and server-side logic to power complex web applications.</p>
+                        <ul class="skill-tags">
+                            <li>Node.js</li>
+                            <li>Express</li>
+                            <li>Python</li>
+                            <li>PostgreSQL</li>
+                            <li>My SQL</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card fade-in-up" style="transition-delay: 0.2s">
+                        <div class="skill-icon">
+                            <i data-lucide="wrench"></i>
+                        </div>
+                        <h3>Tools & Architecture</h3>
+                        <p>Utilizing modern tooling and architectural patterns for efficient development and deployment.
+                        </p>
+                        <ul class="skill-tags">
+                            <li>Git / GitHub</li>
+                            <li>Figma</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects section">
+            <div class="container">
+                <div class="section-header fade-in-up">
+                    <h2 class="section-title">Featured Work</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="projects-grid">
+
+                    <!-- Project 1: BoyCold Cafe POS -->
+                    <div class="project-card fade-in-up">
+                        <div class="project-image">
+                            <!-- Image Carousel -->
+                            <div class="carousel" id="carousel-boycold">
+                                <div class="carousel-track">
+                                    <img src="assets/boycoldDashbord.png" alt="BoyCold Dashboard"
+                                        class="carousel-slide">
+                                    <img src="assets/boycoldLogin.png" alt="BoyCold Login" class="carousel-slide">
+                                    <img src="assets/boycoldPos.png" alt="BoyCold POS" class="carousel-slide">
+                                    <img src="assets/boycoldMenu.png" alt="BoyCold Menu" class="carousel-slide">
+                                    <img src="assets/boycoldOrder.png" alt="BoyCold Order" class="carousel-slide">
+                                    <img src="assets/boycoldInventory.png" alt="BoyCold Inventory"
+                                        class="carousel-slide">
+                                    <img src="assets/boycoldReceipt.png" alt="BoyCold Receipt" class="carousel-slide">
+                                </div>
+                                <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                        data-lucide="chevron-left"></i></button>
+                                <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                        data-lucide="chevron-right"></i></button>
+                                <div class="carousel-dots" id="dots-boycold"></div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <p class="project-overline">Featured Project</p>
+                            <h3 class="project-title">BoyCold Cafe POS System</h3>
+                            <p class="project-desc">
+                                A full-featured point-of-sale system built for cafe operations. The system covers the
+                                entire workflow — from a secure login screen and interactive menu management to
+                                real-time
+                                order processing, sales tracking, inventory monitoring, and receipt generation — all
+                                designed with an intuitive interface to streamline daily transactions.
+                            </p>
+                            <ul class="project-tech">
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                                <li>PHP</li>
+                                <li>MySQL</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Ever Gotesco -->
+                    <div class="project-card fade-in-up" style="transition-delay: 0.1s">
+                        <div class="project-image">
+                            <!-- Image Carousel -->
+                            <div class="carousel" id="carousel-evergotesco">
+                                <div class="carousel-track">
+                                    <img src="assets/evergotesco.png" alt="Ever Gotesco Store Directory"
+                                        class="carousel-slide">
+                                    <img src="assets/evergotescomap.png" alt="Ever Gotesco Floor Map"
+                                        class="carousel-slide">
+                                    <img src="assets/evergotescoview.png" alt="Ever Gotesco Store Detail"
+                                        class="carousel-slide">
+                                </div>
+                                <button class="carousel-btn carousel-prev" aria-label="Previous slide"><i
+                                        data-lucide="chevron-left"></i></button>
+                                <button class="carousel-btn carousel-next" aria-label="Next slide"><i
+                                        data-lucide="chevron-right"></i></button>
+                                <div class="carousel-dots" id="dots-evergotesco"></div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <p class="project-overline">Featured Project</p>
+                            <h3 class="project-title">Ever Gotesco Web System</h3>
+                            <p class="project-desc">
+                                A web-based mall information system for Ever Gotesco Commonwealth. Features a full
+                                store directory with category and floor filters, an interactive floor map showing
+                                tenant layouts per level, and detailed store pages with operating hours and location
+                                info — giving shoppers a seamless digital mall experience.
+                            </p>
+                            <ul class="project-tech">
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                                <li>PHP</li>
+                                <li>MySQL</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Fundline -->
+                    <div class="project-card fade-in-up" style="transition-delay: 0.2s">
+                        <div class="project-image">
+                            <img src="assets/fundline.png" alt="Fundline Project" class="project-img-real">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link" aria-label="View Project"><i
+                                        data-lucide="external-link"></i></a>
+                                <a href="#" class="project-link" aria-label="View Source"><i
+                                        data-lucide="github"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <p class="project-overline">Featured Project</p>
+                            <h3 class="project-title">Fundline</h3>
+                            <p class="project-desc">
+                                A financial management and fund tracking platform designed to help users monitor
+                                budgets,
+                                manage transactions, and visualize financial data. Fundline provides a clean, intuitive
+                                dashboard that simplifies personal and organizational finance management.
+                            </p>
+                            <ul class="project-tech">
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                                <li>PHP</li>
+                                <li>MySQL</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: RNF Trucking -->
+                    <div class="project-card fade-in-up" style="transition-delay: 0.3s">
+                        <div class="project-image">
+                            <img src="assets/rnftrucking.png" alt="RNF Trucking Project" class="project-img-real">
+                            <div class="project-overlay">
+                                <a href="#" class="project-link" aria-label="View Project"><i
+                                        data-lucide="external-link"></i></a>
+                                <a href="#" class="project-link" aria-label="View Source"><i
+                                        data-lucide="github"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <p class="project-overline">Featured Project</p>
+                            <h3 class="project-title">RNF Trucking Management System</h3>
+                            <p class="project-desc">
+                                A logistics and fleet management system built for RNF Trucking. The platform handles
+                                truck dispatch scheduling, driver management, delivery tracking, and cargo records —
+                                streamlining the end-to-end operations of a trucking business with a centralized
+                                digital solution.
+                            </p>
+                            <ul class="project-tech">
+                                <li>HTML</li>
+                                <li>CSS</li>
+                                <li>JavaScript</li>
+                                <li>PHP</li>
+                                <li>MySQL</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience section">
+            <div class="container">
+                <div class="section-header fade-in-up">
+                    <h2 class="section-title">My Journey</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="timeline">
+
+                    <!-- Education -->
+                    <div class="timeline-item fade-in-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>Bachelor of Science in Information Technology <span class="company">@ National
+                                        University Baliwag</span></h3>
+                                <span class="timeline-date">2023 - Present</span>
+                            </div>
+                            <ul class="timeline-desc">
+                                <li>Currently a 3rd-year IT student with a focus on web development and mobile
+                                    developmnent.</li>
+                                <li>Consistently applying classroom knowledge to hands-on projects covering both
+                                    frontend and backend development.</li>
+                                <li>Developing strong foundations in data structures, database management, and system
+                                    design.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Academic Projects -->
+                    <div class="timeline-item fade-in-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>Freelance Developer <span class="company">@ Personal</span></h3>
+                                <span class="timeline-date">2022 - Present</span>
+                            </div>
+                            <ul class="timeline-desc">
+                                <li>Designed and built full-stack systems including a Cafe POS, a Trucking Management
+                                    System, and a Financial Tracking platform as part of coursework.</li>
+                                <li>Collaborated with classmates in team projects, practicing version control with Git
+                                    and GitHub throughout the development lifecycle.</li>
+                                <li>Applied UI/UX principles using Figma to plan and prototype interfaces before
+                                    implementation.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Self-Learning -->
+                    <div class="timeline-item fade-in-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <h3>Self-Taught Developer <span class="company">@ Personal</span></h3>
+                                <span class="timeline-date">2022 - Present</span>
+                            </div>
+                            <ul class="timeline-desc">
+                                <li>Continuously expanding skills through online resources, tutorials, and personal
+                                    projects beyond the academic curriculum.</li>
+                                <li>Explored modern technologies including React, Node.js, and REST API development to
+                                    supplement coursework.</li>
+                                <li>Built and iterated on personal portfolio projects to deepen understanding of
+                                    real-world development workflows.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
+            <div class="container contact-container fade-in-up">
+                <div class="contact-info">
+                    <h2 class="contact-title">Get In Touch</h2>
+                    <p class="contact-desc">
+                        Although I'm not currently looking for any new opportunities, my inbox is always open. Whether
+                        you have a question or just want to say hi, I'll try my best to get back to you!
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i data-lucide="mail"></i>
+                            <a href="mailto:Harrysevilla567@gmail.com">Harrysevilla567@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="phone"></i>
+                            <a href="tel:+639076478115">+63 907 647 8115</a>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="map-pin"></i>
+                            <span>San Miguel, Bulacan, Philippines</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/Mowteeeeeeeeeeeee" target="_blank" rel="noopener noreferrer"
+                            aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S9 17.44 9 18v4" />
+                                <path d="M9 18c-4.51 2-5-2-7-2" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect width="4" height="12" x="2" y="9" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required
+                                placeholder="Hello! I'd like to discuss..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full" id="send-btn">
+                            <span id="send-btn-text">Send Message</span>
+                            <i data-lucide="send" class="icon-small" id="send-icon"></i>
+                        </button>
+                        <p id="form-status" class="form-status"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Designed & Built with <i data-lucide="heart" class="icon-tiny text-accent"></i> by Harry Sevilla</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
