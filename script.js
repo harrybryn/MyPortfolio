@@ -157,9 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 const formData = new FormData(contactForm);
-                const res      = await fetch('send_mail.php', {
+                const body = Object.fromEntries(formData.entries());
+                const res = await fetch('/api/send-mail', {
                     method: 'POST',
-                    body: formData
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
                 });
 
                 const data = await res.json();
