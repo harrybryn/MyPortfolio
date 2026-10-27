@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f1117"/>
+      <stop offset="100%" stop-color="#08090c"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#171923" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#10121a" stop-opacity="0.9"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#grid)"/>
+  
+  <rect x="0" y="0" width="800" height="48" fill="#13151f" stroke="#1f2330" stroke-width="1"/>
+  <circle cx="28" cy="24" r="10" fill="#06b6d4" opacity="0.8"/>
+  <text x="48" y="29" fill="#f1f5f9" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">WanderLocal · Itinerary Engine</text>
+  <rect x="630" y="12" width="140" height="24" rx="12" fill="#1e293b"/>
+  <text x="645" y="28" fill="#38bdf8" font-family="-apple-system, sans-serif" font-size="11">+ New Custom Trip</text>
+
+  <!-- Destination Discovery Grid -->
+  <g transform="translate(30, 70)">
+    <!-- Card 1 -->
+    <rect width="230" height="390" rx="14" fill="url(#panel)" stroke="#222634"/>
+    <rect x="12" y="12" width="206" height="150" rx="10" fill="#16202c"/>
+    <circle cx="115" cy="87" r="28" fill="#0284c7" opacity="0.4"/>
+    <text x="115" y="93" text-anchor="middle" fill="#7dd3fc" font-family="sans-serif" font-size="20">Batanes</text>
+    <text x="20" y="195" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="16" font-weight="700">Rolling Hills & Lighthouses</text>
+    <text x="20" y="218" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="12">Basco, Batanes · 4 Days / 3 Nights</text>
+    <text x="20" y="250" fill="#cbd5e1" font-family="-apple-system, sans-serif" font-size="12">Autonomous itinerary planner with geo-tagged sunrise spots and local homestay routing.</text>
+    <rect x="20" y="340" width="90" height="26" rx="6" fill="#0369a1"/>
+    <text x="32" y="357" fill="#fff" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">View Day Plan</text>
+  </g>
+
+  <g transform="translate(285, 70)">
+    <!-- Card 2 -->
+    <rect width="230" height="390" rx="14" fill="url(#panel)" stroke="#222634"/>
+    <rect x="12" y="12" width="206" height="150" rx="10" fill="#1a2323"/>
+    <circle cx="115" cy="87" r="28" fill="#0d9488" opacity="0.4"/>
+    <text x="115" y="93" text-anchor="middle" fill="#5eead4" font-family="sans-serif" font-size="20">Siargao</text>
+    <text x="20" y="195" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="16" font-weight="700">Cloud 9 & Island Hopping</text>
+    <text x="20" y="218" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="12">General Luna · 5 Days / 4 Nights</text>
+    <text x="20" y="250" fill="#cbd5e1" font-family="-apple-system, sans-serif" font-size="12">Tide-synchronized surfing schedule and multi-stop lagoon excursion checklist.</text>
+    <rect x="20" y="340" width="90" height="26" rx="6" fill="#0f766e"/>
+    <text x="32" y="357" fill="#fff" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">View Day Plan</text>
+  </g>
+
+  <g transform="translate(540, 70)">
+    <!-- Card 3 -->
+    <rect width="230" height="390" rx="14" fill="url(#panel)" stroke="#222634"/>
+    <rect x="12" y="12" width="206" height="150" rx="10" fill="#291e23"/>
+    <circle cx="115" cy="87" r="28" fill="#e11d48" opacity="0.4"/>
+    <text x="115" y="93" text-anchor="middle" fill="#fda4af" font-family="sans-serif" font-size="20">Sagada</text>
+    <text x="20" y="195" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="16" font-weight="700">Caves & Sea of Clouds</text>
+    <text x="20" y="218" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="12">Mountain Province · 3 Days</text>
+    <text x="20" y="250" fill="#cbd5e1" font-family="-apple-system, sans-serif" font-size="12">Hiking trail elevation tracker and mountain weather forecasting integration.</text>
+    <rect x="20" y="340" width="90" height="26" rx="6" fill="#be123c"/>
+    <text x="32" y="357" fill="#fff" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">View Day Plan</text>
+  </g>
+
+</svg>

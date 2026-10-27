@@ -13,26 +13,29 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://harrysevilla.vercel.app/">
     <meta property="og:title" content="Harry Sevilla — Full-Stack Developer">
-    <meta property="og:description" content="Full-stack developer building clean web systems with PHP, MySQL, React, and TypeScript.">
+    <meta property="og:description"
+        content="Full-stack developer building clean web systems with PHP, MySQL, React, and TypeScript.">
     <meta property="og:image" content="https://harrysevilla.vercel.app/assets/profile.png">
 
     <!-- Google Fonts: Inter + JetBrains Mono for subtle accents -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
     <!-- Immediate Theme Initialization (Eliminates flash & supports System/Light/Dark) -->
     <script>
-        (function() {
+        (function () {
             var p = 'system';
-            try { p = localStorage.getItem('portfolio-theme') || 'system'; } catch (e) {}
+            try { p = localStorage.getItem('portfolio-theme') || 'system'; } catch (e) { }
             var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
             var isDark = p === 'dark' || (p === 'system' && !!mq && mq.matches);
             document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=88">
+    <link rel="stylesheet" href="styles.css?v=105">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -62,38 +65,78 @@
                     <div class="nav-menu-theme-row">
                         <span class="nav-menu-theme-label">Theme</span>
                         <div class="theme-switch" role="group" aria-label="Theme selection">
-                            <button type="button" data-theme-opt="system" class="theme-opt" title="System theme" aria-label="System theme">
-                                <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                            <button type="button" data-theme-opt="system" class="theme-opt" title="System theme"
+                                aria-label="System theme">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor"
+                                        stroke-width="1.8" />
+                                    <path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.8"
+                                        stroke-linecap="round" />
+                                </svg>
                             </button>
-                            <button type="button" data-theme-opt="light" class="theme-opt" title="Light theme" aria-label="Light theme">
-                                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                            <button type="button" data-theme-opt="light" class="theme-opt" title="Light theme"
+                                aria-label="Light theme">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+                                    <path
+                                        d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"
+                                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                                </svg>
                             </button>
-                            <button type="button" data-theme-opt="dark" class="theme-opt" title="Dark theme" aria-label="Dark theme">
-                                <svg viewBox="0 0 24 24" fill="none"><path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                            <button type="button" data-theme-opt="dark" class="theme-opt" title="Dark theme"
+                                aria-label="Dark theme">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor"
+                                        stroke-width="1.8" stroke-linejoin="round" />
+                                </svg>
                             </button>
                         </div>
                     </div>
                     <button type="button" class="nav-menu-cta-btn open-contact-modal" id="navMenuContactBtn">
                         <span>Let's talk</span>
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
                     </button>
                 </div>
             </nav>
 
             <div class="nav-right">
-                <button type="button" class="nav-bored-btn" id="openArcadeBtn" title="Are you bored? Play mini arcade games" aria-label="Mini Arcade">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line><rect x="2" y="6" width="20" height="12" rx="2"></rect></svg>
-                    <span>bored?</span>
+                <button type="button" class="nav-bored-btn" id="openArcadeBtn"
+                    title="Test your developer skills & reflexes" aria-label="Test your Skills">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                        <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8">
+                        </path>
+                    </svg>
+                    <span>Test your Skills</span>
                 </button>
                 <div class="theme-switch" role="group" aria-label="Theme selection">
-                    <button type="button" data-theme-opt="system" class="theme-opt" title="System theme" aria-label="System theme">
-                        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <button type="button" data-theme-opt="system" class="theme-opt" title="System theme"
+                        aria-label="System theme">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8" />
+                            <path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        </svg>
                     </button>
-                    <button type="button" data-theme-opt="light" class="theme-opt" title="Light theme" aria-label="Light theme">
-                        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    <button type="button" data-theme-opt="light" class="theme-opt" title="Light theme"
+                        aria-label="Light theme">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" />
+                            <path
+                                d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"
+                                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        </svg>
                     </button>
-                    <button type="button" data-theme-opt="dark" class="theme-opt" title="Dark theme" aria-label="Dark theme">
-                        <svg viewBox="0 0 24 24" fill="none"><path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                    <button type="button" data-theme-opt="dark" class="theme-opt" title="Dark theme"
+                        aria-label="Dark theme">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor"
+                                stroke-width="1.8" stroke-linejoin="round" />
+                        </svg>
                     </button>
                 </div>
                 <button type="button" class="nav-cta-btn open-contact-modal" id="headerContactBtn">Let's talk</button>
@@ -110,42 +153,59 @@
             <div class="container hero-container">
                 <div class="hero-profile-row">
                     <div class="hero-avatar-box" title="Harry Sevilla">
-                        <img src="assets/profile.png" alt="Harry Sevilla" class="hero-avatar-img hero-avatar-default" loading="eager">
-                        <img src="assets/profile2.png" alt="Harry Sevilla saying Hi" class="hero-avatar-img hero-avatar-hover" loading="eager">
+                        <img src="assets/profile.png" alt="Harry Sevilla" class="hero-avatar-img hero-avatar-default"
+                            loading="eager">
+                        <img src="assets/profile2.png" alt="Harry Sevilla saying Hi"
+                            class="hero-avatar-img hero-avatar-hover" loading="eager">
                     </div>
 
                     <div class="hero-intro-text">
-                        <h1 class="hero-name">Harry Sevilla</h1>
+                        <h1 class="hero-name"><span class="hero-typewriter-text" id="heroNameTypewriter">Harry Sevilla</span><span class="hero-cursor" aria-hidden="true">|</span></h1>
                         <p class="hero-role">Full-Stack Developer &amp; IT Student</p>
-                        
+
                         <div class="hero-bio">
                             <p>
-                                I build clean, reliable web applications and digital systems. Currently studying Information Technology at <strong>National University</strong> and developing full-stack projects using PHP, MySQL, React, React Native, and Next.js.
+                                I build clean, reliable web applications and digital systems. Currently studying
+                                Information Technology at <strong>National University</strong> and developing full-stack
+                                projects using PHP, MySQL, React, React Native, and Next.js.
                             </p>
                             <p class="hero-bio-sub">
-                                I love turning real operational ideas into software people actually use — from point-of-sale systems to interactive mall directories and collaborative mobile travel apps.
+                                I love turning real operational ideas into software people actually use — from
+                                point-of-sale systems to interactive mall directories and collaborative mobile travel
+                                apps.
                             </p>
 
-                            <a href="about.html" target="_blank" rel="noopener noreferrer" class="hero-bio-toggle-btn" id="heroBioLink" title="Read more about Harry Sevilla in a new tab">
+                            <a href="about.html" class="hero-bio-toggle-btn"
+                                id="heroBioLink" title="Read more about Harry Sevilla">
                                 <span>See more about me</span>
-                                <i data-lucide="arrow-up-right"></i>
+                                <i data-lucide="arrow-right"></i>
                             </a>
                         </div>
 
                         <!-- Direct links strip -->
                         <div class="hero-links">
-                            <a href="https://github.com/harrybryn" target="_blank" rel="noopener noreferrer" class="link-item" title="GitHub">
-                                <svg class="link-item-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+                            <a href="https://github.com/harrybryn" target="_blank" rel="noopener noreferrer"
+                                class="link-item" title="GitHub">
+                                <svg class="link-item-icon" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" aria-hidden="true">
+                                    <path
+                                        d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+                                    </path>
                                     <path d="M9 18c-4.51 2-5-2-7-2"></path>
                                 </svg>
                                 <span>github</span>
                                 <i data-lucide="arrow-up-right" class="link-item-arrow"></i>
                             </a>
                             <span class="link-sep">/</span>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="link-item" title="LinkedIn">
-                                <svg class="link-item-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="link-item"
+                                title="LinkedIn">
+                                <svg class="link-item-icon" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" aria-hidden="true">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                    </path>
                                     <rect x="2" y="9" width="4" height="12"></rect>
                                     <circle cx="4" cy="4" r="2"></circle>
                                 </svg>
@@ -153,16 +213,22 @@
                                 <i data-lucide="arrow-up-right" class="link-item-arrow"></i>
                             </a>
                             <span class="link-sep">/</span>
-                            <a href="https://www.facebook.com/Mowteeeeeeeeeeeee" target="_blank" rel="noopener noreferrer" class="link-item" title="Facebook">
-                                <svg class="link-item-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <a href="https://www.facebook.com/Mowteeeeeeeeeeeee" target="_blank"
+                                rel="noopener noreferrer" class="link-item" title="Facebook">
+                                <svg class="link-item-icon" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" aria-hidden="true">
                                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                                 </svg>
                                 <span>facebook</span>
                                 <i data-lucide="arrow-up-right" class="link-item-arrow"></i>
                             </a>
                             <span class="link-sep">/</span>
-                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="link-item" title="Instagram">
-                                <svg class="link-item-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="link-item"
+                                title="Instagram">
+                                <svg class="link-item-icon" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" aria-hidden="true">
                                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
@@ -172,7 +238,9 @@
                             </a>
                             <span class="link-sep">/</span>
                             <a href="mailto:Harrysevilla567@gmail.com" class="link-item" title="Email">
-                                <svg class="link-item-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <svg class="link-item-icon" viewBox="0 0 24 24" width="14" height="14" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" aria-hidden="true">
                                     <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                                 </svg>
@@ -212,7 +280,7 @@
                 <div class="coverflow-top-bar">
                     <div class="section-title-group">
                         <span class="section-num">01 —</span>
-                        <h2 class="section-heading">Selected Projects</h2>
+                        <h2 class="section-heading">Featured Projects</h2>
                     </div>
                     <div class="coverflow-top-actions">
                         <a href="projects.html" class="see-all-link" title="View all projects in subpage archive">
@@ -236,76 +304,128 @@
                     <div class="coverflow-cards-track" id="cfCardsTrack">
 
                         <!-- Card 1: ANI-GROW -->
-                        <div class="cf-card is-active" data-index="0">
+                        <div class="cf-card is-active" data-index="0" data-project="anigrow">
                             <div class="cf-card-inner">
                                 <div class="cf-card-content">
                                     <div class="cf-card-meta-top">
-                                        <div class="cf-card-logo-box">
-                                            <img src="assets/anigrow_logo.png" alt="ANI-GROW Logo" class="cf-card-logo">
+                                        <div class="cf-card-brand">
+                                            <div class="cf-card-logo-box">
+                                                <img src="assets/anigrow_logo.png" alt="ANI-GROW Logo"
+                                                    class="cf-card-logo">
+                                            </div>
+                                            <div class="cf-card-titles">
+                                                <h3 class="cf-card-title">ANI-GROW</h3>
+                                                <span class="cf-card-sub">Poultry &amp; Livestock Analytics</span>
+                                            </div>
                                         </div>
                                         <span class="cf-card-year">2026</span>
                                     </div>
-                                    <h3 class="cf-card-title">ANI-GROW</h3>
+
+                                    <div class="cf-card-body">
+                                        <p class="cf-card-desc">AI guidance and telemetry platform for livestock operations with automated sorting gates and feeding dispensers.</p>
+                                    </div>
+
                                     <div class="cf-card-meta-bottom">
-                                        <span class="cf-card-sub">Poultry &amp; Livestock Analytics</span>
-                                        <span class="cf-card-tech">React · React Native · IoT</span>
+                                        <span class="cf-card-cta is-locked" title="Project details currently locked">
+                                            <span>View Details</span>
+                                            <i data-lucide="lock"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Card 2: TOURGO -->
-                        <div class="cf-card is-next" data-index="1">
+                        <div class="cf-card is-next" data-index="1" data-project="tourgo">
                             <div class="cf-card-inner">
                                 <div class="cf-card-content">
                                     <div class="cf-card-meta-top">
-                                        <div class="cf-card-logo-box">
-                                            <img src="assets/TourGoAppLogo.png" alt="TOURGO Logo" class="cf-card-logo">
+                                        <div class="cf-card-brand">
+                                            <div class="cf-card-logo-box">
+                                                <img src="assets/TourGoAppLogo.png" alt="TOURGO Logo"
+                                                    class="cf-card-logo">
+                                            </div>
+                                            <div class="cf-card-titles">
+                                                <h3 class="cf-card-title">TOURGO</h3>
+                                                <span class="cf-card-sub">Group Travel &amp; Coordination</span>
+                                            </div>
                                         </div>
                                         <span class="cf-card-year">2026</span>
                                     </div>
-                                    <h3 class="cf-card-title">TOURGO</h3>
+
+                                    <div class="cf-card-body">
+                                        <p class="cf-card-desc">Cross-platform mobile application for group trips featuring join-code enrollment, expense splitting, and Gemini AI itinerary planning.</p>
+                                    </div>
+
                                     <div class="cf-card-meta-bottom">
-                                        <span class="cf-card-sub">Group Travel &amp; Coordination</span>
-                                        <span class="cf-card-tech">React Native · Gemini AI</span>
+                                        <span class="cf-card-cta is-locked" title="Project details currently locked">
+                                            <span>View Details</span>
+                                            <i data-lucide="lock"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Card 3: BINHI CONCEPT -->
-                        <div class="cf-card is-hidden-right" data-index="2">
+                        <div class="cf-card is-hidden-right" data-index="2" data-project="binhi">
                             <div class="cf-card-inner">
                                 <div class="cf-card-content">
                                     <div class="cf-card-meta-top">
-                                        <div class="cf-card-logo-box">
-                                            <img src="assets/BINHI Concept Logo.webp" alt="Binhi Logo" class="cf-card-logo">
+                                        <div class="cf-card-brand">
+                                            <div class="cf-card-logo-box">
+                                                <img src="assets/BINHI Concept Logo.webp" alt="Binhi Logo"
+                                                    class="cf-card-logo">
+                                            </div>
+                                            <div class="cf-card-titles">
+                                                <h3 class="cf-card-title">Binhi</h3>
+                                                <span class="cf-card-sub">Lights &amp; Sounds Booking</span>
+                                            </div>
                                         </div>
                                         <span class="cf-card-year">2026</span>
                                     </div>
-                                    <h3 class="cf-card-title">Binhi</h3>
+
+                                    <div class="cf-card-body">
+                                        <p class="cf-card-desc">Full-scale lights and sound booking system with 4 specialized portals for clients, crew, administrators, and affiliates.</p>
+                                    </div>
+
                                     <div class="cf-card-meta-bottom">
-                                        <span class="cf-card-sub">Lights &amp; Sounds Booking</span>
-                                        <span class="cf-card-tech">React · Multi-Portal</span>
+                                        <span class="cf-card-cta is-locked" title="Project details currently locked">
+                                            <span>View Details</span>
+                                            <i data-lucide="lock"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Card 4: COLM Pulilan -->
-                        <div class="cf-card is-prev" data-index="3">
+                        <div class="cf-card is-prev" data-index="3" data-project="colm">
                             <div class="cf-card-inner">
                                 <div class="cf-card-content">
                                     <div class="cf-card-meta-top">
-                                        <div class="cf-card-logo-box">
-                                            <img src="assets/COLM_Pulilan_logo.png" alt="COLM Pulilan" class="cf-card-logo">
+                                        <div class="cf-card-brand">
+                                            <div class="cf-card-logo-box">
+                                                <img src="assets/COLM_Pulilan_logo.png" alt="COLM Pulilan"
+                                                    class="cf-card-logo">
+                                            </div>
+                                            <div class="cf-card-titles">
+                                                <h3 class="cf-card-title">COLM</h3>
+                                                <span class="cf-card-sub">Personnel &amp; Records Portal</span>
+                                            </div>
                                         </div>
                                         <span class="cf-card-year">2026</span>
                                     </div>
-                                    <h3 class="cf-card-title">COLM</h3>
+
+                                    <div class="cf-card-body">
+                                        <p class="cf-card-desc">Institutional staff records and personnel management web platform managing institutional directory, leave filing, and approvals.</p>
+                                    </div>
+
                                     <div class="cf-card-meta-bottom">
-                                        <span class="cf-card-sub">Personnel &amp; Records Portal</span>
-                                        <span class="cf-card-tech">React · PHP · MySQL</span>
+                                        <span class="cf-card-cta is-locked" title="Project details currently locked">
+                                            <span>View Details</span>
+                                            <i data-lucide="lock"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -322,77 +442,6 @@
                     </div>
                 </div>
 
-                <!-- Active Project Description & Action Bar -->
-                <div class="cf-active-info" id="cfActiveInfo">
-                    <div class="cf-info-main">
-                        <div class="cf-info-header">
-                            <div class="cf-info-header-left">
-                                <div class="cf-info-logo-box" id="cfInfoLogoBox">
-                                    <img src="assets/anigrow_logo.png" alt="ANI-GROW" id="cfInfoLogo" class="cf-info-logo">
-                                </div>
-                                <div>
-                                    <h3 class="cf-info-title" id="cfTitle">ANI-GROW: AI-Powered Poultry &amp; Livestock Farming Guide</h3>
-                                    <span class="cf-info-badge" id="cfBadge">Poultry &amp; Livestock Analytics</span>
-                                </div>
-                            </div>
-                            <span class="cf-info-year" id="cfYear">2026</span>
-                        </div>
-                        <p class="cf-info-desc" id="cfDesc">
-                            A mobile application that helps farm animal caretakers manage poultry and livestock operations using AI guidance and data analytics. Supports and integrates with custom IoT machines for weight-based segregation and automated feeding of farm animals.
-                        </p>
-
-                        <!-- Expandable Technical Details -->
-                        <div class="cf-detail-accordion">
-                            <button class="cf-detail-toggle" id="cfDetailToggle" type="button" aria-expanded="false" aria-controls="cfDetailPanel">
-                                <span class="cf-toggle-text">Show System Architecture &amp; Deliverables</span>
-                                <i data-lucide="chevron-down" class="cf-toggle-chevron"></i>
-                            </button>
-                            <div class="cf-detail-panel" id="cfDetailPanel" hidden>
-                                <div class="cf-detail-grid">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list" id="cfDeliverables">
-                                            <li>Real-time animal weight telemetry and automatic sorting gates</li>
-                                            <li>Automated scheduling and dosage controls for feeding dispensers</li>
-                                            <li>Offline-first mobile data sync for farm field workers</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text" id="cfArchitecture">
-                                            Built with a cross-platform React Native frontend communicating with sensor hubs via REST &amp; MQTT protocols. Backend processes real-time feed analytics and stores event logs in a normalized schema.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="cf-info-footer-row">
-                            <div class="cf-info-tags" id="cfTags">
-                                <span class="tag">React Native</span>
-                                <span class="tag">IoT Integration</span>
-                                <span class="tag">AI Analytics</span>
-                                <span class="tag">Agricultural Tech</span>
-                            </div>
-                            <a href="projects.html" class="cf-subpage-link" title="Open full projects subpage">
-                                <span>See all in subpage archive</span>
-                                <i data-lucide="arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Right Action Buttons -->
-                    <div class="cf-action-buttons">
-                        <a href="#contact" class="cf-action-btn" title="Send Inquiry" aria-label="Contact about project">
-                            <i data-lucide="message-square"></i>
-                        </a>
-                        <a href="https://github.com/harrybryn" target="_blank" rel="noopener noreferrer" class="cf-action-btn" title="View Source on GitHub" aria-label="GitHub Repository">
-                            <i data-lucide="bookmark"></i>
-                        </a>
-                        <button class="cf-action-btn" id="cfHeartBtn" title="Star Project" aria-label="Star Project">
-                            <i data-lucide="heart"></i>
-                        </button>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -445,7 +494,8 @@
 
                     <div class="stack-category">
                         <h3 class="category-title">Tools</h3>
-                        <p class="category-desc">Developer tooling, version control, hosting platforms, and workspace.</p>
+                        <p class="category-desc">Developer tooling, version control, hosting platforms, and workspace.
+                        </p>
                         <ul class="tech-pills">
                             <li>Git/GitHub</li>
                             <li>VS Code</li>
@@ -506,9 +556,10 @@
                         <div>
                             <div class="cert-card-top">
                                 <div class="cert-logo-box">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                                        <path d="m9 12 2 2 4-4"/>
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                        <path d="m9 12 2 2 4-4" />
                                     </svg>
                                 </div>
                                 <span class="cert-badge-date">2026</span>
@@ -517,12 +568,15 @@
                                 <h3 class="cert-title">IT Specialist in Cybersecurity</h3>
                                 <span class="cert-issuer">Certiport · Pearson VUE</span>
                                 <p class="cert-desc">
-                                    Demonstrated industry competency across core security principles, operating system protection, network defense layers, authentication, and proactive vulnerability mitigation.
+                                    Demonstrated industry competency across core security principles, operating system
+                                    protection, network defense layers, authentication, and proactive vulnerability
+                                    mitigation.
                                 </p>
                             </div>
                         </div>
                         <div class="cert-card-footer">
-                            <a href="https://certiport.pearsonvue.com" target="_blank" rel="noopener noreferrer" class="cert-verify-btn">
+                            <a href="https://certiport.pearsonvue.com" target="_blank" rel="noopener noreferrer"
+                                class="cert-verify-btn">
                                 <span>{ VERIFY }</span>
                                 <i data-lucide="external-link"></i>
                             </a>
@@ -534,11 +588,12 @@
                         <div>
                             <div class="cert-card-top">
                                 <div class="cert-logo-box">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect width="20" height="8" x="2" y="2" rx="2" ry="2"/>
-                                        <rect width="20" height="8" x="2" y="14" rx="2" ry="2"/>
-                                        <line x1="6" x2="6.01" y1="6" y2="6"/>
-                                        <line x1="6" x2="6.01" y1="18" y2="18"/>
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+                                        <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+                                        <line x1="6" x2="6.01" y1="6" y2="6" />
+                                        <line x1="6" x2="6.01" y1="18" y2="18" />
                                     </svg>
                                 </div>
                                 <span class="cert-badge-date">2023</span>
@@ -547,12 +602,15 @@
                                 <h3 class="cert-title">CSS NC II PASSER (Computer Systems Servicing)</h3>
                                 <span class="cert-issuer">TESDA Philippines</span>
                                 <p class="cert-desc">
-                                    National Certificate II credential qualifying technical competency in assembling computer hardware, installing operating systems, configuring network topologies, and deploying computer servers.
+                                    National Certificate II credential qualifying technical competency in assembling
+                                    computer hardware, installing operating systems, configuring network topologies, and
+                                    deploying computer servers.
                                 </p>
                             </div>
                         </div>
                         <div class="cert-card-footer">
-                            <a href="https://www.tesda.gov.ph" target="_blank" rel="noopener noreferrer" class="cert-verify-btn">
+                            <a href="https://www.tesda.gov.ph" target="_blank" rel="noopener noreferrer"
+                                class="cert-verify-btn">
                                 <span>{ VERIFY }</span>
                                 <i data-lucide="external-link"></i>
                             </a>
@@ -570,7 +628,8 @@
             <div class="footer-socials">
                 <a href="https://github.com/harrybryn" target="_blank" rel="noopener noreferrer">github</a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">linkedin</a>
-                <a href="https://www.facebook.com/Mowteeeeeeeeeeeee" target="_blank" rel="noopener noreferrer">facebook</a>
+                <a href="https://www.facebook.com/Mowteeeeeeeeeeeee" target="_blank"
+                    rel="noopener noreferrer">facebook</a>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">instagram</a>
                 <a href="#hero" class="back-to-top">back to top ↑</a>
             </div>
@@ -578,7 +637,8 @@
     </footer>
 
     <!-- Contact Modal Dialog -->
-    <div class="contact-modal" id="contactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+    <div class="contact-modal" id="contactModal" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="contactModalTitle">
         <div class="contact-modal-backdrop" id="contactModalBackdrop"></div>
         <div class="contact-modal-dialog">
             <button type="button" class="contact-modal-close" id="contactModalClose" aria-label="Close contact dialog">
@@ -587,10 +647,11 @@
             <div class="contact-modal-header">
                 <h2 class="contact-modal-title" id="contactModalTitle">Get in touch</h2>
                 <p class="contact-modal-desc">
-                    Send a note below or reach out directly at <a href="mailto:Harrysevilla567@gmail.com" class="inline-contact-link">Harrysevilla567@gmail.com</a>.
+                    Send a note below or reach out directly at <a href="mailto:Harrysevilla567@gmail.com"
+                        class="inline-contact-link">Harrysevilla567@gmail.com</a>.
                 </p>
             </div>
-            
+
             <div class="contact-modal-body">
                 <div class="modal-direct-strip">
                     <a href="mailto:Harrysevilla567@gmail.com" class="modal-direct-link" title="Send email">
@@ -613,16 +674,19 @@
                     <div class="form-row-2col">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Alex Rivera" autocomplete="name">
+                            <input type="text" id="name" name="name" required placeholder="Alex Rivera"
+                                autocomplete="name">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required placeholder="alex@company.com" autocomplete="email">
+                            <input type="email" id="email" name="email" required placeholder="alex@company.com"
+                                autocomplete="email">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="4" required placeholder="Tell me about your project, idea, or inquiry..."></textarea>
+                        <textarea id="message" name="message" rows="4" required
+                            placeholder="Tell me about your project, idea, or inquiry..."></textarea>
                     </div>
                     <div class="form-actions-row">
                         <span class="modal-form-note">Typically replies within 24 hours</span>
@@ -637,219 +701,305 @@
     </div>
 
     <!-- ==========================================================================
-         ARCADE 3D COVERFLOW: LIVE PLAYABLE GAMES CAROUSEL
+         DEVELOPER SKILLS LAB: BENCHMARK & ARCADE (Bryl Lim-Grade UX)
          ========================================================================== -->
-    <div class="arcade-overlay arcade-coverflow-overlay" id="arcadeOverlay" role="dialog" aria-modal="true" aria-labelledby="arcadeActiveTitle">
+    <div class="arcade-overlay" id="arcadeOverlay" role="dialog" aria-modal="true" aria-labelledby="skillsModalTitle">
         <div class="arcade-overlay-backdrop" id="arcadeBackdrop" data-close-arcade></div>
-        
-        <div class="arcade-coverflow-container">
-            <!-- Floating Text Above Carousel (Name & Info) -->
-            <div class="arcade-floating-header">
-                <div class="arcade-floating-kicker">
-                    <span class="arcade-kicker-tag" id="arcadeCounter">01 / 05</span>
+
+        <div class="skills-modal-dialog">
+            <!-- Header: Title, Segmented Game Switcher, Close -->
+            <div class="skills-modal-header">
+                <div class="skills-modal-brand">
+                    <span class="skills-kicker">BENCHMARK</span>
+                    <h2 class="skills-title" id="skillsModalTitle">Test your Skills</h2>
                 </div>
-                <h2 class="arcade-floating-title" id="arcadeActiveTitle">Tug of Tap</h2>
+
+                <!-- Sleek Segmented Game Selector -->
+                <nav class="skills-tabs" role="tablist" aria-label="Select Game">
+                    <button type="button" class="skills-tab is-active" data-tab="reaction" role="tab"
+                        aria-selected="true" id="tabReaction">
+                        <span>Reaction</span>
+                        <kbd class="skills-hotkey">1</kbd>
+                    </button>
+                    <button type="button" class="skills-tab" data-tab="aim" role="tab" aria-selected="false"
+                        id="tabAim">
+                        <span>Aim</span>
+                        <kbd class="skills-hotkey">2</kbd>
+                    </button>
+                    <button type="button" class="skills-tab" data-tab="simon" role="tab" aria-selected="false"
+                        id="tabSimon">
+                        <span>Memory</span>
+                        <kbd class="skills-hotkey">3</kbd>
+                    </button>
+                    <button type="button" class="skills-tab" data-tab="tug" role="tab" aria-selected="false"
+                        id="tabTug">
+                        <span>CPS Duel</span>
+                        <kbd class="skills-hotkey">4</kbd>
+                    </button>
+                    <button type="button" class="skills-tab" data-tab="typer" role="tab" aria-selected="false"
+                        id="tabTyper">
+                        <span>Typing</span>
+                        <kbd class="skills-hotkey">5</kbd>
+                    </button>
+                </nav>
+
+                <!-- Close Button -->
+                <button type="button" class="skills-close-btn" data-close-arcade aria-label="Close skills modal"
+                    title="Close (Esc)">
+                    <kbd>esc</kbd>
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
             </div>
 
-            <!-- 3D Carousel Stage with the Games Themselves -->
-            <div class="arcade-carousel-stage" id="arcadeCarouselStage">
-                <!-- Floating Circular Navigation Arrows -->
-                <button type="button" class="arcade-nav-arrow arcade-nav-prev" id="arcadePrevBtn" aria-label="Previous Game">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-                <button type="button" class="arcade-nav-arrow arcade-nav-next" id="arcadeNextBtn" aria-label="Next Game">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
+            <!-- Stage Panels -->
+            <div class="skills-stage" id="skillsStage">
 
-                <!-- Floating Interactive Games Wrapper -->
-                <div class="arcade-games-track" id="arcadeGamesTrack">
+                <!-- ==========================================
+                     GAME 1 (DEFAULT): BRYL LIM-STYLE SPEED TYPER
+                     ========================================== -->
+                <div class="skills-panel" id="panelTyper" data-panel="typer">
+                    <div class="tt-container">
+                        <!-- Live Stats -->
+                        <div class="tt-stats">
+                            <div class="tt-stat"><span class="tt-stat-val"><span class="tt-num"
+                                        id="ttWpm">0</span></span><span class="tt-stat-label">wpm</span></div>
+                            <div class="tt-stat"><span class="tt-stat-val"><span class="tt-num"
+                                        id="ttAcc">100</span><i>%</i></span><span class="tt-stat-label">acc</span></div>
+                            <div class="tt-stat"><span class="tt-stat-val"><span class="tt-num"
+                                        id="ttTime">0</span><i>s</i></span><span class="tt-stat-label">time</span></div>
+                        </div>
 
-                    <!-- ==========================================
-                         GAME 1: TUG OF TAP
-                         ========================================== -->
-                    <div class="arcade-game-card is-active" data-index="0" data-game="tug" id="cardGameTug">
-                        <div class="game-card-top-bar">
-                            <span class="game-badge-category">CPS DUEL</span>
-                            <div class="stage-score-badge">
-                                <span>Best:</span>
-                                <strong id="tugBestCps">0.0</strong>
+                        <!-- Words Stream with dynamic smooth Caret -->
+                        <div class="tt-words-wrap">
+                            <div class="tt-words" id="ttWords" tabindex="0" aria-label="Typing test stream"></div>
+                        </div>
+
+                        <!-- Interactive On-Screen Keyboard -->
+                        <div class="tt-keyboard" id="ttKeyboard"></div>
+
+                        <!-- Control Hints -->
+                        <div class="tt-hint">
+                            <span><kbd>tab</kbd> restart</span>
+                            <span><kbd>esc</kbd> close</span>
+                            <span><kbd>1-5</kbd> switch game</span>
+                        </div>
+                        <div class="tt-confirm" id="ttConfirm">restart test? <kbd>↵</kbd> to confirm · <kbd>esc</kbd>
+                            cancel</div>
+
+                        <!-- Results Screen -->
+                        <div class="tt-results" id="ttResults">
+                            <div class="tt-res-main">
+                                <span class="tt-res-wpm" id="ttResWpm">0</span>
+                                <span class="tt-res-cap">words per minute</span>
+                            </div>
+                            <div class="tt-res-grid">
+                                <div><b><span id="ttResAcc">0</span><i>%</i></b><label>accuracy</label></div>
+                                <div><b><span id="ttResRaw">0</span></b><label>raw</label></div>
+                                <div><b><span id="ttResTime">0</span><i>s</i></b><label>time</label></div>
+                            </div>
+                            <div class="tt-verdict" id="ttVerdict"></div>
+                            <button type="button" class="tt-restart" id="ttRestartBtn">
+                                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+                                    stroke-width="2.2">
+                                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                    <path d="M3 3v5h5"></path>
+                                </svg>
+                                <span>try again</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     GAME 2: REACTION SPEED TEST
+                     ========================================== -->
+                <div class="skills-panel is-active" id="panelReaction" data-panel="reaction">
+                    <div class="reaction-arena">
+                        <div class="reaction-screen" id="reactionScreen" data-state="idle" tabindex="0" role="button"
+                            aria-label="Reaction test pad">
+                            <div class="reaction-content">
+                                <div class="reaction-title" id="reactionMainText">Click anywhere to start</div>
+                                <p class="reaction-sub" id="reactionSubText">When the screen flashes, click as fast as
+                                    possible.</p>
                             </div>
                         </div>
 
-                        <div class="tug-arena-wrap">
-                            <div class="tug-match-bar">
-                                <span id="tugMatchStatus">Ready</span>
-                                <span id="tugTimer">0.0s</span>
+                        <div class="reaction-bottom-bar">
+                            <div class="reaction-stat-chip">
+                                <span>Best:</span>
+                                <strong id="reactionBestMs">— ms</strong>
                             </div>
-
-                            <div class="tug-track">
-                                <div class="tug-fill-p1" id="tugFillP1" style="width: 50%;"></div>
-                                <div class="tug-fill-p2" id="tugFillP2" style="width: 50%;"></div>
-                                <div class="tug-needle" id="tugKnot" style="left: 50%;"></div>
+                            <div class="reaction-stat-chip">
+                                <span>Average:</span>
+                                <strong id="reactionAvgMs">— ms</strong>
                             </div>
-
-                            <div class="tug-labels-row">
-                                <span class="tug-p1-lbl" id="tugP1Stat"><span class="indicator-dot p1-dot"></span> YOU: 0</span>
-                                <span class="tug-p2-lbl" id="tugP2Stat"><span class="indicator-dot p2-dot"></span> BOT: 0</span>
+                            <div class="reaction-stat-chip">
+                                <span>Attempt:</span>
+                                <strong id="reactionTries">0 / 5</strong>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-                            <button type="button" class="tug-tap-btn" id="tugTapBtn">
-                                <span class="main-txt">TAP</span>
-                            </button>
+                <!-- ==========================================
+                     GAME 3: AIM REFLEX
+                     ========================================== -->
+                <div class="skills-panel" id="panelAim" data-panel="aim">
+                    <div class="aim-game-wrap">
+                        <div class="aim-hud">
+                            <div class="aim-stat-item">
+                                <label>Score</label>
+                                <span id="aimScoreVal">0</span>
+                            </div>
+                            <div class="aim-stat-item">
+                                <label>Time Left</label>
+                                <span id="aimTimerVal">30.0s</span>
+                            </div>
+                            <div class="aim-stat-item">
+                                <label>Accuracy</label>
+                                <span id="aimAccVal">100%</span>
+                            </div>
+                            <div class="aim-stat-item">
+                                <label>Best</label>
+                                <span id="aimBestScoreVal">0 pts</span>
+                            </div>
+                        </div>
 
-                            <div class="tug-footer-actions">
-                                <span class="tug-status-text" id="tugResultBanner"></span>
-                                <button type="button" class="arcade-action-btn" id="tugResetBtn">
-                                    <i data-lucide="rotate-ccw"></i>
-                                    <span>Reset</span>
+                        <div class="aim-field" id="aimField">
+                            <div class="aim-overlay-prompt" id="aimOverlayPrompt">
+                                <h3>Target Reflex Benchmark</h3>
+                                <p>Click targets before they shrink away. Test your mouse precision and speed.</p>
+                                <button type="button" class="skills-action-btn" id="aimStartBtn">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                    <span>Start Challenge</span>
                                 </button>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- ==========================================
-                         GAME 2: REACTION SPEED TEST
-                         ========================================== -->
-                    <div class="arcade-game-card" data-index="1" data-game="reaction" id="cardGameReaction">
-                        <div class="game-card-top-bar">
-                            <span class="game-badge-category">REACTION</span>
-                            <div class="stage-score-badge">
-                                <span>Best:</span>
-                                <strong id="reactionBest">--- ms</strong>
-                            </div>
+                <!-- ==========================================
+                     GAME 4: MEMORY SEQUENCE (SIMON)
+                     ========================================== -->
+                <div class="skills-panel" id="panelSimon" data-panel="simon">
+                    <div class="simon-game-wrap">
+                        <div class="simon-header-bar">
+                            <div class="simon-stat-chip"><span>Level</span><strong id="simonLevel">1</strong></div>
+                            <div class="simon-stat-chip"><span>Best</span><strong id="simonBest">0</strong></div>
+                            <div class="simon-status-msg" id="simonStatus">Press start to begin sequence</div>
                         </div>
 
-                        <div class="reaction-arena-wrap">
-                            <div class="reaction-screen state-idle" id="reactionPad">
-                                <span class="reaction-main-title" id="reactionMainTxt">Click to Start</span>
-                                <span class="reaction-sub-title" id="reactionSubTxt" style="display: none;"></span>
-                                <div class="reaction-rating-badge" id="reactionRating" style="display: none;"></div>
-                            </div>
+                        <div class="simon-grid" id="simonGrid">
+                            <button type="button" class="simon-pad pad-0" data-pad="0" aria-label="Tile 1"></button>
+                            <button type="button" class="simon-pad pad-1" data-pad="1" aria-label="Tile 2"></button>
+                            <button type="button" class="simon-pad pad-2" data-pad="2" aria-label="Tile 3"></button>
+                            <button type="button" class="simon-pad pad-3" data-pad="3" aria-label="Tile 4"></button>
+                            <button type="button" class="simon-pad pad-4" data-pad="4" aria-label="Tile 5"></button>
+                            <button type="button" class="simon-pad pad-5" data-pad="5" aria-label="Tile 6"></button>
                         </div>
+
+                        <button type="button" class="skills-action-btn simon-action" id="simonStartBtn">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            <span>Start Memory Test</span>
+                        </button>
                     </div>
+                </div>
 
-                    <!-- ==========================================
-                         GAME 3: MEMORY SEQUENCE
-                         ========================================== -->
-                    <div class="arcade-game-card" data-index="2" data-game="simon" id="cardGameSimon">
-                        <div class="game-card-top-bar">
-                            <span class="game-badge-category">MEMORY</span>
-                            <div class="stage-score-badge">
-                                <span>Best:</span>
-                                <strong id="simonHighScore">0</strong>
+                <!-- ==========================================
+                     GAME 5: CPS TAP DUEL
+                     ========================================== -->
+                <div class="skills-panel" id="panelTug" data-panel="tug">
+                    <div class="tug-game-wrap">
+                        <div class="tug-match-hud">
+                            <div class="tug-match-status" id="tugMatchStatus">Ready</div>
+                            <div class="tug-match-timer" id="tugTimer">0.0s</div>
+                            <div class="tug-match-best"><span>Best:</span> <strong id="tugBestCps">0.0 CPS</strong>
                             </div>
                         </div>
 
-                        <div class="simon-grid-wrap">
-                            <div class="simon-status-row">
-                                <span id="simonStatus">Ready</span>
-                                <span id="simonLevel">Level: 1</span>
-                            </div>
+                        <div class="tug-meter-bar">
+                            <div class="tug-fill-p1" id="tugFillP1" style="width: 50%;"></div>
+                            <div class="tug-fill-p2" id="tugFillP2" style="width: 50%;"></div>
+                            <div class="tug-needle" id="tugKnot" style="left: 50%;"></div>
+                        </div>
 
-                            <div class="simon-grid" id="simonGrid">
-                                <button type="button" class="simon-pad" data-pad="0">1</button>
-                                <button type="button" class="simon-pad" data-pad="1">2</button>
-                                <button type="button" class="simon-pad" data-pad="2">3</button>
-                                <button type="button" class="simon-pad" data-pad="3">4</button>
-                                <button type="button" class="simon-pad" data-pad="4">5</button>
-                                <button type="button" class="simon-pad" data-pad="5">6</button>
-                                <button type="button" class="simon-pad" data-pad="6">7</button>
-                                <button type="button" class="simon-pad" data-pad="7">8</button>
-                                <button type="button" class="simon-pad" data-pad="8">9</button>
-                            </div>
+                        <div class="tug-labels-bar">
+                            <span class="tug-p1-label" id="tugP1Stat"><span class="dot-p1"></span> YOU: 0</span>
+                            <span class="tug-p2-label" id="tugP2Stat"><span class="dot-p2"></span> BOT: 0</span>
+                        </div>
 
-                            <button type="button" class="arcade-action-btn" id="simonStartBtn">
-                                <i data-lucide="play"></i>
-                                <span>Start</span>
+                        <div class="tug-actions-row">
+                            <button type="button" class="tug-tap-btn" id="tugTapBtn">
+                                <span class="tug-tap-main">TAP / SPACEBAR</span>
+                                <span class="tug-tap-sub" id="tugLiveCps">0.0 CPS</span>
+                            </button>
+                            <button type="button" class="skills-action-btn secondary" id="tugResetBtn">
+                                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                    <path d="M3 3v5h5"></path>
+                                </svg>
+                                <span>Reset Duel</span>
                             </button>
                         </div>
                     </div>
+                </div>
 
-                    <!-- ==========================================
-                         GAME 4: AIM REFLEX
-                         ========================================== -->
-                    <div class="arcade-game-card" data-index="3" data-game="aim" id="cardGameAim">
-                        <div class="game-card-top-bar">
-                            <span class="game-badge-category">AIM REFLEX</span>
-                            <div class="stage-score-badge">
-                                <span>Best:</span>
-                                <strong id="aimHighScore">0</strong>
-                            </div>
-                        </div>
+            </div>
+        </div>
+    </div>
 
-                        <div class="aim-arena-container">
-                            <div class="aim-arena" id="aimArena">
-                                <div class="aim-overlay" id="aimOverlay">
-                                    <button type="button" class="arcade-action-btn" id="aimStartBtn">
-                                        <i data-lucide="play"></i>
-                                        <span>Start</span>
-                                    </button>
-                                </div>
-                                <div class="aim-target" id="aimTarget" style="display: none;"></div>
-                            </div>
-
-                            <div class="aim-stats-row">
-                                <span id="aimScoreLive">Hits: 0</span>
-                                <span id="aimTimerLive">15.0s</span>
-                            </div>
-                        </div>
+    <!-- Project Screen Lightbox Modal -->
+    <div class="cf-lightbox-modal" id="cfLightboxModal" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="cfLightboxTitle">
+        <div class="cf-lightbox-backdrop" id="cfLightboxBackdrop"></div>
+        <div class="cf-lightbox-dialog">
+            <div class="cf-lightbox-header">
+                <div class="cf-lightbox-title-box">
+                    <img src="assets/anigrow_logo.png" alt="" id="cfLightboxLogo" class="cf-lightbox-logo">
+                    <div>
+                        <h3 id="cfLightboxTitle" class="cf-lightbox-title">ANI-GROW Screen Showcase</h3>
+                        <span id="cfLightboxSub" class="cf-lightbox-sub">Poultry &amp; Livestock Analytics</span>
                     </div>
-
-                    <!-- ==========================================
-                         GAME 5: DEV SPEED TYPER
-                         ========================================== -->
-                    <div class="arcade-game-card" data-index="4" data-game="typer" id="cardGameTyper">
-                        <div class="game-card-top-bar">
-                            <span class="game-badge-category">SPEED TYPER</span>
-                            <div class="stage-score-badge">
-                                <span>Best:</span>
-                                <strong id="typerBestWpm">0 WPM</strong>
-                            </div>
-                        </div>
-
-                        <div class="typer-arena">
-                            <div class="typer-word-display" id="typerTargetWord">click start</div>
-                            <input type="text" class="typer-input" id="typerInput" placeholder="Type word..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" disabled>
-                            
-                            <div class="typer-stats-bar">
-                                <span id="typerWordsCount">0 words</span>
-                                <span id="typerTimer">15.0s</span>
-                                <span id="typerLiveWpm">0 WPM</span>
-                            </div>
-
-                            <button type="button" class="arcade-action-btn" id="typerStartBtn">
-                                <i data-lucide="play"></i>
-                                <span>Start</span>
-                            </button>
-                        </div>
-                    </div>
-
+                </div>
+                <div class="cf-lightbox-actions">
+                    <a href="https://anigrow.vercel.app" id="cfLightboxLive" target="_blank" rel="noopener noreferrer"
+                        class="cf-lightbox-btn">
+                        <span>Open Live Demo</span>
+                        <i data-lucide="external-link"></i>
+                    </a>
+                    <button type="button" id="cfLightboxClose" class="cf-lightbox-close" aria-label="Close Preview">
+                        <i data-lucide="x"></i>
+                    </button>
                 </div>
             </div>
-
-            <!-- Floating Footer Below Carousel -->
-            <div class="arcade-floating-footer">
-                <div class="arcade-pills-bar" id="arcadePills">
-                    <button type="button" class="arcade-pill-btn is-active" data-pill="0" aria-label="Game 1"></button>
-                    <button type="button" class="arcade-pill-btn" data-pill="1" aria-label="Game 2"></button>
-                    <button type="button" class="arcade-pill-btn" data-pill="2" aria-label="Game 3"></button>
-                    <button type="button" class="arcade-pill-btn" data-pill="3" aria-label="Game 4"></button>
-                    <button type="button" class="arcade-pill-btn" data-pill="4" aria-label="Game 5"></button>
+            <div class="cf-lightbox-body">
+                <div class="cf-lightbox-browser-bar">
+                    <span class="cf-mockup-dot"></span>
+                    <span class="cf-mockup-dot"></span>
+                    <span class="cf-mockup-dot"></span>
+                    <span id="cfLightboxUrl" class="cf-lightbox-url">https://anigrow.vercel.app</span>
                 </div>
-                <div class="arcade-floating-keys">
-                    <span class="arcade-quit-hint" data-close-arcade><kbd>esc</kbd> or tap anywhere to exit</span>
+                <div class="cf-lightbox-img-wrap">
+                    <img src="assets/screen_anigrow.png" alt="Project Full Screen Preview" id="cfLightboxImg"
+                        class="cf-lightbox-img">
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=67"></script>
-    <script src="arcade.js?v=19"></script>
+    <script src="script.js?v=70"></script>
+    <script src="arcade.js?v=23"></script>
     <script>
         if (window.lucide) {
             lucide.createIcons();

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f1117"/>
+      <stop offset="100%" stop-color="#08090c"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#171923" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#10121a" stop-opacity="0.9"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#grid)"/>
+  
+  <rect x="0" y="0" width="800" height="48" fill="#13151f" stroke="#1f2330" stroke-width="1"/>
+  <circle cx="28" cy="24" r="10" fill="#eab308" opacity="0.8"/>
+  <text x="48" y="29" fill="#f1f5f9" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">EVER GOTESCO · STORE LOCATOR & DIRECTORY</text>
+  <rect x="630" y="12" width="140" height="24" rx="12" fill="#422006"/>
+  <text x="648" y="28" fill="#fde047" font-family="-apple-system, sans-serif" font-size="11">Commonwealth Center</text>
+
+  <!-- Interactive Mall Map Directory -->
+  <g transform="translate(30, 70)">
+    <rect width="470" height="400" rx="12" fill="url(#panel)" stroke="#222634"/>
+    <text x="20" y="32" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">Interactive Floor Plan · Level 2</text>
+
+    <!-- Floor Plan Vector Map -->
+    <g transform="translate(20, 55)">
+      <rect width="430" height="240" rx="10" fill="#10131c" stroke="#252a3a"/>
+      <!-- Atrium Area -->
+      <ellipse cx="215" cy="120" rx="55" ry="35" fill="rgba(234,179,8,0.12)" stroke="#eab308" stroke-dasharray="4"/>
+      <text x="215" y="125" text-anchor="middle" fill="#fde047" font-family="-apple-system, sans-serif" font-size="11" font-weight="700">ACTIVITY ATRIUM</text>
+
+      <!-- Tenant Units -->
+      <rect x="25" y="25" width="80" height="60" rx="4" fill="#1e2230" stroke="#333a4d"/>
+      <text x="65" y="60" text-anchor="middle" fill="#cbd5e1" font-family="sans-serif" font-size="11">Tech Zone</text>
+
+      <rect x="115" y="25" width="90" height="60" rx="4" fill="#1e2230" stroke="#333a4d"/>
+      <text x="160" y="60" text-anchor="middle" fill="#cbd5e1" font-family="sans-serif" font-size="11">Apparel</text>
+
+      <rect x="225" y="25" width="90" height="60" rx="4" fill="#1e2230" stroke="#333a4d"/>
+      <text x="270" y="60" text-anchor="middle" fill="#cbd5e1" font-family="sans-serif" font-size="11">Department</text>
+
+      <rect x="325" y="25" width="80" height="60" rx="4" fill="#1e2230" stroke="#333a4d"/>
+      <text x="365" y="60" text-anchor="middle" fill="#cbd5e1" font-family="sans-serif" font-size="11">Cinema</text>
+
+      <rect x="25" y="155" width="110" height="60" rx="4" fill="#1e2230" stroke="#333a4d"/>
+      <text x="80" y="190" text-anchor="middle" fill="#cbd5e1" font-family="sans-serif" font-size="11">Food Court</text>
+
+      <rect x="295" y="155" width="110" height="60" rx="4" fill="#1e2230" stroke="#333a4d"/>
+      <text x="350" y="190" text-anchor="middle" fill="#cbd5e1" font-family="sans-serif" font-size="11">Supermarket</text>
+    </g>
+
+    <text x="20" y="325" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="12">Currently viewing: Level 2 Center Wing · 48 Active Stores</text>
+  </g>
+
+  <!-- Right: Store Directory Search -->
+  <g transform="translate(525, 70)">
+    <rect width="245" height="400" rx="12" fill="url(#panel)" stroke="#222634"/>
+    <text x="20" y="32" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">Store Search</text>
+
+    <!-- Search Box -->
+    <rect x="20" y="55" width="205" height="32" rx="6" fill="#12141c" stroke="#2a3040"/>
+    <text x="32" y="75" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">Search store or category...</text>
+
+    <text x="20" y="115" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">POPULAR TENANTS</text>
+
+    <g transform="translate(20, 130)">
+      <text x="0" y="16" fill="#f1f5f9" font-family="-apple-system, sans-serif" font-size="12" font-weight="600">Cyberzone Tech Hub</text>
+      <text x="0" y="32" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">Level 2, Unit 204 · Open</text>
+      <line x1="0" y1="44" x2="205" y2="44" stroke="#1f2330"/>
+    </g>
+
+    <g transform="translate(20, 185)">
+      <text x="0" y="16" fill="#f1f5f9" font-family="-apple-system, sans-serif" font-size="12" font-weight="600">Ever Cinema 1-4</text>
+      <text x="0" y="32" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">Level 3, West Wing · Now Showing</text>
+      <line x1="0" y1="44" x2="205" y2="44" stroke="#1f2330"/>
+    </g>
+
+    <g transform="translate(20, 240)">
+      <text x="0" y="16" fill="#f1f5f9" font-family="-apple-system, sans-serif" font-size="12" font-weight="600">Supermarket & Bakery</text>
+      <text x="0" y="32" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">Ground Floor · Open till 10 PM</text>
+      <line x1="0" y1="44" x2="205" y2="44" stroke="#1f2330"/>
+    </g>
+  </g>
+
+</svg>

@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects — Harry Sevilla</title>
+    <meta name="description" content="Complete archive of software development projects, systems, and mobile applications engineered by Harry Sevilla.">
+    <link rel="icon" type="image/png" href="assets/profile.png">
+
+    <!-- Google Fonts: Inter + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Immediate Theme Initialization -->
+    <script>
+        (function() {
+            var p = 'system';
+            try { p = localStorage.getItem('portfolio-theme') || 'system'; } catch (e) {}
+            var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+            var isDark = p === 'dark' || (p === 'system' && !!mq && mq.matches);
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        })();
+    </script>
+
+    <link rel="stylesheet" href="styles.css?v=105">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- Subtle dot grid background -->
+    <div class="bg-dots-pattern"></div>
+
+    <div class="subpage-container">
+        <!-- Subpage Header Navigation -->
+        <header class="subpage-header-nav">
+            <a href="index.html#projects" class="subpage-back-link" title="Return to main portfolio">
+                <i data-lucide="arrow-left"></i>
+                <span>Back to Overview</span>
+            </a>
+
+            <div class="nav-right">
+                <button type="button" class="nav-bored-btn" id="openArcadeBtn" title="Test your developer skills & reflexes" aria-label="Test your Skills">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                        <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"></path>
+                    </svg>
+                    <span>Test your Skills</span>
+                </button>
+                <div class="theme-switch" role="group" aria-label="Theme selection">
+                    <button type="button" data-theme-opt="system" class="theme-opt" title="System theme" aria-label="System theme">
+                        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </button>
+                    <button type="button" data-theme-opt="light" class="theme-opt" title="Light theme" aria-label="Light theme">
+                        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </button>
+                    <button type="button" data-theme-opt="dark" class="theme-opt" title="Dark theme" aria-label="Dark theme">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+                <button type="button" class="nav-cta-btn open-contact-modal" id="openContactBtn">Let's talk</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="subpage-main">
+            <!-- Header Title -->
+            <section class="subpage-title-section">
+                <div class="subpage-badge-row">
+                    <span class="subpage-counter-badge">11 DELIVERED PROJECTS</span>
+                    <span class="subpage-year-range">2023 — 2026</span>
+                </div>
+                <h1 class="subpage-heading">Featured Systems &amp; Software Archive</h1>
+                <p class="subpage-subheading">
+                    A comprehensive index of 11 full-stack applications, mobile platforms, and database-driven software systems built from 2023 to present. Click any project row to view technical architecture, UI screen mockups, and deliverables.
+                </p>
+            </section>
+
+            <!-- Search & Filter Controls -->
+            <div class="subpage-controls">
+                <div class="subpage-search-wrap">
+                    <i data-lucide="search" class="subpage-search-icon"></i>
+                    <input type="text" id="subpageSearch" class="subpage-search-input" placeholder="Search by name, tech stack, or keyword..." autocomplete="off">
+                </div>
+                <div class="subpage-filter-pills" id="subpageFilters">
+                    <button class="subpage-filter-btn active" data-filter="all">All (11)</button>
+                    <button class="subpage-filter-btn" data-filter="mobile">Mobile Apps</button>
+                    <button class="subpage-filter-btn" data-filter="web">Web Systems</button>
+                    <button class="subpage-filter-btn" data-filter="iot">IoT &amp; AI</button>
+                    <button class="subpage-filter-btn" data-filter="enterprise">Enterprise</button>
+                </div>
+            </div>
+
+            <!-- Project Archive List (Clean List Rows with Expandable Showcases) -->
+            <div class="subpage-archive-list" id="subpageList">
+
+                <!-- ANI-GROW -->
+                <article class="subpage-item is-locked" id="project-anigrow" data-project-id="anigrow" data-category="mobile iot" data-search="ani-grow poultry livestock farming guide react native iot ai">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/anigrow_logo.png" alt="ANI-GROW" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">ANI-GROW</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">MOBILE · IOT · AI ANALYTICS</span>
+                            <p class="subpage-item-desc">AI guidance and telemetry platform for livestock operations with automated sorting gates and feeding dispensers.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_anigrow.png" data-title="ANI-GROW: AI-Powered Poultry & Livestock Farming Guide" data-sub="Poultry & Livestock Analytics" data-logo="assets/anigrow_logo.png" data-url="https://anigrow.vercel.app" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_anigrow.png" alt="ANI-GROW Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/anigrow_logo.png" alt="ANI-GROW" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">ANI-GROW</h3>
+                                            <span class="cf-info-badge">Poultry & Livestock Analytics</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2026</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    A mobile application that helps farm animal caretakers manage poultry and livestock operations using AI guidance and data analytics. Supports and integrates with custom IoT machines for weight-based segregation and automated feeding of farm animals.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>Real-time animal weight telemetry and automatic sorting gates</li>
+                                            <li>Automated scheduling and dosage controls for feeding dispensers</li>
+                                            <li>Offline-first mobile data sync for farm field workers</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            Built with a cross-platform React Native frontend communicating with sensor hubs via REST & MQTT protocols. Backend processes real-time feed analytics and stores event logs in a normalized schema.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">React Native</span>
+                                        <span class="tag">IoT Integration</span>
+                                        <span class="tag">AI Analytics</span>
+                                        <span class="tag">Agricultural Tech</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- TOURGO -->
+                <article class="subpage-item is-locked" id="project-tourgo" data-project-id="tourgo" data-category="mobile" data-search="tourgo collaborative group travel platform react native google gemini ai expo">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/TourGoAppLogo.png" alt="TOURGO" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">TOURGO</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">MOBILE PLATFORM · AI</span>
+                            <p class="subpage-item-desc">Collaborative mobile group travel planner with 6-digit join codes, expense splitting, and Gemini AI itineraries.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_tourgo.png" data-title="TOURGO: Collaborative Group Travel Platform" data-sub="Group Travel & Itinerary Platform" data-logo="assets/TourGoAppLogo.png" data-url="https://tourgo.internal" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_tourgo.png" alt="TOURGO Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/TourGoAppLogo.png" alt="TOURGO" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">TOURGO</h3>
+                                            <span class="cf-info-badge">Group Travel & Itinerary Platform</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2026</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    A cross-platform mobile application for group trip planning featuring join-code enrollment, collaborative itineraries, real-time chat, polls, and shared expense splitting. Integrates Google Gemini AI for personalized day-plan generation and Expo push notifications.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>6-digit join-code trip onboarding with real-time room chat and polls</li>
+                                            <li>Automated group expense split calculator with multi-currency balance tracking</li>
+                                            <li>AI itinerary generator powered by Google Gemini 1.5 Flash</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            Engineered with React Native / Expo utilizing client-side optimistic UI updates for real-time messaging, paired with cloud functions orchestrating Gemini AI prompts.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">React Native</span>
+                                        <span class="tag">Google Gemini AI</span>
+                                        <span class="tag">Expo Push</span>
+                                        <span class="tag">Real-Time Chat</span>
+                                        <span class="tag">Travel Tech</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Binhi -->
+                <article class="subpage-item is-locked" id="project-binhi" data-project-id="binhi" data-category="web" data-search="binhi concept lights sounds booking management system react multi-portal otp">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/BINHI Concept Logo.webp" alt="Binhi" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">Binhi</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">WEB SYSTEM · MULTI-PORTAL</span>
+                            <p class="subpage-item-desc">Comprehensive lights and sounds booking system with 4 distinct portals for clients, crew, admins, and affiliates.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_binhi.png" data-title="BINHI CONCEPT: Lights and Sounds Booking Management System" data-sub="Event Production Suite" data-logo="assets/BINHI Concept Logo.webp" data-url="https://traviscruz.vercel.app/project/binhiconcept" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_binhi.png" alt="Binhi Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/BINHI Concept Logo.webp" alt="Binhi" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">Binhi</h3>
+                                            <span class="cf-info-badge">Event Production Suite</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2026</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    A complete website for lights and sound booking and management, with separate portals for admins, crew, customers/clients, and affiliates. Includes automated booking pipeline, interactive price builder, customer Wishlist, and SMS OTP verification.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>Four dedicated portals: Admin, Field Crew, Client, and Affiliate dashboards</li>
+                                            <li>Interactive live package quotation & custom equipment price builder</li>
+                                            <li>Automated booking reservation timeline with SMS OTP verification</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            Modular React web architecture paired with RESTful backend endpoints, SMS gateway webhooks, and transactional booking status management.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">React</span>
+                                        <span class="tag">React Native</span>
+                                        <span class="tag">Backend Architecture</span>
+                                        <span class="tag">Price Builder</span>
+                                        <span class="tag">SMS OTP</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- COLM Pulilan -->
+                <article class="subpage-item is-locked" id="project-colm" data-project-id="colm" data-category="enterprise web" data-search="colm pulilan college of our lady of mercy employee management system staff database institutional hr react php mysql deployment">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/COLM_Pulilan_logo.png" alt="COLM Pulilan" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">COLM Pulilan</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">ENTERPRISE · HR & RECORDS</span>
+                            <p class="subpage-item-desc">Institutional staff records management portal managing directory, leave tracking, and administrative approvals.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_colm.png" data-title="COLM Pulilan: Employee Management & Institutional Records Portal" data-sub="Institutional Client · Deployment Phase" data-logo="assets/COLM_Pulilan_logo.png" data-url="https://colm.edu.ph/portal" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_colm.png" alt="COLM Pulilan Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/COLM_Pulilan_logo.png" alt="COLM Pulilan" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">COLM Pulilan</h3>
+                                            <span class="cf-info-badge">Institutional Client · Deployment Phase</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2026</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    A staff records and personnel management web system commissioned for College of Our Lady of Mercy (Pulilan, Bulacan). Currently in final preparations for official production deployment, maintaining employee profiles, department taxonomy, digital leave request pipelines, and administrative reporting.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>Centralized employee personnel database with department taxonomy</li>
+                                            <li>Digital leave request filing with multi-tier administrative approvals</li>
+                                            <li>Audit logging for employee record updates and administrative actions</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            React frontend architecture paired with secure PHP RESTful endpoints and PDO prepared MySQL transactions for institutional data integrity.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">React</span>
+                                        <span class="tag">PHP</span>
+                                        <span class="tag">MySQL</span>
+                                        <span class="tag">Institutional Client</span>
+                                        <span class="tag">Live Deployment</span>
+                                        <span class="tag">Admin Portal</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- RNF Fleet -->
+                <article class="subpage-item is-locked" id="project-rnf" data-project-id="rnf" data-category="enterprise web" data-search="rnf trucking fleet dispatch logistics management cargo php mysql">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/rnftrucking.png" alt="RNF Trucking" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">RNF Trucking</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">LOGISTICS & SUPPLY CHAIN</span>
+                            <p class="subpage-item-desc">Freight and dispatch operations management platform with real-time cargo status tracking and driver manifest logging.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_rnf.svg" data-title="RNF Fleet: Logistics Fleet Dispatch & Maintenance Platform" data-sub="Fleet Dispatch & Logistics Management" data-logo="assets/rnftrucking.png" data-url="https://rnf-logistics.internal/dispatch" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_rnf.svg" alt="RNF Fleet Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/rnftrucking.png" alt="RNF Fleet" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">RNF Fleet</h3>
+                                            <span class="cf-info-badge">Fleet Dispatch & Logistics Management</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2023</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    An end-to-end logistics platform managing cargo delivery schedules, truck maintenance tracking, driver assignments, client shipment status updates, and fuel expenditure logs.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>Fleet maintenance calendar with automated mileage and inspection alerts</li>
+                                            <li>Driver dispatch assignment with cargo shipment manifest tracking</li>
+                                            <li>Fuel consumption audit logging and route expense reconciliation</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            Structured PHP relational web application with normalized MySQL tables indexing drivers, vehicles, maintenance logs, and financial records.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">PHP</span>
+                                        <span class="tag">MySQL</span>
+                                        <span class="tag">Fleet Dispatch</span>
+                                        <span class="tag">Cargo Logistics</span>
+                                        <span class="tag">Relational DB</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- WanderLocal -->
+                <article class="subpage-item is-locked" id="project-wanderlocal" data-project-id="wanderlocal" data-category="web" data-search="wanderlocal destination discovery localized itinerary planner travel tourism react">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/WanderLocalLogo.png" alt="WanderLocal" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">WanderLocal</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">TOURISM & EXPLORATION</span>
+                            <p class="subpage-item-desc">Community travel discovery directory and curated local destination guide with interactive points of interest.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_wanderlocal.svg" data-title="WanderLocal: Localized Itinerary & Tourism Discovery Engine" data-sub="Tourism & Itinerary Engine" data-logo="assets/WanderLocalLogo.png" data-url="https://wanderlocal.app/explore" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_wanderlocal.svg" alt="WanderLocal Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/WanderLocalLogo.png" alt="WanderLocal" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">WanderLocal</h3>
+                                            <span class="cf-info-badge">Tourism & Itinerary Engine</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2024</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    A destination discovery and itinerary planning application that curates localized attractions and creates custom daily travel itineraries based on user travel preferences.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>Interactive destination matcher based on travel style preferences</li>
+                                            <li>Daily chronological itinerary builder with waypoint mapping</li>
+                                            <li>Local cultural tips, budget calculators, and transit recommendations</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            React frontend utilizing client-side state machine for step-by-step trip customization paired with geolocation-based attraction ranking.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">React</span>
+                                        <span class="tag">Itinerary Generator</span>
+                                        <span class="tag">Geolocation API</span>
+                                        <span class="tag">Tourism Tech</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Together -->
+                <article class="subpage-item is-locked" id="project-together" data-project-id="together" data-category="mobile" data-search="together collaborative planning group events meetup invitations shared schedule">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/TogetherLogo.png" alt="Together" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">Together</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">COMMUNITY & EVENTS</span>
+                            <p class="subpage-item-desc">Collaborative events planning and social meetup coordinator with schedule sync and guest RSVP management.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_together.svg" data-title="Together: Collaborative Group Event & Meetup Coordination" data-sub="Collaborative Event Planning Hub" data-logo="assets/TogetherLogo.png" data-url="https://together.internal/events" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_together.svg" alt="Together Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/TogetherLogo.png" alt="Together" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">Together</h3>
+                                            <span class="cf-info-badge">Collaborative Event Planning Hub</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2024</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    A collaborative planning application designed for coordinating shared group events, managing invitations, scheduling activities, and keeping all participants in sync.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>Group event creation with RSVP status tracking and shared calendar</li>
+                                            <li>Interactive polling module for voting on dates, locations, and activities</li>
+                                            <li>Automated split-expense settlement with instant GCash link generation</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            React Native mobile client with asynchronous event queue and push notification hooks for real-time attendee updates.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">React Native</span>
+                                        <span class="tag">Expo Push</span>
+                                        <span class="tag">Real-Time Sync</span>
+                                        <span class="tag">Expense Split</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Grammar Galaxy -->
+                <article class="subpage-item is-locked" id="project-grammargalaxy" data-project-id="grammargalaxy" data-category="web" data-search="grammar galaxy educational gamified programming coding quest syntax challenges web">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/grammargalaxy.png" alt="Grammar Galaxy" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">Grammar Galaxy</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">EDTECH · GAMIFIED LEARNING</span>
+                            <p class="subpage-item-desc">Interactive educational web game reinforcing language mechanics and syntactic grammar through spaced repetition.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_grammargalaxy.svg" data-title="Grammar Galaxy: Gamified Programming Syntax Learning Quest" data-sub="Gamified Coding Education" data-logo="assets/grammargalaxy.png" data-url="https://grammargalaxy.edu/quest" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_grammargalaxy.svg" alt="Grammar Galaxy Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/grammargalaxy.png" alt="Grammar Galaxy" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">Grammar Galaxy</h3>
+                                            <span class="cf-info-badge">Gamified Coding Education</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2023</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    An educational web platform that teaches web development and programming syntax through gamified quest modules, interactive coding challenges, and progress milestones.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>In-browser interactive code editor with live syntax verification</li>
+                                            <li>Gamified progress roadmap with level unlocks, badges, and XP counters</li>
+                                            <li>Step-by-step interactive debugging exercises with instant automated feedback</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            Client-side sandboxed code execution environment running automated test assertions against user code solutions with zero latency.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">Web Platform</span>
+                                        <span class="tag">Gamified Coding</span>
+                                        <span class="tag">JavaScript Engine</span>
+                                        <span class="tag">EdTech</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- BoyCold POS -->
+                <article class="subpage-item is-locked" id="project-boycold" data-project-id="boycold" data-category="enterprise web" data-search="boycold cafe point of sale pos kitchen inventory dynamic pricing thermal receipts">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/boycoldlogo.png" alt="Boy Cold Cafe POS" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">Boy Cold Cafe POS</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">RETAIL · POS & INVENTORY</span>
+                            <p class="subpage-item-desc">Specialty coffee shop point-of-sale terminal with real-time stock deductions, order queues, and receipt generation.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_boycold.svg" data-title="BoyCold POS: Commercial Point-of-Sale & Kitchen Inventory" data-sub="Cafe POS & Kitchen Inventory" data-logo="assets/boycoldlogo.png" data-url="https://boycold.internal/pos" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_boycold.svg" alt="BoyCold POS Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/boycoldlogo.png" alt="BoyCold POS" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">BoyCold POS</h3>
+                                            <span class="cf-info-badge">Cafe POS & Kitchen Inventory</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2023</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    A comprehensive point-of-sale and kitchen inventory system developed for cafe operations. Manages dynamic menu pricing, cashier billing, barcode scanning, stock level deductions, and automated thermal receipt printing.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>Touchscreen-optimized cashier billing terminal with barcode scanning</li>
+                                            <li>Real-time kitchen inventory deduction linked to ordered menu ingredients</li>
+                                            <li>End-of-day sales reconciliation reports and thermal ESC/POS receipt generation</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            PHP backend utilizing ACID transactional queries to guarantee atomic stock deduction upon transaction confirmation.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">PHP</span>
+                                        <span class="tag">MySQL</span>
+                                        <span class="tag">Point of Sale</span>
+                                        <span class="tag">Inventory Deductions</span>
+                                        <span class="tag">Thermal Receipt</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PsychGuide -->
+                <article class="subpage-item is-locked" id="project-psychguide" data-project-id="psychguide" data-category="web" data-search="psychguide student concern counseling ticketing portal appointments confidentiality">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/psychguide.png" alt="PsychGuide" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">PsychGuide</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">HEALTHCARE · TELECONSULT</span>
+                            <p class="subpage-item-desc">Mental health consultation appointment scheduler and secure patient case notes portal for clinical counselors.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_psychguide.svg" data-title="PsychGuide: Student Guidance & Counseling Ticketing Portal" data-sub="Student Guidance & Counseling Portal" data-logo="assets/psychguide.png" data-url="https://psychguide.internal/consult" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_psychguide.svg" alt="PsychGuide Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/psychguide.png" alt="PsychGuide" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">PsychGuide</h3>
+                                            <span class="cf-info-badge">Student Guidance & Counseling Portal</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2023</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    A student concern management and counseling ticketing portal. Facilitates confidential student inquiries, counselor appointment scheduling, and case follow-up tracking.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>Confidential ticket submission with encrypted student identity protection</li>
+                                            <li>Counselor calendar scheduler with automated appointment confirmation</li>
+                                            <li>Counselor case notes management with role-based access security</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            Secure PHP architecture with parameterized queries and encrypted record fields for sensitive student counseling consultations.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">PHP</span>
+                                        <span class="tag">MySQL</span>
+                                        <span class="tag">Counseling Portal</span>
+                                        <span class="tag">Case Management</span>
+                                        <span class="tag">Health Tech</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Ever Gotesco -->
+                <article class="subpage-item is-locked" id="project-evergotesco" data-project-id="evergotesco" data-category="web" data-search="ever gotesco mall information store locator floor plan directories promo events commonwealth">
+                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
+                        <div class="subpage-item-title-col">
+                            <img src="assets/evergotescologo.png" alt="Ever Gotesco" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">Ever Gotesco</h3>
+                        </div>
+                        <div class="subpage-item-meta-col">
+                            <span class="subpage-item-category">COMMERCIAL · MALL DIRECTORY</span>
+                            <p class="subpage-item-desc">Digital tenant navigation and commercial center directory kiosk interface with store catalog indexing.</p>
+                        </div>
+                        <div class="subpage-item-toggle-wrap">
+                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                        </div>
+                    </div>
+                    <div class="subpage-item-detail" hidden>
+                        <div class="subpage-showcase-card">
+                            <!-- Left: Interactive UI Showcase Stage -->
+                            <div class="subpage-card-stage">
+                                <div class="cf-showcase-browser-frame">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_evergotesco.svg" data-title="Ever Gotesco: Mall Directory & Interactive Store Locator" data-sub="Mall Directory & Tenant Locator" data-logo="assets/evergotescologo.png" data-url="https://evergotesco.com.ph/directory" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/screen_evergotesco.svg" alt="Ever Gotesco Screen Preview" class="cf-showcase-img" loading="lazy">
+                                        <div class="cf-showcase-overlay">
+                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Detailed Dossier & Deliverables -->
+                            <div class="subpage-card-info">
+                                <div class="cf-info-header">
+                                    <div class="cf-info-header-left">
+                                        <div class="cf-info-logo-box">
+                                            <img src="assets/evergotescologo.png" alt="Ever Gotesco" class="cf-info-logo">
+                                        </div>
+                                        <div>
+                                            <h3 class="cf-info-title">Ever Gotesco</h3>
+                                            <span class="cf-info-badge">Mall Directory & Tenant Locator</span>
+                                        </div>
+                                    </div>
+                                    <span class="cf-info-year">2023</span>
+                                </div>
+                                <p class="cf-info-desc">
+                                    A web-based mall information and store locator system for Ever Gotesco Commonwealth. Features interactive floor plan directories, tenant categorization, mall promo event calendars, and visitor navigation.
+                                </p>
+
+                                <!-- Technical Deliverables & Architecture -->
+                                <div class="subpage-detail-row">
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Key Deliverables</span>
+                                        <ul class="cf-detail-list">
+                                            <li>Interactive SVG floor plan directory with tenant unit click-to-highlight</li>
+                                            <li>Keyword and category search for stores, restaurants, and service centers</li>
+                                            <li>Admin portal for mall marketing teams to update events and promo banners</li>
+                                        </ul>
+                                    </div>
+                                    <div class="cf-detail-col">
+                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
+                                        <p class="cf-detail-text">
+                                            Normalized MySQL relational database indexing tenants, categories, and floor unit coordinates paired with interactive DOM SVG floorplan rendering.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="subpage-card-footer">
+                                    <div class="cf-info-tags">
+                                        <span class="tag">PHP</span>
+                                        <span class="tag">MySQL</span>
+                                        <span class="tag">Directory Search</span>
+                                        <span class="tag">Interactive Floor Plan</span>
+                                        <span class="tag">Retail Tech</span>
+                                    </div>
+                                    <div class="subpage-card-actions">
+                                        <button type="button" class="cf-subpage-link open-contact-modal">
+                                            <span>Inquire about project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Empty Search State -->
+            <div id="noResultsState" class="subpage-no-results" style="display: none;">
+                <p>No projects match your search query.</p>
+                <button type="button" class="subpage-filter-btn" id="clearSearchBtn">Clear Search Filters</button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="subpage-footer">
+            <span class="footer-copy">© 2026 Harry Sevilla · Full-Stack Developer</span>
+            <div class="footer-socials">
+                <a href="https://github.com/harrybryn" target="_blank" rel="noopener noreferrer">github</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">linkedin</a>
+                <a href="https://www.facebook.com/Mowteeeeeeeeeeeee" target="_blank" rel="noopener noreferrer">facebook</a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">instagram</a>
+                <a href="#" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">back to top ↑</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Project Screen Lightbox Modal -->
+    <div class="cf-lightbox-modal" id="subpageLightboxModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="subpageLightboxTitle">
+        <div class="cf-lightbox-backdrop" id="subpageLightboxBackdrop"></div>
+        <div class="cf-lightbox-dialog">
+            <div class="cf-lightbox-header">
+                <div class="cf-lightbox-title-box">
+                    <img src="assets/anigrow_logo.png" alt="" id="subpageLightboxLogo" class="cf-lightbox-logo">
+                    <div>
+                        <h3 id="subpageLightboxTitle" class="cf-lightbox-title">Project Screen Showcase</h3>
+                        <span id="subpageLightboxSub" class="cf-lightbox-sub">Architecture &amp; Interface Preview</span>
+                    </div>
+                </div>
+                <div class="cf-lightbox-actions">
+                    <button type="button" id="subpageLightboxClose" class="cf-lightbox-close" aria-label="Close Preview">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="cf-lightbox-body">
+                <div class="cf-lightbox-browser-bar">
+                    <span class="cf-mockup-dot"></span>
+                    <span class="cf-mockup-dot"></span>
+                    <span class="cf-mockup-dot"></span>
+                    <span id="subpageLightboxUrl" class="cf-lightbox-url">https://anigrow.vercel.app</span>
+                </div>
+                <div class="cf-lightbox-img-wrap">
+                    <img src="assets/screen_anigrow.png" alt="Project Full Screen Preview" id="subpageLightboxImg" class="cf-lightbox-img">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal Dialog -->
+    <div class="contact-modal" id="contactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+        <div class="contact-modal-backdrop" id="contactModalBackdrop"></div>
+        <div class="contact-modal-dialog">
+            <button type="button" class="contact-modal-close" id="contactModalClose" aria-label="Close contact dialog">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="contact-modal-header">
+                <h2 class="contact-modal-title" id="contactModalTitle">Get in touch</h2>
+                <p class="contact-modal-desc">
+                    Send a note below or reach out directly at <a href="mailto:Harrysevilla567@gmail.com" class="inline-contact-link">Harrysevilla567@gmail.com</a>.
+                </p>
+            </div>
+            
+            <div class="contact-modal-body">
+                <div class="modal-direct-strip">
+                    <a href="mailto:Harrysevilla567@gmail.com" class="modal-direct-link" title="Send email">
+                        <span class="mono-label">email:</span>
+                        <span class="mono-val">Harrysevilla567@gmail.com</span>
+                    </a>
+                    <span class="modal-sep">·</span>
+                    <a href="tel:+639076478115" class="modal-direct-link" title="Phone">
+                        <span class="mono-label">tel:</span>
+                        <span class="mono-val">+63 907 647 8115</span>
+                    </a>
+                    <span class="modal-sep">·</span>
+                    <span class="modal-direct-link">
+                        <span class="mono-label">loc:</span>
+                        <span class="mono-val">Bulacan, PH</span>
+                    </span>
+                </div>
+
+                <form class="modal-form" id="contact-form" novalidate>
+                    <div class="form-row-2col">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Alex Rivera" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="alex@company.com" autocomplete="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" required placeholder="Tell me about your project, idea, or inquiry..."></textarea>
+                    </div>
+                    <div class="form-actions-row">
+                        <span class="modal-form-note">Typically replies within 24 hours</span>
+                        <button type="submit" class="modal-submit-btn" id="send-btn">
+                            <span id="send-btn-text">send message →</span>
+                        </button>
+                    </div>
+                    <p id="form-status" class="form-status" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ── Theme Switcher Engine (System / Light / Dark) ──
+            const KEY = 'portfolio-theme';
+            const root = document.documentElement;
+            const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+            const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function getPref() {
+                try { return localStorage.getItem(KEY) || 'system'; } catch (e) { return 'system'; }
+            }
+
+            function isDarkTheme(p) {
+                return p === 'dark' || (p === 'system' && !!mq && mq.matches);
+            }
+
+            function syncThemeUI(p) {
+                const isDark = isDarkTheme(p);
+                root.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                document.querySelectorAll('[data-theme-opt]').forEach(b => {
+                    const opt = b.getAttribute('data-theme-opt');
+                    b.classList.toggle('is-active', opt === p);
+                });
+            }
+
+            function crossfadeTheme(p) {
+                root.classList.add('theme-anim');
+                syncThemeUI(p);
+                setTimeout(() => root.classList.remove('theme-anim'), 520);
+            }
+
+            function revealTheme(p, x, y) {
+                const r = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+                const vt = document.startViewTransition(() => {
+                    syncThemeUI(p);
+                });
+                vt.ready.then(() => {
+                    root.animate(
+                        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`] },
+                        { duration: 540, easing: 'cubic-bezier(.32,.08,.24,1)', pseudoElement: '::view-transition-new(root)' }
+                    );
+                }).catch(() => {});
+            }
+
+            window.setPortfolioTheme = function (p, ev) {
+                try { localStorage.setItem(KEY, p); } catch (e) {}
+                const wasDark = root.getAttribute('data-theme') === 'dark';
+                const willBeDark = isDarkTheme(p);
+
+                if (wasDark === willBeDark) {
+                    syncThemeUI(p);
+                    return;
+                }
+
+                if (reduce || !document.startViewTransition) {
+                    crossfadeTheme(p);
+                    return;
+                }
+
+                let x = window.innerWidth / 2;
+                let y = 0;
+                if (ev && typeof ev.clientX === 'number' && ev.clientX > 0) {
+                    x = ev.clientX;
+                    y = ev.clientY;
+                } else if (ev && ev.currentTarget) {
+                    const rect = ev.currentTarget.getBoundingClientRect();
+                    x = rect.left + rect.width / 2;
+                    y = rect.top + rect.height / 2;
+                }
+
+                revealTheme(p, x, y);
+            };
+
+            document.querySelectorAll('[data-theme-opt]').forEach(btn => {
+                btn.addEventListener('click', (ev) => {
+                    const opt = btn.getAttribute('data-theme-opt');
+                    window.setPortfolioTheme(opt, ev);
+                });
+            });
+
+            syncThemeUI(getPref());
+
+            if (mq) {
+                mq.addEventListener('change', () => {
+                    if (getPref() === 'system') crossfadeTheme('system');
+                });
+            }
+
+            // ── Project Row Direct Navigation (Locked) ──
+            // View details locked for now
+            const items = Array.from(document.querySelectorAll('.subpage-item'));
+
+            // Filter pills & Search
+            const filterBtns = document.querySelectorAll('.subpage-filter-btn');
+            const searchInput = document.getElementById('subpageSearch');
+            const noResults = document.getElementById('noResultsState');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+            let currentFilter = 'all';
+
+            function applyFilters() {
+                const query = (searchInput.value || '').toLowerCase().trim();
+                let visibleCount = 0;
+
+                items.forEach(item => {
+                    const category = item.getAttribute('data-category') || '';
+                    const searchData = item.getAttribute('data-search') || '';
+
+                    const matchesFilter = (currentFilter === 'all') || category.includes(currentFilter);
+                    const matchesSearch = !query || searchData.toLowerCase().includes(query);
+
+                    if (matchesFilter && matchesSearch) {
+                        item.style.display = '';
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (noResults) {
+                    noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+                }
+            }
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.getAttribute('data-filter') || 'all';
+                    applyFilters();
+                });
+            });
+
+            if (searchInput) {
+                searchInput.addEventListener('input', applyFilters);
+            }
+
+            if (clearSearchBtn && searchInput) {
+                clearSearchBtn.addEventListener('click', () => {
+                    searchInput.value = '';
+                    currentFilter = 'all';
+                    filterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-filter') === 'all'));
+                    applyFilters();
+                });
+            }
+
+            // Subpage Screen Lightbox Controller
+            const lightbox = document.getElementById('subpageLightboxModal');
+            const lightboxImg = document.getElementById('subpageLightboxImg');
+            const lightboxTitle = document.getElementById('subpageLightboxTitle');
+            const lightboxSub = document.getElementById('subpageLightboxSub');
+            const lightboxLogo = document.getElementById('subpageLightboxLogo');
+            const lightboxUrl = document.getElementById('subpageLightboxUrl');
+            const lightboxLive = document.getElementById('subpageLightboxLive');
+            const lightboxClose = document.getElementById('subpageLightboxClose');
+            const lightboxBackdrop = document.getElementById('subpageLightboxBackdrop');
+
+            function openLightbox(screen, title, sub, logo, url) {
+                if (!lightbox) return;
+                if (lightboxImg) lightboxImg.src = screen;
+                if (lightboxTitle) lightboxTitle.textContent = title;
+                if (lightboxSub) lightboxSub.textContent = sub;
+                if (lightboxLogo) lightboxLogo.src = logo;
+                if (lightboxUrl) lightboxUrl.textContent = url;
+                if (lightboxLive) {
+                    lightboxLive.href = url;
+                    lightboxLive.style.display = (url && url.startsWith('http')) ? 'inline-flex' : 'none';
+                }
+                lightbox.classList.add('is-open');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                if (window.lucide) lucide.createIcons();
+            }
+
+            function closeLightbox() {
+                if (!lightbox) return;
+                lightbox.classList.remove('is-open');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('.open-subpage-lightbox').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const screen = el.getAttribute('data-screen');
+                    const title = el.getAttribute('data-title');
+                    const sub = el.getAttribute('data-sub');
+                    const logo = el.getAttribute('data-logo');
+                    const url = el.getAttribute('data-url');
+                    openLightbox(screen, title, sub, logo, url);
+                });
+            });
+
+            if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+            if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox && lightbox.classList.contains('is-open')) {
+                    closeLightbox();
+                }
+            });
+
+            // Contact Modal Controller
+            const contactModal = document.getElementById('contactModal');
+            const contactModalClose = document.getElementById('contactModalClose');
+            const contactModalBackdrop = document.getElementById('contactModalBackdrop');
+            const modalTriggers = document.querySelectorAll('.open-contact-modal');
+
+            function openContactModal() {
+                if (!contactModal) return;
+                contactModal.classList.add('is-open');
+                contactModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                const nameInput = document.getElementById('name');
+                if (nameInput) setTimeout(() => nameInput.focus(), 150);
+                if (window.lucide) lucide.createIcons();
+            }
+
+            function closeContactModal() {
+                if (!contactModal) return;
+                contactModal.classList.remove('is-open');
+                contactModal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            modalTriggers.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openContactModal();
+                });
+            });
+
+            if (contactModalClose) contactModalClose.addEventListener('click', closeContactModal);
+            if (contactModalBackdrop) contactModalBackdrop.addEventListener('click', closeContactModal);
+
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && contactModal && contactModal.classList.contains('is-open')) {
+                    closeContactModal();
+                }
+            });
+
+            // Contact Form AJAX Submission
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const btn = document.getElementById('send-btn');
+                    const btnText = document.getElementById('send-btn-text');
+                    const status = document.getElementById('form-status');
+
+                    btn.disabled = true;
+                    btnText.textContent = 'Sending...';
+                    status.textContent = '';
+                    status.className = 'form-status';
+
+                    try {
+                        const formData = new FormData(contactForm);
+                        const body = Object.fromEntries(formData.entries());
+                        const res = await fetch('/api/send-mail', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(body)
+                        });
+                        const data = await res.json();
+                        if (data.success) {
+                            status.textContent = 'Message sent successfully. I will get back to you soon.';
+                            status.className = 'form-status form-status--success';
+                            contactForm.reset();
+                        } else {
+                            status.textContent = data.message || 'Something went wrong. Please try again.';
+                            status.className = 'form-status form-status--error';
+                        }
+                    } catch (err) {
+                        status.textContent = 'Message could not be sent. Please email directly at Harrysevilla567@gmail.com.';
+                        status.className = 'form-status form-status--error';
+                    } finally {
+                        btn.disabled = false;
+                        btnText.textContent = 'send message →';
+                        if (window.lucide) lucide.createIcons();
+                    }
+                });
+            }
+
+            if (window.lucide) lucide.createIcons();
+        });
+    </script>
+
+    <div class="arcade-overlay" id="arcadeOverlay" role="dialog" aria-modal="true" aria-labelledby="skillsModalTitle">
+        <div class="arcade-overlay-backdrop" id="arcadeBackdrop" data-close-arcade></div>
+
+        <div class="skills-modal-dialog">
+            <!-- Header: Title, Segmented Game Switcher, Close -->
+            <div class="skills-modal-header">
+                <div class="skills-modal-brand">
+                    <span class="skills-kicker">BENCHMARK</span>
+                    <h2 class="skills-title" id="skillsModalTitle">Test your Skills</h2>
+                </div>
+
+                <!-- Sleek Segmented Game Selector -->
+                <nav class="skills-tabs" role="tablist" aria-label="Select Game">
+                    <button type="button" class="skills-tab is-active" data-tab="reaction" role="tab"
+                        aria-selected="true" id="tabReaction">
+                        <span>Reaction</span>
+                        <kbd class="skills-hotkey">1</kbd>
+                    </button>
+                    <button type="button" class="skills-tab" data-tab="aim" role="tab" aria-selected="false"
+                        id="tabAim">
+                        <span>Aim</span>
+                        <kbd class="skills-hotkey">2</kbd>
+                    </button>
+                    <button type="button" class="skills-tab" data-tab="simon" role="tab" aria-selected="false"
+                        id="tabSimon">
+                        <span>Memory</span>
+                        <kbd class="skills-hotkey">3</kbd>
+                    </button>
+                    <button type="button" class="skills-tab" data-tab="tug" role="tab" aria-selected="false"
+                        id="tabTug">
+                        <span>CPS Duel</span>
+                        <kbd class="skills-hotkey">4</kbd>
+                    </button>
+                    <button type="button" class="skills-tab" data-tab="typer" role="tab" aria-selected="false"
+                        id="tabTyper">
+                        <span>Typing</span>
+                        <kbd class="skills-hotkey">5</kbd>
+                    </button>
+                </nav>
+
+                <!-- Close Button -->
+                <button type="button" class="skills-close-btn" data-close-arcade aria-label="Close skills modal"
+                    title="Close (Esc)">
+                    <kbd>esc</kbd>
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Stage Panels -->
+            <div class="skills-stage" id="skillsStage">
+
+                <!-- ==========================================
+                     GAME 1 (DEFAULT): BRYL LIM-STYLE SPEED TYPER
+                     ========================================== -->
+                <div class="skills-panel" id="panelTyper" data-panel="typer">
+                    <div class="tt-container">
+                        <!-- Live Stats -->
+                        <div class="tt-stats">
+                            <div class="tt-stat"><span class="tt-stat-val"><span class="tt-num"
+                                        id="ttWpm">0</span></span><span class="tt-stat-label">wpm</span></div>
+                            <div class="tt-stat"><span class="tt-stat-val"><span class="tt-num"
+                                        id="ttAcc">100</span><i>%</i></span><span class="tt-stat-label">acc</span></div>
+                            <div class="tt-stat"><span class="tt-stat-val"><span class="tt-num"
+                                        id="ttTime">0</span><i>s</i></span><span class="tt-stat-label">time</span></div>
+                        </div>
+
+                        <!-- Words Stream with dynamic smooth Caret -->
+                        <div class="tt-words-wrap">
+                            <div class="tt-words" id="ttWords" tabindex="0" aria-label="Typing test stream"></div>
+                        </div>
+
+                        <!-- Interactive On-Screen Keyboard -->
+                        <div class="tt-keyboard" id="ttKeyboard"></div>
+
+                        <!-- Control Hints -->
+                        <div class="tt-hint">
+                            <span><kbd>tab</kbd> restart</span>
+                            <span><kbd>esc</kbd> close</span>
+                            <span><kbd>1-5</kbd> switch game</span>
+                        </div>
+                        <div class="tt-confirm" id="ttConfirm">restart test? <kbd>↵</kbd> to confirm · <kbd>esc</kbd>
+                            cancel</div>
+
+                        <!-- Results Screen -->
+                        <div class="tt-results" id="ttResults">
+                            <div class="tt-res-main">
+                                <span class="tt-res-wpm" id="ttResWpm">0</span>
+                                <span class="tt-res-cap">words per minute</span>
+                            </div>
+                            <div class="tt-res-grid">
+                                <div><b><span id="ttResAcc">0</span><i>%</i></b><label>accuracy</label></div>
+                                <div><b><span id="ttResRaw">0</span></b><label>raw</label></div>
+                                <div><b><span id="ttResTime">0</span><i>s</i></b><label>time</label></div>
+                            </div>
+                            <div class="tt-verdict" id="ttVerdict"></div>
+                            <button type="button" class="tt-restart" id="ttRestartBtn">
+                                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+                                    stroke-width="2.2">
+                                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                    <path d="M3 3v5h5"></path>
+                                </svg>
+                                <span>try again</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     GAME 2: REACTION SPEED TEST
+                     ========================================== -->
+                <div class="skills-panel is-active" id="panelReaction" data-panel="reaction">
+                    <div class="reaction-arena">
+                        <div class="reaction-screen" id="reactionScreen" data-state="idle" tabindex="0" role="button"
+                            aria-label="Reaction test pad">
+                            <div class="reaction-content">
+                                <div class="reaction-title" id="reactionMainText">Click anywhere to start</div>
+                                <p class="reaction-sub" id="reactionSubText">When the screen flashes, click as fast as
+                                    possible.</p>
+                            </div>
+                        </div>
+
+                        <div class="reaction-bottom-bar">
+                            <div class="reaction-stat-chip">
+                                <span>Best:</span>
+                                <strong id="reactionBestMs">— ms</strong>
+                            </div>
+                            <div class="reaction-stat-chip">
+                                <span>Average:</span>
+                                <strong id="reactionAvgMs">— ms</strong>
+                            </div>
+                            <div class="reaction-stat-chip">
+                                <span>Attempt:</span>
+                                <strong id="reactionTries">0 / 5</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     GAME 3: AIM REFLEX
+                     ========================================== -->
+                <div class="skills-panel" id="panelAim" data-panel="aim">
+                    <div class="aim-game-wrap">
+                        <div class="aim-hud">
+                            <div class="aim-stat-item">
+                                <label>Score</label>
+                                <span id="aimScoreVal">0</span>
+                            </div>
+                            <div class="aim-stat-item">
+                                <label>Time Left</label>
+                                <span id="aimTimerVal">30.0s</span>
+                            </div>
+                            <div class="aim-stat-item">
+                                <label>Accuracy</label>
+                                <span id="aimAccVal">100%</span>
+                            </div>
+                            <div class="aim-stat-item">
+                                <label>Best</label>
+                                <span id="aimBestScoreVal">0 pts</span>
+                            </div>
+                        </div>
+
+                        <div class="aim-field" id="aimField">
+                            <div class="aim-overlay-prompt" id="aimOverlayPrompt">
+                                <h3>Target Reflex Benchmark</h3>
+                                <p>Click targets before they shrink away. Test your mouse precision and speed.</p>
+                                <button type="button" class="skills-action-btn" id="aimStartBtn">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                    <span>Start Challenge</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     GAME 4: MEMORY SEQUENCE (SIMON)
+                     ========================================== -->
+                <div class="skills-panel" id="panelSimon" data-panel="simon">
+                    <div class="simon-game-wrap">
+                        <div class="simon-header-bar">
+                            <div class="simon-stat-chip"><span>Level</span><strong id="simonLevel">1</strong></div>
+                            <div class="simon-stat-chip"><span>Best</span><strong id="simonBest">0</strong></div>
+                            <div class="simon-status-msg" id="simonStatus">Press start to begin sequence</div>
+                        </div>
+
+                        <div class="simon-grid" id="simonGrid">
+                            <button type="button" class="simon-pad pad-0" data-pad="0" aria-label="Tile 1"></button>
+                            <button type="button" class="simon-pad pad-1" data-pad="1" aria-label="Tile 2"></button>
+                            <button type="button" class="simon-pad pad-2" data-pad="2" aria-label="Tile 3"></button>
+                            <button type="button" class="simon-pad pad-3" data-pad="3" aria-label="Tile 4"></button>
+                            <button type="button" class="simon-pad pad-4" data-pad="4" aria-label="Tile 5"></button>
+                            <button type="button" class="simon-pad pad-5" data-pad="5" aria-label="Tile 6"></button>
+                        </div>
+
+                        <button type="button" class="skills-action-btn simon-action" id="simonStartBtn">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            <span>Start Memory Test</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ==========================================
+                     GAME 5: CPS TAP DUEL
+                     ========================================== -->
+                <div class="skills-panel" id="panelTug" data-panel="tug">
+                    <div class="tug-game-wrap">
+                        <div class="tug-match-hud">
+                            <div class="tug-match-status" id="tugMatchStatus">Ready</div>
+                            <div class="tug-match-timer" id="tugTimer">0.0s</div>
+                            <div class="tug-match-best"><span>Best:</span> <strong id="tugBestCps">0.0 CPS</strong>
+                            </div>
+                        </div>
+
+                        <div class="tug-meter-bar">
+                            <div class="tug-fill-p1" id="tugFillP1" style="width: 50%;"></div>
+                            <div class="tug-fill-p2" id="tugFillP2" style="width: 50%;"></div>
+                            <div class="tug-needle" id="tugKnot" style="left: 50%;"></div>
+                        </div>
+
+                        <div class="tug-labels-bar">
+                            <span class="tug-p1-label" id="tugP1Stat"><span class="dot-p1"></span> YOU: 0</span>
+                            <span class="tug-p2-label" id="tugP2Stat"><span class="dot-p2"></span> BOT: 0</span>
+                        </div>
+
+                        <div class="tug-actions-row">
+                            <button type="button" class="tug-tap-btn" id="tugTapBtn">
+                                <span class="tug-tap-main">TAP / SPACEBAR</span>
+                                <span class="tug-tap-sub" id="tugLiveCps">0.0 CPS</span>
+                            </button>
+                            <button type="button" class="skills-action-btn secondary" id="tugResetBtn">
+                                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                    <path d="M3 3v5h5"></path>
+                                </svg>
+                                <span>Reset Duel</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Lab Arcade Script -->
+    <script src="arcade.js?v=25"></script>
+</body>
+
+</html>

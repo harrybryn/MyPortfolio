@@ -231,12 +231,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const cfArchitecture = document.getElementById('cfArchitecture');
     const cfInfoLogo = document.getElementById('cfInfoLogo');
 
+    // UI Screen Showcase & Lightbox Elements
+    const cfActiveScreenImg = document.getElementById('cfActiveScreenImg');
+    const cfActiveUrlText = document.getElementById('cfActiveUrlText');
+    const cfLiveLink = document.getElementById('cfLiveLink');
+    const cfExpandBtn = document.getElementById('cfExpandBtn');
+    const cfShowcaseViewport = document.getElementById('cfShowcaseViewport');
+    const cfBadgeStatus = document.getElementById('cfBadgeStatus');
+
+    // Lightbox modal elements
+    const cfLightboxModal = document.getElementById('cfLightboxModal');
+    const cfLightboxBackdrop = document.getElementById('cfLightboxBackdrop');
+    const cfLightboxClose = document.getElementById('cfLightboxClose');
+    const cfLightboxImg = document.getElementById('cfLightboxImg');
+    const cfLightboxTitle = document.getElementById('cfLightboxTitle');
+    const cfLightboxSub = document.getElementById('cfLightboxSub');
+    const cfLightboxLogo = document.getElementById('cfLightboxLogo');
+    const cfLightboxUrl = document.getElementById('cfLightboxUrl');
+    const cfLightboxLive = document.getElementById('cfLightboxLive');
+
     const projectsData = [
         {
             title: 'ANI-GROW: AI-Powered Poultry & Livestock Farming Guide',
             badge: 'Poultry & Livestock Analytics',
             year: '2026',
             logo: 'assets/anigrow_logo.png',
+            screen: 'assets/screen_anigrow.png',
+            url: 'https://anigrow.vercel.app',
+            statusText: 'Live Web & Mobile · IoT Connected',
             desc: 'A mobile application that helps farm animal caretakers manage poultry and livestock operations using AI guidance and data analytics. Supports and integrates with custom IoT machines for weight-based segregation and automated feeding of farm animals.',
             tags: ['React Native', 'IoT Integration', 'AI Analytics', 'Agricultural Tech'],
             deliverables: [
@@ -251,6 +273,9 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: 'Group Travel & Itinerary Platform',
             year: '2026',
             logo: 'assets/TourGoAppLogo.png',
+            screen: 'assets/screen_tourgo.png',
+            url: 'https://tourgo.internal',
+            statusText: 'Mobile Prototype · Gemini AI Integrated',
             desc: 'A cross-platform mobile application for group trip planning featuring join-code enrollment, collaborative itineraries, real-time chat, polls, and shared expense splitting. Integrates Google Gemini AI for personalized day-plan generation and Expo push notifications.',
             tags: ['React Native', 'Google Gemini AI', 'Expo Push', 'Real-Time Chat', 'Travel Tech'],
             deliverables: [
@@ -265,6 +290,9 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: 'Event Production Suite',
             year: '2026',
             logo: 'assets/BINHI Concept Logo.webp',
+            screen: 'assets/screen_binhi.png',
+            url: 'https://traviscruz.vercel.app/project/binhiconcept',
+            statusText: 'Production Client System · 4 Portals',
             desc: 'A complete website for lights and sound booking and management, with separate portals for admins, crew, customers/clients, and affiliates. Includes automated booking pipeline, interactive price builder, customer Wishlist, and SMS OTP verification.',
             tags: ['React', 'React Native', 'Backend Architecture', 'Price Builder', 'OTP Verification'],
             deliverables: [
@@ -279,6 +307,9 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: 'Institutional Client · Deployment Phase',
             year: '2026',
             logo: 'assets/COLM_Pulilan_logo.png',
+            screen: 'assets/screen_colm.png',
+            url: 'https://colm-pulilan.internal/portal',
+            statusText: 'Client System · Deployment Phase',
             desc: 'A comprehensive staff records and personnel management web system commissioned for College of Our Lady of Mercy (Pulilan, Bulacan). Currently in final preparations for official production deployment, managing faculty profiles, department taxonomies, digital leave filing, and multi-level administrative approvals.',
             tags: ['React', 'PHP', 'MySQL', 'Institutional Client', 'HR & Records', 'Live Deployment'],
             deliverables: [
@@ -329,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dot.classList.toggle('active', idx === currentIndex);
             });
 
-            // Update Project Meta Dossier
+            // Update Project Meta Dossier & Showcase Screen
             const curData = projectsData[currentIndex];
             if (curData) {
                 if (cfInfoLogo && curData.logo) {
@@ -349,15 +380,107 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (cfArchitecture && curData.architecture) {
                     cfArchitecture.textContent = curData.architecture;
                 }
+
+                // Update UI Screen Showcase
+                if (cfActiveScreenImg && curData.screen) {
+                    cfActiveScreenImg.style.opacity = '0.35';
+                    cfActiveScreenImg.style.transform = 'scale(0.985)';
+                    const tempImg = new Image();
+                    tempImg.src = curData.screen;
+                    tempImg.onload = () => {
+                        cfActiveScreenImg.src = curData.screen;
+                        cfActiveScreenImg.alt = curData.title + ' UI Screen';
+                        cfActiveScreenImg.style.opacity = '1';
+                        cfActiveScreenImg.style.transform = 'scale(1)';
+                    };
+                }
+                if (cfActiveUrlText && curData.url) {
+                    cfActiveUrlText.textContent = curData.url;
+                }
+                if (cfLiveLink && curData.url) {
+                    cfLiveLink.href = curData.url;
+                    cfLiveLink.style.display = curData.url.startsWith('http') ? 'inline-flex' : 'none';
+                }
+                if (cfBadgeStatus && curData.statusText) {
+                    cfBadgeStatus.textContent = curData.statusText;
+                }
+            }
+
+            if (window.lucide) {
+                lucide.createIcons();
             }
         }
 
-        // Click on Cards (clicking prev or next card activates it)
+        // Lightbox Handler
+        function openProjectLightbox(idx) {
+            const data = projectsData[idx !== undefined ? idx : currentIndex];
+            if (!data || !cfLightboxModal) return;
+            if (cfLightboxImg) {
+                cfLightboxImg.src = data.screen;
+                cfLightboxImg.alt = data.title;
+            }
+            if (cfLightboxTitle) cfLightboxTitle.textContent = data.title;
+            if (cfLightboxSub) cfLightboxSub.textContent = data.badge;
+            if (cfLightboxLogo) cfLightboxLogo.src = data.logo;
+            if (cfLightboxUrl) cfLightboxUrl.textContent = data.url;
+            if (cfLightboxLive) {
+                cfLightboxLive.href = data.url;
+                cfLightboxLive.style.display = data.url.startsWith('http') ? 'inline-flex' : 'none';
+            }
+            cfLightboxModal.classList.add('is-open');
+            cfLightboxModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function closeProjectLightbox() {
+            if (!cfLightboxModal) return;
+            cfLightboxModal.classList.remove('is-open');
+            cfLightboxModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        if (cfShowcaseViewport) {
+            cfShowcaseViewport.addEventListener('click', () => openProjectLightbox(currentIndex));
+            cfShowcaseViewport.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openProjectLightbox(currentIndex);
+                }
+            });
+        }
+
+        if (cfExpandBtn) {
+            cfExpandBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openProjectLightbox(currentIndex);
+            });
+        }
+
+        if (cfLightboxClose) {
+            cfLightboxClose.addEventListener('click', closeProjectLightbox);
+        }
+        if (cfLightboxBackdrop) {
+            cfLightboxBackdrop.addEventListener('click', closeProjectLightbox);
+        }
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && cfLightboxModal && cfLightboxModal.classList.contains('is-open')) {
+                closeProjectLightbox();
+            }
+        });
+
+        // Click on Cards (clicking prev or next card activates it; active card view details is locked for now)
         cfCards.forEach(card => {
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (e) => {
                 const idx = parseInt(card.getAttribute('data-index'), 10);
-                if (!isNaN(idx) && idx !== currentIndex) {
-                    updateCoverflow(idx);
+                if (!isNaN(idx)) {
+                    if (idx !== currentIndex) {
+                        e.preventDefault();
+                        updateCoverflow(idx);
+                    } else {
+                        // View details is currently locked
+                        e.preventDefault();
+                    }
                 }
             });
         });
@@ -524,8 +647,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Refresh icons
     if (window.lucide) lucide.createIcons();
-
     // ==========================================================================
+    // 4.5. Hero Name Typewriter Animation
+    // ==========================================================================
+    (() => {
+        const typewriterEl = document.getElementById('heroNameTypewriter');
+        if (!typewriterEl) return;
+
+        const phrases = [
+            "Harry Sevilla",
+            "Full-Stack Developer",
+            "Software Engineer",
+            "Harry Sevilla",
+            "Creative Builder"
+        ];
+
+        let phraseIndex = 0;
+        let charIndex = phrases[0].length;
+        let isDeleting = false;
+        let timer = null;
+
+        const TYPE_SPEED = 100;     // Forward typing speed
+        const DELETE_SPEED = 45;    // Backspacing speed
+        const PAUSE_EMPTY = 350;    // Pause before typing next phrase
+
+        // Ensure initial text in DOM exactly matches first phrase without stray whitespace
+        typewriterEl.textContent = phrases[0];
+
+        function tick() {
+            const currentPhrase = phrases[phraseIndex];
+
+            if (isDeleting) {
+                charIndex--;
+                typewriterEl.textContent = currentPhrase.substring(0, charIndex);
+
+                if (charIndex <= 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    timer = setTimeout(tick, PAUSE_EMPTY);
+                    return;
+                }
+                timer = setTimeout(tick, DELETE_SPEED);
+            } else {
+                charIndex++;
+                typewriterEl.textContent = currentPhrase.substring(0, charIndex);
+
+                if (charIndex >= currentPhrase.length) {
+                    isDeleting = true;
+                    // Hold "Harry Sevilla" longer than secondary titles
+                    const holdTime = currentPhrase === "Harry Sevilla" ? 4000 : 2500;
+                    timer = setTimeout(tick, holdTime);
+                    return;
+                }
+                const speed = TYPE_SPEED + (Math.random() * 25 - 12);
+                timer = setTimeout(tick, speed);
+            }
+        }
+
+        // Start first cycle after an initial 3.2s pause on full name
+        timer = setTimeout(() => {
+            isDeleting = true;
+            tick();
+        }, 3200);
+    })();    // ==========================================================================
     // 5. Signature 3D Isometric Hatched Cube Engine with Obsidian-Grade Lighting
     // ==========================================================================
     (() => {

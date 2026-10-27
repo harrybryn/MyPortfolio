@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f1117"/>
+      <stop offset="100%" stop-color="#08090c"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#171923" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#10121a" stop-opacity="0.9"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#grid)"/>
+  
+  <rect x="0" y="0" width="800" height="48" fill="#13151f" stroke="#1f2330" stroke-width="1"/>
+  <circle cx="28" cy="24" r="10" fill="#14b8a6" opacity="0.8"/>
+  <text x="48" y="29" fill="#f1f5f9" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">PSYCHGUIDE · STUDENT COUNSELING PORTAL</text>
+  <rect x="625" y="12" width="145" height="24" rx="12" fill="#134e4a"/>
+  <text x="645" y="28" fill="#5eead4" font-family="-apple-system, sans-serif" font-size="11">Confidential Portal</text>
+
+  <!-- Left: Appointment Calendar & Tickets -->
+  <g transform="translate(30, 70)">
+    <rect width="450" height="400" rx="12" fill="url(#panel)" stroke="#222634"/>
+    <text x="20" y="32" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">Scheduled Counseling Consultations</text>
+
+    <g transform="translate(20, 60)">
+      <rect width="410" height="75" rx="8" fill="#131722" stroke="#222738"/>
+      <text x="18" y="28" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="600">Case #PG-921: Academic Anxiety & Career Guidance</text>
+      <text x="18" y="50" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">Student ID: 2021-**** (Anonymous) · Counselor: Dr. M. Reyes</text>
+      <rect x="315" y="20" width="80" height="22" rx="4" fill="rgba(16,185,129,0.15)"/>
+      <text x="330" y="35" fill="#10b981" font-family="monospace" font-size="10" font-weight="600">CONFIRMED</text>
+    </g>
+
+    <g transform="translate(20, 150)">
+      <rect width="410" height="75" rx="8" fill="#131722" stroke="#222738"/>
+      <text x="18" y="28" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="600">Case #PG-922: Stress Management Workshop Request</text>
+      <text x="18" y="50" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">Peer Group 3 · Scheduled: Oct 28, 2:00 PM · Room 302</text>
+      <rect x="315" y="20" width="80" height="22" rx="4" fill="rgba(59,130,246,0.15)"/>
+      <text x="330" y="35" fill="#60a5fa" font-family="monospace" font-size="10" font-weight="600">SCHEDULED</text>
+    </g>
+
+    <g transform="translate(20, 240)">
+      <rect width="410" height="75" rx="8" fill="#131722" stroke="#222738"/>
+      <text x="18" y="28" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="600">Case #PG-923: Transition & Adaptation Support</text>
+      <text x="18" y="50" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">First-Year Student Orientation Referral</text>
+      <rect x="315" y="20" width="80" height="22" rx="4" fill="rgba(245,158,11,0.15)"/>
+      <text x="335" y="35" fill="#fbbf24" font-family="monospace" font-size="10" font-weight="600">PENDING</text>
+    </g>
+  </g>
+
+  <!-- Right: Mental Wellness Stats & Resources -->
+  <g transform="translate(505, 70)">
+    <rect width="265" height="400" rx="12" fill="url(#panel)" stroke="#222634"/>
+    <text x="20" y="32" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">Monthly Wellness Metrics</text>
+
+    <text x="20" y="70" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">CONSULTATIONS COMPLETED</text>
+    <text x="20" y="105" fill="#2dd4bf" font-family="-apple-system, sans-serif" font-size="32" font-weight="800">128</text>
+    <text x="100" y="102" fill="#10b981" font-family="monospace" font-size="12">+18% MoM</text>
+
+    <line x1="20" y1="125" x2="245" y2="125" stroke="#222634"/>
+    <text x="20" y="150" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">PRIMARY CONCERNS</text>
+    <text x="20" y="175" fill="#e2e8f0" font-family="-apple-system, sans-serif" font-size="12">1. Academic Workload (44%)</text>
+    <text x="20" y="198" fill="#e2e8f0" font-family="-apple-system, sans-serif" font-size="12">2. Career Direction (31%)</text>
+    <text x="20" y="221" fill="#e2e8f0" font-family="-apple-system, sans-serif" font-size="12">3. Social Adaptation (25%)</text>
+
+    <rect x="20" y="270" width="225" height="90" rx="8" fill="#132a28" stroke="#115e59"/>
+    <text x="32" y="295" fill="#5eead4" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">EMERGENCY HOTLINE</text>
+    <text x="32" y="318" fill="#ccfbf1" font-family="monospace" font-size="14" font-weight="800">1553 · 24/7 SUPPORT</text>
+    <text x="32" y="340" fill="#99f6e4" font-family="-apple-system, sans-serif" font-size="11">Direct National Mental Health Line</text>
+  </g>
+
+</svg>
