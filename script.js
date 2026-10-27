@@ -605,7 +605,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         c,
                         glow: 0,
                         elevation: 0,
-                        lastHovered: 0
+                        lastHovered: 0,
+                        triggerTime: 0
                     });
                 }
             }
@@ -796,7 +797,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     continue;
                 }
 
-                // Mouse proximity & Hover interaction
+                // Mouse proximity & Hover interaction with Onset Trigger Delay
                 const dist = Math.hypot(mouseX - cube.cx, mouseY - cube.cy);
 
                 if (dist < HOVER_RADIUS) {
@@ -804,10 +805,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     const smooth = factor * factor * (3 - 2 * factor);
                     const targetIntensity = smooth;
 
-                    if (targetIntensity > cube.glow) {
-                        cube.glow = targetIntensity;
-                        cube.elevation = targetIntensity * 7;
+                    // Onset delay: schedule ignition with smooth wave latency
+                    if (!cube.triggerTime) {
+                        const onsetDelay = 120 + (dist / HOVER_RADIUS) * 90; // 120ms - 210ms trigger onset delay
+                        cube.triggerTime = now + onsetDelay;
+                    }
+
+                    // Once trigger onset delay elapsed, smoothly ramp up
+                    if (now >= cube.triggerTime) {
+                        cube.glow += (targetIntensity - cube.glow) * 0.18;
+                        cube.elevation = cube.glow * 7;
                         cube.lastHovered = now;
+                    }
+                } else {
+                    if (cube.glow <= 0.01) {
+                        cube.triggerTime = 0;
                     }
                 }
 
@@ -819,6 +831,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Smooth, luxurious decay over ~1.6 seconds
                     cube.glow = Math.max(0, cube.glow - dt * 0.6);
                     cube.elevation = cube.glow * 7;
+                    if (cube.glow <= 0.01) {
+                        cube.triggerTime = 0;
+                    }
                 }
 
                 // Add ambient shimmer
