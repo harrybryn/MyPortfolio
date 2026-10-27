@@ -526,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.lucide) lucide.createIcons();
 
     // ==========================================================================
-    // 5. Isometric Hatched Cube Tessellation with Subtle Shimmering Glowing Engine
+    // 5. Obsidian Official Platform Background Grid Engine (1:1 Replica)
     // ==========================================================================
     (() => {
         let canvas = document.getElementById('bgInteractiveCanvas');
@@ -544,29 +544,28 @@ document.addEventListener('DOMContentLoaded', () => {
         let height = 0;
         let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-        // Isometric Cube Geometry
-        const R = 44; // Outer radius of isometric cube
-        const dx = R * 0.8660254; // R * cos(30 deg)
-        const dy = R * 0.5;       // R * sin(30 deg)
-        const stepX = dx * 2;     // Column spacing
-        const stepY = R * 1.5;    // Row spacing
-        const LINE_SPACING = 4.2; // Fine "dikit dikit" line spacing inside each face
+        // Official Obsidian Configuration
+        const n = 48;       // 48px tile size
+        const k = 0.24;     // 24% ambient density
+        const K = 1100;     // 1100ms hover burst lifetime
+        const V = 1600;     // 1600ms drag burst lifetime
+        const W = 450;      // 450ms hover cooldown
+        const J = 220;      // 220ms drag cooldown
+        const B = 60;       // max active burst count
+        const Q = 2000;     // purge interval
 
-        let cols = 0;
-        let rows = 0;
-        let cubes = [];
+        // Content exclusion bounds (protects text & readability)
+        const isUnderText = (x, y, w, h) => {
+            const bound = w < 768 ? { w: 1, h: 0.55 } : { w: 0.6, h: 1 };
+            return x < bound.w * w && y < bound.h * h;
+        };
 
-        // Interactive tracking
-        let mouseX = -9999;
-        let mouseY = -9999;
-        let targetMouseX = -9999;
-        let targetMouseY = -9999;
-        let isHovering = false;
+        let ambientTiles = [];
+        let bursts = [];
+        const cooldownMap = new Map();
+        let isDragging = false;
         let isVisible = true;
-
-        // Ambient Shimmering Cubes (Obsidian "glimpses of glowing shining everywhere")
-        const AMBIENT_SHIMMER_COUNT = 52; // More frequent (mas madalas) ambient glistening
-        const ambientShimmers = [];
+        let pendingFrame = false;
 
         function resize() {
             width = window.innerWidth;
@@ -577,297 +576,228 @@ document.addEventListener('DOMContentLoaded', () => {
             canvas.style.height = height + 'px';
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-            cols = Math.ceil(width / stepX) + 3;
-            rows = Math.ceil(height / stepY) + 3;
-
-            initGrid();
-            initAmbientShimmers();
+            initAmbientTiles();
         }
 
-        function initGrid() {
-            cubes = [];
-            for (let r = -2; r < rows; r++) {
-                const isOdd = (Math.abs(r) % 2 === 1);
-                const xOffset = isOdd ? dx : 0;
-                for (let c = -2; c < cols; c++) {
-                    const cx = c * stepX + xOffset;
-                    const cy = r * stepY;
-                    cubes.push({
-                        cx,
-                        cy,
-                        r,
-                        c,
-                        glow: 0,
-                        elevation: 0,
-                        lastHovered: 0
-                    });
+        function initAmbientTiles() {
+            const cols = Math.ceil(width / n);
+            const rows = Math.ceil(height / n);
+            ambientTiles = [];
+
+            if (cols === 0 || rows === 0) return;
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const x = c * n;
+                    const y = r * n;
+                    const underText = isUnderText(x, y, width, height);
+                    const prob = underText ? k * 0.2 : k;
+
+                    if (Math.random() < prob) {
+                        ambientTiles.push({
+                            x,
+                            y,
+                            gradIdx: Math.floor(Math.random() * 4), // 0: Top, 1: Right, 2: Bottom, 3: Left
+                            maxOpacity: underText ? 0.06 + Math.random() * 0.12 : 0.15 + Math.random() * 0.3,
+                            delay: Math.random() * 6,
+                            duration: 2 + Math.random() * 4
+                        });
+                    }
                 }
             }
         }
 
-        function createShimmer(now) {
-            const index = Math.floor(Math.random() * (cubes.length || 100));
-            // Restrained peak alpha so it stays tasteful and never overpowers content
-            const peakAlpha = 0.07 + Math.random() * 0.15;
-            // Shorter duration between 1.4s and 2.8s so shimmers cycle rapidly and frequently
-            const duration = 1400 + Math.random() * 1400;
-            const startTime = now !== undefined ? now + Math.random() * 800 : performance.now() + Math.random() * 1200;
-            return {
-                index,
-                peakAlpha,
-                birth: startTime,
-                duration
-            };
-        }
-
-        function initAmbientShimmers() {
-            ambientShimmers.length = 0;
+        // Spawn interactive burst tiles
+        function spawnBurst(clientX, clientY, isDrag) {
+            const G = isDrag ? 1 + Math.floor(Math.random() * 3) : 1;
+            const S = isDrag ? n * 2.5 : n * 1.4;
+            const cooldown = isDrag ? J : W;
+            const lifetime = isDrag ? V : K;
             const now = performance.now();
-            for (let i = 0; i < AMBIENT_SHIMMER_COUNT; i++) {
-                ambientShimmers.push(createShimmer(now - Math.random() * 2000));
+            const newBursts = [];
+
+            for (let i = 0; i < G; i++) {
+                const offX = (Math.random() - 0.5) * S;
+                const offY = (Math.random() - 0.5) * S;
+                const tileX = Math.floor((clientX + offX) / n) * n;
+                const tileY = Math.floor((clientY + offY) / n) * n;
+
+                if (tileX < 0 || tileY < 0 || tileX + n > width || tileY + n > height) continue;
+
+                const key = `${tileX},${tileY}`;
+                const lastTime = cooldownMap.get(key);
+                if (lastTime && now - lastTime < cooldown) continue;
+
+                cooldownMap.set(key, now);
+                newBursts.push({
+                    x: tileX,
+                    y: tileY,
+                    gradIdx: Math.floor(Math.random() * 4),
+                    maxOpacity: isDrag ? 0.3 + Math.random() * 0.25 : 0.15 + Math.random() * 0.2,
+                    birth: now,
+                    lifetime,
+                    expiresAt: now + lifetime
+                });
+            }
+
+            if (newBursts.length > 0) {
+                bursts.push(...newBursts);
+                if (bursts.length > B) {
+                    bursts.splice(0, bursts.length - B);
+                }
             }
         }
 
         // Pointer listeners
-        window.addEventListener('pointermove', (e) => {
-            targetMouseX = e.clientX;
-            targetMouseY = e.clientY;
-            if (!isHovering) {
-                mouseX = targetMouseX;
-                mouseY = targetMouseY;
-                isHovering = true;
+        window.addEventListener('mousedown', (e) => {
+            if (e.button === 0) {
+                isDragging = true;
+                spawnBurst(e.clientX, e.clientY, true);
             }
         }, { passive: true });
 
-        document.addEventListener('mouseleave', () => {
-            isHovering = false;
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        }, { passive: true });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!pendingFrame) {
+                pendingFrame = true;
+                requestAnimationFrame(() => {
+                    pendingFrame = false;
+                    spawnBurst(e.clientX, e.clientY, isDragging);
+                });
+            }
+        }, { passive: true });
+
+        window.addEventListener('blur', () => {
+            isDragging = false;
         });
 
+        // Periodic cleanup of cooldown map
+        setInterval(() => {
+            const now = performance.now();
+            cooldownMap.forEach((time, key) => {
+                if (now - time > Q) cooldownMap.delete(key);
+            });
+        }, 500);
+
+        // Visibility optimization
         document.addEventListener('visibilitychange', () => {
             isVisible = !document.hidden;
-            if (isVisible) {
-                lastTime = performance.now();
-                requestAnimationFrame(render);
-            }
+            if (isVisible) requestAnimationFrame(render);
         });
 
         window.addEventListener('resize', resize, { passive: true });
         resize();
 
-        // Helper: Draw single face with hatched lines
-        function drawFace(p1, p2, p3, p4, angle, lineSpacing, strokeColor, borderColor, fillColor, hatchWidth = 0.65, borderWidth = 0.8) {
+        // Directional Gradient Drawer (matches Obsidian's 4 rotated linear gradients)
+        function drawTileGradient(x, y, gradIdx, opacity, isDark) {
             ctx.save();
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.lineTo(p3.x, p3.y);
-            ctx.lineTo(p4.x, p4.y);
-            ctx.closePath();
+            ctx.globalAlpha = opacity;
 
-            if (fillColor) {
-                ctx.fillStyle = fillColor;
-                ctx.fill();
-            }
-
-            // Clip strictly to polygon boundary
-            ctx.clip();
-
-            // Draw parallel hatch lines inside face
-            ctx.beginPath();
-            ctx.lineWidth = hatchWidth;
-            ctx.strokeStyle = strokeColor;
-
-            const minX = Math.min(p1.x, p2.x, p3.x, p4.x) - 4;
-            const maxX = Math.max(p1.x, p2.x, p3.x, p4.x) + 4;
-            const minY = Math.min(p1.y, p2.y, p3.y, p4.y) - 4;
-            const maxY = Math.max(p1.y, p2.y, p3.y, p4.y) + 4;
-
-            if (angle === Math.PI / 2) {
-                // Vertical lines (Left face, matches user reference image)
-                for (let x = minX; x <= maxX; x += lineSpacing) {
-                    ctx.moveTo(x, minY);
-                    ctx.lineTo(x, maxY);
-                }
+            let grad;
+            if (gradIdx === 0) {
+                // 0 deg: Top to Bottom
+                grad = ctx.createLinearGradient(x, y, x, y + n);
+            } else if (gradIdx === 1) {
+                // 90 deg: Left to Right
+                grad = ctx.createLinearGradient(x, y, x + n, y);
+            } else if (gradIdx === 2) {
+                // 180 deg: Bottom to Top
+                grad = ctx.createLinearGradient(x, y + n, x, y);
             } else {
-                // Angled lines (Top and Right faces, matches user reference image)
-                const cosA = Math.cos(angle);
-                const sinA = Math.sin(angle);
-                const normX = -sinA;
-                const normY = cosA;
-
-                const pts = [p1, p2, p3, p4];
-                let minD = Infinity;
-                let maxD = -Infinity;
-                for (let i = 0; i < 4; i++) {
-                    const d = pts[i].x * normX + pts[i].y * normY;
-                    if (d < minD) minD = d;
-                    if (d > maxD) maxD = d;
-                }
-
-                const lineLen = Math.hypot(maxX - minX, maxY - minY) * 1.5;
-                for (let d = minD - lineSpacing; d <= maxD + lineSpacing; d += lineSpacing) {
-                    const px = d * normX;
-                    const py = d * normY;
-                    ctx.moveTo(px - lineLen * cosA, py - lineLen * sinA);
-                    ctx.lineTo(px + lineLen * cosA, py + lineLen * sinA);
-                }
+                // 270 deg: Right to Left
+                grad = ctx.createLinearGradient(x + n, y, x, y);
             }
-            ctx.stroke();
+
+            const baseColor = isDark ? '255, 255, 255' : '0, 0, 0';
+            const baseStrength = isDark ? 0.45 : 0.3;
+
+            grad.addColorStop(0, `rgba(${baseColor}, ${baseStrength})`);
+            grad.addColorStop(1, `rgba(${baseColor}, 0)`);
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(x, y, n, n);
             ctx.restore();
-
-            // Clean crisp face border
-            if (borderColor) {
-                ctx.beginPath();
-                ctx.moveTo(p1.x, p1.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.lineTo(p3.x, p3.y);
-                ctx.lineTo(p4.x, p4.y);
-                ctx.closePath();
-                ctx.strokeStyle = borderColor;
-                ctx.lineWidth = borderWidth;
-                ctx.stroke();
-            }
         }
-
-        let lastTime = performance.now();
 
         function render(now) {
             if (!isVisible) return;
-            const dt = Math.min((now - lastTime) / 1000, 0.1);
-            lastTime = now;
 
             ctx.clearRect(0, 0, width, height);
 
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-            // Smooth cursor interpolation
-            if (isHovering) {
-                mouseX += (targetMouseX - mouseX) * 0.14;
-                mouseY += (targetMouseY - mouseY) * 0.14;
-            } else {
-                mouseX += (-9999 - mouseX) * 0.05;
-                mouseY += (-9999 - mouseY) * 0.05;
+            // 1. Draw base square grid pattern (Obsidian M 48 0 L 0 0 0 48)
+            ctx.beginPath();
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+
+            for (let x = 0; x <= width + n; x += n) {
+                ctx.moveTo(x + 0.5, 0);
+                ctx.lineTo(x + 0.5, height);
             }
-
-            // Update ambient shimmers
-            const activeShimmerAlphas = new Map();
-            for (let i = 0; i < ambientShimmers.length; i++) {
-                const s = ambientShimmers[i];
-                const age = now - s.birth;
-                if (age > s.duration) {
-                    ambientShimmers[i] = createShimmer(now);
-                    continue;
-                }
-                if (age < 0) continue;
-
-                const progress = age / s.duration;
-                const alphaFactor = Math.sin(progress * Math.PI);
-                const alpha = s.peakAlpha * Math.pow(alphaFactor, 1.4);
-                if (alpha > 0.005) {
-                    activeShimmerAlphas.set(s.index, alpha);
-                }
+            for (let y = 0; y <= height + n; y += n) {
+                ctx.moveTo(0, y + 0.5);
+                ctx.lineTo(width, y + 0.5);
             }
+            ctx.stroke();
 
-            const HOVER_RADIUS = 210;
+            const sec = now / 1000;
 
-            // Render all isometric cubes
-            for (let i = 0; i < cubes.length; i++) {
-                const cube = cubes[i];
+            // 2. Render Ambient Strobe Tiles (Obsidian hero-grid-strobe animation)
+            for (let i = 0; i < ambientTiles.length; i++) {
+                const t = ambientTiles[i];
+                const cycleTime = (sec - t.delay) % t.duration;
+                if (cycleTime < 0) continue;
 
-                // Fast bounds culling
-                if (cube.cx < -R * 2 || cube.cx > width + R * 2 || cube.cy < -R * 2 || cube.cy > height + R * 2) {
-                    continue;
-                }
+                const progress = cycleTime / t.duration;
+                let opacity = 0;
 
-                // Mouse proximity & Hover interaction
-                const dist = Math.hypot(mouseX - cube.cx, mouseY - cube.cy);
-
-                if (dist < HOVER_RADIUS) {
-                    const factor = 1 - dist / HOVER_RADIUS;
-                    const smooth = factor * factor * (3 - 2 * factor);
-                    const targetIntensity = smooth;
-
-                    if (targetIntensity > cube.glow) {
-                        cube.glow = targetIntensity;
-                        cube.elevation = targetIntensity * 7;
-                        cube.lastHovered = now;
-                    }
-                }
-
-                // Lingering delay after mouse hovers over it ("effects will last after mouse hovers it")
-                const HOLD_DELAY = 450; // Milliseconds to hold peak effect before beginning fade
-                const timeSinceHover = now - (cube.lastHovered || 0);
-
-                if (timeSinceHover > HOLD_DELAY && cube.glow > 0.001) {
-                    // Smooth, luxurious decay over ~1.6 seconds
-                    cube.glow = Math.max(0, cube.glow - dt * 0.6);
-                    cube.elevation = cube.glow * 7;
-                }
-
-                // Add ambient shimmer
-                const ambientAlpha = activeShimmerAlphas.get(i) || 0;
-
-                // Combined visual intensity (hover glow + ambient shimmer)
-                const totalGlow = Math.min(cube.glow + ambientAlpha * 2.2, 1);
-
-                // Vertices
-                const cx = cube.cx;
-                const cy = cube.cy - cube.elevation;
-                const C = { x: cx, y: cy };
-                const V_top = { x: cx, y: cy - R };
-                const V_tr = { x: cx + dx, y: cy - dy };
-                const V_br = { x: cx + dx, y: cy + dy };
-                const V_bot = { x: cx, y: cy + R };
-                const V_bl = { x: cx - dx, y: cy + dy };
-                const V_tl = { x: cx - dx, y: cy - dy };
-
-                // Ultra-calm styling so it NEVER overpowers content:
-                let strokeColor, borderColor, fillColor;
-                const hlw = 0.55 + totalGlow * 0.35;
-                const blw = 0.7 + totalGlow * 0.4;
-
-                if (isDark) {
-                    // Resting state: whisper faint (0.026 hatch, 0.045 border)
-                    const baseHatchAlpha = 0.026;
-                    const baseBorderAlpha = 0.045;
-
-                    if (totalGlow > 0.01) {
-                        const hA = (baseHatchAlpha + totalGlow * 0.22).toFixed(3);
-                        const bA = (baseBorderAlpha + totalGlow * 0.28).toFixed(3);
-                        strokeColor = `rgba(255, 255, 255, ${hA})`;
-                        borderColor = `rgba(255, 255, 255, ${bA})`;
-                        fillColor = `rgba(255, 255, 255, ${(totalGlow * 0.08).toFixed(3)})`;
-                    } else {
-                        strokeColor = `rgba(255, 255, 255, ${baseHatchAlpha})`;
-                        borderColor = `rgba(255, 255, 255, ${baseBorderAlpha})`;
-                        fillColor = null;
-                    }
+                // Obsidian @keyframes hero-grid-strobe:
+                // 0%, 100% { opacity: 0; }
+                // 40%, 60% { opacity: var(--strobe-max); }
+                if (progress < 0.4) {
+                    opacity = (progress / 0.4) * t.maxOpacity;
+                } else if (progress <= 0.6) {
+                    opacity = t.maxOpacity;
                 } else {
-                    const baseHatchAlpha = 0.03;
-                    const baseBorderAlpha = 0.05;
-
-                    if (totalGlow > 0.01) {
-                        const hA = (baseHatchAlpha + totalGlow * 0.2).toFixed(3);
-                        const bA = (baseBorderAlpha + totalGlow * 0.25).toFixed(3);
-                        strokeColor = `rgba(0, 0, 0, ${hA})`;
-                        borderColor = `rgba(0, 0, 0, ${bA})`;
-                        fillColor = `rgba(0, 0, 0, ${(totalGlow * 0.045).toFixed(3)})`;
-                    } else {
-                        strokeColor = `rgba(0, 0, 0, ${baseHatchAlpha})`;
-                        borderColor = `rgba(0, 0, 0, ${baseBorderAlpha})`;
-                        fillColor = null;
-                    }
+                    opacity = ((1 - progress) / 0.4) * t.maxOpacity;
                 }
 
-                // 1. TOP FACE [C, V_tr, V_top, V_tl] - angled lines (-30 deg)
-                drawFace(C, V_tr, V_top, V_tl, -Math.PI / 6, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
+                if (opacity > 0.005) {
+                    drawTileGradient(t.x, t.y, t.gradIdx, opacity, isDark);
+                }
+            }
 
-                // 2. LEFT FACE [C, V_tl, V_bl, V_bot] - vertical lines (90 deg)
-                drawFace(C, V_tl, V_bl, V_bot, Math.PI / 2, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
+            // 3. Render Interactive Burst Tiles (Obsidian hero-grid-burst animation)
+            for (let i = bursts.length - 1; i >= 0; i--) {
+                const b = bursts[i];
+                const elapsed = now - b.birth;
 
-                // 3. RIGHT FACE [C, V_bot, V_br, V_tr] - angled lines (+30 deg)
-                drawFace(C, V_bot, V_br, V_tr, Math.PI / 6, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
+                if (elapsed >= b.lifetime) {
+                    bursts.splice(i, 1);
+                    continue;
+                }
+
+                const progress = elapsed / b.lifetime;
+                let opacity = 0;
+
+                // Obsidian @keyframes hero-grid-burst:
+                // 0% { opacity: 0; }
+                // 15% { opacity: var(--burst-max); }
+                // 100% { opacity: 0; }
+                if (progress < 0.15) {
+                    opacity = (progress / 0.15) * b.maxOpacity;
+                } else {
+                    opacity = ((1 - progress) / 0.85) * b.maxOpacity;
+                }
+
+                if (opacity > 0.005) {
+                    drawTileGradient(b.x, b.y, b.gradIdx, opacity, isDark);
+                }
             }
 
             requestAnimationFrame(render);
