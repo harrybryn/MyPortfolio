@@ -6936,6 +6936,8 @@ body.splash-locked {
    Fredoka: thick, bubbly, rounded — matches HarryS. logo aesthetic.
    White fill + chunky black stroke replicates the logo's outline style.
    font-style: italic adds the logo's characteristic lean.
+   line-height > 1 gives vertical room so stroke top/bottom don't clip.
+   Horizontal padding gives room for italic lean — zeroed out on collapse.
    ──────────────────────────────────────────────────────────────────────── */
 .xrd-char {
   display: inline-block;
@@ -6943,15 +6945,15 @@ body.splash-locked {
   font-size: clamp(1.8rem, 4.5vw, 4rem);
   font-weight: 600;
   font-style: italic;
-  /* Horizontal padding lets the stroke + italic lean breathe without clipping */
-  padding: 0.15em 0.12em;
-  max-width: 1.5em;
+  line-height: 1.4;
+  padding: 0 0.14em;
+  max-width: 1.8em;
   margin: 0;
   white-space: nowrap;
   vertical-align: middle;
   letter-spacing: 0.04em;
   opacity: 0;
-  overflow: visible;
+  overflow: hidden;
   /* LEGO-logo: white fill + thick black stroke */
   color: #ffffff;
   -webkit-text-stroke: 3px #000000;
@@ -6970,9 +6972,10 @@ body.splash-locked {
   opacity: 1;
 }
 
-/* Step 2: Collapse into initials (e.g. HS or XRD) */
+/* Step 2: Collapse into initials — zero out padding so max-width:0 fully closes */
 .splash-screen.step-collapsed .xrd-char:not(.is-initial) {
   max-width: 0 !important;
+  padding: 0 !important;
   opacity: 0 !important;
 }
 
