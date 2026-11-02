@@ -4,15 +4,24 @@
 const PROJECTS_DATA = [
     {
         id: 'anigrow',
-        title: 'ANI-GROW: AI-Powered Poultry & Livestock Farming Guide',
-        shortTitle: 'ANI-GROW',
+        title: 'Ani-Grow: AI-Powered Poultry & Livestock Farming Guide',
+        shortTitle: 'Ani-Grow',
         logo: 'assets/anigrow_logo.png',
         screen: 'assets/anigrow_screen_1.png',
-        category: 'MOBILE · IOT · AI ANALYTICS',
+        category: 'Poultry & Livestock Guide',
         badge: 'Poultry & Livestock Analytics',
+        accentColor: '#15803d',
         year: '2026',
         timeline: '2025 – 2026',
         role: 'Lead Full-Stack Mobile & IoT Architect',
+        tagline: 'AI-Powered Poultry and Livestock Farming Guide with Data Analytics',
+        client: 'Golden Nutriharvest, Inc. (San Miguel Foods Grower Partner)',
+        repoUrl: 'https://github.com/harrybryn',
+        siteUrl: 'https://anigrow.vercel.app',
+        roles: ['Thesis', 'IoT Hardware', 'Mobile App Development', 'Web Dashboard', 'AI Integration', 'Capstone'],
+        overviewHeadline: 'Farming with Data, Not Guesswork',
+        overviewDesc: 'Contributed to the design and development of an AI-powered poultry and livestock farming guide for Golden Nutriharvest, Inc., a San Miguel Foods grower partner with over 15 years in the industry. The system combines IoT prototypes, an Android app for caretakers, and a web dashboard for farm administrators. A project grounded in on-site research, hardware prototyping, and expert evaluation.',
+        challenge: 'Caretakers at Golden Nutriharvest weighed only a small sample of chickens once a week and used the average to represent the whole flock. Sorting out underweight "rejects" was done by eye, and feed was fixed to general standards instead of actual weight. The goal was to replace this with continuous, objective weight monitoring and growth-based decisions.',
         desc: 'A mobile application that helps farm animal caretakers manage poultry and livestock operations using AI guidance and data analytics. Supports and integrates with custom IoT machines for weight-based segregation and automated feeding of farm animals.',
         deliverables: [
             'Real-time animal weight telemetry and automatic sorting gates',
@@ -21,6 +30,101 @@ const PROJECTS_DATA = [
         ],
         architecture: 'Built with a cross-platform React Native frontend communicating with sensor hubs via REST & MQTT protocols. Backend processes real-time feed analytics and stores event logs in a normalized schema.',
         tags: ['React Native', 'IoT Integration', 'AI Analytics', 'Agricultural Tech', 'REST API'],
+        builtWith: [
+            'React Native (Expo)',
+            'React (Vite)',
+            'TypeScript',
+            'Tailwind CSS',
+            'Supabase (Auth, PostgreSQL, Realtime, Storage)',
+            'Firebase Cloud Messaging',
+            'Claude API',
+            'ESP32 Microcontroller',
+            'Arduino IDE',
+            'Load cell + HX711',
+            '12V Linear Actuator',
+            'Relay Module',
+            'LCD I2C Display',
+            '3D-Printed Parts'
+        ],
+        outcome: {
+            title: 'The Outcome & Validation',
+            narrative: 'The result: a fully integrated system field-tested and evaluated by 3 technical experts and 10 commercial farm operators from poultry and piggery operations in Bulacan, evaluated using the ISO/IEC 25010:2023 quality model, with the hardware independently rated by 5 technical experts. Both were rated Strongly Agree.',
+            stats: [
+                {
+                    value: '3.73 / 4.00',
+                    label: 'Overall Software Quality',
+                    sub: 'ISO/IEC 25010:2023 · Functional Suitability & Security highest at 3.79'
+                },
+                {
+                    value: '3.65 / 4.00',
+                    label: 'Overall IoT Hardware Quality',
+                    sub: '5 Technical Experts · Usability rated highest at 3.87'
+                },
+                {
+                    value: '10+',
+                    label: 'Commercial Operators Evaluated',
+                    sub: 'Tested with San Miguel Foods grower partner & piggery operators'
+                }
+            ]
+        },
+        caseStudySections: [
+            {
+                id: 'animal-registration',
+                num: '01',
+                title: 'Animal Registration & Daily Logging',
+                badge: 'Caretaker Workflow',
+                desc: 'Caretakers create a profile for each animal or batch (species, age, pen) and log daily observations such as feeding times, biometric progression, and health status. Row-Level Security ensures each caretaker only accesses records in their assigned scope.',
+                image: 'assets/anigrow_screen_1.png'
+            },
+            {
+                id: 'automated-feeding',
+                num: '02',
+                title: 'Automated Feeding Dispenser Integration',
+                badge: 'IoT Machine Control',
+                desc: 'Feed can be dispensed on automated schedules or triggered on demand from the caretaker mobile app. The ESP32-controlled dispenser logs every dispensing event to Supabase in real time, letting caretakers monitor feed history and remaining hopper levels directly from their phones.',
+                image: 'assets/anigrow_screen_2.png'
+            },
+            {
+                id: 'weight-segregation',
+                num: '03',
+                title: 'Weight Segregation & Automated Sorting Gates',
+                badge: 'Telemetry & Actuators',
+                desc: 'A 100 kg load cell with an HX711 amplifier measures real-time livestock weight, while the ESP32 classifies the reading against growth cohorts. A 12V linear actuator directs the animal into its designated sorting cell, backed by limit switches to prevent mechanical overextension.',
+                image: 'assets/anigrow_screen_2.png'
+            },
+            {
+                id: 'ai-care-guide',
+                num: '04',
+                title: 'AI Diagnostic & Guidance Center',
+                badge: 'Claude API Intelligence',
+                desc: 'Leveraging AI intelligence conditioned on each batch’s real-time weight trajectory, the system generates custom step-by-step care guides based on species, age, and growth stage, covering feeding adjustments, ambient housing conditions, and disease prevention.',
+                image: 'assets/anigrow_screen_3.png'
+            },
+            {
+                id: 'predictive-analytics',
+                num: '05',
+                title: 'Predictive Analytics & Growth Pattern Detection',
+                badge: 'Biometric Telemetry',
+                desc: 'Growth trajectories and market-ready harvest dates are forecast from historical weight logs. The system continuously benchmarks each batch against standard growth curves, instantly flagging irregular patterns such as weight stagnation so caretakers can intervene early.',
+                image: 'assets/anigrow_screen_4.png'
+            },
+            {
+                id: 'hardware-settings',
+                num: '06',
+                title: 'Hardware Sensor Status & Device Sync',
+                badge: 'Edge Gateway Telemetry',
+                desc: 'A dedicated mobile interface for managing connected IoT hardware prototypes. Provides real-time visibility into Wi-Fi / MQTT connection states, calibration offsets, dispensing schedules, and offline data buffering for low-connectivity farm environments.',
+                image: 'assets/anigrow_screen_5.png'
+            },
+            {
+                id: 'admin-dashboard',
+                num: '07',
+                title: 'Admin Operations Web Dashboard',
+                badge: 'Farm Command Center',
+                desc: 'A comprehensive React web dashboard engineered for farm owners and administrative staff. Aggregates data from every batch, caretaker log, and IoT unit into an executive view of farm-wide mortality, feed conversion ratios, and growth efficiency.',
+                image: 'assets/anigrow_screen_6.png'
+            }
+        ],
         screenshots: [
             {
                 src: 'assets/anigrow_screen_1.png',

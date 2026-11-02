@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=119">
+    <link rel="stylesheet" href="styles.css?v=120">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -85,16 +85,28 @@
                             <span class="pdetail-year-badge" id="pdetailYear">2026</span>
                         </div>
                         <h1 class="pdetail-title" id="pdetailTitle">ANI-GROW</h1>
+                        <p class="pdetail-tagline" id="pdetailTagline" style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.35rem; display: none;"></p>
+                        <div class="tc-roles-row" id="tcRolesRow"></div>
                     </div>
                 </div>
 
                 <div class="pdetail-quick-actions">
+                    <a href="https://anigrow.vercel.app" id="pdetailLiveSiteBtn" target="_blank" rel="noopener noreferrer" class="pdetail-inquire-btn" style="display: none; background: var(--surface-hover); color: var(--text-main); border: 1px solid var(--border);">
+                        <span>Live Demo</span>
+                        <i data-lucide="external-link"></i>
+                    </a>
                     <button type="button" class="pdetail-inquire-btn open-contact-modal">
                         <span>Inquire about project</span>
                         <i data-lucide="arrow-right"></i>
                     </button>
                 </div>
             </div>
+        </section>
+
+        <!-- Overview Narrative Headline Card -->
+        <section class="tc-overview-card" id="tcOverviewCard" style="display: none;">
+            <h2 class="tc-headline" id="tcHeadline">Farming with Data, Not Guesswork</h2>
+            <p class="tc-narrative" id="tcNarrative"></p>
         </section>
 
         <!-- Main Screen Showcase Frame -->
@@ -163,8 +175,35 @@
             </div>
         </section>
 
+        <!-- The Challenge Callout Box -->
+        <div class="tc-challenge-box" id="tcChallengeBox" style="display: none;">
+            <div class="tc-challenge-label">
+                <i data-lucide="alert-circle"></i>
+                <span>The Core Challenge</span>
+            </div>
+            <p class="tc-challenge-text" id="tcChallengeText"></p>
+        </div>
+
+        <!-- Section-by-Section Walkthrough -->
+        <section class="tc-sections-container" id="tcSectionsContainer" style="display: none;">
+            <!-- Populated dynamically -->
+        </section>
+
+        <!-- Built With Chip Grid -->
+        <section class="tc-built-with-card" id="tcBuiltWithCard" style="display: none;">
+            <h2 class="pdetail-section-label">Built With &amp; Technologies</h2>
+            <div class="tc-chips-grid" id="tcChipsGrid"></div>
+        </section>
+
+        <!-- The Outcome Section -->
+        <section class="tc-outcome-card" id="tcOutcomeCard" style="display: none;">
+            <h2 class="pdetail-section-label" id="tcOutcomeTitle">The Outcome &amp; Field Validation</h2>
+            <div class="tc-outcome-grid" id="tcOutcomeGrid"></div>
+            <p class="tc-outcome-narrative" id="tcOutcomeNarrative"></p>
+        </section>
+
         <!-- Detailed Dossier Section -->
-        <section class="pdetail-content-grid">
+        <section class="pdetail-content-grid" id="pdetailStandardGrid">
             <!-- Left Column: Overview & Deliverables -->
             <div class="pdetail-col-main">
                 <div class="pdetail-card">
@@ -240,6 +279,18 @@
                 <!-- Populated dynamically -->
             </div>
         </section>
+
+        <!-- Project Next/Prev Navigation -->
+        <nav class="tc-project-nav" id="tcProjectNav" style="display: none;">
+            <a href="#" class="tc-nav-card" id="tcPrevProjectLink">
+                <span class="tc-nav-dir"><i data-lucide="arrow-left"></i> Previous Project</span>
+                <strong class="tc-nav-title" id="tcPrevProjectTitle"></strong>
+            </a>
+            <a href="#" class="tc-nav-card" id="tcNextProjectLink" style="text-align: right;">
+                <span class="tc-nav-dir" style="justify-content: flex-end;">Next Project <i data-lucide="arrow-right"></i></span>
+                <strong class="tc-nav-title" id="tcNextProjectTitle"></strong>
+            </a>
+        </nav>
 
         <!-- Footer -->
         <footer class="subpage-footer">
@@ -351,7 +402,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=2"></script>
+    <script src="projects-data.js?v=3"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -455,6 +506,26 @@
             document.getElementById('pdetailYear').textContent = project.year;
             document.getElementById('pdetailTitle').textContent = project.title;
 
+            // Tagline & Live Site Button
+            const taglineEl = document.getElementById('pdetailTagline');
+            if (taglineEl && project.tagline) {
+                taglineEl.textContent = project.tagline;
+                taglineEl.style.display = 'block';
+            }
+            const liveBtn = document.getElementById('pdetailLiveSiteBtn');
+            if (liveBtn && project.siteUrl && project.siteUrl.startsWith('http')) {
+                liveBtn.href = project.siteUrl;
+                liveBtn.style.display = 'inline-flex';
+            }
+
+            // Role Pills (Thesis, IoT, Mobile Development, etc.)
+            const rolesRow = document.getElementById('tcRolesRow');
+            if (rolesRow && Array.isArray(project.roles) && project.roles.length > 0) {
+                rolesRow.innerHTML = project.roles.map(r => `<span class="tc-role-pill">${r}</span>`).join('');
+            } else if (rolesRow) {
+                rolesRow.innerHTML = '';
+            }
+
             // Populate TBA Placeholder Name
             const tbaName = document.getElementById('pdetailTbaProjectName');
             if (tbaName) tbaName.textContent = project.shortTitle;
@@ -477,6 +548,133 @@
 
             const tagsWrap = document.getElementById('pdetailTags');
             tagsWrap.innerHTML = project.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+            // ── Travis Cruz Style Case Study Elements ──────────────────────────
+            const isCaseStudy = Array.isArray(project.caseStudySections) && project.caseStudySections.length > 0;
+            const overviewCard = document.getElementById('tcOverviewCard');
+            const headlineEl = document.getElementById('tcHeadline');
+            const narrativeEl = document.getElementById('tcNarrative');
+            const challengeBox = document.getElementById('tcChallengeBox');
+            const challengeText = document.getElementById('tcChallengeText');
+            const sectionsContainer = document.getElementById('tcSectionsContainer');
+            const builtWithCard = document.getElementById('tcBuiltWithCard');
+            const chipsGrid = document.getElementById('tcChipsGrid');
+            const outcomeCard = document.getElementById('tcOutcomeCard');
+            const outcomeTitle = document.getElementById('tcOutcomeTitle');
+            const outcomeGrid = document.getElementById('tcOutcomeGrid');
+            const outcomeNarrative = document.getElementById('tcOutcomeNarrative');
+            const standardGrid = document.getElementById('pdetailStandardGrid');
+            const projectNav = document.getElementById('tcProjectNav');
+            const prevLink = document.getElementById('tcPrevProjectLink');
+            const prevTitle = document.getElementById('tcPrevProjectTitle');
+            const nextLink = document.getElementById('tcNextProjectLink');
+            const nextTitle = document.getElementById('tcNextProjectTitle');
+
+            if (isCaseStudy) {
+                if (standardGrid) standardGrid.style.display = 'none';
+
+                if (overviewCard) {
+                    overviewCard.style.display = 'block';
+                    if (headlineEl) headlineEl.textContent = project.overviewHeadline || project.title;
+                    if (narrativeEl) narrativeEl.textContent = project.overviewDesc || project.desc;
+                }
+
+                if (challengeBox && project.challenge) {
+                    challengeBox.style.display = 'block';
+                    if (challengeText) challengeText.textContent = project.challenge;
+                }
+
+                if (sectionsContainer) {
+                    sectionsContainer.style.display = 'flex';
+                    sectionsContainer.innerHTML = project.caseStudySections.map((sec, idx) => `
+                        <article class="tc-section-item" id="${sec.id || `section-${idx}`}">
+                            <div class="tc-section-content">
+                                <div class="tc-section-badge-row">
+                                    <span class="tc-section-num">SECTION ${sec.num || `0${idx+1}`}</span>
+                                    <span class="tc-section-badge">${sec.badge || 'SYSTEM COMPONENT'}</span>
+                                </div>
+                                <h3 class="tc-section-title">${sec.title}</h3>
+                                <p class="tc-section-desc">${sec.desc}</p>
+                            </div>
+                            <div class="tc-section-media open-case-study-lightbox" data-img="${sec.image}" data-title="${sec.title}" data-badge="${sec.badge}" tabindex="0" role="button" aria-label="Inspect ${sec.title}">
+                                <img src="${sec.image}" alt="${sec.title}" class="tc-section-img" loading="lazy">
+                                <div class="pdetail-mockup-overlay">
+                                    <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                </div>
+                            </div>
+                        </article>
+                    `).join('');
+
+                    sectionsContainer.querySelectorAll('.open-case-study-lightbox').forEach(media => {
+                        media.addEventListener('click', () => {
+                            const imgSrc = media.getAttribute('data-img');
+                            const title = media.getAttribute('data-title');
+                            const badge = media.getAttribute('data-badge');
+                            if (lbImg) { lbImg.src = imgSrc; lbImg.alt = title; }
+                            if (lbTitle) lbTitle.textContent = `${title} — ${project.shortTitle}`;
+                            if (lbSub) lbSub.textContent = badge || project.badge;
+                            if (lbLogo) lbLogo.src = project.logo;
+                            const url = project.siteUrl || 'https://anigrow.vercel.app';
+                            if (lbUrl) lbUrl.textContent = url;
+                            if (lbLive) {
+                                lbLive.href = url;
+                                lbLive.style.display = url.startsWith('http') ? 'inline-flex' : 'none';
+                            }
+                            lbModal.classList.add('is-open');
+                            lbModal.setAttribute('aria-hidden', 'false');
+                            document.body.style.overflow = 'hidden';
+                            if (window.lucide) lucide.createIcons();
+                        });
+                    });
+                }
+
+                if (builtWithCard && Array.isArray(project.builtWith) && project.builtWith.length > 0) {
+                    builtWithCard.style.display = 'block';
+                    if (chipsGrid) {
+                        chipsGrid.innerHTML = project.builtWith.map(chip => `
+                            <span class="tc-chip"><i data-lucide="cpu" style="width:12px;height:12px;color:var(--accent-green,#10b981);"></i> ${chip}</span>
+                        `).join('');
+                    }
+                }
+
+                if (outcomeCard && project.outcome) {
+                    outcomeCard.style.display = 'block';
+                    if (outcomeTitle) outcomeTitle.textContent = project.outcome.title || 'The Outcome & Field Validation';
+                    if (outcomeGrid && Array.isArray(project.outcome.stats)) {
+                        outcomeGrid.innerHTML = project.outcome.stats.map(st => `
+                            <div class="tc-stat-card">
+                                <span class="tc-stat-val">${st.value}</span>
+                                <strong class="tc-stat-label">${st.label}</strong>
+                                <span class="tc-stat-sub">${st.sub}</span>
+                            </div>
+                        `).join('');
+                    }
+                    if (outcomeNarrative) outcomeNarrative.textContent = project.outcome.narrative;
+                }
+
+                // Project Pagination
+                if (projectNav) {
+                    projectNav.style.display = 'grid';
+                    const prevProj = PROJECTS_DATA[(currentIndex - 1 + PROJECTS_DATA.length) % PROJECTS_DATA.length];
+                    const nextProj = PROJECTS_DATA[(currentIndex + 1) % PROJECTS_DATA.length];
+                    if (prevLink && prevProj) {
+                        prevLink.href = `project-detail.html?id=${prevProj.id}`;
+                        if (prevTitle) prevTitle.textContent = prevProj.shortTitle || prevProj.title;
+                    }
+                    if (nextLink && nextProj) {
+                        nextLink.href = `project-detail.html?id=${nextProj.id}`;
+                        if (nextTitle) nextTitle.textContent = nextProj.shortTitle || nextProj.title;
+                    }
+                }
+            } else {
+                if (standardGrid) standardGrid.style.display = 'grid';
+                if (overviewCard) overviewCard.style.display = 'none';
+                if (challengeBox) challengeBox.style.display = 'none';
+                if (sectionsContainer) sectionsContainer.style.display = 'none';
+                if (builtWithCard) builtWithCard.style.display = 'none';
+                if (outcomeCard) outcomeCard.style.display = 'none';
+                if (projectNav) projectNav.style.display = 'none';
+            }
 
             // ── Screenshots & Gallery Engine ──────────────────────────────────
             const hasScreenshots = Array.isArray(project.screenshots) && project.screenshots.length > 0;

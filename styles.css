@@ -6891,6 +6891,353 @@ html.theme-anim *::after {
   color: var(--text-muted);
 }
 
+/* ==========================================================================
+   TRAVIS CRUZ STYLE CASE STUDY ARCHITECTURE
+   Deep narrative breakdown, section walkthroughs, outcome metrics, and pagination
+   ========================================================================== */
+
+/* Role Pills Row */
+.tc-roles-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.tc-role-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* Overview Narrative Box */
+.tc-overview-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.25rem 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .tc-overview-card {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.tc-headline {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+.tc-narrative {
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+/* The Challenge Callout Box */
+.tc-challenge-box {
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-green, #10b981);
+  border-radius: 14px;
+  padding: 1.5rem 1.85rem;
+  margin-bottom: 3.5rem;
+}
+
+.tc-challenge-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-green, #10b981);
+  margin-bottom: 0.5rem;
+}
+
+.tc-challenge-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-main);
+}
+
+/* Section-by-Section Walkthrough */
+.tc-sections-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  margin-bottom: 4rem;
+}
+
+.tc-section-item {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 2rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tc-section-item:nth-child(even) {
+  grid-template-columns: 1fr 1.1fr;
+}
+
+.tc-section-item:nth-child(even) .tc-section-content {
+  order: 2;
+}
+
+.tc-section-item:nth-child(even) .tc-section-media {
+  order: 1;
+}
+
+@media (max-width: 900px) {
+  .tc-section-item,
+  .tc-section-item:nth-child(even) {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+  .tc-section-item:nth-child(even) .tc-section-content {
+    order: 1;
+  }
+  .tc-section-item:nth-child(even) .tc-section-media {
+    order: 2;
+  }
+}
+
+.tc-section-item:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.25);
+}
+
+.tc-section-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+}
+
+.tc-section-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-green, #10b981);
+}
+
+.tc-section-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-subtle);
+  background: var(--surface-hover);
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.tc-section-title {
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  margin-bottom: 0.85rem;
+}
+
+.tc-section-desc {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.tc-section-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #090a0e;
+  cursor: zoom-in;
+}
+
+.tc-section-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.35s ease;
+  display: block;
+}
+
+.tc-section-media:hover .tc-section-img {
+  transform: scale(1.03);
+}
+
+/* Built With Chip Grid */
+.tc-built-with-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.tc-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.tc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.tc-chip:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+
+/* The Outcome Section */
+.tc-outcome-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 4rem;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .tc-outcome-card {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.tc-outcome-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 1.75rem 0;
+}
+
+@media (max-width: 768px) {
+  .tc-outcome-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tc-stat-card {
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.tc-stat-val {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--accent-green, #10b981);
+}
+
+.tc-stat-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.tc-stat-sub {
+  font-size: 0.74rem;
+  color: var(--text-subtle);
+  line-height: 1.5;
+}
+
+.tc-outcome-narrative {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+/* Project Next/Prev Pagination Footer */
+.tc-project-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 640px) {
+  .tc-project-nav {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tc-nav-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tc-nav-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.tc-nav-dir {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.tc-nav-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
 /* Content Grid */
 .pdetail-content-grid {
   display: grid;
