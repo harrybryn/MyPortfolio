@@ -7,7 +7,7 @@ const PROJECTS_DATA = [
         title: 'Ani-Grow: AI-Powered Poultry & Livestock Farming Guide',
         shortTitle: 'Ani-Grow',
         logo: 'assets/anigrow_logo.png',
-        screen: 'assets/anigrow_screen_1.png',
+        screen: 'assets/Ani-Grow/6.jpg',
         category: 'Poultry & Livestock Guide',
         badge: 'Poultry & Livestock Analytics',
         accentColor: '#15803d',
@@ -69,98 +69,96 @@ const PROJECTS_DATA = [
         },
         caseStudySections: [
             {
-                id: 'animal-registration',
+                id: 'animal-management',
                 num: '01',
-                title: 'Animal Registration & Daily Logging',
-                badge: 'Caretaker Workflow',
-                desc: 'Caretakers create a profile for each animal or batch (species, age, pen) and log daily observations such as feeding times, biometric progression, and health status. Row-Level Security ensures each caretaker only accesses records in their assigned scope.',
-                image: 'assets/anigrow_screen_1.png'
+                title: 'Animal Management & Housing Units',
+                badge: 'Farm Command Center',
+                desc: 'Caretakers and administrators monitor housings, flock populations, and mortality records across Broiler and Swine pens.',
+                image: 'assets/Ani-Grow/6.jpg'
             },
             {
-                id: 'automated-feeding',
+                id: 'predictive-analytics',
                 num: '02',
-                title: 'Automated Feeding Dispenser Integration',
-                badge: 'IoT Machine Control',
-                desc: 'Feed can be dispensed on automated schedules or triggered on demand from the caretaker mobile app. The ESP32-controlled dispenser logs every dispensing event to Supabase in real time, letting caretakers monitor feed history and remaining hopper levels directly from their phones.',
-                image: 'assets/anigrow_screen_2.png'
+                title: 'Weight Forecast & Harvest Trajectory',
+                badge: 'Predictive Analytics',
+                desc: 'Continuous growth benchmark tracking against breed curves, predicting market-ready harvest dates and milestone variances.',
+                image: 'assets/Ani-Grow/2.jpg'
             },
             {
-                id: 'weight-segregation',
+                id: 'growth-distribution',
                 num: '03',
-                title: 'Weight Segregation & Automated Sorting Gates',
-                badge: 'Telemetry & Actuators',
-                desc: 'A 100 kg load cell with an HX711 amplifier measures real-time livestock weight, while the ESP32 classifies the reading against growth cohorts. A 12V linear actuator directs the animal into its designated sorting cell, backed by limit switches to prevent mechanical overextension.',
-                image: 'assets/anigrow_screen_2.png'
+                title: 'Distribution Trend & Growth Insights',
+                badge: 'Flock Telemetry',
+                desc: 'Headcount distribution across normal, underweight, and overweight categories with Average Daily Gain (ADG) calculations.',
+                image: 'assets/Ani-Grow/3.jpg'
             },
             {
                 id: 'ai-care-guide',
                 num: '04',
-                title: 'AI Diagnostic & Guidance Center',
+                title: 'Actionable Guide & Lifecycle Roadmap',
                 badge: 'Claude API Intelligence',
-                desc: 'Leveraging AI intelligence conditioned on each batch’s real-time weight trajectory, the system generates custom step-by-step care guides based on species, age, and growth stage, covering feeding adjustments, ambient housing conditions, and disease prevention.',
-                image: 'assets/anigrow_screen_3.png'
+                desc: 'AI-tailored feeding ratios, temperature recommendations, and milestone guidelines customized to each batch lifecycle stage.',
+                image: 'assets/Ani-Grow/5.jpg'
             },
             {
-                id: 'predictive-analytics',
+                id: 'weighing-history',
                 num: '05',
-                title: 'Predictive Analytics & Growth Pattern Detection',
-                badge: 'Biometric Telemetry',
-                desc: 'Growth trajectories and market-ready harvest dates are forecast from historical weight logs. The system continuously benchmarks each batch against standard growth curves, instantly flagging irregular patterns such as weight stagnation so caretakers can intervene early.',
-                image: 'assets/anigrow_screen_4.png'
+                title: 'Weighing History & Scale Telemetry',
+                badge: 'IoT Machine Integration',
+                desc: 'Direct telemetry synchronization with load cell hardware scales, logging day-by-day weight logs and batch comparisons.',
+                image: 'assets/Ani-Grow/4.jpg'
             },
             {
-                id: 'hardware-settings',
+                id: 'biometric-report',
                 num: '06',
-                title: 'Hardware Sensor Status & Device Sync',
-                badge: 'Edge Gateway Telemetry',
-                desc: 'A dedicated mobile interface for managing connected IoT hardware prototypes. Provides real-time visibility into Wi-Fi / MQTT connection states, calibration offsets, dispensing schedules, and offline data buffering for low-connectivity farm environments.',
-                image: 'assets/anigrow_screen_5.png'
-            },
-            {
-                id: 'admin-dashboard',
-                num: '07',
-                title: 'Admin Operations Web Dashboard',
-                badge: 'Farm Command Center',
-                desc: 'A comprehensive React web dashboard engineered for farm owners and administrative staff. Aggregates data from every batch, caretaker log, and IoT unit into an executive view of farm-wide mortality, feed conversion ratios, and growth efficiency.',
-                image: 'assets/anigrow_screen_6.png'
+                title: 'Official Biometric & Audit Report',
+                badge: 'Official Audit',
+                desc: 'Formatted export and print-ready biometric performance audit for compliance with San Miguel Foods grower standards.',
+                image: 'assets/Ani-Grow/1.jpg'
             }
         ],
         screenshots: [
             {
-                src: 'assets/anigrow_screen_1.png',
-                title: 'Livestock & Poultry Telemetry Dashboard',
-                badge: 'System Overview',
-                desc: 'Real-time telemetry, monitoring metrics, flock health indicators, and farm overview analytics.'
+                src: 'assets/Ani-Grow/6.jpg',
+                title: 'Animal Management & Housing Units',
+                badge: 'Farm Command',
+                desc: 'Multi-housing monitoring across Broiler and Swine units, active batch headcounts, and capacity utilization.'
             },
             {
-                src: 'assets/anigrow_screen_2.png',
-                title: 'Weight-Based Sorting & Automated Feeder Controls',
-                badge: 'IoT Machine Integration',
-                desc: 'Configuration interface for IoT weight segregation gates, automated sorting thresholds, and scheduled feeding dispensers.'
+                src: 'assets/Ani-Grow/2.jpg',
+                title: 'Weight Forecast & Harvest Trajectory',
+                badge: 'Predictive Analytics',
+                desc: 'Predictive 140-day growth curves, harvest readiness dates, and milestone tracking against breed standards.'
             },
             {
-                src: 'assets/anigrow_screen_3.png',
-                title: 'AI Diagnostic & Guidance Center',
+                src: 'assets/Ani-Grow/3.jpg',
+                title: 'Distribution Trend & Growth Insights',
+                badge: 'Flock Telemetry',
+                desc: 'Headcount distribution across normal, underweight, and overweight categories with Average Daily Gain (ADG) calculations.'
+            },
+            {
+                src: 'assets/Ani-Grow/5.jpg',
+                title: 'Actionable Guide & Lifecycle Roadmap',
                 badge: 'AI Recommendations',
-                desc: 'AI-assisted poultry flock health recommendations, feeding ratio optimizations, and predictive disease advisories.'
+                desc: 'Automated care roadmap with daily task verification, temperature regulation, and AI-recommended feed adjustments.'
             },
             {
-                src: 'assets/anigrow_screen_4.png',
-                title: 'Growth Analytics & Weight Progression Logs',
+                src: 'assets/Ani-Grow/4.jpg',
+                title: 'Weighing History & Scale Telemetry',
                 badge: 'Data Telemetry',
-                desc: 'Historical livestock telemetry charts, batch weight progression tracking, and mortality reduction metrics.'
+                desc: 'Day-by-day weighing breakdowns from IoT load cell scales, historical trends, and min/max weight logs.'
             },
             {
-                src: 'assets/anigrow_screen_5.png',
-                title: 'Hardware Sensor Status & Device Sync',
-                badge: 'Hardware Telemetry',
-                desc: 'Live IoT gateway status, MQTT broker communication logs, battery levels, and offline edge data sync.'
+                src: 'assets/Ani-Grow/1.jpg',
+                title: 'Official Biometric & Audit Report',
+                badge: 'Official Audit',
+                desc: 'Exportable print layout report for farm performance records, mortality tracking, and San Miguel Foods compliance.'
             },
             {
-                src: 'assets/anigrow_screen_6.png',
-                title: 'Batch Management & Operational Controls',
-                badge: 'Operations & Settings',
-                desc: 'Livestock pen assignment, cohort tracking, user role management, and automated operation schedule parameters.'
+                src: 'assets/anigrow_hero_showcase.webp',
+                title: 'Caretaker Mobile App Interface',
+                badge: 'Mobile App',
+                desc: 'Android mobile app for caretakers: priority dispenser alerts, livestock count overview, and IoT device connection statuses.'
             }
         ]
     },

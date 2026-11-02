@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=121">
+    <link rel="stylesheet" href="styles.css?v=122">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -103,53 +103,52 @@
             </div>
         </section>
 
-        <!-- Dual Device Showcase (MacBook Laptop + Floating Mobile iPhone) -->
+        <!-- Actual Laptop Showcase (From assets/Ani-Grow Folder) + Floating Companion Mobile -->
         <section class="dual-device-section" id="dualDeviceSection" style="display: none;">
-            <!-- Interactive Screen Switcher Pills -->
+            <!-- Interactive View Switcher Tabs -->
             <div class="device-switcher-row" id="deviceSwitcherRow">
-                <button type="button" class="device-tab-btn is-active" data-laptop="assets/anigrow_screen_1.png" data-mobile="assets/anigrow_screen_2.png" data-title="Dashboard &amp; Feeder IoT">
-                    <i data-lucide="layout"></i>
-                    <span>Overview &amp; Controls</span>
+                <button type="button" class="device-tab-btn is-active" data-src="assets/Ani-Grow/6.jpg" data-title="Animal Management &amp; Housing Units" data-badge="FARM COMMAND">
+                    <i data-lucide="layout-grid"></i>
+                    <span>Animal Management</span>
                 </button>
-                <button type="button" class="device-tab-btn" data-laptop="assets/anigrow_screen_4.png" data-mobile="assets/anigrow_screen_3.png" data-title="Analytics &amp; AI Diagnostic">
+                <button type="button" class="device-tab-btn" data-src="assets/Ani-Grow/2.jpg" data-title="Weight Forecast &amp; Harvest Trajectory" data-badge="PREDICTIVE AI">
+                    <i data-lucide="trending-up"></i>
+                    <span>Weight Forecast</span>
+                </button>
+                <button type="button" class="device-tab-btn" data-src="assets/Ani-Grow/3.jpg" data-title="Distribution Trend &amp; Growth Insights" data-badge="GROWTH ANALYTICS">
+                    <i data-lucide="line-chart"></i>
+                    <span>Growth Analytics</span>
+                </button>
+                <button type="button" class="device-tab-btn" data-src="assets/Ani-Grow/5.jpg" data-title="Actionable Guide &amp; Lifecycle Roadmap" data-badge="AI RECOMMENDATIONS">
                     <i data-lucide="sparkles"></i>
-                    <span>AI &amp; Biometrics</span>
+                    <span>Actionable Guide</span>
                 </button>
-                <button type="button" class="device-tab-btn" data-laptop="assets/anigrow_screen_6.png" data-mobile="assets/anigrow_screen_5.png" data-title="Admin Web &amp; Hardware Telemetry">
-                    <i data-lucide="cpu"></i>
-                    <span>Telemetry &amp; Sync</span>
+                <button type="button" class="device-tab-btn" data-src="assets/Ani-Grow/4.jpg" data-title="Weighing History &amp; Scale Telemetry" data-badge="IOT TELEMETRY">
+                    <i data-lucide="scale"></i>
+                    <span>Weighing History</span>
+                </button>
+                <button type="button" class="device-tab-btn" data-src="assets/Ani-Grow/1.jpg" data-title="Official Biometric &amp; Audit Report" data-badge="OFFICIAL AUDIT">
+                    <i data-lucide="file-text"></i>
+                    <span>Biometric Report</span>
                 </button>
             </div>
 
-            <div class="dual-device-stage">
-                <!-- MacBook Laptop Mockup -->
-                <div class="laptop-mockup" id="laptopMockup" tabindex="0" role="button" aria-label="Inspect Web Dashboard">
-                    <div class="laptop-screen-bezel">
-                        <div class="laptop-webcam"></div>
-                        <div class="laptop-screen-content">
-                            <img src="assets/anigrow_screen_1.png" alt="Ani-Grow Web Dashboard" class="laptop-screen-img" id="laptopScreenImg">
-                        </div>
-                        <div class="pdetail-mockup-overlay">
-                            <span class="pdetail-inspect-hint"><i data-lucide="monitor"></i> Web Dashboard (Click to Zoom)</span>
-                        </div>
-                    </div>
-                    <div class="laptop-base">
-                        <div class="laptop-notch"></div>
+            <div class="actual-laptop-stage" id="laptopStageWrap">
+                <!-- Actual Laptop Frame Rendering Real Mockup -->
+                <div class="actual-laptop-frame" id="laptopMockup" tabindex="0" role="button" aria-label="Inspect Laptop Screen Fullscreen">
+                    <img src="assets/Ani-Grow/6.jpg" alt="Ani-Grow Web Dashboard on Laptop" class="actual-laptop-img" id="actualLaptopImg">
+                    <div class="pdetail-mockup-overlay">
+                        <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click Laptop to Zoom Fullscreen</span>
                     </div>
                 </div>
 
-                <!-- Floating iPhone Mobile Mockup -->
-                <div class="mobile-mockup" id="mobileMockup" tabindex="0" role="button" aria-label="Inspect Caretaker Mobile App">
-                    <div class="mobile-island">
-                        <span class="mobile-camera-dot"></span>
-                        <span class="mobile-sensor-dot"></span>
-                    </div>
-                    <div class="mobile-screen-content">
-                        <img src="assets/anigrow_screen_2.png" alt="Ani-Grow Mobile App" class="mobile-screen-img" id="mobileScreenImg">
-                    </div>
-                    <div class="pdetail-mockup-overlay" style="padding: 0.65rem;">
-                        <span class="pdetail-inspect-hint" style="font-size: 0.64rem; padding: 0.22rem 0.65rem;"><i data-lucide="smartphone"></i> Mobile App</span>
-                    </div>
+                <!-- Floating Mobile App (Companion) -->
+                <div class="floating-mobile-device" id="mobileMockup" tabindex="0" role="button" aria-label="Inspect Caretaker Mobile App Fullscreen">
+                    <img src="assets/anigrow_hero_showcase.webp" alt="Ani-Grow Caretaker Mobile App" class="floating-mobile-img" id="mobileScreenImg">
+                    <span class="floating-mobile-badge">
+                        <i data-lucide="smartphone"></i>
+                        <span>Caretaker App</span>
+                    </span>
                 </div>
             </div>
         </section>
@@ -432,7 +431,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=4"></script>
+    <script src="projects-data.js?v=5"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -583,7 +582,7 @@
             const isCaseStudy = Array.isArray(project.caseStudySections) && project.caseStudySections.length > 0;
             const dualDeviceSection = document.getElementById('dualDeviceSection');
             const laptopMockup = document.getElementById('laptopMockup');
-            const laptopScreenImg = document.getElementById('laptopScreenImg');
+            const actualLaptopImg = document.getElementById('actualLaptopImg');
             const mobileMockup = document.getElementById('mobileMockup');
             const mobileScreenImg = document.getElementById('mobileScreenImg');
             const featuresContainer = document.getElementById('tcFeaturesContainer');
@@ -608,31 +607,23 @@
             if (isCaseStudy) {
                 if (standardGrid) standardGrid.style.display = 'none';
 
-                // Display Dual Device Stage (MacBook + iPhone)
+                // Display Actual Laptop Showcase (assets/Ani-Grow Folder) + Companion Mobile
                 if (dualDeviceSection) {
                     dualDeviceSection.style.display = 'block';
 
-                    // Tab buttons switcher (Overview, AI & Biometrics, Telemetry)
+                    // Tab buttons switcher (Animal Management, Weight Forecast, Growth Analytics, etc.)
                     const tabBtns = document.querySelectorAll('.device-tab-btn');
                     tabBtns.forEach(btn => {
                         btn.addEventListener('click', () => {
                             tabBtns.forEach(b => b.classList.remove('is-active'));
                             btn.classList.add('is-active');
-                            const laptopSrc = btn.getAttribute('data-laptop');
-                            const mobileSrc = btn.getAttribute('data-mobile');
+                            const src = btn.getAttribute('data-src');
 
-                            if (laptopScreenImg && laptopSrc) {
-                                laptopScreenImg.style.opacity = '0.3';
+                            if (actualLaptopImg && src) {
+                                actualLaptopImg.style.opacity = '0.35';
                                 setTimeout(() => {
-                                    laptopScreenImg.src = laptopSrc;
-                                    laptopScreenImg.style.opacity = '1';
-                                }, 140);
-                            }
-                            if (mobileScreenImg && mobileSrc) {
-                                mobileScreenImg.style.opacity = '0.3';
-                                setTimeout(() => {
-                                    mobileScreenImg.src = mobileSrc;
-                                    mobileScreenImg.style.opacity = '1';
+                                    actualLaptopImg.src = src;
+                                    actualLaptopImg.style.opacity = '1';
                                 }, 140);
                             }
                         });
@@ -643,16 +634,14 @@
                         laptopMockup.addEventListener('click', () => {
                             const activeBtn = document.querySelector('.device-tab-btn.is-active');
                             const label = activeBtn ? activeBtn.getAttribute('data-title') : 'Web Dashboard';
-                            const src = laptopScreenImg ? laptopScreenImg.getAttribute('src') : 'assets/anigrow_screen_1.png';
-                            openCustomLightbox(src, `${project.shortTitle} — ${label}`, 'WEB DASHBOARD');
+                            const badge = activeBtn ? activeBtn.getAttribute('data-badge') : 'WEB DASHBOARD';
+                            const src = actualLaptopImg ? actualLaptopImg.getAttribute('src') : 'assets/Ani-Grow/6.jpg';
+                            openCustomLightbox(src, `${project.shortTitle} — ${label}`, badge);
                         });
                     }
                     if (mobileMockup) {
                         mobileMockup.addEventListener('click', () => {
-                            const activeBtn = document.querySelector('.device-tab-btn.is-active');
-                            const label = activeBtn ? activeBtn.getAttribute('data-title') : 'Mobile App';
-                            const src = mobileScreenImg ? mobileScreenImg.getAttribute('src') : 'assets/anigrow_screen_2.png';
-                            openCustomLightbox(src, `${project.shortTitle} — Caretaker Mobile App`, 'MOBILE APP');
+                            openCustomLightbox('assets/anigrow_hero_showcase.webp', `${project.shortTitle} — Caretaker Mobile App`, 'MOBILE APP');
                         });
                     }
                 }
