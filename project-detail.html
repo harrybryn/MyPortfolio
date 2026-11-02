@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=120">
+    <link rel="stylesheet" href="styles.css?v=121">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -103,90 +103,105 @@
             </div>
         </section>
 
+        <!-- Dual Device Showcase (MacBook Laptop + Floating Mobile iPhone) -->
+        <section class="dual-device-section" id="dualDeviceSection" style="display: none;">
+            <!-- Interactive Screen Switcher Pills -->
+            <div class="device-switcher-row" id="deviceSwitcherRow">
+                <button type="button" class="device-tab-btn is-active" data-laptop="assets/anigrow_screen_1.png" data-mobile="assets/anigrow_screen_2.png" data-title="Dashboard &amp; Feeder IoT">
+                    <i data-lucide="layout"></i>
+                    <span>Overview &amp; Controls</span>
+                </button>
+                <button type="button" class="device-tab-btn" data-laptop="assets/anigrow_screen_4.png" data-mobile="assets/anigrow_screen_3.png" data-title="Analytics &amp; AI Diagnostic">
+                    <i data-lucide="sparkles"></i>
+                    <span>AI &amp; Biometrics</span>
+                </button>
+                <button type="button" class="device-tab-btn" data-laptop="assets/anigrow_screen_6.png" data-mobile="assets/anigrow_screen_5.png" data-title="Admin Web &amp; Hardware Telemetry">
+                    <i data-lucide="cpu"></i>
+                    <span>Telemetry &amp; Sync</span>
+                </button>
+            </div>
+
+            <div class="dual-device-stage">
+                <!-- MacBook Laptop Mockup -->
+                <div class="laptop-mockup" id="laptopMockup" tabindex="0" role="button" aria-label="Inspect Web Dashboard">
+                    <div class="laptop-screen-bezel">
+                        <div class="laptop-webcam"></div>
+                        <div class="laptop-screen-content">
+                            <img src="assets/anigrow_screen_1.png" alt="Ani-Grow Web Dashboard" class="laptop-screen-img" id="laptopScreenImg">
+                        </div>
+                        <div class="pdetail-mockup-overlay">
+                            <span class="pdetail-inspect-hint"><i data-lucide="monitor"></i> Web Dashboard (Click to Zoom)</span>
+                        </div>
+                    </div>
+                    <div class="laptop-base">
+                        <div class="laptop-notch"></div>
+                    </div>
+                </div>
+
+                <!-- Floating iPhone Mobile Mockup -->
+                <div class="mobile-mockup" id="mobileMockup" tabindex="0" role="button" aria-label="Inspect Caretaker Mobile App">
+                    <div class="mobile-island">
+                        <span class="mobile-camera-dot"></span>
+                        <span class="mobile-sensor-dot"></span>
+                    </div>
+                    <div class="mobile-screen-content">
+                        <img src="assets/anigrow_screen_2.png" alt="Ani-Grow Mobile App" class="mobile-screen-img" id="mobileScreenImg">
+                    </div>
+                    <div class="pdetail-mockup-overlay" style="padding: 0.65rem;">
+                        <span class="pdetail-inspect-hint" style="font-size: 0.64rem; padding: 0.22rem 0.65rem;"><i data-lucide="smartphone"></i> Mobile App</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Overview Narrative Headline Card -->
         <section class="tc-overview-card" id="tcOverviewCard" style="display: none;">
             <h2 class="tc-headline" id="tcHeadline">Farming with Data, Not Guesswork</h2>
             <p class="tc-narrative" id="tcNarrative"></p>
-        </section>
 
-        <!-- Main Screen Showcase Frame -->
-        <section class="pdetail-showcase-section" id="pdetailShowcaseSection">
-            <!-- Active Showcase Frame (if screenshots exist) -->
-            <div class="pdetail-mockup-frame" id="pdetailActiveFrame" style="display: none;">
-                <div class="pdetail-browser-bar">
-                    <div class="pdetail-browser-dots">
-                        <span class="browser-dot dot-red"></span>
-                        <span class="browser-dot dot-yellow"></span>
-                        <span class="browser-dot dot-green"></span>
-                    </div>
-                    <div class="pdetail-browser-url">
-                        <i data-lucide="lock" class="pdetail-url-lock"></i>
-                        <span id="pdetailShowcaseUrl">https://anigrow.vercel.app</span>
-                    </div>
-                    <div class="pdetail-browser-counter" id="pdetailScreenCounter">
-                        <span>Screen 01 / 06</span>
-                    </div>
+            <!-- The Challenge Callout Box -->
+            <div class="tc-challenge-box" id="tcChallengeBox" style="margin-top: 1.75rem; margin-bottom: 0;">
+                <div class="tc-challenge-label">
+                    <i data-lucide="alert-circle"></i>
+                    <span>The Challenge</span>
                 </div>
-
-                <div class="pdetail-mockup-viewport" id="pdetailMockupViewport" tabindex="0" role="button" aria-label="Click to enlarge screenshot in full resolution">
-                    <img src="" alt="Project Interface Capture" class="pdetail-mockup-img" id="pdetailShowcaseImg">
-                    
-                    <div class="pdetail-mockup-nav">
-                        <button type="button" class="pdetail-nav-arrow pdetail-nav-prev" id="pdetailPrevScreenBtn" aria-label="Previous screenshot">
-                            <i data-lucide="chevron-left"></i>
-                        </button>
-                        <button type="button" class="pdetail-nav-arrow pdetail-nav-next" id="pdetailNextScreenBtn" aria-label="Next screenshot">
-                            <i data-lucide="chevron-right"></i>
-                        </button>
-                    </div>
-
-                    <div class="pdetail-mockup-overlay">
-                        <div class="pdetail-screen-caption" id="pdetailScreenCaption">
-                            <strong id="pdetailScreenTitle">Dashboard Overview</strong>
-                            <span id="pdetailScreenDesc">Telemetry monitoring and farm overview metrics.</span>
-                        </div>
-                        <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Thumbnail selector strip -->
-            <div class="pdetail-thumbs-strip" id="pdetailThumbsStrip" style="display: none;">
-                <!-- Populated dynamically -->
-            </div>
-
-            <!-- Placeholder Frame (if no screenshots exist) -->
-            <div class="pdetail-mockup-frame pdetail-mockup-placeholder" id="pdetailPlaceholderFrame">
-                <div class="pdetail-tba-container">
-                    <div class="pdetail-tba-badge">
-                        <span class="pdetail-tba-dot"></span>
-                        <span>PREVIEW SHOWCASE · TBA</span>
-                    </div>
-                    <div class="pdetail-tba-icon-wrap">
-                        <i data-lucide="image"></i>
-                    </div>
-                    <h3 class="pdetail-tba-title">Interface Preview in Preparation</h3>
-                    <p class="pdetail-tba-desc">High-resolution interface captures, system walkthroughs, and UI design mockups for <strong id="pdetailTbaProjectName">this project</strong> are currently being curated and will be uploaded soon.</p>
-                    <div class="pdetail-tba-meta">
-                        <span class="pdetail-tba-chip"><i data-lucide="layers"></i> UI/UX In Production</span>
-                        <span class="pdetail-tba-chip"><i data-lucide="file-code"></i> Engineering Specs Below</span>
-                    </div>
-                </div>
+                <p class="tc-challenge-text" id="tcChallengeText"></p>
             </div>
         </section>
 
-        <!-- The Challenge Callout Box -->
-        <div class="tc-challenge-box" id="tcChallengeBox" style="display: none;">
-            <div class="tc-challenge-label">
-                <i data-lucide="alert-circle"></i>
-                <span>The Core Challenge</span>
+        <!-- Compact Core Capabilities Grid (Replaces 7 Bloated Panels) -->
+        <section class="tc-features-container" id="tcFeaturesContainer" style="display: none;">
+            <h2 class="pdetail-section-label" style="margin-bottom: 1rem;">Core System Capabilities</h2>
+            <div class="tc-features-grid">
+                <div class="tc-feature-card">
+                    <div class="tc-feature-top">
+                        <div class="tc-feature-icon"><i data-lucide="scale"></i></div>
+                        <h3 class="tc-feature-title">Weight-Based Segregation</h3>
+                    </div>
+                    <p class="tc-feature-desc">100 kg load cell + HX711 amplifier measures livestock in real-time, directing animals into sorting cells via 12V linear actuators.</p>
+                </div>
+                <div class="tc-feature-card">
+                    <div class="tc-feature-top">
+                        <div class="tc-feature-icon"><i data-lucide="utensils"></i></div>
+                        <h3 class="tc-feature-title">Automated Dispenser</h3>
+                    </div>
+                    <p class="tc-feature-desc">ESP32 automated feeding schedules with live weight-based dosage calculations, syncing dispense logs to Supabase in real time.</p>
+                </div>
+                <div class="tc-feature-card">
+                    <div class="tc-feature-top">
+                        <div class="tc-feature-icon"><i data-lucide="brain"></i></div>
+                        <h3 class="tc-feature-title">AI Diagnostic Guides</h3>
+                    </div>
+                    <p class="tc-feature-desc">Claude API intelligence generates tailored daily feeding ratios, ambient climate guidance, and disease prevention steps per cohort.</p>
+                </div>
+                <div class="tc-feature-card">
+                    <div class="tc-feature-top">
+                        <div class="tc-feature-icon"><i data-lucide="line-chart"></i></div>
+                        <h3 class="tc-feature-title">Growth Telemetry Curves</h3>
+                    </div>
+                    <p class="tc-feature-desc">Continuous benchmark tracking against standard poultry/swine growth patterns, instantly flagging weight anomalies and forecast harvest readiness.</p>
+                </div>
             </div>
-            <p class="tc-challenge-text" id="tcChallengeText"></p>
-        </div>
-
-        <!-- Section-by-Section Walkthrough -->
-        <section class="tc-sections-container" id="tcSectionsContainer" style="display: none;">
-            <!-- Populated dynamically -->
         </section>
 
         <!-- Built With Chip Grid -->
@@ -201,6 +216,21 @@
             <div class="tc-outcome-grid" id="tcOutcomeGrid"></div>
             <p class="tc-outcome-narrative" id="tcOutcomeNarrative"></p>
         </section>
+
+        <!-- Placeholder Frame (if no screenshots exist) -->
+        <div class="pdetail-mockup-frame pdetail-mockup-placeholder" id="pdetailPlaceholderFrame" style="display: none; margin-bottom: 3rem;">
+            <div class="pdetail-tba-container">
+                <div class="pdetail-tba-badge">
+                    <span class="pdetail-tba-dot"></span>
+                    <span>PREVIEW SHOWCASE · TBA</span>
+                </div>
+                <div class="pdetail-tba-icon-wrap">
+                    <i data-lucide="image"></i>
+                </div>
+                <h3 class="pdetail-tba-title">Interface Preview in Preparation</h3>
+                <p class="pdetail-tba-desc">High-resolution interface captures, system walkthroughs, and UI design mockups for <strong id="pdetailTbaProjectName">this project</strong> are currently being curated and will be uploaded soon.</p>
+            </div>
+        </div>
 
         <!-- Detailed Dossier Section -->
         <section class="pdetail-content-grid" id="pdetailStandardGrid">
@@ -402,7 +432,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=3"></script>
+    <script src="projects-data.js?v=4"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -549,14 +579,19 @@
             const tagsWrap = document.getElementById('pdetailTags');
             tagsWrap.innerHTML = project.tags.map(t => `<span class="tag">${t}</span>`).join('');
 
-            // ── Travis Cruz Style Case Study Elements ──────────────────────────
+            // ── Dual Device Showcase & Case Study Elements ────────────────────
             const isCaseStudy = Array.isArray(project.caseStudySections) && project.caseStudySections.length > 0;
+            const dualDeviceSection = document.getElementById('dualDeviceSection');
+            const laptopMockup = document.getElementById('laptopMockup');
+            const laptopScreenImg = document.getElementById('laptopScreenImg');
+            const mobileMockup = document.getElementById('mobileMockup');
+            const mobileScreenImg = document.getElementById('mobileScreenImg');
+            const featuresContainer = document.getElementById('tcFeaturesContainer');
             const overviewCard = document.getElementById('tcOverviewCard');
             const headlineEl = document.getElementById('tcHeadline');
             const narrativeEl = document.getElementById('tcNarrative');
             const challengeBox = document.getElementById('tcChallengeBox');
             const challengeText = document.getElementById('tcChallengeText');
-            const sectionsContainer = document.getElementById('tcSectionsContainer');
             const builtWithCard = document.getElementById('tcBuiltWithCard');
             const chipsGrid = document.getElementById('tcChipsGrid');
             const outcomeCard = document.getElementById('tcOutcomeCard');
@@ -573,6 +608,55 @@
             if (isCaseStudy) {
                 if (standardGrid) standardGrid.style.display = 'none';
 
+                // Display Dual Device Stage (MacBook + iPhone)
+                if (dualDeviceSection) {
+                    dualDeviceSection.style.display = 'block';
+
+                    // Tab buttons switcher (Overview, AI & Biometrics, Telemetry)
+                    const tabBtns = document.querySelectorAll('.device-tab-btn');
+                    tabBtns.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            tabBtns.forEach(b => b.classList.remove('is-active'));
+                            btn.classList.add('is-active');
+                            const laptopSrc = btn.getAttribute('data-laptop');
+                            const mobileSrc = btn.getAttribute('data-mobile');
+
+                            if (laptopScreenImg && laptopSrc) {
+                                laptopScreenImg.style.opacity = '0.3';
+                                setTimeout(() => {
+                                    laptopScreenImg.src = laptopSrc;
+                                    laptopScreenImg.style.opacity = '1';
+                                }, 140);
+                            }
+                            if (mobileScreenImg && mobileSrc) {
+                                mobileScreenImg.style.opacity = '0.3';
+                                setTimeout(() => {
+                                    mobileScreenImg.src = mobileSrc;
+                                    mobileScreenImg.style.opacity = '1';
+                                }, 140);
+                            }
+                        });
+                    });
+
+                    // Lightbox zoom handlers on clicking device frames
+                    if (laptopMockup) {
+                        laptopMockup.addEventListener('click', () => {
+                            const activeBtn = document.querySelector('.device-tab-btn.is-active');
+                            const label = activeBtn ? activeBtn.getAttribute('data-title') : 'Web Dashboard';
+                            const src = laptopScreenImg ? laptopScreenImg.getAttribute('src') : 'assets/anigrow_screen_1.png';
+                            openCustomLightbox(src, `${project.shortTitle} — ${label}`, 'WEB DASHBOARD');
+                        });
+                    }
+                    if (mobileMockup) {
+                        mobileMockup.addEventListener('click', () => {
+                            const activeBtn = document.querySelector('.device-tab-btn.is-active');
+                            const label = activeBtn ? activeBtn.getAttribute('data-title') : 'Mobile App';
+                            const src = mobileScreenImg ? mobileScreenImg.getAttribute('src') : 'assets/anigrow_screen_2.png';
+                            openCustomLightbox(src, `${project.shortTitle} — Caretaker Mobile App`, 'MOBILE APP');
+                        });
+                    }
+                }
+
                 if (overviewCard) {
                     overviewCard.style.display = 'block';
                     if (headlineEl) headlineEl.textContent = project.overviewHeadline || project.title;
@@ -584,48 +668,8 @@
                     if (challengeText) challengeText.textContent = project.challenge;
                 }
 
-                if (sectionsContainer) {
-                    sectionsContainer.style.display = 'flex';
-                    sectionsContainer.innerHTML = project.caseStudySections.map((sec, idx) => `
-                        <article class="tc-section-item" id="${sec.id || `section-${idx}`}">
-                            <div class="tc-section-content">
-                                <div class="tc-section-badge-row">
-                                    <span class="tc-section-num">SECTION ${sec.num || `0${idx+1}`}</span>
-                                    <span class="tc-section-badge">${sec.badge || 'SYSTEM COMPONENT'}</span>
-                                </div>
-                                <h3 class="tc-section-title">${sec.title}</h3>
-                                <p class="tc-section-desc">${sec.desc}</p>
-                            </div>
-                            <div class="tc-section-media open-case-study-lightbox" data-img="${sec.image}" data-title="${sec.title}" data-badge="${sec.badge}" tabindex="0" role="button" aria-label="Inspect ${sec.title}">
-                                <img src="${sec.image}" alt="${sec.title}" class="tc-section-img" loading="lazy">
-                                <div class="pdetail-mockup-overlay">
-                                    <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                </div>
-                            </div>
-                        </article>
-                    `).join('');
-
-                    sectionsContainer.querySelectorAll('.open-case-study-lightbox').forEach(media => {
-                        media.addEventListener('click', () => {
-                            const imgSrc = media.getAttribute('data-img');
-                            const title = media.getAttribute('data-title');
-                            const badge = media.getAttribute('data-badge');
-                            if (lbImg) { lbImg.src = imgSrc; lbImg.alt = title; }
-                            if (lbTitle) lbTitle.textContent = `${title} — ${project.shortTitle}`;
-                            if (lbSub) lbSub.textContent = badge || project.badge;
-                            if (lbLogo) lbLogo.src = project.logo;
-                            const url = project.siteUrl || 'https://anigrow.vercel.app';
-                            if (lbUrl) lbUrl.textContent = url;
-                            if (lbLive) {
-                                lbLive.href = url;
-                                lbLive.style.display = url.startsWith('http') ? 'inline-flex' : 'none';
-                            }
-                            lbModal.classList.add('is-open');
-                            lbModal.setAttribute('aria-hidden', 'false');
-                            document.body.style.overflow = 'hidden';
-                            if (window.lucide) lucide.createIcons();
-                        });
-                    });
+                if (featuresContainer) {
+                    featuresContainer.style.display = 'block';
                 }
 
                 if (builtWithCard && Array.isArray(project.builtWith) && project.builtWith.length > 0) {
@@ -667,10 +711,11 @@
                     }
                 }
             } else {
+                if (dualDeviceSection) dualDeviceSection.style.display = 'none';
+                if (featuresContainer) featuresContainer.style.display = 'none';
                 if (standardGrid) standardGrid.style.display = 'grid';
                 if (overviewCard) overviewCard.style.display = 'none';
                 if (challengeBox) challengeBox.style.display = 'none';
-                if (sectionsContainer) sectionsContainer.style.display = 'none';
                 if (builtWithCard) builtWithCard.style.display = 'none';
                 if (outcomeCard) outcomeCard.style.display = 'none';
                 if (projectNav) projectNav.style.display = 'none';
@@ -706,7 +751,25 @@
                 if (lbTitle) lbTitle.textContent = `${sc.title} — ${project.shortTitle}`;
                 if (lbSub) lbSub.textContent = sc.badge || project.badge;
                 if (lbLogo) lbLogo.src = project.logo;
-                const url = project.url || 'https://anigrow.vercel.app';
+                const url = project.siteUrl || project.url || 'https://anigrow.vercel.app';
+                if (lbUrl) lbUrl.textContent = url;
+                if (lbLive) {
+                    lbLive.href = url;
+                    lbLive.style.display = url.startsWith('http') ? 'inline-flex' : 'none';
+                }
+                lbModal.classList.add('is-open');
+                lbModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                if (window.lucide) lucide.createIcons();
+            }
+
+            function openCustomLightbox(src, title, badge) {
+                if (!lbModal) return;
+                if (lbImg) { lbImg.src = src; lbImg.alt = title; }
+                if (lbTitle) lbTitle.textContent = title;
+                if (lbSub) lbSub.textContent = badge || project.badge;
+                if (lbLogo) lbLogo.src = project.logo;
+                const url = project.siteUrl || project.url || 'https://anigrow.vercel.app';
                 if (lbUrl) lbUrl.textContent = url;
                 if (lbLive) {
                     lbLive.href = url;
@@ -726,9 +789,15 @@
             }
 
             if (hasScreenshots) {
-                if (activeFrame) activeFrame.style.display = 'block';
+                // If case study with dual-device mockup, hide redundant single browser window and thumbs
+                if (isCaseStudy) {
+                    if (activeFrame) activeFrame.style.display = 'none';
+                    if (thumbsStrip) thumbsStrip.style.display = 'none';
+                } else {
+                    if (activeFrame) activeFrame.style.display = 'block';
+                    if (thumbsStrip) thumbsStrip.style.display = 'flex';
+                }
                 if (placeholderFrame) placeholderFrame.style.display = 'none';
-                if (thumbsStrip) thumbsStrip.style.display = 'flex';
                 if (gallerySection) gallerySection.style.display = 'block';
 
                 const showcaseImg = document.getElementById('pdetailShowcaseImg');
