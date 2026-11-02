@@ -6926,9 +6926,10 @@ body.splash-locked {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 1rem;
+  padding: 0.5rem 1.5rem;
   margin: 0 auto;
   max-width: 100%;
+  overflow: visible;
 }
 
 /* ─── Individual Character — LEGO-logo inspired ───────────────────────────
@@ -6942,14 +6943,15 @@ body.splash-locked {
   font-size: clamp(1.8rem, 4.5vw, 4rem);
   font-weight: 600;
   font-style: italic;
-  padding: 0;
-  max-width: 1.2em;
+  /* Horizontal padding lets the stroke + italic lean breathe without clipping */
+  padding: 0.15em 0.12em;
+  max-width: 1.5em;
   margin: 0;
   white-space: nowrap;
   vertical-align: middle;
   letter-spacing: 0.04em;
   opacity: 0;
-  overflow: hidden;
+  overflow: visible;
   /* LEGO-logo: white fill + thick black stroke */
   color: #ffffff;
   -webkit-text-stroke: 3px #000000;
