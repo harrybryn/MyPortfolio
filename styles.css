@@ -6716,8 +6716,8 @@ html.theme-anim *::after {
 }
 
 .pdetail-thumb-item.is-active {
-  border-color: var(--accent-green, #10b981);
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.35);
+  border-color: var(--text-main);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
 }
 
 .pdetail-thumb-img {
@@ -6867,7 +6867,7 @@ html.theme-anim *::after {
   font-family: var(--font-mono);
   font-size: 0.66rem;
   font-weight: 600;
-  color: var(--accent-green, #10b981);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -6947,7 +6947,7 @@ html.theme-anim *::after {
 .tc-challenge-box {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent-green, #10b981);
+  border-left: 3px solid var(--text-muted);
   border-radius: 12px;
   padding: 1.35rem 1.75rem;
   margin-bottom: 3.5rem;
@@ -6962,7 +6962,7 @@ html.theme-anim *::after {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--accent-green, #10b981);
+  color: var(--text-main);
   margin-bottom: 0.5rem;
 }
 
@@ -7039,7 +7039,7 @@ html.theme-anim *::after {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--accent-green, #10b981);
+  color: var(--text-muted);
 }
 
 .tc-section-badge {
@@ -7115,8 +7115,6 @@ html.theme-anim *::after {
   object-fit: contain;
 }
 
-/* Built With Chip Grid */
-.tc-built-with-card {
 /* Built With Chip Grid (Unboxed) */
 .tc-built-with-card {
   background: transparent;
@@ -7154,63 +7152,62 @@ html.theme-anim *::after {
   transform: translateY(-1px);
 }
 
-/* The Outcome Section (Unboxed) */
+/* The Outcome Section (Unboxed, Elegant Typography) */
 .tc-outcome-card {
   background: transparent;
   border: none;
   border-radius: 0;
   padding: 0;
-  margin-bottom: 4.5rem;
+  margin-top: 4rem;
+  margin-bottom: 5.5rem;
   box-shadow: none;
-}
-
-.tc-outcome-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin: 1.75rem 0;
-}
-
-@media (max-width: 768px) {
-  .tc-outcome-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.tc-stat-card {
-  background: var(--surface-hover);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.5rem 1.25rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.tc-stat-val {
-  font-family: var(--font-mono);
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--accent-green, #10b981);
-}
-
-.tc-stat-label {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.tc-stat-sub {
-  font-size: 0.74rem;
-  color: var(--text-subtle);
-  line-height: 1.5;
+  max-width: 880px;
 }
 
 .tc-outcome-narrative {
-  font-size: 0.95rem;
-  line-height: 1.75;
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: var(--text-subtle);
+  margin-bottom: 1.75rem;
+}
+
+.tc-outcome-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.tc-outcome-bullet-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  font-size: 0.98rem;
+  line-height: 1.7;
   color: var(--text-muted);
+}
+
+.tc-bullet-symbol {
+  color: var(--text-subtle);
+  font-size: 1.15rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tc-bullet-val {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.tc-outcome-closing {
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-top: 1.5rem;
 }
 
 
@@ -7287,7 +7284,7 @@ html.theme-anim *::after {
 }
 
 [data-theme="dark"] .actual-laptop-stage:hover {
-  box-shadow: 0 35px 95px -15px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 35px 95px -15px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 .actual-laptop-frame {
@@ -7329,7 +7326,7 @@ html.theme-anim *::after {
 
 .floating-mobile-device:hover {
   transform: translateY(-6px) scale(1.04);
-  filter: drop-shadow(0 25px 40px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 14px rgba(16, 185, 129, 0.4));
+  filter: drop-shadow(0 25px 40px rgba(0, 0, 0, 0.7));
 }
 
 .floating-mobile-img {
@@ -7438,7 +7435,7 @@ html.theme-anim *::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-green, #10b981);
+  color: var(--text-main);
 }
 
 .tc-feature-title {
@@ -7526,7 +7523,7 @@ html.theme-anim *::after {
 .pdetail-check-icon {
   width: 16px;
   height: 16px;
-  color: #10b981;
+  color: var(--text-muted);
   flex-shrink: 0;
   margin-top: 2px;
 }

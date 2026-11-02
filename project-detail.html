@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=125">
+    <link rel="stylesheet" href="styles.css?v=126">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -109,15 +109,6 @@
                         <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Inspect System Fullscreen</span>
                     </div>
                 </div>
-
-                <!-- Floating Mobile App (Companion) -->
-                <div class="floating-mobile-device" id="mobileMockup" tabindex="0" role="button" aria-label="Inspect Caretaker Mobile App Fullscreen">
-                    <img src="assets/anigrow_hero_showcase.webp" alt="Ani-Grow Caretaker Mobile App" class="floating-mobile-img" id="mobileScreenImg">
-                    <span class="floating-mobile-badge">
-                        <i data-lucide="smartphone"></i>
-                        <span>Caretaker App</span>
-                    </span>
-                </div>
             </div>
         </section>
 
@@ -145,11 +136,12 @@
             <div class="tc-chips-grid" id="tcChipsGrid"></div>
         </section>
 
-        <!-- The Outcome Section -->
+        <!-- The Outcome Section (Simple, Elegant Typography) -->
         <section class="tc-outcome-card" id="tcOutcomeCard" style="display: none;">
-            <h2 class="pdetail-section-label" id="tcOutcomeTitle">The Outcome &amp; Field Validation</h2>
-            <div class="tc-outcome-grid" id="tcOutcomeGrid"></div>
+            <h2 class="tc-section-title" id="tcOutcomeTitle" style="margin-bottom: 1.25rem;">The Outcome &amp; Validation</h2>
             <p class="tc-outcome-narrative" id="tcOutcomeNarrative"></p>
+            <ul class="tc-outcome-bullets" id="tcOutcomeBullets"></ul>
+            <p class="tc-outcome-closing" id="tcOutcomeClosing"></p>
         </section>
 
         <!-- Placeholder Frame (if no screenshots exist) -->
@@ -346,7 +338,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=8"></script>
+    <script src="projects-data.js?v=9"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -492,7 +484,6 @@
             const heroShowcase = document.getElementById('tcHeroShowcase');
             const laptopMockup = document.getElementById('laptopMockup');
             const actualLaptopImg = document.getElementById('actualLaptopImg');
-            const mobileMockup = document.getElementById('mobileMockup');
             const sectionsContainer = document.getElementById('tcSectionsContainer');
             const overviewCard = document.getElementById('tcOverviewCard');
             const headlineEl = document.getElementById('tcHeadline');
@@ -503,14 +494,15 @@
             const chipsGrid = document.getElementById('tcChipsGrid');
             const outcomeCard = document.getElementById('tcOutcomeCard');
             const outcomeTitle = document.getElementById('tcOutcomeTitle');
-            const outcomeGrid = document.getElementById('tcOutcomeGrid');
             const outcomeNarrative = document.getElementById('tcOutcomeNarrative');
+            const outcomeBullets = document.getElementById('tcOutcomeBullets');
+            const outcomeClosing = document.getElementById('tcOutcomeClosing');
             const standardGrid = document.getElementById('pdetailStandardGrid');
 
             if (isCaseStudy) {
                 if (standardGrid) standardGrid.style.display = 'none';
 
-                // Display Hero Presentation Showcase (Actual Laptop + Floating Mobile)
+                // Display Hero Presentation Showcase (Actual Laptop Only)
                 if (heroShowcase) {
                     heroShowcase.style.display = 'block';
 
@@ -518,12 +510,6 @@
                         laptopMockup.addEventListener('click', () => {
                             const src = actualLaptopImg ? actualLaptopImg.getAttribute('src') : 'assets/Ani-Grow/6.jpg';
                             openCustomLightbox(src, `${project.shortTitle} — Web Dashboard Command Center`, 'FARM COMMAND');
-                        });
-                    }
-                    if (mobileMockup) {
-                        mobileMockup.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            openCustomLightbox('assets/anigrow_hero_showcase.webp', `${project.shortTitle} — Caretaker Mobile App`, 'MOBILE APP');
                         });
                     }
                 }
@@ -575,24 +561,32 @@
                     builtWithCard.style.display = 'block';
                     if (chipsGrid) {
                         chipsGrid.innerHTML = project.builtWith.map(chip => `
-                            <span class="tc-chip"><i data-lucide="cpu" style="width:12px;height:12px;color:var(--accent-green,#10b981);"></i> ${chip}</span>
+                            <span class="tc-chip"><i data-lucide="cpu" style="width:12px;height:12px;color:var(--text-muted);"></i> ${chip}</span>
                         `).join('');
                     }
                 }
 
                 if (outcomeCard && project.outcome) {
                     outcomeCard.style.display = 'block';
-                    if (outcomeTitle) outcomeTitle.textContent = project.outcome.title || 'The Outcome & Field Validation';
-                    if (outcomeGrid && Array.isArray(project.outcome.stats)) {
-                        outcomeGrid.innerHTML = project.outcome.stats.map(st => `
-                            <div class="tc-stat-card">
-                                <span class="tc-stat-val">${st.value}</span>
-                                <strong class="tc-stat-label">${st.label}</strong>
-                                <span class="tc-stat-sub">${st.sub}</span>
-                            </div>
+                    if (outcomeTitle) outcomeTitle.textContent = project.outcome.title || 'The Outcome & Validation';
+                    if (outcomeNarrative) outcomeNarrative.textContent = project.outcome.narrative;
+
+                    if (outcomeBullets && Array.isArray(project.outcome.stats)) {
+                        outcomeBullets.innerHTML = project.outcome.stats.map(st => `
+                            <li class="tc-outcome-bullet-item">
+                                <span class="tc-bullet-symbol">•</span>
+                                <div>
+                                    <strong class="tc-bullet-val">${st.value}</strong>
+                                    <span style="color: var(--text-main); font-weight: 600;"> ${st.label}</span>
+                                    <span style="color: var(--text-muted);"> — ${st.sub}</span>
+                                </div>
+                            </li>
                         `).join('');
                     }
-                    if (outcomeNarrative) outcomeNarrative.textContent = project.outcome.narrative;
+
+                    if (outcomeClosing) {
+                        outcomeClosing.textContent = 'Swine growth telemetry and feeding trials from a consulted commercial operator also confirmed the modular IoT and AI architecture extends seamlessly beyond poultry to livestock operations.';
+                    }
                 }
             } else {
                 if (heroShowcase) heroShowcase.style.display = 'none';

@@ -10,7 +10,7 @@ const PROJECTS_DATA = [
         screen: 'assets/Ani-Grow/6.jpg',
         category: 'Poultry & Livestock Guide',
         badge: 'Poultry & Livestock Analytics',
-        accentColor: '#15803d',
+        accentColor: '#ededec',
         year: '2026',
         timeline: '2025 – 2026',
         role: 'Lead Full-Stack Mobile & IoT Architect',
