@@ -115,6 +115,15 @@ const PROJECTS_DATA = [
                 badge: 'Official Audit',
                 desc: 'Formatted export and print-ready biometric performance audit for compliance with San Miguel Foods grower standards.',
                 image: 'assets/Ani-Grow/1.jpg'
+            },
+            {
+                id: 'caretaker-mobile-app',
+                num: '07',
+                title: 'Caretaker Mobile Companion Application',
+                badge: 'Mobile App',
+                desc: 'An Android app for field caretakers to monitor automated feeder hoppers, log daily biometric observations, and receive push notifications for low feed and harvest readiness.',
+                image: 'assets/anigrow_hero_showcase.webp',
+                isMobile: true
             }
         ],
         screenshots: [

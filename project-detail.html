@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=122">
+    <link rel="stylesheet" href="styles.css?v=123">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -103,42 +103,14 @@
             </div>
         </section>
 
-        <!-- Actual Laptop Showcase (From assets/Ani-Grow Folder) + Floating Companion Mobile -->
-        <section class="dual-device-section" id="dualDeviceSection" style="display: none;">
-            <!-- Interactive View Switcher Tabs -->
-            <div class="device-switcher-row" id="deviceSwitcherRow">
-                <button type="button" class="device-tab-btn is-active" data-src="assets/Ani-Grow/6.jpg" data-title="Animal Management &amp; Housing Units" data-badge="FARM COMMAND">
-                    <i data-lucide="layout-grid"></i>
-                    <span>Animal Management</span>
-                </button>
-                <button type="button" class="device-tab-btn" data-src="assets/Ani-Grow/2.jpg" data-title="Weight Forecast &amp; Harvest Trajectory" data-badge="PREDICTIVE AI">
-                    <i data-lucide="trending-up"></i>
-                    <span>Weight Forecast</span>
-                </button>
-                <button type="button" class="device-tab-btn" data-src="assets/Ani-Grow/3.jpg" data-title="Distribution Trend &amp; Growth Insights" data-badge="GROWTH ANALYTICS">
-                    <i data-lucide="line-chart"></i>
-                    <span>Growth Analytics</span>
-                </button>
-                <button type="button" class="device-tab-btn" data-src="assets/Ani-Grow/5.jpg" data-title="Actionable Guide &amp; Lifecycle Roadmap" data-badge="AI RECOMMENDATIONS">
-                    <i data-lucide="sparkles"></i>
-                    <span>Actionable Guide</span>
-                </button>
-                <button type="button" class="device-tab-btn" data-src="assets/Ani-Grow/4.jpg" data-title="Weighing History &amp; Scale Telemetry" data-badge="IOT TELEMETRY">
-                    <i data-lucide="scale"></i>
-                    <span>Weighing History</span>
-                </button>
-                <button type="button" class="device-tab-btn" data-src="assets/Ani-Grow/1.jpg" data-title="Official Biometric &amp; Audit Report" data-badge="OFFICIAL AUDIT">
-                    <i data-lucide="file-text"></i>
-                    <span>Biometric Report</span>
-                </button>
-            </div>
-
+        <!-- Hero Presentation Showcase (Laptop + Mobile Companion) -->
+        <section class="tc-hero-showcase" id="tcHeroShowcase" style="display: none; margin-bottom: 3.5rem;">
             <div class="actual-laptop-stage" id="laptopStageWrap">
                 <!-- Actual Laptop Frame Rendering Real Mockup -->
                 <div class="actual-laptop-frame" id="laptopMockup" tabindex="0" role="button" aria-label="Inspect Laptop Screen Fullscreen">
                     <img src="assets/Ani-Grow/6.jpg" alt="Ani-Grow Web Dashboard on Laptop" class="actual-laptop-img" id="actualLaptopImg">
                     <div class="pdetail-mockup-overlay">
-                        <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click Laptop to Zoom Fullscreen</span>
+                        <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Inspect System Fullscreen</span>
                     </div>
                 </div>
 
@@ -168,40 +140,8 @@
             </div>
         </section>
 
-        <!-- Compact Core Capabilities Grid (Replaces 7 Bloated Panels) -->
-        <section class="tc-features-container" id="tcFeaturesContainer" style="display: none;">
-            <h2 class="pdetail-section-label" style="margin-bottom: 1rem;">Core System Capabilities</h2>
-            <div class="tc-features-grid">
-                <div class="tc-feature-card">
-                    <div class="tc-feature-top">
-                        <div class="tc-feature-icon"><i data-lucide="scale"></i></div>
-                        <h3 class="tc-feature-title">Weight-Based Segregation</h3>
-                    </div>
-                    <p class="tc-feature-desc">100 kg load cell + HX711 amplifier measures livestock in real-time, directing animals into sorting cells via 12V linear actuators.</p>
-                </div>
-                <div class="tc-feature-card">
-                    <div class="tc-feature-top">
-                        <div class="tc-feature-icon"><i data-lucide="utensils"></i></div>
-                        <h3 class="tc-feature-title">Automated Dispenser</h3>
-                    </div>
-                    <p class="tc-feature-desc">ESP32 automated feeding schedules with live weight-based dosage calculations, syncing dispense logs to Supabase in real time.</p>
-                </div>
-                <div class="tc-feature-card">
-                    <div class="tc-feature-top">
-                        <div class="tc-feature-icon"><i data-lucide="brain"></i></div>
-                        <h3 class="tc-feature-title">AI Diagnostic Guides</h3>
-                    </div>
-                    <p class="tc-feature-desc">Claude API intelligence generates tailored daily feeding ratios, ambient climate guidance, and disease prevention steps per cohort.</p>
-                </div>
-                <div class="tc-feature-card">
-                    <div class="tc-feature-top">
-                        <div class="tc-feature-icon"><i data-lucide="line-chart"></i></div>
-                        <h3 class="tc-feature-title">Growth Telemetry Curves</h3>
-                    </div>
-                    <p class="tc-feature-desc">Continuous benchmark tracking against standard poultry/swine growth patterns, instantly flagging weight anomalies and forecast harvest readiness.</p>
-                </div>
-            </div>
-        </section>
+        <!-- Section-by-Section Walkthrough (Elegant & Simple Case Study Layout) -->
+        <section class="tc-sections-container" id="tcSectionsContainer" style="display: none;"></section>
 
         <!-- Built With Chip Grid -->
         <section class="tc-built-with-card" id="tcBuiltWithCard" style="display: none;">
@@ -431,7 +371,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=5"></script>
+    <script src="projects-data.js?v=6"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -578,14 +518,13 @@
             const tagsWrap = document.getElementById('pdetailTags');
             tagsWrap.innerHTML = project.tags.map(t => `<span class="tag">${t}</span>`).join('');
 
-            // ── Dual Device Showcase & Case Study Elements ────────────────────
+            // ── Travis Cruz Style Case Study Elements ──────────────────────────
             const isCaseStudy = Array.isArray(project.caseStudySections) && project.caseStudySections.length > 0;
-            const dualDeviceSection = document.getElementById('dualDeviceSection');
+            const heroShowcase = document.getElementById('tcHeroShowcase');
             const laptopMockup = document.getElementById('laptopMockup');
             const actualLaptopImg = document.getElementById('actualLaptopImg');
             const mobileMockup = document.getElementById('mobileMockup');
-            const mobileScreenImg = document.getElementById('mobileScreenImg');
-            const featuresContainer = document.getElementById('tcFeaturesContainer');
+            const sectionsContainer = document.getElementById('tcSectionsContainer');
             const overviewCard = document.getElementById('tcOverviewCard');
             const headlineEl = document.getElementById('tcHeadline');
             const narrativeEl = document.getElementById('tcNarrative');
@@ -607,40 +546,19 @@
             if (isCaseStudy) {
                 if (standardGrid) standardGrid.style.display = 'none';
 
-                // Display Actual Laptop Showcase (assets/Ani-Grow Folder) + Companion Mobile
-                if (dualDeviceSection) {
-                    dualDeviceSection.style.display = 'block';
+                // Display Hero Presentation Showcase (Actual Laptop + Floating Mobile)
+                if (heroShowcase) {
+                    heroShowcase.style.display = 'block';
 
-                    // Tab buttons switcher (Animal Management, Weight Forecast, Growth Analytics, etc.)
-                    const tabBtns = document.querySelectorAll('.device-tab-btn');
-                    tabBtns.forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            tabBtns.forEach(b => b.classList.remove('is-active'));
-                            btn.classList.add('is-active');
-                            const src = btn.getAttribute('data-src');
-
-                            if (actualLaptopImg && src) {
-                                actualLaptopImg.style.opacity = '0.35';
-                                setTimeout(() => {
-                                    actualLaptopImg.src = src;
-                                    actualLaptopImg.style.opacity = '1';
-                                }, 140);
-                            }
-                        });
-                    });
-
-                    // Lightbox zoom handlers on clicking device frames
                     if (laptopMockup) {
                         laptopMockup.addEventListener('click', () => {
-                            const activeBtn = document.querySelector('.device-tab-btn.is-active');
-                            const label = activeBtn ? activeBtn.getAttribute('data-title') : 'Web Dashboard';
-                            const badge = activeBtn ? activeBtn.getAttribute('data-badge') : 'WEB DASHBOARD';
                             const src = actualLaptopImg ? actualLaptopImg.getAttribute('src') : 'assets/Ani-Grow/6.jpg';
-                            openCustomLightbox(src, `${project.shortTitle} — ${label}`, badge);
+                            openCustomLightbox(src, `${project.shortTitle} — Web Dashboard Command Center`, 'FARM COMMAND');
                         });
                     }
                     if (mobileMockup) {
-                        mobileMockup.addEventListener('click', () => {
+                        mobileMockup.addEventListener('click', (e) => {
+                            e.stopPropagation();
                             openCustomLightbox('assets/anigrow_hero_showcase.webp', `${project.shortTitle} — Caretaker Mobile App`, 'MOBILE APP');
                         });
                     }
@@ -657,8 +575,36 @@
                     if (challengeText) challengeText.textContent = project.challenge;
                 }
 
-                if (featuresContainer) {
-                    featuresContainer.style.display = 'block';
+                // Section-by-Section Walkthrough (Elegant & Simple Case Study Layout)
+                if (sectionsContainer && Array.isArray(project.caseStudySections)) {
+                    sectionsContainer.style.display = 'flex';
+                    sectionsContainer.innerHTML = project.caseStudySections.map((sec, idx) => `
+                        <article class="tc-section-item" id="${sec.id || `section-${idx}`}">
+                            <div class="tc-section-content">
+                                <div class="tc-section-badge-row">
+                                    <span class="tc-section-num">MODULE ${sec.num || `0${idx+1}`}</span>
+                                    <span class="tc-section-badge">${sec.badge || 'SYSTEM MODULE'}</span>
+                                </div>
+                                <h3 class="tc-section-title">${sec.title}</h3>
+                                <p class="tc-section-desc">${sec.desc}</p>
+                            </div>
+                            <div class="tc-section-media ${sec.isMobile ? 'is-mobile-media' : ''} open-case-study-lightbox" data-img="${sec.image}" data-title="${sec.title}" data-badge="${sec.badge}" tabindex="0" role="button" aria-label="Inspect ${sec.title}">
+                                <img src="${sec.image}" alt="${sec.title}" class="tc-section-img" loading="lazy">
+                                <div class="pdetail-mockup-overlay">
+                                    <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                                </div>
+                            </div>
+                        </article>
+                    `).join('');
+
+                    sectionsContainer.querySelectorAll('.open-case-study-lightbox').forEach(media => {
+                        media.addEventListener('click', () => {
+                            const imgSrc = media.getAttribute('data-img');
+                            const title = media.getAttribute('data-title');
+                            const badge = media.getAttribute('data-badge');
+                            openCustomLightbox(imgSrc, `${title} — ${project.shortTitle}`, badge);
+                        });
+                    });
                 }
 
                 if (builtWithCard && Array.isArray(project.builtWith) && project.builtWith.length > 0) {
@@ -700,8 +646,8 @@
                     }
                 }
             } else {
-                if (dualDeviceSection) dualDeviceSection.style.display = 'none';
-                if (featuresContainer) featuresContainer.style.display = 'none';
+                if (heroShowcase) heroShowcase.style.display = 'none';
+                if (sectionsContainer) sectionsContainer.style.display = 'none';
                 if (standardGrid) standardGrid.style.display = 'grid';
                 if (overviewCard) overviewCard.style.display = 'none';
                 if (challengeBox) challengeBox.style.display = 'none';
@@ -778,16 +724,17 @@
             }
 
             if (hasScreenshots) {
-                // If case study with dual-device mockup, hide redundant single browser window and thumbs
+                // For case studies (e.g. Ani-Grow), the walkthrough sections already tell the story with each screen
                 if (isCaseStudy) {
                     if (activeFrame) activeFrame.style.display = 'none';
                     if (thumbsStrip) thumbsStrip.style.display = 'none';
+                    if (gallerySection) gallerySection.style.display = 'none';
                 } else {
                     if (activeFrame) activeFrame.style.display = 'block';
                     if (thumbsStrip) thumbsStrip.style.display = 'flex';
+                    if (gallerySection) gallerySection.style.display = 'block';
                 }
                 if (placeholderFrame) placeholderFrame.style.display = 'none';
-                if (gallerySection) gallerySection.style.display = 'block';
 
                 const showcaseImg = document.getElementById('pdetailShowcaseImg');
                 const showcaseUrl = document.getElementById('pdetailShowcaseUrl');

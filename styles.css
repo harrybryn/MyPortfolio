@@ -7069,25 +7069,49 @@ html.theme-anim *::after {
 .tc-section-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 14px;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: #090a0e;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
   cursor: zoom-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .tc-section-media {
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.6);
 }
 
 .tc-section-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  transition: transform 0.35s ease;
+  object-fit: contain;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: block;
 }
 
 .tc-section-media:hover .tc-section-img {
-  transform: scale(1.03);
+  transform: scale(1.025);
+}
+
+.tc-section-media.is-mobile-media {
+  background: var(--surface-hover);
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tc-section-media.is-mobile-media .tc-section-img {
+  height: 92%;
+  width: auto;
+  object-fit: contain;
 }
 
 /* Built With Chip Grid */
