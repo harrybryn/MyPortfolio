@@ -7259,55 +7259,62 @@ html.theme-anim *::after {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Actual Laptop Stage (assets/Ani-Grow Folder) */
+/* Actual Laptop Stage (assets/travis_laptop.png) */
 .actual-laptop-stage {
   position: relative;
   width: 100%;
-  max-width: 1020px;
+  max-width: 980px;
   margin: 0 auto;
-  border-radius: 20px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 25px 70px -15px rgba(0, 0, 0, 0.3);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-theme="dark"] .actual-laptop-stage {
-  background: #ffffff;
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 30px 85px -15px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .actual-laptop-stage:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 35px 90px -15px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+  box-shadow: none;
 }
 
 [data-theme="dark"] .actual-laptop-stage:hover {
-  box-shadow: 0 35px 95px -15px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.15);
+  box-shadow: none;
 }
 
 .actual-laptop-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
   cursor: zoom-in;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
-  overflow: hidden;
+  border-radius: 0;
+  overflow: visible;
 }
 
 .actual-laptop-img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
   display: block;
-  transition: opacity 0.25s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.45));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+}
+
+[data-theme="dark"] .actual-laptop-img {
+  filter: drop-shadow(0 35px 70px rgba(0, 0, 0, 0.9));
 }
 
 .actual-laptop-frame:hover .actual-laptop-img {
+  transform: scale(1.025);
+  filter: drop-shadow(0 40px 85px rgba(0, 0, 0, 0.98));
+}
   transform: scale(1.02);
 }
 
@@ -8076,6 +8083,54 @@ body.splash-revealed .header {
 
 .tc-device-lightbox-modal.is-open .tc-lightbox-device-dialog {
   transform: scale(1) translateY(0);
+}
+
+/* Travis Cruz Laptop Image Mockup Presentation in Lightbox */
+.tc-travis-laptop-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tc-travis-laptop-img {
+  width: 100%;
+  height: auto;
+  max-height: 88vh;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 35px 80px rgba(0, 0, 0, 0.95));
+}
+
+.tc-laptop-screen-slot {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+}
+
+.tc-laptop-slot-frame {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(0 35px 80px rgba(0, 0, 0, 0.95));
+}
+
+.tc-laptop-slot-img {
+  position: absolute;
+  left: 18.72%;
+  top: 3.39%;
+  width: 71.56%;
+  height: 82.84%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+  background: #ffffff;
+  border-radius: 4px 4px 0 0;
 }
 
 /* MacBook Pro Device Frame */

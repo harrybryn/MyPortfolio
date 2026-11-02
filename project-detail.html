@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=127">
+    <link rel="stylesheet" href="styles.css?v=128">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -104,7 +104,7 @@
             <div class="actual-laptop-stage" id="laptopStageWrap">
                 <!-- Actual Laptop Frame Rendering Real Mockup -->
                 <div class="actual-laptop-frame" id="laptopMockup" tabindex="0" role="button" aria-label="Inspect Laptop Screen Fullscreen">
-                    <img src="assets/Ani-Grow/6.jpg" alt="Ani-Grow Web Dashboard on Laptop" class="actual-laptop-img" id="actualLaptopImg">
+                    <img src="assets/travis_laptop.png" alt="Ani-Grow Web Dashboard on MacBook" class="actual-laptop-img" id="actualLaptopImg">
                     <div class="pdetail-mockup-overlay">
                         <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Inspect System Fullscreen</span>
                     </div>
@@ -259,18 +259,12 @@
             <i data-lucide="x"></i>
         </button>
         <div class="cf-lightbox-dialog tc-lightbox-device-dialog">
-            <!-- MacBook Pro Mockup Frame (Desktop & Web Screens) -->
-            <div class="tc-modal-laptop" id="tcModalLaptop">
-                <div class="tc-laptop-lid">
-                    <div class="tc-laptop-notch">
-                        <span class="tc-laptop-camera"></span>
-                    </div>
-                    <div class="tc-laptop-screen">
-                        <img src="" alt="Project Screen Preview" id="pdetailLightboxImg" class="tc-laptop-screen-img">
-                    </div>
-                </div>
-                <div class="tc-laptop-base">
-                    <div class="tc-laptop-notch-thumb"></div>
+            <!-- Photorealistic Laptop Mockup from Travis Cruz -->
+            <div class="tc-travis-laptop-wrap" id="tcTravisLaptopWrap">
+                <img src="assets/travis_laptop.png" alt="Ani-Grow on MacBook" id="tcTravisLaptopImg" class="tc-travis-laptop-img">
+                <div class="tc-laptop-screen-slot" id="tcLaptopScreenSlot" style="display: none;">
+                    <img src="" alt="Screen Preview" id="pdetailLightboxImg" class="tc-laptop-slot-img">
+                    <img src="assets/travis_laptop_frame.png" alt="MacBook Frame" class="tc-laptop-slot-frame">
                 </div>
             </div>
 
@@ -628,7 +622,9 @@
             const lbBackdrop = document.getElementById('pdetailLightboxBackdrop');
             const lbClose = document.getElementById('pdetailLightboxClose');
             const lbImg = document.getElementById('pdetailLightboxImg');
-            const modalLaptop = document.getElementById('tcModalLaptop');
+            const travisLaptopWrap = document.getElementById('tcTravisLaptopWrap');
+            const travisLaptopImg = document.getElementById('tcTravisLaptopImg');
+            const laptopScreenSlot = document.getElementById('tcLaptopScreenSlot');
             const modalMobile = document.getElementById('tcModalMobile');
             const mobileLbImg = document.getElementById('pdetailMobileLightboxImg');
 
@@ -647,16 +643,29 @@
                 const isMobileScreen = isMobile || (src && (src.includes('hero_showcase') || src.includes('mobile')));
 
                 if (isMobileScreen) {
-                    if (modalLaptop) modalLaptop.style.display = 'none';
+                    if (travisLaptopWrap) travisLaptopWrap.style.display = 'none';
                     if (modalMobile) {
                         modalMobile.style.display = 'flex';
                         if (mobileLbImg) { mobileLbImg.src = cleanSrc; mobileLbImg.alt = title || 'Mobile Preview'; }
                     }
                 } else {
                     if (modalMobile) modalMobile.style.display = 'none';
-                    if (modalLaptop) {
-                        modalLaptop.style.display = 'flex';
-                        if (lbImg) { lbImg.src = cleanSrc; lbImg.alt = title || 'Laptop Screen Preview'; }
+                    if (travisLaptopWrap) {
+                        travisLaptopWrap.style.display = 'flex';
+
+                        // If it's the flagship dashboard screen or laptop showcase, use the exact travis_laptop.png image!
+                        const isFlagship = (cleanSrc === 'assets/anigrow_screen_1.png' || cleanSrc.includes('travis_laptop') || cleanSrc.includes('Ani-Grow/6.jpg'));
+
+                        if (isFlagship) {
+                            if (travisLaptopImg) travisLaptopImg.style.display = 'block';
+                            if (laptopScreenSlot) laptopScreenSlot.style.display = 'none';
+                        } else {
+                            if (travisLaptopImg) travisLaptopImg.style.display = 'none';
+                            if (laptopScreenSlot) {
+                                laptopScreenSlot.style.display = 'block';
+                                if (lbImg) { lbImg.src = cleanSrc; lbImg.alt = title || 'Screen Preview'; }
+                            }
+                        }
                     }
                 }
 
