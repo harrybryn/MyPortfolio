@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=128">
+    <link rel="stylesheet" href="styles.css?v=129">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -104,7 +104,7 @@
             <div class="actual-laptop-stage" id="laptopStageWrap">
                 <!-- Actual Laptop Frame Rendering Real Mockup -->
                 <div class="actual-laptop-frame" id="laptopMockup" tabindex="0" role="button" aria-label="Inspect Laptop Screen Fullscreen">
-                    <img src="assets/travis_laptop.png" alt="Ani-Grow Web Dashboard on MacBook" class="actual-laptop-img" id="actualLaptopImg">
+                    <img src="assets/Ani-Grow/6_nobg.png" alt="Ani-Grow Web Dashboard on Laptop" class="actual-laptop-img" id="actualLaptopImg">
                     <div class="pdetail-mockup-overlay">
                         <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Inspect System Fullscreen</span>
                     </div>
@@ -259,13 +259,9 @@
             <i data-lucide="x"></i>
         </button>
         <div class="cf-lightbox-dialog tc-lightbox-device-dialog">
-            <!-- Photorealistic Laptop Mockup from Travis Cruz -->
-            <div class="tc-travis-laptop-wrap" id="tcTravisLaptopWrap">
-                <img src="assets/travis_laptop.png" alt="Ani-Grow on MacBook" id="tcTravisLaptopImg" class="tc-travis-laptop-img">
-                <div class="tc-laptop-screen-slot" id="tcLaptopScreenSlot" style="display: none;">
-                    <img src="" alt="Screen Preview" id="pdetailLightboxImg" class="tc-laptop-slot-img">
-                    <img src="assets/travis_laptop_frame.png" alt="MacBook Frame" class="tc-laptop-slot-frame">
-                </div>
+            <!-- Project Transparent Laptop Showcase -->
+            <div class="tc-laptop-display-wrap" id="tcLaptopDisplayWrap">
+                <img src="assets/Ani-Grow/6_nobg.png" alt="Ani-Grow Laptop Preview" id="pdetailLightboxImg" class="tc-laptop-display-img">
             </div>
 
             <!-- Mobile Phone Mockup Frame (Mobile Screens) -->
@@ -338,7 +334,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=9"></script>
+    <script src="projects-data.js?v=11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -508,7 +504,7 @@
 
                     if (laptopMockup) {
                         laptopMockup.addEventListener('click', () => {
-                            openCustomLightbox('assets/anigrow_screen_1.png', `${project.shortTitle} — Farm Overview & Analytics`, 'FARM COMMAND', false);
+                            openCustomLightbox('assets/Ani-Grow/6_nobg.png', `${project.shortTitle} — Farm Overview & Analytics`, 'FARM COMMAND', false);
                         });
                     }
                 }
@@ -607,24 +603,12 @@
             const galleryGrid = document.getElementById('pdetailGalleryGrid');
             const galleryCount = document.getElementById('pdetailGalleryCount');
 
-            // Clean Screen Mapping for MacBook Frame
-            const SCREEN_CLEAN_MAP = {
-                'assets/Ani-Grow/6.jpg': 'assets/anigrow_screen_1.png',
-                'assets/Ani-Grow/2.jpg': 'assets/anigrow_screen_2.png',
-                'assets/Ani-Grow/3.jpg': 'assets/anigrow_screen_3.png',
-                'assets/Ani-Grow/4.jpg': 'assets/anigrow_screen_4.png',
-                'assets/Ani-Grow/5.jpg': 'assets/anigrow_screen_5.png',
-                'assets/Ani-Grow/1.jpg': 'assets/anigrow_screen_6.png'
-            };
-
             // Lightbox Elements
             const lbModal = document.getElementById('pdetailLightboxModal');
             const lbBackdrop = document.getElementById('pdetailLightboxBackdrop');
             const lbClose = document.getElementById('pdetailLightboxClose');
             const lbImg = document.getElementById('pdetailLightboxImg');
-            const travisLaptopWrap = document.getElementById('tcTravisLaptopWrap');
-            const travisLaptopImg = document.getElementById('tcTravisLaptopImg');
-            const laptopScreenSlot = document.getElementById('tcLaptopScreenSlot');
+            const laptopDisplayWrap = document.getElementById('tcLaptopDisplayWrap');
             const modalMobile = document.getElementById('tcModalMobile');
             const mobileLbImg = document.getElementById('pdetailMobileLightboxImg');
 
@@ -639,33 +623,19 @@
 
             function openCustomLightbox(src, title, badge, isMobile = false) {
                 if (!lbModal) return;
-                const cleanSrc = SCREEN_CLEAN_MAP[src] || src;
                 const isMobileScreen = isMobile || (src && (src.includes('hero_showcase') || src.includes('mobile')));
 
                 if (isMobileScreen) {
-                    if (travisLaptopWrap) travisLaptopWrap.style.display = 'none';
+                    if (laptopDisplayWrap) laptopDisplayWrap.style.display = 'none';
                     if (modalMobile) {
                         modalMobile.style.display = 'flex';
-                        if (mobileLbImg) { mobileLbImg.src = cleanSrc; mobileLbImg.alt = title || 'Mobile Preview'; }
+                        if (mobileLbImg) { mobileLbImg.src = src; mobileLbImg.alt = title || 'Mobile Preview'; }
                     }
                 } else {
                     if (modalMobile) modalMobile.style.display = 'none';
-                    if (travisLaptopWrap) {
-                        travisLaptopWrap.style.display = 'flex';
-
-                        // If it's the flagship dashboard screen or laptop showcase, use the exact travis_laptop.png image!
-                        const isFlagship = (cleanSrc === 'assets/anigrow_screen_1.png' || cleanSrc.includes('travis_laptop') || cleanSrc.includes('Ani-Grow/6.jpg'));
-
-                        if (isFlagship) {
-                            if (travisLaptopImg) travisLaptopImg.style.display = 'block';
-                            if (laptopScreenSlot) laptopScreenSlot.style.display = 'none';
-                        } else {
-                            if (travisLaptopImg) travisLaptopImg.style.display = 'none';
-                            if (laptopScreenSlot) {
-                                laptopScreenSlot.style.display = 'block';
-                                if (lbImg) { lbImg.src = cleanSrc; lbImg.alt = title || 'Screen Preview'; }
-                            }
-                        }
+                    if (laptopDisplayWrap) {
+                        laptopDisplayWrap.style.display = 'flex';
+                        if (lbImg) { lbImg.src = src; lbImg.alt = title || 'Laptop Screen Preview'; }
                     }
                 }
 

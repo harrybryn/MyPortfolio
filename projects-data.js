@@ -7,7 +7,7 @@ const PROJECTS_DATA = [
         title: 'Ani-Grow: AI-Powered Poultry & Livestock Farming Guide',
         shortTitle: 'Ani-Grow',
         logo: 'assets/anigrow_logo.png',
-        screen: 'assets/Ani-Grow/6.jpg',
+        screen: 'assets/Ani-Grow/6_nobg.png',
         category: 'Poultry & Livestock Guide',
         badge: 'Poultry & Livestock Analytics',
         accentColor: '#ededec',
@@ -74,7 +74,7 @@ const PROJECTS_DATA = [
                 title: 'Animal Management & Housing Units',
                 badge: 'Farm Command Center',
                 desc: 'Caretakers and administrators monitor housings, flock populations, and mortality records across Broiler and Swine pens.',
-                image: 'assets/Ani-Grow/6.jpg'
+                image: 'assets/Ani-Grow/6_nobg.png'
             },
             {
                 id: 'predictive-analytics',
@@ -82,7 +82,7 @@ const PROJECTS_DATA = [
                 title: 'Weight Forecast & Harvest Trajectory',
                 badge: 'Predictive Analytics',
                 desc: 'Continuous growth benchmark tracking against breed curves, predicting market-ready harvest dates and milestone variances.',
-                image: 'assets/Ani-Grow/2.jpg'
+                image: 'assets/Ani-Grow/2_nobg.png'
             },
             {
                 id: 'growth-distribution',
@@ -90,7 +90,7 @@ const PROJECTS_DATA = [
                 title: 'Distribution Trend & Growth Insights',
                 badge: 'Flock Telemetry',
                 desc: 'Headcount distribution across normal, underweight, and overweight categories with Average Daily Gain (ADG) calculations.',
-                image: 'assets/Ani-Grow/3.jpg'
+                image: 'assets/Ani-Grow/3_nobg.png'
             },
             {
                 id: 'ai-care-guide',
@@ -98,7 +98,7 @@ const PROJECTS_DATA = [
                 title: 'Actionable Guide & Lifecycle Roadmap',
                 badge: 'Claude API Intelligence',
                 desc: 'AI-tailored feeding ratios, temperature recommendations, and milestone guidelines customized to each batch lifecycle stage.',
-                image: 'assets/Ani-Grow/5.jpg'
+                image: 'assets/Ani-Grow/5_nobg.png'
             },
             {
                 id: 'weighing-history',
@@ -106,7 +106,7 @@ const PROJECTS_DATA = [
                 title: 'Weighing History & Scale Telemetry',
                 badge: 'IoT Machine Integration',
                 desc: 'Direct telemetry synchronization with load cell hardware scales, logging day-by-day weight logs and batch comparisons.',
-                image: 'assets/Ani-Grow/4.jpg'
+                image: 'assets/Ani-Grow/4_nobg.png'
             },
             {
                 id: 'biometric-report',
@@ -114,7 +114,7 @@ const PROJECTS_DATA = [
                 title: 'Official Biometric & Audit Report',
                 badge: 'Official Audit',
                 desc: 'Formatted export and print-ready biometric performance audit for compliance with San Miguel Foods grower standards.',
-                image: 'assets/Ani-Grow/1.jpg'
+                image: 'assets/Ani-Grow/1_nobg.png'
             },
             {
                 id: 'caretaker-mobile-app',

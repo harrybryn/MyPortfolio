@@ -7070,35 +7070,39 @@ html.theme-anim *::after {
 .tc-section-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   cursor: zoom-in;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1.25rem;
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.12);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 [data-theme="dark"] .tc-section-media {
-  background: #ffffff;
-  border-color: rgba(255, 255, 255, 0.12);
+  background: #0f1015;
+  border-color: rgba(255, 255, 255, 0.08);
   box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.6);
 }
 
 .tc-section-img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   object-fit: contain;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: block;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.35));
 }
 
 .tc-section-media:hover .tc-section-img {
-  transform: scale(1.025);
+  transform: scale(1.03);
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
 }
 
 .tc-section-media.is-mobile-media {
@@ -8085,152 +8089,24 @@ body.splash-revealed .header {
   transform: scale(1) translateY(0);
 }
 
-/* Travis Cruz Laptop Image Mockup Presentation in Lightbox */
-.tc-travis-laptop-wrap {
+/* Transparent Laptop Showcase Presentation in Lightbox */
+.tc-laptop-display-wrap {
   position: relative;
   width: 100%;
-  max-width: 980px;
+  max-width: 1060px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.tc-travis-laptop-img {
+.tc-laptop-display-img {
   width: 100%;
   height: auto;
   max-height: 88vh;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 35px 80px rgba(0, 0, 0, 0.95));
-}
-
-.tc-laptop-screen-slot {
-  position: relative;
-  width: 100%;
-  max-width: 980px;
-}
-
-.tc-laptop-slot-frame {
-  position: relative;
-  width: 100%;
-  height: auto;
-  display: block;
-  z-index: 2;
-  pointer-events: none;
-  filter: drop-shadow(0 35px 80px rgba(0, 0, 0, 0.95));
-}
-
-.tc-laptop-slot-img {
-  position: absolute;
-  left: 18.72%;
-  top: 3.39%;
-  width: 71.56%;
-  height: 82.84%;
-  object-fit: cover;
-  object-position: top center;
-  z-index: 1;
-  background: #ffffff;
-  border-radius: 4px 4px 0 0;
-}
-
-/* MacBook Pro Device Frame */
-.tc-modal-laptop {
-  position: relative;
-  width: 100%;
-  max-width: 1040px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* MacBook Lid / Display */
-.tc-laptop-lid {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  background: #0f1014;
-  border: 2px solid #282a32;
-  border-bottom: none;
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0 0 0 1px #08090b, inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-  padding: 12px 12px 0 12px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-
-/* MacBook Camera Notch */
-.tc-laptop-notch {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 128px;
-  height: 18px;
-  background: #0f1014;
-  border-radius: 0 0 8px 8px;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tc-laptop-camera {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #172033;
-  box-shadow: 0 0 2px rgba(80, 140, 255, 0.35);
-  margin-top: -2px;
-}
-
-/* Inner Screen */
-.tc-laptop-screen {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px 8px 0 0;
-  overflow: hidden;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tc-laptop-screen-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: top center;
-  display: block;
-}
-
-/* MacBook Aluminum Lower Base */
-.tc-laptop-base {
-  position: relative;
-  width: calc(100% + 26px);
-  margin-left: -13px;
-  margin-right: -13px;
-  height: 16px;
-  background: linear-gradient(180deg, #32353e 0%, #22242a 45%, #151619 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-top: none;
-  border-radius: 0 0 16px 16px;
-  box-shadow: 0 35px 85px -15px rgba(0, 0, 0, 0.95), 0 15px 35px rgba(0, 0, 0, 0.85);
-}
-
-/* Base Opening Thumb Groove */
-.tc-laptop-notch-thumb {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 110px;
-  height: 5px;
-  background: #0d0e12;
-  border-radius: 0 0 6px 6px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-top: none;
+  filter: drop-shadow(0 35px 85px rgba(0, 0, 0, 0.95));
+  transition: transform 0.3s ease;
 }
 
 /* Mobile Phone Mockup in Lightbox */
