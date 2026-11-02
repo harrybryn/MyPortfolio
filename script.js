@@ -129,19 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Skip on click or Escape
-        splash.addEventListener('click', () => {
-            if (!isComplete) finishAndReveal();
-        });
-
-        window.addEventListener('keydown', (e) => {
-            if ((e.key === 'Escape' || e.key === ' ') && !isComplete) {
-                finishAndReveal();
-            } else if ((e.key === 'r' || e.key === 'R') && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
-                window.replaySplashScreen();
-            }
-        });
-
         // Start initial sequence
         window.replaySplashScreen(currentPresetKey);
     })();
