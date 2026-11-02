@@ -17,7 +17,7 @@ const PROJECTS_DATA = [
         tagline: 'AI-Powered Poultry and Livestock Farming Guide with Data Analytics',
         client: 'Golden Nutriharvest, Inc. (San Miguel Foods Grower Partner)',
         repoUrl: 'https://github.com/harrybryn',
-        siteUrl: 'https://anigrow.vercel.app',
+        siteUrl: '',
         roles: ['Thesis', 'IoT Hardware', 'Mobile App Development', 'Web Dashboard', 'AI Integration', 'Capstone'],
         overviewHeadline: 'Farming with Data, Not Guesswork',
         overviewDesc: 'Contributed to the design and development of an AI-powered poultry and livestock farming guide for Golden Nutriharvest, Inc., a San Miguel Foods grower partner with over 15 years in the industry. The system combines IoT prototypes, an Android app for caretakers, and a web dashboard for farm administrators. A project grounded in on-site research, hardware prototyping, and expert evaluation.',

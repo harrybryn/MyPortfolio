@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=123">
+    <link rel="stylesheet" href="styles.css?v=124">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -91,10 +91,6 @@
                 </div>
 
                 <div class="pdetail-quick-actions">
-                    <a href="https://anigrow.vercel.app" id="pdetailLiveSiteBtn" target="_blank" rel="noopener noreferrer" class="pdetail-inquire-btn" style="display: none; background: var(--surface-hover); color: var(--text-main); border: 1px solid var(--border);">
-                        <span>Live Demo</span>
-                        <i data-lucide="external-link"></i>
-                    </a>
                     <button type="button" class="pdetail-inquire-btn open-contact-modal">
                         <span>Inquire about project</span>
                         <i data-lucide="arrow-right"></i>
@@ -288,22 +284,12 @@
                     </div>
                 </div>
                 <div class="cf-lightbox-actions">
-                    <a href="" id="pdetailLightboxLive" target="_blank" rel="noopener noreferrer" class="cf-lightbox-btn">
-                        <span>Open Live Demo</span>
-                        <i data-lucide="external-link"></i>
-                    </a>
                     <button type="button" id="pdetailLightboxClose" class="cf-lightbox-close" aria-label="Close Preview">
                         <i data-lucide="x"></i>
                     </button>
                 </div>
             </div>
             <div class="cf-lightbox-body">
-                <div class="cf-lightbox-browser-bar">
-                    <span class="cf-mockup-dot"></span>
-                    <span class="cf-mockup-dot"></span>
-                    <span class="cf-mockup-dot"></span>
-                    <span id="pdetailLightboxUrl" class="cf-lightbox-url">https://anigrow.vercel.app</span>
-                </div>
                 <div class="cf-lightbox-img-wrap">
                     <img src="" alt="Project Full Screen Preview" id="pdetailLightboxImg" class="cf-lightbox-img">
                 </div>
@@ -371,7 +357,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=6"></script>
+    <script src="projects-data.js?v=7"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -481,12 +467,6 @@
                 taglineEl.textContent = project.tagline;
                 taglineEl.style.display = 'block';
             }
-            const liveBtn = document.getElementById('pdetailLiveSiteBtn');
-            if (liveBtn && project.siteUrl && project.siteUrl.startsWith('http')) {
-                liveBtn.href = project.siteUrl;
-                liveBtn.style.display = 'inline-flex';
-            }
-
             // Role Pills (Thesis, IoT, Mobile Development, etc.)
             const rolesRow = document.getElementById('tcRolesRow');
             if (rolesRow && Array.isArray(project.roles) && project.roles.length > 0) {
@@ -673,8 +653,6 @@
             const lbTitle = document.getElementById('pdetailLightboxTitle');
             const lbSub = document.getElementById('pdetailLightboxSub');
             const lbLogo = document.getElementById('pdetailLightboxLogo');
-            const lbUrl = document.getElementById('pdetailLightboxUrl');
-            const lbLive = document.getElementById('pdetailLightboxLive');
 
             let currentScreenIdx = 0;
 
@@ -686,12 +664,6 @@
                 if (lbTitle) lbTitle.textContent = `${sc.title} — ${project.shortTitle}`;
                 if (lbSub) lbSub.textContent = sc.badge || project.badge;
                 if (lbLogo) lbLogo.src = project.logo;
-                const url = project.siteUrl || project.url || 'https://anigrow.vercel.app';
-                if (lbUrl) lbUrl.textContent = url;
-                if (lbLive) {
-                    lbLive.href = url;
-                    lbLive.style.display = url.startsWith('http') ? 'inline-flex' : 'none';
-                }
                 lbModal.classList.add('is-open');
                 lbModal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
@@ -704,12 +676,6 @@
                 if (lbTitle) lbTitle.textContent = title;
                 if (lbSub) lbSub.textContent = badge || project.badge;
                 if (lbLogo) lbLogo.src = project.logo;
-                const url = project.siteUrl || project.url || 'https://anigrow.vercel.app';
-                if (lbUrl) lbUrl.textContent = url;
-                if (lbLive) {
-                    lbLive.href = url;
-                    lbLive.style.display = url.startsWith('http') ? 'inline-flex' : 'none';
-                }
                 lbModal.classList.add('is-open');
                 lbModal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';

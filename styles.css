@@ -6918,20 +6918,17 @@ html.theme-anim *::after {
 
 /* Overview Narrative Box */
 .tc-overview-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 2.25rem 2.5rem;
-  margin-bottom: 3rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-}
-
-[data-theme="dark"] .tc-overview-card {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-top: 1.5rem;
+  margin-bottom: 3.5rem;
+  box-shadow: none;
 }
 
 .tc-headline {
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
   font-weight: 700;
   color: var(--text-main);
   letter-spacing: -0.025em;
@@ -6940,18 +6937,19 @@ html.theme-anim *::after {
 }
 
 .tc-narrative {
-  font-size: 1.02rem;
-  line-height: 1.75;
+  font-size: 1.05rem;
+  line-height: 1.8;
   color: var(--text-muted);
+  max-width: 880px;
 }
 
 /* The Challenge Callout Box */
 .tc-challenge-box {
-  background: var(--surface-hover);
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 4px solid var(--accent-green, #10b981);
-  border-radius: 14px;
-  padding: 1.5rem 1.85rem;
+  border-left: 3px solid var(--accent-green, #10b981);
+  border-radius: 12px;
+  padding: 1.35rem 1.75rem;
   margin-bottom: 3.5rem;
 }
 
@@ -6974,29 +6972,29 @@ html.theme-anim *::after {
   color: var(--text-main);
 }
 
-/* Section-by-Section Walkthrough */
+/* Section-by-Section Walkthrough (Unboxed & Simple Like Travis Cruz) */
 .tc-sections-container {
   display: flex;
   flex-direction: column;
-  gap: 3.5rem;
-  margin-bottom: 4rem;
+  gap: 5rem;
+  margin-top: 3.5rem;
+  margin-bottom: 5.5rem;
 }
 
 .tc-section-item {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 3.5rem;
   align-items: center;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
-  padding: 2rem;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
 }
 
 .tc-section-item:nth-child(even) {
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 1.25fr 1fr;
 }
 
 .tc-section-item:nth-child(even) .tc-section-content {
@@ -7008,10 +7006,13 @@ html.theme-anim *::after {
 }
 
 @media (max-width: 900px) {
+  .tc-sections-container {
+    gap: 3.5rem;
+  }
   .tc-section-item,
   .tc-section-item:nth-child(even) {
     grid-template-columns: 1fr;
-    padding: 1.5rem;
+    padding: 0;
     gap: 1.5rem;
   }
   .tc-section-item:nth-child(even) .tc-section-content {
@@ -7023,8 +7024,8 @@ html.theme-anim *::after {
 }
 
 .tc-section-item:hover {
-  border-color: var(--border-hover);
-  box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.25);
+  border-color: transparent;
+  box-shadow: none;
 }
 
 .tc-section-badge-row {
@@ -7116,11 +7117,15 @@ html.theme-anim *::after {
 
 /* Built With Chip Grid */
 .tc-built-with-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 2.25rem;
-  margin-bottom: 3.5rem;
+/* Built With Chip Grid (Unboxed) */
+.tc-built-with-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-top: 3.5rem;
+  margin-bottom: 4rem;
+  box-shadow: none;
 }
 
 .tc-chips-grid {
@@ -7136,9 +7141,9 @@ html.theme-anim *::after {
   gap: 0.4rem;
   font-family: var(--font-mono);
   font-size: 0.76rem;
-  padding: 0.4rem 0.85rem;
+  padding: 0.45rem 0.9rem;
   border-radius: 8px;
-  background: var(--surface-hover);
+  background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text-main);
   transition: all 0.2s ease;
@@ -7149,18 +7154,14 @@ html.theme-anim *::after {
   transform: translateY(-1px);
 }
 
-/* The Outcome Section */
+/* The Outcome Section (Unboxed) */
 .tc-outcome-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 2.5rem;
-  margin-bottom: 4rem;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
-}
-
-[data-theme="dark"] .tc-outcome-card {
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 4.5rem;
+  box-shadow: none;
 }
 
 .tc-outcome-grid {
