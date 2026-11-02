@@ -6970,7 +6970,119 @@ body.splash-locked {
   margin-bottom: 2.4rem;
 }
 
-/* Iconic Bold Rounded Mark (Matches reference screenshot 1:1) */
+/* ==========================================================================
+   Full Name -> 2 Letters (HS) Morphing Transition
+   ========================================================================== */
+.splash-morph-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-family: 'Outfit', 'Plus Jakarta Sans', var(--font-main);
+  font-size: clamp(2.1rem, 5.6vw, 3.5rem);
+  line-height: 1;
+  position: relative;
+  transform-origin: center center;
+  transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1),
+              letter-spacing 0.85s cubic-bezier(0.76, 0, 0.24, 1),
+              margin 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+  animation: splashNameEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes splashNameEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.splash-morph-word {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.splash-char-lead {
+  display: inline-block;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f8fafc 20%,
+    #cbd5e1 45%,
+    #94a3b8 65%,
+    #cbd5e1 85%,
+    #ffffff 100%
+  );
+  background-size: 240% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.22))
+          drop-shadow(0 4px 14px rgba(0, 0, 0, 0.95));
+  transition: letter-spacing 0.85s cubic-bezier(0.76, 0, 0.24, 1),
+              filter 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.splash-chars-tail {
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 240px;
+  color: #e2e8f0;
+  opacity: 0.95;
+  transition: max-width 0.82s cubic-bezier(0.76, 0, 0.24, 1),
+              opacity 0.6s ease,
+              filter 0.6s ease,
+              transform 0.82s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.splash-morph-space {
+  display: inline-block;
+  width: clamp(14px, 2.4vw, 24px);
+  transition: width 0.82s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Collapsed State: "HARRY SEVILLA" collapses into the bold "HS" Emblem */
+.splash-morph-wrap.is-collapsed {
+  transform: scale(1.92);
+  margin-left: 0.18em; /* Optical centering for letter-spacing */
+}
+
+.splash-morph-wrap.is-collapsed .splash-chars-tail {
+  max-width: 0 !important;
+  opacity: 0 !important;
+  filter: blur(10px) !important;
+  transform: scaleX(0.2) translateY(-2px) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.splash-morph-space.is-collapsed,
+.splash-morph-wrap.is-collapsed .splash-morph-space {
+  width: 0 !important;
+  margin: 0 !important;
+}
+
+.splash-morph-wrap.is-collapsed .splash-char-lead {
+  letter-spacing: 0.18em;
+  filter: drop-shadow(0 0 34px rgba(255, 255, 255, 0.38))
+          drop-shadow(0 4px 18px rgba(0, 0, 0, 0.95));
+  animation: splashSheen 3.4s ease-in-out infinite;
+}
+
+/* Iconic Bold Rounded Mark (Fallback / Direct) */
 .splash-brand-mark {
   font-family: 'Outfit', 'Plus Jakarta Sans', var(--font-main);
   font-weight: 800;

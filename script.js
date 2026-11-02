@@ -6,17 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const splash = document.getElementById('splashScreen');
         if (!splash) return;
 
+        const morphWrap = document.getElementById('splashMorphWrap');
         const progressBar = document.getElementById('splashProgressBar');
         const counterEl = document.getElementById('splashCounter');
         const statusText = document.getElementById('splashStatusText');
-        const markText = document.getElementById('splashMarkText');
-        const taglineEl = document.getElementById('splashTagline');
         const replayBtn = document.getElementById('splashReplayBtn');
-        const replayPill = document.getElementById('splashReplayPill');
-        const toggleBtns = document.querySelectorAll('.splash-toggle-btn');
 
-        const STORAGE_MARK_KEY = 'portfolio-splash-mark';
-        const DURATION = 1350; // Total count-up duration in ms
+        const DURATION = 1650; // Total count-up duration in ms
+        const MORPH_COLLAPSE_DELAY = 550; // Delay before full name collapses into 2 letters (HS)
         let isAnimating = false;
         let isComplete = false;
         let animFrameId = null;
@@ -31,62 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Get saved mark preference: default to 'HS', also supports 'XRD'
-        function getSavedMark() {
-            try {
-                const saved = localStorage.getItem(STORAGE_MARK_KEY);
-                return (saved === 'XRD' || saved === 'HS') ? saved : 'HS';
-            } catch (e) {
-                return 'HS';
-            }
-        }
-
-        function setMark(mark, shouldReplay = false) {
-            try {
-                localStorage.setItem(STORAGE_MARK_KEY, mark);
-            } catch (e) {}
-
-            if (markText) {
-                markText.textContent = mark;
-            }
-
-            if (taglineEl) {
-                if (mark === 'XRD') {
-                    taglineEl.innerHTML = `
-                        <span class="splash-tagline-name">XRD Studio</span>
-                        <span class="splash-tagline-dot"></span>
-                        <span class="splash-tagline-role">Creative Engineering</span>
-                    `;
-                } else {
-                    taglineEl.innerHTML = `
-                        <span class="splash-tagline-name">Harry Sevilla</span>
-                        <span class="splash-tagline-dot"></span>
-                        <span class="splash-tagline-role">Full-Stack Developer</span>
-                    `;
-                }
-            }
-
-            toggleBtns.forEach(btn => {
-                btn.classList.toggle('is-active', btn.getAttribute('data-mark') === mark);
-            });
-
-            if (shouldReplay) {
-                window.replaySplashScreen();
-            }
-        }
-
-        // Sync initial mark
-        setMark(getSavedMark(), false);
-
-        // Attach listeners to toggle buttons
-        toggleBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const chosen = btn.getAttribute('data-mark');
-                setMark(chosen, true);
-            });
-        });
-
         if (replayBtn) {
             replayBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -99,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
             isComplete = true;
             isAnimating = false;
             clearScheduledTimeouts();
+
+            // Ensure collapsed state into 2 letters
+            if (morphWrap) morphWrap.classList.add('is-collapsed');
 
             // Fast-forward counter & progress
             if (progressBar) progressBar.style.width = '100%';
@@ -120,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.body.classList.remove('splash-locked', 'splash-pending-reveal');
                     }, 880));
                 }, 160));
-            }, 120));
+            }, 180));
         }
 
         function runSequence() {
@@ -134,9 +78,21 @@ document.addEventListener('DOMContentLoaded', () => {
             splash.classList.remove('is-hidden', 'is-exiting', 'is-lifting');
             splash.style.display = 'flex';
 
+            // Reset morph: Show full name "HARRY SEVILLA"
+            if (morphWrap) {
+                morphWrap.classList.remove('is-collapsed');
+            }
+
             if (progressBar) progressBar.style.width = '0%';
             if (counterEl) counterEl.textContent = '00%';
-            if (statusText) statusText.textContent = 'INITIALIZING SYSTEM';
+            if (statusText) statusText.textContent = 'HARRY SEVILLA';
+
+            // Schedule the collapse: Full Name -> 2 Letters (HS)
+            timeouts.push(setTimeout(() => {
+                if (morphWrap && !isComplete) {
+                    morphWrap.classList.add('is-collapsed');
+                }
+            }, MORPH_COLLAPSE_DELAY));
 
             const start = performance.now();
 
@@ -154,12 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (counterEl) counterEl.textContent = String(currentPct).padStart(2, '0') + '%';
 
                 if (statusText) {
-                    if (currentPct < 32) {
+                    if (currentPct < 35) {
+                        statusText.textContent = 'HARRY SEVILLA';
+                    } else if (currentPct < 75) {
                         statusText.textContent = 'INITIALIZING SYSTEM';
-                    } else if (currentPct < 68) {
-                        statusText.textContent = 'SYNCING ASSETS';
                     } else if (currentPct < 96) {
-                        statusText.textContent = 'HARRY SEVILLA // 2026';
+                        statusText.textContent = 'HS // PORTFOLIO';
                     } else {
                         statusText.textContent = 'SYSTEM READY';
                     }
