@@ -35,7 +35,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=112">
+    <link rel="stylesheet" href="styles.css?v=113">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -47,6 +47,10 @@
          ===================================================================== -->
     <div id="splashScreen" class="splash-screen" role="dialog" aria-modal="true" aria-label="Loading portfolio">
         <div class="splash-audiowide-center">
+            <!-- Logo: visible only during the collapsed HS phase -->
+            <div class="splash-logo-wrap" id="splashLogoWrap">
+                <img src="assets/logo.png" alt="HS Logo" class="splash-logo-img" draggable="false">
+            </div>
             <div id="splashLetterContainer" class="splash-letter-container">
                 <span class="xrd-char is-initial">H</span>
                 <span class="xrd-char">A</span>
