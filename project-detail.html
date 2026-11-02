@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=124">
+    <link rel="stylesheet" href="styles.css?v=125">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -245,17 +245,6 @@
             </div>
         </section>
 
-        <!-- Project Next/Prev Navigation -->
-        <nav class="tc-project-nav" id="tcProjectNav" style="display: none;">
-            <a href="#" class="tc-nav-card" id="tcPrevProjectLink">
-                <span class="tc-nav-dir"><i data-lucide="arrow-left"></i> Previous Project</span>
-                <strong class="tc-nav-title" id="tcPrevProjectTitle"></strong>
-            </a>
-            <a href="#" class="tc-nav-card" id="tcNextProjectLink" style="text-align: right;">
-                <span class="tc-nav-dir" style="justify-content: flex-end;">Next Project <i data-lucide="arrow-right"></i></span>
-                <strong class="tc-nav-title" id="tcNextProjectTitle"></strong>
-            </a>
-        </nav>
 
         <!-- Footer -->
         <footer class="subpage-footer">
@@ -357,7 +346,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=7"></script>
+    <script src="projects-data.js?v=8"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -517,11 +506,6 @@
             const outcomeGrid = document.getElementById('tcOutcomeGrid');
             const outcomeNarrative = document.getElementById('tcOutcomeNarrative');
             const standardGrid = document.getElementById('pdetailStandardGrid');
-            const projectNav = document.getElementById('tcProjectNav');
-            const prevLink = document.getElementById('tcPrevProjectLink');
-            const prevTitle = document.getElementById('tcPrevProjectTitle');
-            const nextLink = document.getElementById('tcNextProjectLink');
-            const nextTitle = document.getElementById('tcNextProjectTitle');
 
             if (isCaseStudy) {
                 if (standardGrid) standardGrid.style.display = 'none';
@@ -610,21 +594,6 @@
                     }
                     if (outcomeNarrative) outcomeNarrative.textContent = project.outcome.narrative;
                 }
-
-                // Project Pagination
-                if (projectNav) {
-                    projectNav.style.display = 'grid';
-                    const prevProj = PROJECTS_DATA[(currentIndex - 1 + PROJECTS_DATA.length) % PROJECTS_DATA.length];
-                    const nextProj = PROJECTS_DATA[(currentIndex + 1) % PROJECTS_DATA.length];
-                    if (prevLink && prevProj) {
-                        prevLink.href = `project-detail.html?id=${prevProj.id}`;
-                        if (prevTitle) prevTitle.textContent = prevProj.shortTitle || prevProj.title;
-                    }
-                    if (nextLink && nextProj) {
-                        nextLink.href = `project-detail.html?id=${nextProj.id}`;
-                        if (nextTitle) nextTitle.textContent = nextProj.shortTitle || nextProj.title;
-                    }
-                }
             } else {
                 if (heroShowcase) heroShowcase.style.display = 'none';
                 if (sectionsContainer) sectionsContainer.style.display = 'none';
@@ -633,7 +602,6 @@
                 if (challengeBox) challengeBox.style.display = 'none';
                 if (builtWithCard) builtWithCard.style.display = 'none';
                 if (outcomeCard) outcomeCard.style.display = 'none';
-                if (projectNav) projectNav.style.display = 'none';
             }
 
             // ── Screenshots & Gallery Engine ──────────────────────────────────

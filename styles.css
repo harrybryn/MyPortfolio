@@ -7213,55 +7213,6 @@ html.theme-anim *::after {
   color: var(--text-muted);
 }
 
-/* Project Next/Prev Pagination Footer */
-.tc-project-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 3rem;
-  margin-bottom: 4rem;
-}
-
-@media (max-width: 640px) {
-  .tc-project-nav {
-    grid-template-columns: 1fr;
-  }
-}
-
-.tc-nav-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.tc-nav-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.tc-nav-dir {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--text-subtle);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.tc-nav-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-main);
-}
 
 /* ==========================================================================
    ACTUAL LAPTOP + MOBILE DEVICE SHOWCASE
