@@ -7,27 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!splash) return;
 
         const container = document.getElementById('splashLetterContainer');
-        const replayBtn = document.getElementById('splashReplayBtn');
-        const toggleBtns = document.querySelectorAll('.splash-toggle-btn');
 
-        // Presets: Harry Sevilla (HS) and Xyrus Rex Darcen (XRD)
-        const PRESETS = {
-            HS: {
-                name: "HARRY SEVILLA",
-                initials: [0, 6] // 'H' at 0, 'S' at 6
-            },
-            XRD: {
-                name: "XYRUS REX DARCEN",
-                initials: [0, 6, 10] // 'X' at 0, 'R' at 6, 'D' at 10
-            }
-        };
-
-        const STORAGE_KEY = 'portfolio-splash-preset';
-        let currentPresetKey = 'HS';
-        try {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved === 'XRD' || saved === 'HS') currentPresetKey = saved;
-        } catch (e) {}
+        const NAME = "HARRY SEVILLA";
+        const INITIALS = [0, 6]; // 'H' at 0, 'S' at 6
 
         let timeouts = [];
         let isComplete = false;
@@ -37,13 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
             timeouts = [];
         }
 
-        function renderLetters(presetKey) {
+        function renderLetters() {
             if (!container) return;
-            const preset = PRESETS[presetKey] || PRESETS.HS;
             container.innerHTML = '';
-
-            preset.name.split('').forEach((char, i) => {
-                const isInitial = preset.initials.includes(i);
+            NAME.split('').forEach((char, i) => {
+                const isInitial = INITIALS.includes(i);
                 const isSpace = char === ' ';
                 const span = document.createElement('span');
                 span.className = 'xrd-char' + (isInitial ? ' is-initial' : '') + (isSpace ? ' is-space' : '');
@@ -52,20 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        function finishAndReveal() {
-            if (isComplete) return;
-            isComplete = true;
-            clearScheduledTimeouts();
-
-            splash.classList.add('step-reveal', 'step-collapsed', 'step-fadeout');
-            timeouts.push(setTimeout(() => {
-                splash.classList.add('is-hidden');
-                document.body.classList.remove('splash-locked', 'splash-pending-reveal');
-                document.body.classList.add('splash-revealed');
-            }, 500));
-        }
-
-        function runSequence(presetKey = currentPresetKey) {
+        function runSequence() {
             clearScheduledTimeouts();
             isComplete = false;
 
@@ -74,14 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
             splash.classList.remove('is-hidden', 'step-reveal', 'step-collapsed', 'step-fadeout');
             splash.style.display = 'flex';
 
-            renderLetters(presetKey);
+            renderLetters();
 
             // Step 1: Fade in full name (300ms)
             timeouts.push(setTimeout(() => {
                 if (!isComplete) splash.classList.add('step-reveal');
             }, 300));
 
-            // Step 2: Collapse into initials (2200ms) - matching xyrusdarcen.com
+            // Step 2: Collapse into initials (2200ms)
             timeouts.push(setTimeout(() => {
                 if (!isComplete) splash.classList.add('step-collapsed');
             }, 2200));
@@ -104,33 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 5600));
         }
 
-        // Global replay function
-        window.replaySplashScreen = function (key) {
-            if (key) {
-                currentPresetKey = key;
-                try { localStorage.setItem(STORAGE_KEY, key); } catch(e) {}
-            }
-            toggleBtns.forEach(b => b.classList.toggle('is-active', b.getAttribute('data-preset') === currentPresetKey));
-            runSequence(currentPresetKey);
-        };
-
-        if (replayBtn) {
-            replayBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                window.replaySplashScreen();
-            });
-        }
-
-        toggleBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const key = btn.getAttribute('data-preset');
-                window.replaySplashScreen(key);
-            });
-        });
-
-        // Start initial sequence
-        window.replaySplashScreen(currentPresetKey);
+        // Start sequence
+        runSequence();
     })();
 
     // ── 1. 3-Option Theme Controller with Bryl Lim Circular Wipe Animation ──
