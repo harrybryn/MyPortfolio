@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
             badge: 'Poultry & Livestock Analytics',
             year: '2026',
             logo: 'assets/anigrow_logo.png',
-            screen: 'assets/screen_anigrow.png',
+            screen: 'assets/anigrow_screen_1.png',
             url: 'https://anigrow.vercel.app',
             statusText: 'Live Web & Mobile · IoT Connected',
             desc: 'A mobile application that helps farm animal caretakers manage poultry and livestock operations using AI guidance and data analytics. Supports and integrates with custom IoT machines for weight-based segregation and automated feeding of farm animals.',

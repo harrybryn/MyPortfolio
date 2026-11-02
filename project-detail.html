@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=105">
+    <link rel="stylesheet" href="styles.css?v=119">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -97,9 +97,54 @@
             </div>
         </section>
 
-        <!-- Main Screen Showcase Frame (TBA / Placeholder) -->
-        <section class="pdetail-showcase-section">
-            <div class="pdetail-mockup-frame pdetail-mockup-placeholder">
+        <!-- Main Screen Showcase Frame -->
+        <section class="pdetail-showcase-section" id="pdetailShowcaseSection">
+            <!-- Active Showcase Frame (if screenshots exist) -->
+            <div class="pdetail-mockup-frame" id="pdetailActiveFrame" style="display: none;">
+                <div class="pdetail-browser-bar">
+                    <div class="pdetail-browser-dots">
+                        <span class="browser-dot dot-red"></span>
+                        <span class="browser-dot dot-yellow"></span>
+                        <span class="browser-dot dot-green"></span>
+                    </div>
+                    <div class="pdetail-browser-url">
+                        <i data-lucide="lock" class="pdetail-url-lock"></i>
+                        <span id="pdetailShowcaseUrl">https://anigrow.vercel.app</span>
+                    </div>
+                    <div class="pdetail-browser-counter" id="pdetailScreenCounter">
+                        <span>Screen 01 / 06</span>
+                    </div>
+                </div>
+
+                <div class="pdetail-mockup-viewport" id="pdetailMockupViewport" tabindex="0" role="button" aria-label="Click to enlarge screenshot in full resolution">
+                    <img src="" alt="Project Interface Capture" class="pdetail-mockup-img" id="pdetailShowcaseImg">
+                    
+                    <div class="pdetail-mockup-nav">
+                        <button type="button" class="pdetail-nav-arrow pdetail-nav-prev" id="pdetailPrevScreenBtn" aria-label="Previous screenshot">
+                            <i data-lucide="chevron-left"></i>
+                        </button>
+                        <button type="button" class="pdetail-nav-arrow pdetail-nav-next" id="pdetailNextScreenBtn" aria-label="Next screenshot">
+                            <i data-lucide="chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="pdetail-mockup-overlay">
+                        <div class="pdetail-screen-caption" id="pdetailScreenCaption">
+                            <strong id="pdetailScreenTitle">Dashboard Overview</strong>
+                            <span id="pdetailScreenDesc">Telemetry monitoring and farm overview metrics.</span>
+                        </div>
+                        <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thumbnail selector strip -->
+            <div class="pdetail-thumbs-strip" id="pdetailThumbsStrip" style="display: none;">
+                <!-- Populated dynamically -->
+            </div>
+
+            <!-- Placeholder Frame (if no screenshots exist) -->
+            <div class="pdetail-mockup-frame pdetail-mockup-placeholder" id="pdetailPlaceholderFrame">
                 <div class="pdetail-tba-container">
                     <div class="pdetail-tba-badge">
                         <span class="pdetail-tba-dot"></span>
@@ -182,6 +227,20 @@
         </section>
 
 
+        <!-- Dedicated Screenshots Gallery Grid Section -->
+        <section class="pdetail-gallery-section" id="pdetailGallerySection" style="display: none;">
+            <div class="pdetail-gallery-header">
+                <div>
+                    <h2 class="pdetail-section-label" style="margin-bottom: 0.25rem;">System Interface Captures &amp; Telemetry Screens</h2>
+                    <p style="font-size: 0.85rem; color: var(--text-subtle);">Click any preview card to inspect in full 1080p high resolution.</p>
+                </div>
+                <span class="pdetail-gallery-count" id="pdetailGalleryCount">6 High-Resolution Captures</span>
+            </div>
+            <div class="pdetail-gallery-grid" id="pdetailGalleryGrid">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer class="subpage-footer">
             <span class="footer-copy">© 2026 Harry Sevilla · Full-Stack Developer</span>
@@ -195,6 +254,42 @@
         </footer>
     </div>
 
+
+    <!-- Project Screen Lightbox Modal -->
+    <div class="cf-lightbox-modal" id="pdetailLightboxModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pdetailLightboxTitle">
+        <div class="cf-lightbox-backdrop" id="pdetailLightboxBackdrop"></div>
+        <div class="cf-lightbox-dialog">
+            <div class="cf-lightbox-header">
+                <div class="cf-lightbox-title-box">
+                    <img src="" alt="" id="pdetailLightboxLogo" class="cf-lightbox-logo">
+                    <div>
+                        <h3 id="pdetailLightboxTitle" class="cf-lightbox-title">Screen Title</h3>
+                        <span id="pdetailLightboxSub" class="cf-lightbox-sub">Poultry &amp; Livestock Analytics</span>
+                    </div>
+                </div>
+                <div class="cf-lightbox-actions">
+                    <a href="" id="pdetailLightboxLive" target="_blank" rel="noopener noreferrer" class="cf-lightbox-btn">
+                        <span>Open Live Demo</span>
+                        <i data-lucide="external-link"></i>
+                    </a>
+                    <button type="button" id="pdetailLightboxClose" class="cf-lightbox-close" aria-label="Close Preview">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="cf-lightbox-body">
+                <div class="cf-lightbox-browser-bar">
+                    <span class="cf-mockup-dot"></span>
+                    <span class="cf-mockup-dot"></span>
+                    <span class="cf-mockup-dot"></span>
+                    <span id="pdetailLightboxUrl" class="cf-lightbox-url">https://anigrow.vercel.app</span>
+                </div>
+                <div class="cf-lightbox-img-wrap">
+                    <img src="" alt="Project Full Screen Preview" id="pdetailLightboxImg" class="cf-lightbox-img">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Contact Modal Dialog -->
     <div class="contact-modal" id="contactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
@@ -256,7 +351,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=1"></script>
+    <script src="projects-data.js?v=2"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -383,6 +478,184 @@
             const tagsWrap = document.getElementById('pdetailTags');
             tagsWrap.innerHTML = project.tags.map(t => `<span class="tag">${t}</span>`).join('');
 
+            // ── Screenshots & Gallery Engine ──────────────────────────────────
+            const hasScreenshots = Array.isArray(project.screenshots) && project.screenshots.length > 0;
+            const activeFrame = document.getElementById('pdetailActiveFrame');
+            const placeholderFrame = document.getElementById('pdetailPlaceholderFrame');
+            const thumbsStrip = document.getElementById('pdetailThumbsStrip');
+            const gallerySection = document.getElementById('pdetailGallerySection');
+            const galleryGrid = document.getElementById('pdetailGalleryGrid');
+            const galleryCount = document.getElementById('pdetailGalleryCount');
+
+            // Lightbox Elements
+            const lbModal = document.getElementById('pdetailLightboxModal');
+            const lbBackdrop = document.getElementById('pdetailLightboxBackdrop');
+            const lbClose = document.getElementById('pdetailLightboxClose');
+            const lbImg = document.getElementById('pdetailLightboxImg');
+            const lbTitle = document.getElementById('pdetailLightboxTitle');
+            const lbSub = document.getElementById('pdetailLightboxSub');
+            const lbLogo = document.getElementById('pdetailLightboxLogo');
+            const lbUrl = document.getElementById('pdetailLightboxUrl');
+            const lbLive = document.getElementById('pdetailLightboxLive');
+
+            let currentScreenIdx = 0;
+
+            function openLightboxScreen(idx) {
+                if (!hasScreenshots || !lbModal) return;
+                const sc = project.screenshots[idx];
+                if (!sc) return;
+                if (lbImg) { lbImg.src = sc.src; lbImg.alt = sc.title; }
+                if (lbTitle) lbTitle.textContent = `${sc.title} — ${project.shortTitle}`;
+                if (lbSub) lbSub.textContent = sc.badge || project.badge;
+                if (lbLogo) lbLogo.src = project.logo;
+                const url = project.url || 'https://anigrow.vercel.app';
+                if (lbUrl) lbUrl.textContent = url;
+                if (lbLive) {
+                    lbLive.href = url;
+                    lbLive.style.display = url.startsWith('http') ? 'inline-flex' : 'none';
+                }
+                lbModal.classList.add('is-open');
+                lbModal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                if (window.lucide) lucide.createIcons();
+            }
+
+            function closeLightboxScreen() {
+                if (!lbModal) return;
+                lbModal.classList.remove('is-open');
+                lbModal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            if (hasScreenshots) {
+                if (activeFrame) activeFrame.style.display = 'block';
+                if (placeholderFrame) placeholderFrame.style.display = 'none';
+                if (thumbsStrip) thumbsStrip.style.display = 'flex';
+                if (gallerySection) gallerySection.style.display = 'block';
+
+                const showcaseImg = document.getElementById('pdetailShowcaseImg');
+                const showcaseUrl = document.getElementById('pdetailShowcaseUrl');
+                const screenCounter = document.getElementById('pdetailScreenCounter');
+                const screenTitle = document.getElementById('pdetailScreenTitle');
+                const screenDesc = document.getElementById('pdetailScreenDesc');
+                const prevBtn = document.getElementById('pdetailPrevScreenBtn');
+                const nextBtn = document.getElementById('pdetailNextScreenBtn');
+                const mockupViewport = document.getElementById('pdetailMockupViewport');
+
+                if (showcaseUrl) showcaseUrl.textContent = project.url || 'https://anigrow.vercel.app';
+                if (galleryCount) galleryCount.textContent = `${project.screenshots.length} High-Resolution Views`;
+
+                function setScreen(idx) {
+                    currentScreenIdx = (idx + project.screenshots.length) % project.screenshots.length;
+                    const sc = project.screenshots[currentScreenIdx];
+                    if (showcaseImg) {
+                        showcaseImg.src = sc.src;
+                        showcaseImg.alt = sc.title;
+                    }
+                    if (screenTitle) screenTitle.textContent = sc.title;
+                    if (screenDesc) screenDesc.textContent = sc.desc;
+                    if (screenCounter) {
+                        screenCounter.innerHTML = `<span>Screen <strong>${String(currentScreenIdx + 1).padStart(2, '0')}</strong> / ${String(project.screenshots.length).padStart(2, '0')}</span>`;
+                    }
+                    // Update thumbnails
+                    document.querySelectorAll('.pdetail-thumb-item').forEach((item, i) => {
+                        item.classList.toggle('is-active', i === currentScreenIdx);
+                    });
+                }
+
+                // Populate Thumbnails Strip
+                if (thumbsStrip) {
+                    thumbsStrip.innerHTML = project.screenshots.map((sc, i) => `
+                        <button type="button" class="pdetail-thumb-item ${i === 0 ? 'is-active' : ''}" data-screen-idx="${i}" aria-label="Switch to ${sc.title}">
+                            <img src="${sc.src}" alt="${sc.title}" class="pdetail-thumb-img" loading="lazy">
+                            <div class="pdetail-thumb-info">
+                                <span class="pdetail-thumb-title">${sc.title}</span>
+                                <span class="pdetail-thumb-badge">${sc.badge || `Screen 0${i+1}`}</span>
+                            </div>
+                        </button>
+                    `).join('');
+
+                    thumbsStrip.querySelectorAll('.pdetail-thumb-item').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const idx = parseInt(btn.getAttribute('data-screen-idx'), 10);
+                            setScreen(idx);
+                        });
+                    });
+                }
+
+                // Populate Gallery Grid
+                if (galleryGrid) {
+                    galleryGrid.innerHTML = project.screenshots.map((sc, i) => `
+                        <article class="pdetail-gallery-card" data-screen-idx="${i}" tabindex="0" role="button" aria-label="Inspect ${sc.title}">
+                            <div class="pdetail-gallery-thumb-wrap">
+                                <img src="${sc.src}" alt="${sc.title}" class="pdetail-gallery-thumb" loading="lazy">
+                                <div class="pdetail-gallery-overlay">
+                                    <span class="pdetail-gallery-zoom-badge">
+                                        <i data-lucide="zoom-in"></i> Inspect Fullscreen
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="pdetail-gallery-info">
+                                <div class="pdetail-gallery-card-top">
+                                    <span class="pdetail-gallery-badge">${sc.badge || 'TELEMETRY'}</span>
+                                    <span class="pdetail-gallery-num">View 0${i+1}</span>
+                                </div>
+                                <h3 class="pdetail-gallery-title">${sc.title}</h3>
+                                <p class="pdetail-gallery-desc">${sc.desc}</p>
+                            </div>
+                        </article>
+                    `).join('');
+
+                    galleryGrid.querySelectorAll('.pdetail-gallery-card').forEach(card => {
+                        card.addEventListener('click', () => {
+                            const idx = parseInt(card.getAttribute('data-screen-idx'), 10);
+                            openLightboxScreen(idx);
+                        });
+                    });
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        setScreen(currentScreenIdx - 1);
+                    });
+                }
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        setScreen(currentScreenIdx + 1);
+                    });
+                }
+                if (mockupViewport) {
+                    mockupViewport.addEventListener('click', () => {
+                        openLightboxScreen(currentScreenIdx);
+                    });
+                }
+
+                // Initialize screen 0
+                setScreen(0);
+            } else {
+                if (activeFrame) activeFrame.style.display = 'none';
+                if (placeholderFrame) placeholderFrame.style.display = 'block';
+                if (thumbsStrip) thumbsStrip.style.display = 'none';
+                if (gallerySection) gallerySection.style.display = 'none';
+            }
+
+            if (lbClose) lbClose.addEventListener('click', closeLightboxScreen);
+            if (lbBackdrop) lbBackdrop.addEventListener('click', closeLightboxScreen);
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lbModal && lbModal.classList.contains('is-open')) {
+                    closeLightboxScreen();
+                } else if (hasScreenshots && lbModal && lbModal.classList.contains('is-open')) {
+                    if (e.key === 'ArrowLeft') {
+                        setScreen(currentScreenIdx - 1);
+                        openLightboxScreen(currentScreenIdx);
+                    } else if (e.key === 'ArrowRight') {
+                        setScreen(currentScreenIdx + 1);
+                        openLightboxScreen(currentScreenIdx);
+                    }
+                }
+            });
 
             // Contact Modal
             const contactModal = document.getElementById('contactModal');

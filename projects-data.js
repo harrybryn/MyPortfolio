@@ -7,7 +7,7 @@ const PROJECTS_DATA = [
         title: 'ANI-GROW: AI-Powered Poultry & Livestock Farming Guide',
         shortTitle: 'ANI-GROW',
         logo: 'assets/anigrow_logo.png',
-        screen: 'assets/screen_anigrow.png',
+        screen: 'assets/anigrow_screen_1.png',
         category: 'MOBILE · IOT · AI ANALYTICS',
         badge: 'Poultry & Livestock Analytics',
         year: '2026',
@@ -20,7 +20,45 @@ const PROJECTS_DATA = [
             'Offline-first mobile data sync for farm field workers'
         ],
         architecture: 'Built with a cross-platform React Native frontend communicating with sensor hubs via REST & MQTT protocols. Backend processes real-time feed analytics and stores event logs in a normalized schema.',
-        tags: ['React Native', 'IoT Integration', 'AI Analytics', 'Agricultural Tech', 'REST API']
+        tags: ['React Native', 'IoT Integration', 'AI Analytics', 'Agricultural Tech', 'REST API'],
+        screenshots: [
+            {
+                src: 'assets/anigrow_screen_1.png',
+                title: 'Livestock & Poultry Telemetry Dashboard',
+                badge: 'System Overview',
+                desc: 'Real-time telemetry, monitoring metrics, flock health indicators, and farm overview analytics.'
+            },
+            {
+                src: 'assets/anigrow_screen_2.png',
+                title: 'Weight-Based Sorting & Automated Feeder Controls',
+                badge: 'IoT Machine Integration',
+                desc: 'Configuration interface for IoT weight segregation gates, automated sorting thresholds, and scheduled feeding dispensers.'
+            },
+            {
+                src: 'assets/anigrow_screen_3.png',
+                title: 'AI Diagnostic & Guidance Center',
+                badge: 'AI Recommendations',
+                desc: 'AI-assisted poultry flock health recommendations, feeding ratio optimizations, and predictive disease advisories.'
+            },
+            {
+                src: 'assets/anigrow_screen_4.png',
+                title: 'Growth Analytics & Weight Progression Logs',
+                badge: 'Data Telemetry',
+                desc: 'Historical livestock telemetry charts, batch weight progression tracking, and mortality reduction metrics.'
+            },
+            {
+                src: 'assets/anigrow_screen_5.png',
+                title: 'Hardware Sensor Status & Device Sync',
+                badge: 'Hardware Telemetry',
+                desc: 'Live IoT gateway status, MQTT broker communication logs, battery levels, and offline edge data sync.'
+            },
+            {
+                src: 'assets/anigrow_screen_6.png',
+                title: 'Batch Management & Operational Controls',
+                badge: 'Operations & Settings',
+                desc: 'Livestock pen assignment, cohort tracking, user role management, and automated operation schedule parameters.'
+            }
+        ]
     },
     {
         id: 'tourgo',

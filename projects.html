@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=105">
+    <link rel="stylesheet" href="styles.css?v=119">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -97,7 +97,7 @@
             <div class="subpage-archive-list" id="subpageList">
 
                 <!-- ANI-GROW -->
-                <article class="subpage-item is-locked" id="project-anigrow" data-project-id="anigrow" data-category="mobile iot" data-search="ani-grow poultry livestock farming guide react native iot ai">
+                <article class="subpage-item" id="project-anigrow" data-project-id="anigrow" data-category="mobile iot" data-search="ani-grow poultry livestock farming guide react native iot ai">
                     <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
                         <div class="subpage-item-title-col">
                             <img src="assets/anigrow_logo.png" alt="ANI-GROW" class="subpage-item-logo">
@@ -108,7 +108,7 @@
                             <p class="subpage-item-desc">AI guidance and telemetry platform for livestock operations with automated sorting gates and feeding dispensers.</p>
                         </div>
                         <div class="subpage-item-toggle-wrap">
-                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                            <a href="project-detail.html?id=anigrow" class="subpage-view-details-pill" title="View Full Project Dossier & All 6 Screenshots"><span>View Project</span><i data-lucide="arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="subpage-item-detail" hidden>
@@ -116,8 +116,8 @@
                             <!-- Left: Interactive UI Showcase Stage -->
                             <div class="subpage-card-stage">
                                 <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_anigrow.png" data-title="ANI-GROW: AI-Powered Poultry & Livestock Farming Guide" data-sub="Poultry & Livestock Analytics" data-logo="assets/anigrow_logo.png" data-url="https://anigrow.vercel.app" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_anigrow.png" alt="ANI-GROW Screen Preview" class="cf-showcase-img" loading="lazy">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/anigrow_screen_1.png" data-title="ANI-GROW: AI-Powered Poultry & Livestock Farming Guide" data-sub="Poultry & Livestock Analytics" data-logo="assets/anigrow_logo.png" data-url="https://anigrow.vercel.app" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/anigrow_screen_1.png" alt="ANI-GROW Screen Preview" class="cf-showcase-img" loading="lazy">
                                         <div class="cf-showcase-overlay">
                                             <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
                                         </div>
@@ -1229,8 +1229,21 @@
                 });
             }
 
-            // ── Project Row Direct Navigation (Locked) ──
-            // View details locked for now
+            // ── Project Row Direct Navigation & Accordion ──
+            document.querySelectorAll('.subpage-item:not(.is-locked) .subpage-item-header').forEach(header => {
+                header.addEventListener('click', (e) => {
+                    if (e.target.closest('a')) return;
+                    const item = header.closest('.subpage-item');
+                    const detail = item.querySelector('.subpage-item-detail');
+                    if (!detail) return;
+                    const isOpen = !detail.hidden;
+                    detail.hidden = isOpen;
+                    header.setAttribute('aria-expanded', !isOpen);
+                    item.classList.toggle('is-expanded', !isOpen);
+                    if (window.lucide) lucide.createIcons();
+                });
+            });
+
             const items = Array.from(document.querySelectorAll('.subpage-item'));
 
             // Filter pills & Search
