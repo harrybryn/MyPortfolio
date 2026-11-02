@@ -6917,7 +6917,7 @@ body.splash-locked {
 }
 
 .splash-audiowide-center {
-  font-family: 'Audiowide', sans-serif;
+  /* Font set on individual chars for LEGO-logo fidelity */
   text-align: center;
   width: 100%;
 }
@@ -6931,20 +6931,32 @@ body.splash-locked {
   max-width: 100%;
 }
 
-/* Individual Character Styling matching xyrusdarcen.com */
+/* ─── Individual Character — LEGO-logo inspired ───────────────────────────
+   Fredoka: thick, bubbly, rounded — matches HarryS. logo aesthetic.
+   White fill + chunky black stroke replicates the logo's outline style.
+   font-style: italic adds the logo's characteristic lean.
+   ──────────────────────────────────────────────────────────────────────── */
 .xrd-char {
   display: inline-block;
-  font-size: clamp(1.5rem, 4vw, 3.75rem);
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: clamp(1.8rem, 4.5vw, 4rem);
+  font-weight: 600;
+  font-style: italic;
   padding: 0;
   max-width: 1.2em;
   margin: 0;
   white-space: nowrap;
   vertical-align: middle;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   opacity: 0;
   overflow: hidden;
+  /* LEGO-logo: white fill + thick black stroke */
   color: #ffffff;
-  font-weight: 400;
+  -webkit-text-stroke: 3px #000000;
+  paint-order: stroke fill;
+  text-shadow:
+    2px 2px 0px #000,
+    -1px -1px 0px #000;
   transform: scale(1);
   transition: all 1600ms cubic-bezier(0.22, 1, 0.36, 1),
               padding 1600ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -6962,17 +6974,25 @@ body.splash-locked {
   opacity: 0 !important;
 }
 
+/* Initials grow + keep LEGO stroke — no gradient, pure logo style */
 .splash-screen.step-collapsed .xrd-char.is-initial {
-  font-size: clamp(3rem, 6vw, 4.5rem) !important;
-  padding: 0 0.05em !important;
-  letter-spacing: 0.1em !important;
-  color: transparent !important;
-  background: linear-gradient(to bottom, rgb(156, 163, 175), rgb(255, 255, 255)) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  font-weight: 800 !important;
-  transform: scale(1.15) !important;
+  font-size: clamp(4rem, 9vw, 7rem) !important;
+  padding: 0 0.06em !important;
+  letter-spacing: 0.08em !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+  color: #ffffff !important;
+  -webkit-text-stroke: 5px #000000 !important;
+  paint-order: stroke fill !important;
+  text-shadow:
+    3px 3px 0px #000,
+    -2px -2px 0px #000 !important;
+  /* clear any gradient from previous rules */
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transform: scale(1.12) !important;
 }
 
 /* Step 3: Fade out entire screen */
