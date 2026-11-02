@@ -194,6 +194,27 @@ a {
   text-decoration: none;
 }
 
+/* HS text logo — LEGO-logo style to match splash initials */
+.nav-logo-hs {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  color: var(--text-main);
+  -webkit-text-stroke: 1.5px var(--text-main);
+  paint-order: stroke fill;
+  letter-spacing: 0.05em;
+  transition: transform var(--transition), opacity var(--transition);
+  user-select: none;
+}
+
+.nav-logo:hover .nav-logo-hs {
+  transform: scale(1.08);
+  opacity: 0.8;
+}
+
+/* Legacy img rule kept in case referenced elsewhere */
 .nav-logo-img {
   height: 38px;
   width: auto;
