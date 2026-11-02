@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=126">
+    <link rel="stylesheet" href="styles.css?v=127">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -252,27 +252,33 @@
     </div>
 
 
-    <!-- Project Screen Lightbox Modal -->
-    <div class="cf-lightbox-modal" id="pdetailLightboxModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pdetailLightboxTitle">
+    <!-- Project Screen Lightbox Modal (Travis Cruz Style MacBook Presentation) -->
+    <div class="cf-lightbox-modal tc-device-lightbox-modal" id="pdetailLightboxModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project Screen Preview">
         <div class="cf-lightbox-backdrop" id="pdetailLightboxBackdrop"></div>
-        <div class="cf-lightbox-dialog">
-            <div class="cf-lightbox-header">
-                <div class="cf-lightbox-title-box">
-                    <img src="" alt="" id="pdetailLightboxLogo" class="cf-lightbox-logo">
-                    <div>
-                        <h3 id="pdetailLightboxTitle" class="cf-lightbox-title">Screen Title</h3>
-                        <span id="pdetailLightboxSub" class="cf-lightbox-sub">Poultry &amp; Livestock Analytics</span>
+        <button type="button" id="pdetailLightboxClose" class="tc-lightbox-close-btn" aria-label="Close Preview">
+            <i data-lucide="x"></i>
+        </button>
+        <div class="cf-lightbox-dialog tc-lightbox-device-dialog">
+            <!-- MacBook Pro Mockup Frame (Desktop & Web Screens) -->
+            <div class="tc-modal-laptop" id="tcModalLaptop">
+                <div class="tc-laptop-lid">
+                    <div class="tc-laptop-notch">
+                        <span class="tc-laptop-camera"></span>
+                    </div>
+                    <div class="tc-laptop-screen">
+                        <img src="" alt="Project Screen Preview" id="pdetailLightboxImg" class="tc-laptop-screen-img">
                     </div>
                 </div>
-                <div class="cf-lightbox-actions">
-                    <button type="button" id="pdetailLightboxClose" class="cf-lightbox-close" aria-label="Close Preview">
-                        <i data-lucide="x"></i>
-                    </button>
+                <div class="tc-laptop-base">
+                    <div class="tc-laptop-notch-thumb"></div>
                 </div>
             </div>
-            <div class="cf-lightbox-body">
-                <div class="cf-lightbox-img-wrap">
-                    <img src="" alt="Project Full Screen Preview" id="pdetailLightboxImg" class="cf-lightbox-img">
+
+            <!-- Mobile Phone Mockup Frame (Mobile Screens) -->
+            <div class="tc-modal-mobile" id="tcModalMobile" style="display: none;">
+                <div class="tc-mobile-dynamic-island"></div>
+                <div class="tc-mobile-screen">
+                    <img src="" alt="Mobile App Screen Preview" id="pdetailMobileLightboxImg" class="tc-mobile-screen-img">
                 </div>
             </div>
         </div>
@@ -508,8 +514,7 @@
 
                     if (laptopMockup) {
                         laptopMockup.addEventListener('click', () => {
-                            const src = actualLaptopImg ? actualLaptopImg.getAttribute('src') : 'assets/Ani-Grow/6.jpg';
-                            openCustomLightbox(src, `${project.shortTitle} — Web Dashboard Command Center`, 'FARM COMMAND');
+                            openCustomLightbox('assets/anigrow_screen_1.png', `${project.shortTitle} — Farm Overview & Analytics`, 'FARM COMMAND', false);
                         });
                     }
                 }
@@ -552,7 +557,8 @@
                             const imgSrc = media.getAttribute('data-img');
                             const title = media.getAttribute('data-title');
                             const badge = media.getAttribute('data-badge');
-                            openCustomLightbox(imgSrc, `${title} — ${project.shortTitle}`, badge);
+                            const isMobile = media.classList.contains('is-mobile-media');
+                            openCustomLightbox(imgSrc, `${title} — ${project.shortTitle}`, badge, isMobile);
                         });
                     });
                 }
@@ -607,14 +613,24 @@
             const galleryGrid = document.getElementById('pdetailGalleryGrid');
             const galleryCount = document.getElementById('pdetailGalleryCount');
 
+            // Clean Screen Mapping for MacBook Frame
+            const SCREEN_CLEAN_MAP = {
+                'assets/Ani-Grow/6.jpg': 'assets/anigrow_screen_1.png',
+                'assets/Ani-Grow/2.jpg': 'assets/anigrow_screen_2.png',
+                'assets/Ani-Grow/3.jpg': 'assets/anigrow_screen_3.png',
+                'assets/Ani-Grow/4.jpg': 'assets/anigrow_screen_4.png',
+                'assets/Ani-Grow/5.jpg': 'assets/anigrow_screen_5.png',
+                'assets/Ani-Grow/1.jpg': 'assets/anigrow_screen_6.png'
+            };
+
             // Lightbox Elements
             const lbModal = document.getElementById('pdetailLightboxModal');
             const lbBackdrop = document.getElementById('pdetailLightboxBackdrop');
             const lbClose = document.getElementById('pdetailLightboxClose');
             const lbImg = document.getElementById('pdetailLightboxImg');
-            const lbTitle = document.getElementById('pdetailLightboxTitle');
-            const lbSub = document.getElementById('pdetailLightboxSub');
-            const lbLogo = document.getElementById('pdetailLightboxLogo');
+            const modalLaptop = document.getElementById('tcModalLaptop');
+            const modalMobile = document.getElementById('tcModalMobile');
+            const mobileLbImg = document.getElementById('pdetailMobileLightboxImg');
 
             let currentScreenIdx = 0;
 
@@ -622,22 +638,28 @@
                 if (!hasScreenshots || !lbModal) return;
                 const sc = project.screenshots[idx];
                 if (!sc) return;
-                if (lbImg) { lbImg.src = sc.src; lbImg.alt = sc.title; }
-                if (lbTitle) lbTitle.textContent = `${sc.title} — ${project.shortTitle}`;
-                if (lbSub) lbSub.textContent = sc.badge || project.badge;
-                if (lbLogo) lbLogo.src = project.logo;
-                lbModal.classList.add('is-open');
-                lbModal.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-                if (window.lucide) lucide.createIcons();
+                openCustomLightbox(sc.src, sc.title, sc.badge, sc.isMobile);
             }
 
-            function openCustomLightbox(src, title, badge) {
+            function openCustomLightbox(src, title, badge, isMobile = false) {
                 if (!lbModal) return;
-                if (lbImg) { lbImg.src = src; lbImg.alt = title; }
-                if (lbTitle) lbTitle.textContent = title;
-                if (lbSub) lbSub.textContent = badge || project.badge;
-                if (lbLogo) lbLogo.src = project.logo;
+                const cleanSrc = SCREEN_CLEAN_MAP[src] || src;
+                const isMobileScreen = isMobile || (src && (src.includes('hero_showcase') || src.includes('mobile')));
+
+                if (isMobileScreen) {
+                    if (modalLaptop) modalLaptop.style.display = 'none';
+                    if (modalMobile) {
+                        modalMobile.style.display = 'flex';
+                        if (mobileLbImg) { mobileLbImg.src = cleanSrc; mobileLbImg.alt = title || 'Mobile Preview'; }
+                    }
+                } else {
+                    if (modalMobile) modalMobile.style.display = 'none';
+                    if (modalLaptop) {
+                        modalLaptop.style.display = 'flex';
+                        if (lbImg) { lbImg.src = cleanSrc; lbImg.alt = title || 'Laptop Screen Preview'; }
+                    }
+                }
+
                 lbModal.classList.add('is-open');
                 lbModal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
