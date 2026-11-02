@@ -17,11 +17,11 @@
         content="Full-stack developer building clean web systems with PHP, MySQL, React, and TypeScript.">
     <meta property="og:image" content="https://harrysevilla.vercel.app/assets/profile.png">
 
-    <!-- Google Fonts: Inter + JetBrains Mono + Outfit & Plus Jakarta Sans for Splash Display -->
+    <!-- Google Fonts: Inter + JetBrains Mono + Audiowide -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
 
     <!-- Immediate Theme Initialization (Eliminates flash & supports System/Light/Dark) -->
@@ -35,68 +35,38 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=107">
+    <link rel="stylesheet" href="styles.css?v=108">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="splash-locked splash-pending-reveal">
     <!-- =====================================================================
-         CINEMATIC SPLASH SCREEN & CURTAIN TRANSITION
-         Minimalist Obsidian Entrance, Metallic Logo Shimmer, Dynamic Curtain Lift
+         XYRUS DARCEN INSPIRED SPLASH SCREEN TRANSITION
+         Audiowide Typography: Full Name -> Initials Organic Collapse
          ===================================================================== -->
     <div id="splashScreen" class="splash-screen" role="dialog" aria-modal="true" aria-label="Loading portfolio">
-        <!-- Ambient Backdrop Atmosphere -->
-        <div class="splash-bg-spotlight"></div>
-        <div class="splash-bg-grid"></div>
-
-        <!-- Center Stage -->
-        <div class="splash-stage">
-            <div class="splash-brand-wrap">
-                <!-- Morphing Typography: Transitions From Full Name -> 2 Letters (HS) -->
-                <div class="splash-morph-wrap" id="splashMorphWrap">
-                    <div class="splash-morph-word splash-first-word">
-                        <span class="splash-char-lead">H</span><span class="splash-chars-tail">ARRY</span>
-                    </div>
-                    <span class="splash-morph-space"></span>
-                    <div class="splash-morph-word splash-last-word">
-                        <span class="splash-char-lead">S</span><span class="splash-chars-tail">EVILLA</span>
-                    </div>
-                </div>
-                
-                <!-- Refined Editorial Tagline -->
-                <div class="splash-tagline" id="splashTagline">
-                    <span class="splash-tagline-name">Harry Sevilla</span>
-                    <span class="splash-tagline-dot"></span>
-                    <span class="splash-tagline-role">Full-Stack Developer</span>
-                </div>
-            </div>
-
-            <!-- Progress Track & Monospace Tech Counter -->
-            <div class="splash-meta-wrap">
-                <div class="splash-progress-track">
-                    <div class="splash-progress-bar" id="splashProgressBar"></div>
-                </div>
-                <div class="splash-status-row">
-                    <div class="splash-status-left">
-                        <span class="splash-status-pulse"></span>
-                        <span class="splash-status-text" id="splashStatusText">INITIALIZING SYSTEM</span>
-                    </div>
-                    <span class="splash-counter" id="splashCounter">00%</span>
-                </div>
+        <div class="splash-audiowide-center">
+            <div id="splashLetterContainer" class="splash-letter-container">
+                <span class="xrd-char is-initial">H</span>
+                <span class="xrd-char">A</span>
+                <span class="xrd-char">R</span>
+                <span class="xrd-char">R</span>
+                <span class="xrd-char">Y</span>
+                <span class="xrd-char is-space">&nbsp;</span>
+                <span class="xrd-char is-initial">S</span>
+                <span class="xrd-char">E</span>
+                <span class="xrd-char">V</span>
+                <span class="xrd-char">I</span>
+                <span class="xrd-char">L</span>
+                <span class="xrd-char">L</span>
+                <span class="xrd-char">A</span>
             </div>
         </div>
 
         <!-- Skip Hint for Keyboard/Mouse -->
         <div class="splash-skip-hint" id="splashSkipHint">
             <span>Press <kbd>Esc</kbd> or click anywhere to skip</span>
-        </div>
-
-        <!-- Dynamic SVG curve for physical curtain lift feel -->
-        <div class="splash-curtain-curve" aria-hidden="true">
-            <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="splash-curve-svg">
-                <path d="M0,0 L1440,0 L1440,0 Q720,120 0,0 Z" fill="#000000" id="splashCurvePath" />
-            </svg>
         </div>
     </div>
 
@@ -1056,19 +1026,23 @@
         </div>
     </div>
 
-    <!-- Discreet Replay Pill for Preview / Testing -->
-    <div class="splash-replay-pill" id="splashReplayPill" title="Replay Full Name to 2 Letters Transition">
-        <button type="button" class="splash-replay-btn" id="splashReplayBtn" aria-label="Replay Name to HS Transition">
+    <!-- Discreet Replay & Preset Switcher Pill for Preview / Testing -->
+    <div class="splash-replay-pill" id="splashReplayPill" title="Replay Full Name to Initials Transition">
+        <button type="button" class="splash-replay-btn" id="splashReplayBtn" aria-label="Replay Transition">
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
                 <path d="M3 3v5h5"></path>
             </svg>
-            <span>Replay (Name &rarr; HS)</span>
+            <span>Replay</span>
         </button>
+        <div class="splash-mark-toggle" role="group" aria-label="Choose Splash Name">
+            <button type="button" class="splash-toggle-btn is-active" data-preset="HS" title="Harry Sevilla &rarr; HS">HS</button>
+            <button type="button" class="splash-toggle-btn" data-preset="XRD" title="Xyrus Rex Darcen &rarr; XRD">XRD</button>
+        </div>
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=72"></script>
+    <script src="script.js?v=73"></script>
     <script src="arcade.js?v=26"></script>
     <script>
         if (window.lucide) {

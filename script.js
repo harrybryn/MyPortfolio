@@ -1,32 +1,118 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
-    // 0. Cinematic Splash Screen & Curtain Transition Controller
+    // 0. Xyrus Darcen Exact Splash Screen Controller (Full Name -> Initials)
     // ==========================================================================
     (() => {
         const splash = document.getElementById('splashScreen');
         if (!splash) return;
 
-        const morphWrap = document.getElementById('splashMorphWrap');
-        const progressBar = document.getElementById('splashProgressBar');
-        const counterEl = document.getElementById('splashCounter');
-        const statusText = document.getElementById('splashStatusText');
+        const container = document.getElementById('splashLetterContainer');
         const replayBtn = document.getElementById('splashReplayBtn');
+        const toggleBtns = document.querySelectorAll('.splash-toggle-btn');
 
-        const DURATION = 1650; // Total count-up duration in ms
-        const MORPH_COLLAPSE_DELAY = 550; // Delay before full name collapses into 2 letters (HS)
-        let isAnimating = false;
-        let isComplete = false;
-        let animFrameId = null;
+        // Presets: Harry Sevilla (HS) and Xyrus Rex Darcen (XRD)
+        const PRESETS = {
+            HS: {
+                name: "HARRY SEVILLA",
+                initials: [0, 6] // 'H' at 0, 'S' at 6
+            },
+            XRD: {
+                name: "XYRUS REX DARCEN",
+                initials: [0, 6, 10] // 'X' at 0, 'R' at 6, 'D' at 10
+            }
+        };
+
+        const STORAGE_KEY = 'portfolio-splash-preset';
+        let currentPresetKey = 'HS';
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved === 'XRD' || saved === 'HS') currentPresetKey = saved;
+        } catch (e) {}
+
         let timeouts = [];
+        let isComplete = false;
 
         function clearScheduledTimeouts() {
             timeouts.forEach(t => clearTimeout(t));
             timeouts = [];
-            if (animFrameId) {
-                cancelAnimationFrame(animFrameId);
-                animFrameId = null;
-            }
         }
+
+        function renderLetters(presetKey) {
+            if (!container) return;
+            const preset = PRESETS[presetKey] || PRESETS.HS;
+            container.innerHTML = '';
+
+            preset.name.split('').forEach((char, i) => {
+                const isInitial = preset.initials.includes(i);
+                const isSpace = char === ' ';
+                const span = document.createElement('span');
+                span.className = 'xrd-char' + (isInitial ? ' is-initial' : '') + (isSpace ? ' is-space' : '');
+                span.textContent = isSpace ? '\u00a0' : char;
+                container.appendChild(span);
+            });
+        }
+
+        function finishAndReveal() {
+            if (isComplete) return;
+            isComplete = true;
+            clearScheduledTimeouts();
+
+            splash.classList.add('step-reveal', 'step-collapsed', 'step-fadeout');
+            timeouts.push(setTimeout(() => {
+                splash.classList.add('is-hidden');
+                document.body.classList.remove('splash-locked', 'splash-pending-reveal');
+                document.body.classList.add('splash-revealed');
+            }, 500));
+        }
+
+        function runSequence(presetKey = currentPresetKey) {
+            clearScheduledTimeouts();
+            isComplete = false;
+
+            document.body.classList.add('splash-locked', 'splash-pending-reveal');
+            document.body.classList.remove('splash-revealed');
+            splash.classList.remove('is-hidden', 'step-reveal', 'step-collapsed', 'step-fadeout');
+            splash.style.display = 'flex';
+
+            renderLetters(presetKey);
+
+            // Step 1: Fade in full name (300ms)
+            timeouts.push(setTimeout(() => {
+                if (!isComplete) splash.classList.add('step-reveal');
+            }, 300));
+
+            // Step 2: Collapse into initials (2200ms) - matching xyrusdarcen.com
+            timeouts.push(setTimeout(() => {
+                if (!isComplete) splash.classList.add('step-collapsed');
+            }, 2200));
+
+            // Step 3: Fade out splash (4800ms)
+            timeouts.push(setTimeout(() => {
+                if (!isComplete) {
+                    splash.classList.add('step-fadeout');
+                    document.body.classList.add('splash-revealed');
+                }
+            }, 4800));
+
+            // Step 4: Complete & cleanup (5600ms)
+            timeouts.push(setTimeout(() => {
+                if (!isComplete) {
+                    isComplete = true;
+                    splash.classList.add('is-hidden');
+                    document.body.classList.remove('splash-locked', 'splash-pending-reveal');
+                }
+            }, 5600));
+        }
+
+        // Global replay function
+        window.replaySplashScreen = function (key) {
+            if (key) {
+                currentPresetKey = key;
+                try { localStorage.setItem(STORAGE_KEY, key); } catch(e) {}
+            }
+            toggleBtns.forEach(b => b.classList.toggle('is-active', b.getAttribute('data-preset') === currentPresetKey));
+            runSequence(currentPresetKey);
+        };
 
         if (replayBtn) {
             replayBtn.addEventListener('click', (e) => {
@@ -35,126 +121,29 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        function finishAndReveal() {
-            if (isComplete) return;
-            isComplete = true;
-            isAnimating = false;
-            clearScheduledTimeouts();
-
-            // Ensure collapsed state into 2 letters
-            if (morphWrap) morphWrap.classList.add('is-collapsed');
-
-            // Fast-forward counter & progress
-            if (progressBar) progressBar.style.width = '100%';
-            if (counterEl) counterEl.textContent = '100%';
-            if (statusText) statusText.textContent = 'SYSTEM READY';
-
-            // Hold briefly at 100% for climax
-            timeouts.push(setTimeout(() => {
-                splash.classList.add('is-exiting');
-
-                // Initiate curtain lift
-                timeouts.push(setTimeout(() => {
-                    splash.classList.add('is-lifting');
-                    document.body.classList.add('splash-revealed');
-
-                    // Post-lift cleanup
-                    timeouts.push(setTimeout(() => {
-                        splash.classList.add('is-hidden');
-                        document.body.classList.remove('splash-locked', 'splash-pending-reveal');
-                    }, 880));
-                }, 160));
-            }, 180));
-        }
-
-        function runSequence() {
-            clearScheduledTimeouts();
-            isAnimating = true;
-            isComplete = false;
-
-            // Reset classes
-            document.body.classList.add('splash-locked', 'splash-pending-reveal');
-            document.body.classList.remove('splash-revealed');
-            splash.classList.remove('is-hidden', 'is-exiting', 'is-lifting');
-            splash.style.display = 'flex';
-
-            // Reset morph: Show full name "HARRY SEVILLA"
-            if (morphWrap) {
-                morphWrap.classList.remove('is-collapsed');
-            }
-
-            if (progressBar) progressBar.style.width = '0%';
-            if (counterEl) counterEl.textContent = '00%';
-            if (statusText) statusText.textContent = 'HARRY SEVILLA';
-
-            // Schedule the collapse: Full Name -> 2 Letters (HS)
-            timeouts.push(setTimeout(() => {
-                if (morphWrap && !isComplete) {
-                    morphWrap.classList.add('is-collapsed');
-                }
-            }, MORPH_COLLAPSE_DELAY));
-
-            const start = performance.now();
-
-            function frame(now) {
-                if (isComplete) return;
-
-                const elapsed = now - start;
-                const progress = Math.min(1, elapsed / DURATION);
-
-                // Smooth deceleration curve: easeOutCubic
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const currentPct = Math.min(100, Math.floor(eased * 100));
-
-                if (progressBar) progressBar.style.width = currentPct + '%';
-                if (counterEl) counterEl.textContent = String(currentPct).padStart(2, '0') + '%';
-
-                if (statusText) {
-                    if (currentPct < 35) {
-                        statusText.textContent = 'HARRY SEVILLA';
-                    } else if (currentPct < 75) {
-                        statusText.textContent = 'INITIALIZING SYSTEM';
-                    } else if (currentPct < 96) {
-                        statusText.textContent = 'HS // PORTFOLIO';
-                    } else {
-                        statusText.textContent = 'SYSTEM READY';
-                    }
-                }
-
-                if (progress < 1) {
-                    animFrameId = requestAnimationFrame(frame);
-                } else {
-                    finishAndReveal();
-                }
-            }
-
-            animFrameId = requestAnimationFrame(frame);
-        }
-
-        // Global function to replay intro transition
-        window.replaySplashScreen = function () {
-            runSequence();
-        };
-
-        // Skip on click anywhere on the splash screen
-        splash.addEventListener('click', () => {
-            if (isAnimating && !isComplete) {
-                finishAndReveal();
-            }
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const key = btn.getAttribute('data-preset');
+                window.replaySplashScreen(key);
+            });
         });
 
-        // Skip on Escape or Space key
+        // Skip on click or Escape
+        splash.addEventListener('click', () => {
+            if (!isComplete) finishAndReveal();
+        });
+
         window.addEventListener('keydown', (e) => {
             if ((e.key === 'Escape' || e.key === ' ') && !isComplete) {
                 finishAndReveal();
             } else if ((e.key === 'r' || e.key === 'R') && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
-                // 'R' key to replay
                 window.replaySplashScreen();
             }
         });
 
-        // Start splash animation immediately
-        runSequence();
+        // Start initial sequence
+        window.replaySplashScreen(currentPresetKey);
     })();
 
     // ── 1. 3-Option Theme Controller with Bryl Lim Circular Wipe Animation ──
