@@ -24,7 +24,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=129">
+    <link rel="stylesheet" href="styles.css?v=130">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -33,7 +33,7 @@
     <!-- Subtle dot grid background -->
     <div class="bg-dots-pattern"></div>
 
-    <div class="subpage-container">
+    <div class="subpage-container pdetail-wide-container">
         <!-- Subpage Header Navigation -->
         <header class="subpage-header-nav">
             <a href="projects.html" class="subpage-back-link" title="Return to all projects archive">
@@ -264,12 +264,9 @@
                 <img src="assets/Ani-Grow/6_nobg.png" alt="Ani-Grow Laptop Preview" id="pdetailLightboxImg" class="tc-laptop-display-img">
             </div>
 
-            <!-- Mobile Phone Mockup Frame (Mobile Screens) -->
-            <div class="tc-modal-mobile" id="tcModalMobile" style="display: none;">
-                <div class="tc-mobile-dynamic-island"></div>
-                <div class="tc-mobile-screen">
-                    <img src="" alt="Mobile App Screen Preview" id="pdetailMobileLightboxImg" class="tc-mobile-screen-img">
-                </div>
+            <!-- Mobile Phone Display in Lightbox (No Box, Pure Transparent Phone) -->
+            <div class="tc-mobile-display-wrap" id="tcModalMobile" style="display: none;">
+                <img src="assets/anigrow_hero_showcase.webp" alt="Mobile App Screen Preview" id="pdetailMobileLightboxImg" class="tc-mobile-display-img">
             </div>
         </div>
     </div>
@@ -334,7 +331,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=11"></script>
+    <script src="projects-data.js?v=12"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine

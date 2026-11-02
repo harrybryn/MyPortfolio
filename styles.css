@@ -6983,7 +6983,7 @@ html.theme-anim *::after {
 
 .tc-section-item {
   display: grid;
-  grid-template-columns: 1fr 1.25fr;
+  grid-template-columns: 0.8fr 1.5fr;
   gap: 3.5rem;
   align-items: center;
   background: transparent;
@@ -6994,7 +6994,7 @@ html.theme-anim *::after {
 }
 
 .tc-section-item:nth-child(even) {
-  grid-template-columns: 1.25fr 1fr;
+  grid-template-columns: 1.5fr 0.8fr;
 }
 
 .tc-section-item:nth-child(even) .tc-section-content {
@@ -7070,53 +7070,59 @@ html.theme-anim *::after {
 .tc-section-media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--surface);
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
   cursor: zoom-in;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 [data-theme="dark"] .tc-section-media {
-  background: #0f1015;
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.6);
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .tc-section-img {
   width: 100%;
   height: auto;
-  max-height: 100%;
+  max-width: 100%;
   object-fit: contain;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
   display: block;
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.35));
+}
+
+[data-theme="dark"] .tc-section-img {
+  filter: drop-shadow(0 30px 65px rgba(0, 0, 0, 0.9));
 }
 
 .tc-section-media:hover .tc-section-img {
-  transform: scale(1.03);
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+  transform: scale(1.035);
+  filter: drop-shadow(0 35px 80px rgba(0, 0, 0, 0.98));
 }
 
 .tc-section-media.is-mobile-media {
-  background: var(--surface-hover);
-  aspect-ratio: 16 / 10;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .tc-section-media.is-mobile-media .tc-section-img {
-  height: 92%;
   width: auto;
+  max-width: 380px;
+  max-height: 620px;
+  height: auto;
   object-fit: contain;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.6));
 }
 
 /* Built With Chip Grid (Unboxed) */
@@ -7263,11 +7269,11 @@ html.theme-anim *::after {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Actual Laptop Stage (assets/travis_laptop.png) */
+/* Actual Laptop Stage (assets/Ani-Grow/6_nobg.png) */
 .actual-laptop-stage {
   position: relative;
   width: 100%;
-  max-width: 980px;
+  max-width: 1180px;
   margin: 0 auto;
   border-radius: 0;
   background: transparent;
@@ -8064,12 +8070,17 @@ body.splash-revealed .header {
   stroke-width: 2.2;
 }
 
+/* Wide page container for case studies */
+.pdetail-wide-container {
+  max-width: 1220px !important;
+}
+
 /* Device Dialog Stage (Unboxed, transparent) */
 .tc-lightbox-device-dialog {
   position: relative;
   z-index: 100000;
   width: 100%;
-  max-width: 1060px;
+  max-width: 1240px;
   max-height: 94vh;
   background: transparent !important;
   border: none !important;
@@ -8089,11 +8100,11 @@ body.splash-revealed .header {
   transform: scale(1) translateY(0);
 }
 
-/* Transparent Laptop Showcase Presentation in Lightbox */
+/* Transparent Laptop Showcase Presentation in Lightbox (Bigger) */
 .tc-laptop-display-wrap {
   position: relative;
   width: 100%;
-  max-width: 1060px;
+  max-width: 1220px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8102,59 +8113,30 @@ body.splash-revealed .header {
 .tc-laptop-display-img {
   width: 100%;
   height: auto;
-  max-height: 88vh;
+  max-height: 90vh;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 35px 85px rgba(0, 0, 0, 0.95));
+  filter: drop-shadow(0 40px 90px rgba(0, 0, 0, 0.95));
   transition: transform 0.3s ease;
 }
 
-/* Mobile Phone Mockup in Lightbox */
-.tc-modal-mobile {
+/* Mobile Phone Presentation in Lightbox (No background, pure transparent floating phone) */
+.tc-mobile-display-wrap {
   position: relative;
   width: 100%;
-  max-width: 360px;
-  height: 82vh;
-  max-height: 720px;
-  background: #111216;
-  border: 3px solid #2c2e38;
-  border-radius: 46px;
-  padding: 10px;
-  box-sizing: border-box;
-  box-shadow: 0 35px 85px -15px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.06);
-  display: none;
-  flex-direction: column;
-}
-
-.tc-mobile-dynamic-island {
-  position: absolute;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 24px;
-  background: #000000;
-  border-radius: 20px;
-  z-index: 10;
-}
-
-.tc-mobile-screen {
-  width: 100%;
-  height: 100%;
-  border-radius: 36px;
-  overflow: hidden;
-  background: #000000;
+  max-width: 440px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.tc-mobile-screen-img {
+.tc-mobile-display-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  max-height: 88vh;
+  height: auto;
+  object-fit: contain;
   display: block;
+  filter: drop-shadow(0 35px 85px rgba(0, 0, 0, 0.95));
 }
 
 @media (max-width: 768px) {
