@@ -17,11 +17,11 @@
         content="Full-stack developer building clean web systems with PHP, MySQL, React, and TypeScript.">
     <meta property="og:image" content="https://harrysevilla.vercel.app/assets/profile.png">
 
-    <!-- Google Fonts: Inter + JetBrains Mono for subtle accents -->
+    <!-- Google Fonts: Inter + JetBrains Mono + Outfit & Plus Jakarta Sans for Splash Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
         rel="stylesheet">
 
     <!-- Immediate Theme Initialization (Eliminates flash & supports System/Light/Dark) -->
@@ -35,12 +35,65 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=105">
+    <link rel="stylesheet" href="styles.css?v=106">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body>
+<body class="splash-locked splash-pending-reveal">
+    <!-- =====================================================================
+         CINEMATIC SPLASH SCREEN & CURTAIN TRANSITION
+         Minimalist Obsidian Entrance, Metallic Logo Shimmer, Dynamic Curtain Lift
+         ===================================================================== -->
+    <div id="splashScreen" class="splash-screen" role="dialog" aria-modal="true" aria-label="Loading portfolio">
+        <!-- Ambient Backdrop Atmosphere -->
+        <div class="splash-bg-spotlight"></div>
+        <div class="splash-bg-grid"></div>
+
+        <!-- Center Stage -->
+        <div class="splash-stage">
+            <div class="splash-brand-wrap">
+                <!-- Iconic Bold Rounded Mark (Matches reference screenshot 1:1) -->
+                <div class="splash-brand-mark" id="splashBrandMark">
+                    <span class="splash-mark-text" id="splashMarkText">HS</span>
+                </div>
+                
+                <!-- Refined Editorial Tagline -->
+                <div class="splash-tagline" id="splashTagline">
+                    <span class="splash-tagline-name">Harry Sevilla</span>
+                    <span class="splash-tagline-dot"></span>
+                    <span class="splash-tagline-role">Full-Stack Developer</span>
+                </div>
+            </div>
+
+            <!-- Progress Track & Monospace Tech Counter -->
+            <div class="splash-meta-wrap">
+                <div class="splash-progress-track">
+                    <div class="splash-progress-bar" id="splashProgressBar"></div>
+                </div>
+                <div class="splash-status-row">
+                    <div class="splash-status-left">
+                        <span class="splash-status-pulse"></span>
+                        <span class="splash-status-text" id="splashStatusText">INITIALIZING SYSTEM</span>
+                    </div>
+                    <span class="splash-counter" id="splashCounter">00%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skip Hint for Keyboard/Mouse -->
+        <div class="splash-skip-hint" id="splashSkipHint">
+            <span>Press <kbd>Esc</kbd> or click anywhere to skip</span>
+        </div>
+
+        <!-- Dynamic SVG curve for physical curtain lift feel -->
+        <div class="splash-curtain-curve" aria-hidden="true">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="splash-curve-svg">
+                <path d="M0,0 L1440,0 L1440,0 Q720,120 0,0 Z" fill="#000000" id="splashCurvePath" />
+            </svg>
+        </div>
+    </div>
+
     <!-- Interactive Geometric Canvas Background -->
     <div class="bg-dots-pattern"></div>
     <canvas class="bg-interactive-canvas" id="bgInteractiveCanvas"></canvas>
@@ -997,8 +1050,23 @@
         </div>
     </div>
 
+    <!-- Discreet Replay & Mark Switcher Pill for Preview / Testing -->
+    <div class="splash-replay-pill" id="splashReplayPill" title="Replay Splash Screen Transition">
+        <button type="button" class="splash-replay-btn" id="splashReplayBtn" aria-label="Replay Intro Transition">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+            </svg>
+            <span>Replay Intro</span>
+        </button>
+        <div class="splash-mark-toggle" role="group" aria-label="Choose Splash Mark">
+            <button type="button" class="splash-toggle-btn is-active" data-mark="HS" title="Show HS (Harry Sevilla)">HS</button>
+            <button type="button" class="splash-toggle-btn" data-mark="XRD" title="Show XRD (Aesthetic Match)">XRD</button>
+        </div>
+    </div>
+
     <!-- Scripts -->
-    <script src="script.js?v=70"></script>
+    <script src="script.js?v=71"></script>
     <script src="arcade.js?v=26"></script>
     <script>
         if (window.lucide) {

@@ -1,4 +1,206 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ==========================================================================
+    // 0. Cinematic Splash Screen & Curtain Transition Controller
+    // ==========================================================================
+    (() => {
+        const splash = document.getElementById('splashScreen');
+        if (!splash) return;
+
+        const progressBar = document.getElementById('splashProgressBar');
+        const counterEl = document.getElementById('splashCounter');
+        const statusText = document.getElementById('splashStatusText');
+        const markText = document.getElementById('splashMarkText');
+        const taglineEl = document.getElementById('splashTagline');
+        const replayBtn = document.getElementById('splashReplayBtn');
+        const replayPill = document.getElementById('splashReplayPill');
+        const toggleBtns = document.querySelectorAll('.splash-toggle-btn');
+
+        const STORAGE_MARK_KEY = 'portfolio-splash-mark';
+        const DURATION = 1350; // Total count-up duration in ms
+        let isAnimating = false;
+        let isComplete = false;
+        let animFrameId = null;
+        let timeouts = [];
+
+        function clearScheduledTimeouts() {
+            timeouts.forEach(t => clearTimeout(t));
+            timeouts = [];
+            if (animFrameId) {
+                cancelAnimationFrame(animFrameId);
+                animFrameId = null;
+            }
+        }
+
+        // Get saved mark preference: default to 'HS', also supports 'XRD'
+        function getSavedMark() {
+            try {
+                const saved = localStorage.getItem(STORAGE_MARK_KEY);
+                return (saved === 'XRD' || saved === 'HS') ? saved : 'HS';
+            } catch (e) {
+                return 'HS';
+            }
+        }
+
+        function setMark(mark, shouldReplay = false) {
+            try {
+                localStorage.setItem(STORAGE_MARK_KEY, mark);
+            } catch (e) {}
+
+            if (markText) {
+                markText.textContent = mark;
+            }
+
+            if (taglineEl) {
+                if (mark === 'XRD') {
+                    taglineEl.innerHTML = `
+                        <span class="splash-tagline-name">XRD Studio</span>
+                        <span class="splash-tagline-dot"></span>
+                        <span class="splash-tagline-role">Creative Engineering</span>
+                    `;
+                } else {
+                    taglineEl.innerHTML = `
+                        <span class="splash-tagline-name">Harry Sevilla</span>
+                        <span class="splash-tagline-dot"></span>
+                        <span class="splash-tagline-role">Full-Stack Developer</span>
+                    `;
+                }
+            }
+
+            toggleBtns.forEach(btn => {
+                btn.classList.toggle('is-active', btn.getAttribute('data-mark') === mark);
+            });
+
+            if (shouldReplay) {
+                window.replaySplashScreen();
+            }
+        }
+
+        // Sync initial mark
+        setMark(getSavedMark(), false);
+
+        // Attach listeners to toggle buttons
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const chosen = btn.getAttribute('data-mark');
+                setMark(chosen, true);
+            });
+        });
+
+        if (replayBtn) {
+            replayBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                window.replaySplashScreen();
+            });
+        }
+
+        function finishAndReveal() {
+            if (isComplete) return;
+            isComplete = true;
+            isAnimating = false;
+            clearScheduledTimeouts();
+
+            // Fast-forward counter & progress
+            if (progressBar) progressBar.style.width = '100%';
+            if (counterEl) counterEl.textContent = '100%';
+            if (statusText) statusText.textContent = 'SYSTEM READY';
+
+            // Hold briefly at 100% for climax
+            timeouts.push(setTimeout(() => {
+                splash.classList.add('is-exiting');
+
+                // Initiate curtain lift
+                timeouts.push(setTimeout(() => {
+                    splash.classList.add('is-lifting');
+                    document.body.classList.add('splash-revealed');
+
+                    // Post-lift cleanup
+                    timeouts.push(setTimeout(() => {
+                        splash.classList.add('is-hidden');
+                        document.body.classList.remove('splash-locked', 'splash-pending-reveal');
+                    }, 880));
+                }, 160));
+            }, 120));
+        }
+
+        function runSequence() {
+            clearScheduledTimeouts();
+            isAnimating = true;
+            isComplete = false;
+
+            // Reset classes
+            document.body.classList.add('splash-locked', 'splash-pending-reveal');
+            document.body.classList.remove('splash-revealed');
+            splash.classList.remove('is-hidden', 'is-exiting', 'is-lifting');
+            splash.style.display = 'flex';
+
+            if (progressBar) progressBar.style.width = '0%';
+            if (counterEl) counterEl.textContent = '00%';
+            if (statusText) statusText.textContent = 'INITIALIZING SYSTEM';
+
+            const start = performance.now();
+
+            function frame(now) {
+                if (isComplete) return;
+
+                const elapsed = now - start;
+                const progress = Math.min(1, elapsed / DURATION);
+
+                // Smooth deceleration curve: easeOutCubic
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const currentPct = Math.min(100, Math.floor(eased * 100));
+
+                if (progressBar) progressBar.style.width = currentPct + '%';
+                if (counterEl) counterEl.textContent = String(currentPct).padStart(2, '0') + '%';
+
+                if (statusText) {
+                    if (currentPct < 32) {
+                        statusText.textContent = 'INITIALIZING SYSTEM';
+                    } else if (currentPct < 68) {
+                        statusText.textContent = 'SYNCING ASSETS';
+                    } else if (currentPct < 96) {
+                        statusText.textContent = 'HARRY SEVILLA // 2026';
+                    } else {
+                        statusText.textContent = 'SYSTEM READY';
+                    }
+                }
+
+                if (progress < 1) {
+                    animFrameId = requestAnimationFrame(frame);
+                } else {
+                    finishAndReveal();
+                }
+            }
+
+            animFrameId = requestAnimationFrame(frame);
+        }
+
+        // Global function to replay intro transition
+        window.replaySplashScreen = function () {
+            runSequence();
+        };
+
+        // Skip on click anywhere on the splash screen
+        splash.addEventListener('click', () => {
+            if (isAnimating && !isComplete) {
+                finishAndReveal();
+            }
+        });
+
+        // Skip on Escape or Space key
+        window.addEventListener('keydown', (e) => {
+            if ((e.key === 'Escape' || e.key === ' ') && !isComplete) {
+                finishAndReveal();
+            } else if ((e.key === 'r' || e.key === 'R') && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+                // 'R' key to replay
+                window.replaySplashScreen();
+            }
+        });
+
+        // Start splash animation immediately
+        runSequence();
+    })();
+
     // ── 1. 3-Option Theme Controller with Bryl Lim Circular Wipe Animation ──
     const KEY = 'portfolio-theme';
     const root = document.documentElement;
