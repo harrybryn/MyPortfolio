@@ -1459,40 +1459,7 @@ html.theme-anim *::after {
   transform: translateX(3px);
 }
 
-/* Locked Coverflow Card CTA */
-.cf-card-cta.is-locked {
-  cursor: not-allowed;
-  opacity: 0.65;
-  background: var(--surface);
-  border-color: var(--border);
-  color: var(--text-faint);
-  pointer-events: auto;
-  user-select: none;
-}
 
-[data-theme="dark"] .cf-card-cta.is-locked {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.38);
-}
-
-.cf-card:hover .cf-card-cta.is-locked,
-.cf-card-cta.is-locked:hover {
-  background: var(--surface) !important;
-  color: var(--text-faint) !important;
-  border-color: var(--border) !important;
-}
-
-[data-theme="dark"] .cf-card:hover .cf-card-cta.is-locked,
-[data-theme="dark"] .cf-card-cta.is-locked:hover {
-  background: rgba(255, 255, 255, 0.03) !important;
-  color: rgba(255, 255, 255, 0.38) !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-.cf-card:hover .cf-card-cta.is-locked svg {
-  transform: none !important;
-}
 
 /* Unified Monochromatic Border on Active Card */
 .cf-card.is-active .cf-card-inner {
@@ -3708,45 +3675,193 @@ html.theme-anim *::after {
 }
 
 .subpage-item-detail {
-  display: none !important;
+  display: none;
 }
 
-/* Locked View Details Pill */
-.subpage-item.is-locked .subpage-item-header {
-  cursor: default;
+.subpage-item.is-expanded .subpage-item-detail {
+  display: block !important;
+  animation: subpageAccordionOpen 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.subpage-view-details-pill.is-locked {
-  cursor: not-allowed;
-  opacity: 0.65;
-  background: var(--surface);
+@keyframes subpageAccordionOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Group Headers (Featured Case Studies vs Archive) ── */
+.subpage-group-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.25rem 0 0.85rem 0;
+  margin-top: 1rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.subpage-group-header.subpage-group-archive {
+  margin-top: 3.25rem;
+  padding-top: 1.75rem;
+}
+
+.subpage-group-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.subpage-group-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.24);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+
+.subpage-group-badge.subpage-badge-muted {
+  color: var(--text-muted);
+  background: var(--surface-hover);
   border-color: var(--border);
-  color: var(--text-faint);
-  pointer-events: auto;
+}
+
+.subpage-group-title {
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.subpage-group-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Featured Projects High-Impact Presentation ── */
+.subpage-item.is-featured {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: var(--surface);
+  position: relative;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .subpage-item.is-featured {
+  background: #141413;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.subpage-item.is-featured:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .subpage-item.is-featured:hover {
+  background: #181817;
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+}
+
+.subpage-featured-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  padding: 0.18rem 0.5rem;
+  border-radius: 9999px;
+  margin-bottom: 0.35rem;
+  width: fit-content;
+}
+
+.subpage-featured-badge svg {
+  width: 11px;
+  height: 11px;
+}
+
+.subpage-view-details-pill.is-featured-pill {
+  background: #ededec;
+  color: #0c0d10;
+  border-color: #ededec;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.12);
+  padding: 0.45rem 1rem;
+}
+
+[data-theme="light"] .subpage-view-details-pill.is-featured-pill {
+  background: #0c0d10;
+  color: #ffffff;
+  border-color: #0c0d10;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.subpage-item:hover .subpage-view-details-pill.is-featured-pill {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
+  color: #000000;
+}
+
+[data-theme="light"] .subpage-item:hover .subpage-view-details-pill.is-featured-pill {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+}
+
+/* ── Archive Items Clean Expansion ── */
+.subpage-archive-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
   user-select: none;
 }
 
-[data-theme="dark"] .subpage-view-details-pill.is-locked {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.38);
+.subpage-item:hover .subpage-archive-expand-btn {
+  border-color: var(--border-hover);
+  color: var(--text-main);
+  background: var(--surface-hover);
 }
 
-.subpage-item:hover .subpage-view-details-pill.is-locked {
-  color: var(--text-faint) !important;
-  border-color: var(--border) !important;
-  background: var(--surface) !important;
-  transform: none !important;
+.subpage-chevron-icon {
+  width: 13px;
+  height: 13px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-theme="dark"] .subpage-item:hover .subpage-view-details-pill.is-locked {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  color: rgba(255, 255, 255, 0.38) !important;
+.subpage-item.is-expanded .subpage-chevron-icon {
+  transform: rotate(180deg);
 }
 
-.subpage-item-header:hover .subpage-view-details-pill.is-locked svg {
-  transform: none !important;
+.subpage-item.is-expanded .subpage-archive-expand-btn {
+  background: var(--surface-hover);
+  color: var(--text-main);
+  border-color: var(--border-hover);
 }
 
 /* ── Project Details Screen Modal (Dedicated Non-Expanding View) ── */
