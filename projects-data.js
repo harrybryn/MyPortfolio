@@ -24,7 +24,7 @@ const PROJECTS_DATA = [
         overview: {
             title: 'Farming with Data, Not Guesswork',
             description: 'Contributed to the design and development of an AI-powered poultry and livestock farming guide for Golden Nutriharvest, Inc., a San Miguel Foods grower partner with over 15 years in the industry. The system combines IoT prototypes, an Android app for caretakers, and a web dashboard for farm administrators. A project grounded in on-site research, hardware prototyping, and expert evaluation.',
-            heroImage: 'assets/anigrow_hero_showcase.webp'
+            heroImage: 'assets/Ani-Grow/Ani-Grow Home.webp'
         },
         challenge: 'Caretakers at Golden Nutriharvest weighed only a small sample of chickens once a week and used the average to represent the whole flock. Sorting out underweight "rejects" was done by eye, and feed was fixed to general standards instead of actual weight. The goal was to replace this with continuous, objective weight monitoring and growth-based decisions.',
         desc: 'A mobile application that helps farm animal caretakers manage poultry and livestock operations using AI guidance and data analytics. Supports and integrates with custom IoT machines for weight-based segregation and automated feeding of farm animals.',
@@ -54,57 +54,93 @@ const PROJECTS_DATA = [
         sections: [
             {
                 id: 'the-challenge',
-                title: 'The Challenge: Beyond Sample-Weighing & Guesswork',
+                title: 'The Challenge',
                 badge: 'PROBLEM STATEMENT',
-                description: 'Caretakers at Golden Nutriharvest weighed only a small sample of chickens once a week and used the average to represent the whole flock. Sorting out underweight "rejects" was done by eye, and feed was fixed to general standards instead of actual weight. The goal was to replace this with continuous, objective weight monitoring and growth-based decisions directly on handheld mobile devices in the pens.',
-                images: ['assets/anigrow_hero_showcase.webp'],
+                description: 'Caretakers at Golden Nutriharvest weighed only a small sample of chickens once a week and used the average to represent the whole flock. Sorting out underweight "rejects" was done by eye, and feed was fixed to general standards instead of actual weight. The goal was to replace this with continuous, objective weight monitoring and growth-based decisions.',
+                images: ['assets/Ani-Grow/Ani-Grow Home.webp'],
                 layout: 'single',
                 device: 'standalone'
             },
             {
-                id: 'animal-registration-logging',
-                title: 'Animal Registration & Daily Observations',
+                id: 'animal-registration',
+                title: 'Animal Registration and Daily Logging',
                 badge: 'CARETAKER MOBILE WORKFLOW',
-                description: 'Caretakers create a digital profile for each animal or flock batch (species, age, pen) and log daily observations such as feeding times, biometric progression, and health status directly from the handheld mobile interface.',
-                images: ['assets/anigrow_hero_device.png'],
-                layout: 'single',
+                description: 'Caretakers create a profile for each animal or batch (species, age, pen) and log daily observations such as feeding times and disease. Row-Level Security means each caretaker only sees and edits the records in their own assigned scope.',
+                images: ['assets/Ani-Grow/Ani-Grow Animal Batch.webp', 'assets/Ani-Grow/Ani-Grow Animal Batch 2.webp'],
+                layout: 'duo-crop',
                 device: 'standalone'
             },
             {
-                id: 'automated-feeding-sorting',
-                title: 'Automated Feeder Controls & IoT Sorting Gates',
-                badge: 'MOBILE IOT MACHINE INTEGRATION',
-                description: 'Feed can be dispensed on automated schedules or triggered on demand from the caretaker mobile app. The ESP32-controlled dispenser logs every dispensing event to Supabase in real time, while linear sorting gates direct livestock into designated pens based on live weight telemetry.',
-                images: ['assets/screen_anigrow.png'],
-                layout: 'single',
+                id: 'automated-feeding',
+                title: 'Automated Feeding Dispenser',
+                badge: 'IOT MACHINE AUTOMATION',
+                description: 'Feed can be dispensed on a schedule or triggered manually from the app. The ESP32-controlled dispenser syncs every dispense to Supabase in real time, so caretakers can check feeding history and remaining feed from their phone.',
+                images: ['assets/Ani-Grow/Ani-Grow Devices 3.webp', 'assets/Ani-Grow/Ani-Grow Analytics Feed.webp'],
+                layout: 'duo-crop',
+                device: 'standalone'
+            },
+            {
+                id: 'weight-segregation',
+                title: 'Weight Segregation',
+                badge: 'LOAD CELL SENSORS & ACTUATORS',
+                description: 'A 100 kg load cell with an HX711 amplifier measures each animal\'s weight, and the ESP32 classifies it. A 12V linear actuator then directs the animal into its sorting cell, while limit switches prevent overextension and an LCD shows the live reading. The app displays the resulting weight classification per animal.',
+                images: ['assets/Ani-Grow/Ani-Grow Devices 2.webp', 'assets/Ani-Grow/Ani-Grow Analytics Growth.webp'],
+                layout: 'duo-crop',
+                device: 'standalone'
+            },
+            {
+                id: 'iot-settings',
+                title: 'IoT Device Settings',
+                badge: 'HARDWARE TELEMETRY',
+                description: 'A dedicated page in the app for managing and monitoring the connected hardware prototypes from the phone.',
+                images: ['assets/Ani-Grow/Ani-Grow Devices 1.webp', 'assets/Ani-Grow/Ani-Grow Devices 3.webp', 'assets/Ani-Grow/Ani-Grow Devices 2.webp'],
+                layout: 'fade-loop',
                 device: 'standalone'
             },
             {
                 id: 'ai-care-guide',
-                title: 'AI Diagnostic Guide & Care Roadmap',
+                title: 'AI Care Guide',
                 badge: 'CLAUDE API INTELLIGENCE',
-                description: 'Conditioned on real-time weight trajectories, the mobile companion delivers Claude-powered care guides customized to each batch lifecycle stage, delivering dynamic daily verification checklists for feeding, temperature, and disease prevention.',
-                images: ['assets/anigrow_hero_showcase.webp'],
+                description: 'Using the Claude API and the animal\'s own data, the app generates step-by-step care guides based on type, age, and growth stage, covering feeding adjustments, housing conditions, and general farming practices. Guides are available right from each animal\'s profile.',
+                images: ['assets/Ani-Grow/Ani-Grow Guide.webp'],
                 layout: 'single',
                 device: 'standalone'
             },
             {
-                id: 'admin-web-dashboard',
-                title: 'Admin Operations Web Dashboard & Housing Control',
-                badge: 'FARM COMMAND WEB DASHBOARD',
-                description: 'A comprehensive React web dashboard engineered for farm owners and administrative staff. Aggregates data from every housing unit, flock population, and caretaker log into an executive view of active pens, headcounts, and capacity utilization.',
-                images: ['assets/Ani-Grow/6_nobg.png'],
-                layout: 'single',
-                device: 'laptop'
+                id: 'predictive-analytics',
+                title: 'Predictive Analytics and Growth Pattern Detection',
+                badge: 'PREDICTIVE ANALYTICS',
+                description: 'Growth rates and harvest-ready dates are forecast from historical weight and feeding data. The app also compares each animal\'s growth against the expected pattern for its type and age, and flags irregular trends such as slower-than-expected weight gain so caretakers can step in early.',
+                images: ['assets/Ani-Grow/Ani-Grow Analytics Prediction.webp', 'assets/Ani-Grow/Ani-Grow Analytics Growth 2.webp'],
+                layout: 'duo-crop',
+                device: 'standalone'
             },
             {
-                id: 'predictive-analytics-biometrics',
-                title: 'Predictive Growth Benchmarking & Biometric Compliance Audit',
-                badge: 'PREDICTIVE MODELING & SAN MIGUEL FOODS AUDIT',
-                description: 'Predictive 140-day growth curves, harvest readiness dates, and benchmark tracking against breed standards, paired with formatted export and print-ready biometric performance audits compliant with San Miguel Foods grower standards.',
-                images: ['assets/Ani-Grow/2_nobg.png', 'assets/Ani-Grow/1_nobg.png'],
-                layout: 'duo-crop',
-                device: 'laptop'
+                id: 'health-monitoring',
+                title: 'Health Monitoring and Reminders',
+                badge: 'HEALTH MODULE',
+                description: 'A timestamped record of vaccinations, medicines, and treatments per animal. Firebase Cloud Messaging sends push reminders before upcoming health tasks, along with alerts for harvest readiness and low feed.',
+                images: ['assets/Ani-Grow/Ani-Grow Health Module.webp', 'assets/Ani-Grow/Ani-Grow Analytics Health 1.webp', 'assets/Ani-Grow/Ani-Grow Analytics Health 2.webp'],
+                layout: 'fade-loop',
+                device: 'standalone'
+            },
+            {
+                id: 'admin-dashboard',
+                title: 'Admin Web Dashboard',
+                badge: 'FARM COMMAND WEB DASHBOARD',
+                description: 'A React web platform built for farm owners and administrators, bringing together data from every animal, IoT prototype, and caretaker account. It shows farm-wide growth trends, feeding consumption, and health statistics in one place, a view that wasn\'t possible with per-caretaker record-keeping.',
+                images: ['assets/Ani-Grow/AdminDashboard.webp'],
+                layout: 'single',
+                device: 'standalone'
+            },
+            {
+                id: 'user-management',
+                title: 'User Management',
+                badge: 'RBAC ADMIN CONSOLE',
+                description: 'Administrators add, edit, and deactivate caretaker and staff accounts and assign roles (admin or caretaker), without touching the database directly.',
+                images: ['assets/Ani-Grow/UserManagement.webp'],
+                layout: 'single',
+                device: 'standalone'
             }
         ],
         outcome: {
