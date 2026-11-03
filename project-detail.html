@@ -23,7 +23,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=133">
+    <link rel="stylesheet" href="styles.css?v=135">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -260,24 +260,6 @@
                 <a href="#" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">back to top ↑</a>
             </div>
         </footer>
-    </div>
-
-
-    <!-- Travis Cruz Style Floating Dock -->
-    <div class="tc-floating-dock is-hidden" id="tcFloatingDock" aria-label="Quick Navigation">
-        <div class="tc-dock-inner">
-            <a href="projects.html" class="tc-dock-btn" title="Back to Projects" aria-label="Back to Projects">
-                <i data-lucide="arrow-left"></i>
-                <span>Back</span>
-            </a>
-            <div class="tc-dock-sep"></div>
-            <span class="tc-dock-project-title" id="tcDockTitle">TOURGO</span>
-            <div class="tc-dock-sep"></div>
-            <button type="button" class="tc-dock-btn" id="tcDockTopBtn" title="Scroll to Top" aria-label="Scroll to Top">
-                <span>Top</span>
-                <i data-lucide="arrow-up"></i>
-            </button>
-        </div>
     </div>
 
     <!-- Project Screen Lightbox Modal (Travis Cruz Style MacBook Presentation) -->
@@ -529,27 +511,9 @@
             const outcomeBullets = document.getElementById('tcOutcomeBullets');
             const outcomeClosing = document.getElementById('tcOutcomeClosing');
             const standardGrid = document.getElementById('pdetailStandardGrid');
-            const floatingDock = document.getElementById('tcFloatingDock');
-            const dockTitle = document.getElementById('tcDockTitle');
-            const dockTopBtn = document.getElementById('tcDockTopBtn');
 
             if (isCaseStudy) {
                 if (standardGrid) standardGrid.style.display = 'none';
-
-                // Floating Dock Setup (Travis Cruz bottom pill dock)
-                if (floatingDock) {
-                    if (dockTitle) dockTitle.textContent = project.shortTitle || project.title;
-                    if (dockTopBtn) {
-                        dockTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                    window.addEventListener('scroll', () => {
-                        if (window.scrollY > 350) {
-                            floatingDock.classList.remove('is-hidden');
-                        } else {
-                            floatingDock.classList.add('is-hidden');
-                        }
-                    }, { passive: true });
-                }
 
                 // Display Hero Presentation Showcase (Mobile Phone for Tourgo, Laptop for Ani-Grow)
                 if (heroShowcase) {
