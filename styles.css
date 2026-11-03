@@ -3694,13 +3694,38 @@ html.theme-anim *::after {
   }
 }
 
-/* ── Group Headers (Featured Case Studies vs Archive) ── */
-.subpage-group-header {
-  display: flex;
 /* ==========================================================================
    TRAVIS CRUZ STYLE DEVELOPMENT PAGE (/development or projects.html)
    Max 560px centered column, minimal typography, authentic layout
    ========================================================================== */
+.subpage-container.tc-dev-shell {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.tc-dev-shell .subpage-header-nav {
+  padding: 2.25rem 0 1.25rem 0;
+  border-bottom: none;
+}
+
+.tc-dev-shell .tc-dev-page-container {
+  padding: 0.5rem 0 4rem 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.tc-dev-shell .subpage-footer {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 2.5rem 0 4rem 0;
+  border-top: 1px solid var(--border);
+}
+
+[data-theme="dark"] .tc-dev-shell .subpage-footer {
+  border-color: #1f1f1e;
+}
+
 .tc-dev-page-container {
   max-width: 560px;
   margin: 0 auto;
