@@ -32,18 +32,35 @@
             var isDark = p !== 'light';
             document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 
-            // Check if splash already shown once
+            // Splash Screen: Allow replay on Refresh (F5 / Reload) or on ?replay=1; bypass ONLY on subpage back-navigation
             try {
                 var urlParams = new URLSearchParams(window.location.search);
-                var forceReplay = urlParams.get('replay') === '1' || urlParams.get('splash') === '1';
-                if (!forceReplay && (sessionStorage.getItem('portfolio_splash_seen') || localStorage.getItem('portfolio_splash_seen'))) {
-                    document.documentElement.classList.add('splash-already-seen');
+                var forceSplash = urlParams.has('replay') || urlParams.has('splash');
+                var navEntries = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation');
+                var isReload = (navEntries && navEntries.length > 0 && navEntries[0].type === 'reload') ||
+                               (window.performance && window.performance.navigation && window.performance.navigation.type === 1);
+
+                if (isReload || forceSplash) {
+                    sessionStorage.removeItem('portfolio_splash_seen');
+                    localStorage.removeItem('portfolio_splash_seen');
+                } else {
+                    var seen = sessionStorage.getItem('portfolio_splash_seen');
+                    var isFromSubpage = document.referrer && (
+                        document.referrer.indexOf('project-detail') !== -1 ||
+                        document.referrer.indexOf('projects.html') !== -1 ||
+                        document.referrer.indexOf('about.html') !== -1 ||
+                        document.referrer.indexOf('certifications.html') !== -1 ||
+                        document.referrer.indexOf('experience.html') !== -1
+                    );
+                    if (seen && isFromSubpage) {
+                        document.documentElement.classList.add('splash-already-seen');
+                    }
                 }
             } catch (e) { }
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=131">
+    <link rel="stylesheet" href="styles.css?v=132">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -1027,7 +1044,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=76"></script>
+    <script src="script.js?v=77"></script>
     <script src="arcade.js?v=26"></script>
     <script>
         if (window.lucide) {

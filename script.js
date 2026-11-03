@@ -49,12 +49,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     window.speechSynthesis.cancel();
                     const utterance = new SpeechSynthesisUtterance('Harry Sevilla');
-                    utterance.rate = 0.95;
+                    utterance.rate = 0.92;
                     utterance.pitch = 1.0;
-                    utterance.volume = 0.95;
-                    const voices = window.speechSynthesis.getVoices();
-                    const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Daniel') || v.name.includes('David') || v.name.includes('en-US')));
-                    if (englishVoice) utterance.voice = englishVoice;
+                    utterance.volume = 1.0;
+                    
+                    const pickVoice = () => {
+                        const voices = window.speechSynthesis.getVoices();
+                        if (voices && voices.length > 0) {
+                            const v = voices.find(vo => vo.lang.startsWith('en') && (vo.name.includes('Natural') || vo.name.includes('Google') || vo.name.includes('Daniel') || vo.name.includes('David') || vo.name.includes('en-US')));
+                            if (v) utterance.voice = v;
+                        }
+                    };
+                    pickVoice();
+                    if (!utterance.voice && window.speechSynthesis.onvoiceschanged !== undefined) {
+                        window.speechSynthesis.onvoiceschanged = () => {
+                            pickVoice();
+                            window.speechSynthesis.speak(utterance);
+                        };
+                    }
                     window.speechSynthesis.speak(utterance);
                 } catch (e) {}
             }
@@ -202,22 +214,44 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 5600));
         }
 
-        // Start sequence (One time only: bypass if already viewed in this session or browser)
+        // Start sequence (Bypassed ONLY on subpage back-navigation, plays on refresh or direct entry)
         const SPLASH_KEY = 'portfolio_splash_seen';
         const urlParams = new URLSearchParams(window.location.search);
         const forceReplay = urlParams.get('replay') === '1' || urlParams.get('splash') === '1';
+        const navEntries = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation');
+        const isReload = (navEntries && navEntries.length > 0 && navEntries[0].type === 'reload') ||
+                         (window.performance && window.performance.navigation && window.performance.navigation.type === 1);
 
         try {
-            if (!forceReplay && (sessionStorage.getItem(SPLASH_KEY) || localStorage.getItem(SPLASH_KEY))) {
-                splash.classList.add('is-hidden');
-                splash.style.display = 'none';
-                document.body.classList.remove('splash-locked', 'splash-pending-reveal');
-                document.body.classList.add('splash-revealed');
-                return;
+            if (isReload || forceReplay) {
+                sessionStorage.removeItem(SPLASH_KEY);
+                localStorage.removeItem(SPLASH_KEY);
+            } else {
+                const isFromSubpage = document.referrer && (
+                    document.referrer.includes('project-detail') ||
+                    document.referrer.includes('projects.html') ||
+                    document.referrer.includes('about.html') ||
+                    document.referrer.includes('certifications.html') ||
+                    document.referrer.includes('experience.html')
+                );
+                if (sessionStorage.getItem(SPLASH_KEY) && isFromSubpage) {
+                    splash.classList.add('is-hidden');
+                    splash.style.display = 'none';
+                    document.body.classList.remove('splash-locked', 'splash-pending-reveal');
+                    document.body.classList.add('splash-revealed');
+                    return;
+                }
             }
             sessionStorage.setItem(SPLASH_KEY, 'true');
-            localStorage.setItem(SPLASH_KEY, 'true');
         } catch (e) {}
+
+        // Pointerdown / click listener on splash to ensure sound triggers if browser blocked initial autoplay
+        splash.addEventListener('pointerdown', () => {
+            getAudioContext();
+            if (window.speechSynthesis && !window.speechSynthesis.speaking) {
+                speakHarrySevilla();
+            }
+        });
 
         runSequence();
     })();
