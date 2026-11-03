@@ -23,7 +23,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=141">
+    <link rel="stylesheet" href="styles.css?v=142">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -33,31 +33,14 @@
     <div class="bg-dots-pattern"></div>
 
     <div class="subpage-container pdetail-wide-container">
-        <!-- Subpage Header Navigation (Travis Cruz Style Floating Nav Pill) -->
-        <header class="subpage-header-nav tc-header-nav">
-            <div class="tc-nav-pill-wrapper">
-                <nav class="tc-nav-pill" aria-label="Project Navigation">
-                    <a href="projects.html" class="tc-nav-pill-item tc-nav-pill-back" id="tcNavBackBtn" title="Back to all projects" onclick="if (document.referrer && document.referrer.includes(window.location.host)) { window.history.back(); return false; }">
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="m15 18-6-6 6-6"/>
-                        </svg>
-                        <span>Back</span>
-                    </a>
-                    <span class="tc-nav-pill-divider" aria-hidden="true"></span>
-                    <span class="tc-nav-pill-title" id="tcNavProjectTitle">PROJECT</span>
-                    <span class="tc-nav-pill-divider" aria-hidden="true"></span>
-                    <button type="button" class="tc-nav-pill-item tc-nav-pill-top" id="tcNavTopBtn" title="Scroll to top of case study" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                        <span>Top</span>
-                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="m18 15-6-6-6 6"/>
-                        </svg>
-                    </button>
-                </nav>
-            </div>
+        <!-- Subpage Header Navigation (Consistent with Projects Archive) -->
+        <header class="subpage-header-nav">
+            <a href="projects.html" class="subpage-back-link" title="Return to all projects archive">
+                <i data-lucide="arrow-left"></i>
+                <span>Back to Projects</span>
+            </a>
 
-            <div class="nav-right tc-nav-right">
-                <a href="https://github.com/harrybryn" target="_blank" rel="noopener noreferrer" class="tc-nav-social-link">github</a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="tc-nav-social-link">linkedin</a>
+            <div class="nav-right">
                 <button type="button" class="nav-bored-btn" id="openArcadeBtn" title="Test your developer skills & reflexes" aria-label="Test your Skills">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="4" width="20" height="16" rx="2"></rect>
@@ -173,20 +156,6 @@
             <p class="tc-outcome-closing" id="tcOutcomeClosing"></p>
         </section>
 
-        <!-- Placeholder Frame (if no screenshots exist) -->
-        <div class="pdetail-mockup-frame pdetail-mockup-placeholder" id="pdetailPlaceholderFrame" style="display: none; margin-bottom: 3rem;">
-            <div class="pdetail-tba-container">
-                <div class="pdetail-tba-badge">
-                    <span class="pdetail-tba-dot"></span>
-                    <span>PREVIEW SHOWCASE · TBA</span>
-                </div>
-                <div class="pdetail-tba-icon-wrap">
-                    <i data-lucide="image"></i>
-                </div>
-                <h3 class="pdetail-tba-title">Interface Preview in Preparation</h3>
-                <p class="pdetail-tba-desc">High-resolution interface captures, system walkthroughs, and UI design mockups for <strong id="pdetailTbaProjectName">this project</strong> are currently being curated and will be uploaded soon.</p>
-            </div>
-        </div>
 
         <!-- Detailed Dossier Section -->
         <section class="pdetail-content-grid" id="pdetailStandardGrid">
@@ -368,7 +337,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=19"></script>
+    <script src="projects-data.js?v=20"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -1103,7 +1072,7 @@
                 setScreen(0);
             } else {
                 if (activeFrame) activeFrame.style.display = 'none';
-                if (placeholderFrame) placeholderFrame.style.display = 'block';
+                if (placeholderFrame) placeholderFrame.style.display = 'none';
                 if (thumbsStrip) thumbsStrip.style.display = 'none';
                 if (gallerySection) gallerySection.style.display = 'none';
             }
