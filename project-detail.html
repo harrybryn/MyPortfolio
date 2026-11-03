@@ -23,7 +23,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=136">
+    <link rel="stylesheet" href="styles.css?v=137">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -345,7 +345,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=14"></script>
+    <script src="projects-data.js?v=15"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -566,7 +566,8 @@
 
                     sectionsContainer.innerHTML = project.sections.map((sec, idx) => {
                         let mediaMarkup = '';
-                        const isPhoneSec = sec.device === 'phone' || (!sec.device && (project.id === 'tourgo' || (sec.images && sec.images.some(img => img.includes('Tourgo') || img.includes('hero_showcase')))));
+                        const isStandaloneMockup = sec.device === 'standalone' || (sec.images && sec.images.some(img => img.includes('hero_showcase') || img.includes('hero_device')));
+                        const isPhoneSec = !isStandaloneMockup && (sec.device === 'phone' || (!sec.device && (project.id === 'tourgo' || (sec.images && sec.images.some(img => img.includes('Tourgo'))))));
 
                         if (sec.layout === 'duo-crop' && Array.isArray(sec.images) && sec.images.length >= 2) {
                             if (isPhoneSec) {
@@ -654,7 +655,16 @@
                                 `;
                             }
                         } else if (sec.layout === 'single' && Array.isArray(sec.images) && sec.images.length > 0) {
-                            if (isPhoneSec) {
+                            if (isStandaloneMockup) {
+                                mediaMarkup = `
+                                    <div class="tc-single-card open-case-study-lightbox" data-img="${sec.images[0]}" data-title="${sec.title}" tabindex="0" role="button" aria-label="Inspect ${sec.title}">
+                                        <img src="${sec.images[0]}" alt="${sec.title}" class="tc-standalone-device-img" loading="lazy">
+                                        <div class="pdetail-mockup-overlay">
+                                            <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click to expand</span>
+                                        </div>
+                                    </div>
+                                `;
+                            } else if (isPhoneSec) {
                                 mediaMarkup = `
                                     <div class="tc-single-card open-case-study-lightbox" data-img="${sec.images[0]}" data-title="${sec.title}" tabindex="0" role="button" aria-label="Inspect ${sec.title}">
                                         <div class="tc-phone-mockup tc-phone-mockup-single">

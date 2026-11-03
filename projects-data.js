@@ -111,7 +111,7 @@ const PROJECTS_DATA = [
                 description: 'An Android app built for field caretakers to monitor automated feeder hoppers, log daily biometric observations, and receive push notifications for low feed and harvest readiness — running directly on handheld devices in the pens.',
                 images: ['assets/anigrow_hero_showcase.webp'],
                 layout: 'single',
-                device: 'phone'
+                device: 'standalone'
             }
         ],
         outcome: {

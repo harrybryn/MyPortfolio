@@ -7280,12 +7280,9 @@ html.theme-anim *::after {
 .actual-laptop-stage {
   position: relative;
   width: 100%;
-  max-width: 1180px;
+  max-width: 640px;
   margin: 0 auto;
-  border-radius: 0;
-  background: transparent;
-  border: none;
-  box-shadow: none;
+  border-radius: 28px;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -7307,6 +7304,8 @@ html.theme-anim *::after {
 .actual-laptop-frame {
   position: relative;
   width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
   cursor: zoom-in;
   display: flex;
   align-items: center;
@@ -8361,11 +8360,11 @@ body.splash-revealed .header {
   border-radius: 28px;
   background: var(--surface);
   border: 1px solid var(--border);
-  padding: 2.75rem 1.5rem;
+  padding: 2.5rem 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 600px;
+  max-width: 640px;
   margin: 0 auto;
   position: relative;
   cursor: zoom-in;
@@ -8385,7 +8384,7 @@ body.splash-revealed .header {
 }
 
 .tc-hero-card .tc-phone-mockup {
-  width: 275px;
+  width: 270px;
 }
 
 .tc-hero-card:hover .tc-phone-mockup {
@@ -8393,12 +8392,12 @@ body.splash-revealed .header {
 }
 
 .tc-hero-card.tc-hero-card-laptop {
-  max-width: 860px;
-  padding: 2.25rem 1.5rem;
+  max-width: 640px;
+  padding: 2.5rem 1.5rem;
 }
 
 .tc-hero-card.tc-hero-card-laptop .actual-laptop-frame {
-  max-width: 780px;
+  max-width: 560px;
   width: 100%;
 }
 
@@ -8407,8 +8406,8 @@ body.splash-revealed .header {
   border-radius: 28px;
   background: var(--surface);
   border: 1px solid var(--border);
-  padding: 2.75rem 1.5rem;
-  max-width: 600px;
+  padding: 2.5rem 1.5rem;
+  max-width: 640px;
   margin: 0.5rem auto 0 auto;
   overflow: hidden;
   user-select: none;
@@ -8476,12 +8475,12 @@ body.splash-revealed .header {
 
 /* Duo-Crop for Laptop / Dashboard screens */
 .tc-duo-crop-card.is-laptop-duo {
-  max-width: 860px;
-  padding: 2.25rem 1.5rem;
+  max-width: 640px;
+  padding: 2.5rem 1.5rem;
 }
 
 .tc-duo-crop-card.is-laptop-duo .tc-duo-crop-row {
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .tc-duo-crop-card.is-laptop-duo .tc-duo-crop-col {
@@ -8507,8 +8506,8 @@ body.splash-revealed .header {
   border-radius: 28px;
   background: var(--surface);
   border: 1px solid var(--border);
-  padding: 2.75rem 1.5rem 2.25rem 1.5rem;
-  max-width: 600px;
+  padding: 2.5rem 1.5rem 2.25rem 1.5rem;
+  max-width: 640px;
   margin: 0.5rem auto 0 auto;
   position: relative;
   overflow: hidden;
@@ -8620,12 +8619,12 @@ body.splash-revealed .header {
 
 /* ── Fade-Loop for Laptop / Dashboard screens ── */
 .tc-fade-loop-card.is-laptop-loop {
-  max-width: 860px;
-  padding: 2.25rem 1.5rem 2rem 1.5rem;
+  max-width: 640px;
+  padding: 2.5rem 1.5rem 2.25rem 1.5rem;
 }
 
 .tc-fade-loop-card.is-laptop-loop .tc-fade-loop-stage {
-  max-width: 780px;
+  max-width: 560px;
   margin: 0 auto;
 }
 
@@ -8659,8 +8658,8 @@ body.splash-revealed .header {
   border-radius: 28px;
   background: var(--surface);
   border: 1px solid var(--border);
-  padding: 2.75rem 1.5rem;
-  max-width: 600px;
+  padding: 2.5rem 1.5rem;
+  max-width: 640px;
   margin: 0.5rem auto 0 auto;
   overflow: hidden;
   display: flex;
@@ -8670,6 +8669,7 @@ body.splash-revealed .header {
   user-select: none;
   width: 100%;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  position: relative;
   transition: border-color 0.2s ease;
 }
 
@@ -8683,7 +8683,7 @@ body.splash-revealed .header {
 }
 
 .tc-phone-mockup-single {
-  width: 275px;
+  width: 270px;
   max-width: 84vw;
 }
 
@@ -8691,13 +8691,31 @@ body.splash-revealed .header {
   transform: translateY(-5px) scale(1.02);
 }
 
+/* Standalone 3D Mobile Device Showcase (NO nested frame around pre-rendered devices) */
+.tc-standalone-device-img {
+  width: auto;
+  max-width: 270px;
+  max-height: 520px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));
+}
+
+.tc-single-card:hover .tc-standalone-device-img {
+  transform: translateY(-4px) scale(1.025);
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.7));
+}
+
 /* ── Laptop / Desktop Showcase Cards (Travis Cruz Style for Web Projects like Ani-Grow) ── */
 .tc-laptop-card {
   border-radius: 28px;
   background: var(--surface);
   border: 1px solid var(--border);
-  padding: 2.25rem 1.5rem;
-  max-width: 860px;
+  padding: 2.5rem 1.5rem;
+  max-width: 640px;
   margin: 0.5rem auto 0 auto;
   overflow: hidden;
   display: flex;
@@ -8722,7 +8740,7 @@ body.splash-revealed .header {
 
 .tc-laptop-card-img {
   width: 100%;
-  max-width: 780px;
+  max-width: 560px;
   height: auto;
   display: block;
   object-fit: contain;
