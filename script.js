@@ -71,7 +71,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 5600));
         }
 
-        // Start sequence
+        // Start sequence (One time only: bypass if already viewed in this session or browser)
+        const SPLASH_KEY = 'portfolio_splash_seen';
+        const urlParams = new URLSearchParams(window.location.search);
+        const forceReplay = urlParams.get('replay') === '1' || urlParams.get('splash') === '1';
+
+        try {
+            if (!forceReplay && (sessionStorage.getItem(SPLASH_KEY) || localStorage.getItem(SPLASH_KEY))) {
+                splash.classList.add('is-hidden');
+                splash.style.display = 'none';
+                document.body.classList.remove('splash-locked', 'splash-pending-reveal');
+                document.body.classList.add('splash-revealed');
+                return;
+            }
+            sessionStorage.setItem(SPLASH_KEY, 'true');
+            localStorage.setItem(SPLASH_KEY, 'true');
+        } catch (e) {}
+
         runSequence();
     })();
 
@@ -85,14 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function getPref() {
         try {
             const v = localStorage.getItem(KEY);
-            return (v === 'dark' || v === 'light' || v === 'system') ? v : 'system';
+            return (v === 'dark' || v === 'light' || v === 'system') ? v : 'dark';
         } catch (e) {
-            return 'system';
+            return 'dark';
         }
     }
 
     function isDarkTheme(p) {
-        return p === 'dark' || (p === 'system' && !!mq && mq.matches);
+        if (p === 'light') return false;
+        if (p === 'dark') return true;
+        return !(mq && !mq.matches);
     }
 
     function syncThemeUI(p) {
@@ -545,17 +563,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Click on Cards (clicking prev or next card activates it; active card view details is locked for now)
+        // Click on Cards (clicking prev or next card activates it; clicking active card or any active CTA navigates)
         cfCards.forEach(card => {
             card.addEventListener('click', (e) => {
                 const idx = parseInt(card.getAttribute('data-index'), 10);
-                if (!isNaN(idx)) {
-                    if (idx !== currentIndex) {
-                        e.preventDefault();
-                        updateCoverflow(idx);
-                    } else {
-                        // View details is currently locked
-                        e.preventDefault();
+                if (isNaN(idx)) return;
+
+                const ctaLink = card.querySelector('a.cf-card-cta');
+
+                // If user directly clicked the "View Project" button on any card
+                if (e.target.closest('a.cf-card-cta')) {
+                    return; // Let browser navigate naturally to the project dossier
+                }
+
+                if (idx !== currentIndex) {
+                    e.preventDefault();
+                    updateCoverflow(idx);
+                } else {
+                    if (ctaLink) {
+                        window.location.href = ctaLink.href;
                     }
                 }
             });

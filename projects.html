@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -16,15 +16,14 @@
     <!-- Immediate Theme Initialization -->
     <script>
         (function() {
-            var p = 'system';
-            try { p = localStorage.getItem('portfolio-theme') || 'system'; } catch (e) {}
-            var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
-            var isDark = p === 'dark' || (p === 'system' && !!mq && mq.matches);
+            var p = 'dark';
+            try { p = localStorage.getItem('portfolio-theme') || 'dark'; } catch (e) {}
+            var isDark = p !== 'light';
             document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=130">
+    <link rel="stylesheet" href="styles.css?v=131">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -169,6 +168,10 @@
                                         <span class="tag">Agricultural Tech</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -181,7 +184,7 @@
                 </article>
 
                 <!-- TOURGO -->
-                <article class="subpage-item is-locked" id="project-tourgo" data-project-id="tourgo" data-category="mobile" data-search="tourgo collaborative group travel platform react native google gemini ai expo">
+                <article class="subpage-item" id="project-tourgo" data-project-id="tourgo" data-category="mobile" data-search="tourgo collaborative group travel platform react native google gemini ai expo barkada itinerary">
                     <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
                         <div class="subpage-item-title-col">
                             <img src="assets/TourGoAppLogo.png" alt="TOURGO" class="subpage-item-logo">
@@ -189,10 +192,10 @@
                         </div>
                         <div class="subpage-item-meta-col">
                             <span class="subpage-item-category">MOBILE PLATFORM · AI</span>
-                            <p class="subpage-item-desc">Collaborative mobile group travel planner with 6-digit join codes, expense splitting, and Gemini AI itineraries.</p>
+                            <p class="subpage-item-desc">Collaborative mobile group travel planner with 1-day AI itineraries, live safety radar, and transparent expense splitting.</p>
                         </div>
                         <div class="subpage-item-toggle-wrap">
-                            <span class="subpage-view-details-pill is-locked" title="Project details currently locked"><span>View Details</span><i data-lucide="lock"></i></span>
+                            <a href="project-detail.html?id=tourgo" class="subpage-view-details-pill" title="View Full Case Study & All Screenshots"><span>View Project</span><i data-lucide="arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="subpage-item-detail" hidden>
@@ -254,6 +257,14 @@
                                         <span class="tag">Travel Tech</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=tourgo" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Case Study</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -339,6 +350,10 @@
                                         <span class="tag">SMS OTP</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -425,6 +440,10 @@
                                         <span class="tag">Admin Portal</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -510,6 +529,10 @@
                                         <span class="tag">Relational DB</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -594,6 +617,10 @@
                                         <span class="tag">Tourism Tech</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -678,6 +705,10 @@
                                         <span class="tag">Expense Split</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -762,6 +793,10 @@
                                         <span class="tag">EdTech</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -847,6 +882,10 @@
                                         <span class="tag">Thermal Receipt</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -932,6 +971,10 @@
                                         <span class="tag">Health Tech</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -1017,6 +1060,10 @@
                                         <span class="tag">Retail Tech</span>
                                     </div>
                                     <div class="subpage-card-actions">
+                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Dossier</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">
                                             <span>Inquire about project</span>
                                             <i data-lucide="arrow-right"></i>
@@ -1144,11 +1191,13 @@
             const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             function getPref() {
-                try { return localStorage.getItem(KEY) || 'system'; } catch (e) { return 'system'; }
+                try { return localStorage.getItem(KEY) || 'dark'; } catch (e) { return 'dark'; }
             }
 
             function isDarkTheme(p) {
-                return p === 'dark' || (p === 'system' && !!mq && mq.matches);
+                if (p === 'light') return false;
+                if (p === 'dark') return true;
+                return !(mq && !mq.matches);
             }
 
             function syncThemeUI(p) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -16,15 +16,14 @@
     <!-- Immediate Theme Initialization -->
     <script>
         (function() {
-            var p = 'system';
-            try { p = localStorage.getItem('portfolio-theme') || 'system'; } catch (e) {}
-            var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
-            var isDark = p === 'dark' || (p === 'system' && !!mq && mq.matches);
+            var p = 'dark';
+            try { p = localStorage.getItem('portfolio-theme') || 'dark'; } catch (e) {}
+            var isDark = p !== 'light';
             document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=130">
+    <link rel="stylesheet" href="styles.css?v=131">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -99,22 +98,30 @@
             </div>
         </section>
 
-        <!-- Hero Presentation Showcase (Laptop + Mobile Companion) -->
-        <section class="tc-hero-showcase" id="tcHeroShowcase" style="display: none; margin-bottom: 3.5rem;">
-            <div class="actual-laptop-stage" id="laptopStageWrap">
-                <!-- Actual Laptop Frame Rendering Real Mockup -->
+        <!-- Hero Presentation Showcase (Laptop or Mobile) -->
+        <section class="tc-hero-showcase" id="tcHeroShowcase" style="display: none; margin-bottom: 2.75rem;">
+            <!-- Actual Laptop Frame Rendering Real Mockup (Ani-Grow) -->
+            <div class="actual-laptop-stage" id="laptopStageWrap" style="display: none;">
                 <div class="actual-laptop-frame" id="laptopMockup" tabindex="0" role="button" aria-label="Inspect Laptop Screen Fullscreen">
-                    <img src="assets/Ani-Grow/6_nobg.png" alt="Ani-Grow Web Dashboard on Laptop" class="actual-laptop-img" id="actualLaptopImg">
+                    <img src="assets/Ani-Grow/6_nobg.png" alt="System Dashboard on Laptop" class="actual-laptop-img" id="actualLaptopImg">
                     <div class="pdetail-mockup-overlay">
                         <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Inspect System Fullscreen</span>
                     </div>
+                </div>
+            </div>
+
+            <!-- Mobile Phone Hero Stage (Travis Cruz Barkadash / TOURGO presentation) -->
+            <div class="tc-hero-card" id="tcMobileHeroCard" style="display: none;" tabindex="0" role="button" aria-label="Inspect Mobile App Showcase">
+                <img src="assets/Tourgo/Home.jpg" alt="TOURGO Mobile App Showcase" class="tc-hero-card-img" id="tcMobileHeroImg">
+                <div class="pdetail-mockup-overlay">
+                    <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click to expand</span>
                 </div>
             </div>
         </section>
 
         <!-- Overview Narrative Headline Card -->
         <section class="tc-overview-card" id="tcOverviewCard" style="display: none;">
-            <h2 class="tc-headline" id="tcHeadline">Farming with Data, Not Guesswork</h2>
+            <h2 class="tc-headline" id="tcHeadline">Planning with Intent</h2>
             <p class="tc-narrative" id="tcNarrative"></p>
 
             <!-- The Challenge Callout Box -->
@@ -132,14 +139,14 @@
 
         <!-- Built With Chip Grid -->
         <section class="tc-built-with-card" id="tcBuiltWithCard" style="display: none;">
-            <h2 class="pdetail-section-label">Built With &amp; Technologies</h2>
+            <h2 class="tc-sec-title" style="margin-bottom: 0.85rem;">Built With</h2>
             <div class="tc-chips-grid" id="tcChipsGrid"></div>
         </section>
 
         <!-- The Outcome Section (Simple, Elegant Typography) -->
         <section class="tc-outcome-card" id="tcOutcomeCard" style="display: none;">
-            <h2 class="tc-section-title" id="tcOutcomeTitle" style="margin-bottom: 1.25rem;">The Outcome &amp; Validation</h2>
-            <p class="tc-outcome-narrative" id="tcOutcomeNarrative"></p>
+            <h2 class="tc-sec-title" id="tcOutcomeTitle" style="margin-bottom: 0.85rem;">The Outcome</h2>
+            <p class="tc-outcome-narrative" id="tcOutcomeNarrative" style="white-space: pre-line;"></p>
             <ul class="tc-outcome-bullets" id="tcOutcomeBullets"></ul>
             <p class="tc-outcome-closing" id="tcOutcomeClosing"></p>
         </section>
@@ -252,6 +259,23 @@
     </div>
 
 
+    <!-- Travis Cruz Style Floating Dock -->
+    <div class="tc-floating-dock is-hidden" id="tcFloatingDock" aria-label="Quick Navigation">
+        <div class="tc-dock-inner">
+            <a href="projects.html" class="tc-dock-btn" title="Back to Projects" aria-label="Back to Projects">
+                <i data-lucide="arrow-left"></i>
+                <span>Back</span>
+            </a>
+            <div class="tc-dock-sep"></div>
+            <span class="tc-dock-project-title" id="tcDockTitle">TOURGO</span>
+            <div class="tc-dock-sep"></div>
+            <button type="button" class="tc-dock-btn" id="tcDockTopBtn" title="Scroll to Top" aria-label="Scroll to Top">
+                <span>Top</span>
+                <i data-lucide="arrow-up"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- Project Screen Lightbox Modal (Travis Cruz Style MacBook Presentation) -->
     <div class="cf-lightbox-modal tc-device-lightbox-modal" id="pdetailLightboxModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project Screen Preview">
         <div class="cf-lightbox-backdrop" id="pdetailLightboxBackdrop"></div>
@@ -331,7 +355,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=12"></script>
+    <script src="projects-data.js?v=13"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -341,13 +365,13 @@
             const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             function getPref() {
-                try { return localStorage.getItem(KEY) || 'system'; } catch (e) { return 'system'; }
+                try { return localStorage.getItem(KEY) || 'dark'; } catch (e) { return 'dark'; }
             }
 
             function isDarkTheme(pref) {
-                if (pref === 'dark') return true;
                 if (pref === 'light') return false;
-                return !!(mq && mq.matches);
+                if (pref === 'dark') return true;
+                return !(mq && !mq.matches);
             }
 
             function syncThemeUI(pref) {
@@ -473,10 +497,16 @@
             tagsWrap.innerHTML = project.tags.map(t => `<span class="tag">${t}</span>`).join('');
 
             // ── Travis Cruz Style Case Study Elements ──────────────────────────
-            const isCaseStudy = Array.isArray(project.caseStudySections) && project.caseStudySections.length > 0;
+            const hasWalkthroughSections = Array.isArray(project.sections) && project.sections.length > 0;
+            const hasLegacyCaseStudy = Array.isArray(project.caseStudySections) && project.caseStudySections.length > 0;
+            const isCaseStudy = hasWalkthroughSections || hasLegacyCaseStudy;
+
             const heroShowcase = document.getElementById('tcHeroShowcase');
+            const laptopStageWrap = document.getElementById('laptopStageWrap');
             const laptopMockup = document.getElementById('laptopMockup');
             const actualLaptopImg = document.getElementById('actualLaptopImg');
+            const mobileHeroCard = document.getElementById('tcMobileHeroCard');
+            const mobileHeroImg = document.getElementById('tcMobileHeroImg');
             const sectionsContainer = document.getElementById('tcSectionsContainer');
             const overviewCard = document.getElementById('tcOverviewCard');
             const headlineEl = document.getElementById('tcHeadline');
@@ -491,35 +521,192 @@
             const outcomeBullets = document.getElementById('tcOutcomeBullets');
             const outcomeClosing = document.getElementById('tcOutcomeClosing');
             const standardGrid = document.getElementById('pdetailStandardGrid');
+            const floatingDock = document.getElementById('tcFloatingDock');
+            const dockTitle = document.getElementById('tcDockTitle');
+            const dockTopBtn = document.getElementById('tcDockTopBtn');
 
             if (isCaseStudy) {
                 if (standardGrid) standardGrid.style.display = 'none';
 
-                // Display Hero Presentation Showcase (Actual Laptop Only)
+                // Floating Dock Setup (Travis Cruz bottom pill dock)
+                if (floatingDock) {
+                    if (dockTitle) dockTitle.textContent = project.shortTitle || project.title;
+                    if (dockTopBtn) {
+                        dockTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 350) {
+                            floatingDock.classList.remove('is-hidden');
+                        } else {
+                            floatingDock.classList.add('is-hidden');
+                        }
+                    }, { passive: true });
+                }
+
+                // Display Hero Presentation Showcase (Mobile Phone for Tourgo, Laptop for Ani-Grow)
                 if (heroShowcase) {
                     heroShowcase.style.display = 'block';
 
-                    if (laptopMockup) {
-                        laptopMockup.addEventListener('click', () => {
-                            openCustomLightbox('assets/Ani-Grow/6_nobg.png', `${project.shortTitle} — Farm Overview & Analytics`, 'FARM COMMAND', false);
-                        });
+                    const isMobileHero = project.id === 'tourgo' || (project.overview && project.overview.heroImage) || project.category.includes('Trip');
+
+                    if (isMobileHero) {
+                        if (laptopStageWrap) laptopStageWrap.style.display = 'none';
+                        if (mobileHeroCard && mobileHeroImg) {
+                            const heroSrc = (project.overview && project.overview.heroImage) || project.screen || 'assets/Tourgo/Home.jpg';
+                            mobileHeroImg.src = heroSrc;
+                            mobileHeroImg.alt = `${project.shortTitle} Mobile Showcase`;
+                            mobileHeroCard.style.display = 'flex';
+                            mobileHeroCard.onclick = () => {
+                                openCustomLightbox(heroSrc, `${project.shortTitle} — Mobile Showcase`, 'MOBILE APP', true);
+                            };
+                        }
+                    } else {
+                        if (mobileHeroCard) mobileHeroCard.style.display = 'none';
+                        if (laptopStageWrap) {
+                            laptopStageWrap.style.display = 'block';
+                            if (laptopMockup) {
+                                laptopMockup.onclick = () => {
+                                    openCustomLightbox(project.screen || 'assets/Ani-Grow/6_nobg.png', `${project.shortTitle} — Farm Overview & Analytics`, 'FARM COMMAND', false);
+                                };
+                            }
+                        }
                     }
                 }
 
                 if (overviewCard) {
                     overviewCard.style.display = 'block';
-                    if (headlineEl) headlineEl.textContent = project.overviewHeadline || project.title;
-                    if (narrativeEl) narrativeEl.textContent = project.overviewDesc || project.desc;
+                    if (headlineEl) headlineEl.textContent = (project.overview && project.overview.title) || project.overviewHeadline || project.title;
+                    if (narrativeEl) narrativeEl.textContent = (project.overview && project.overview.description) || project.overviewDesc || project.desc;
                 }
 
                 if (challengeBox && project.challenge) {
                     challengeBox.style.display = 'block';
                     if (challengeText) challengeText.textContent = project.challenge;
+                } else if (challengeBox) {
+                    challengeBox.style.display = 'none';
                 }
 
                 // Section-by-Section Walkthrough (Elegant & Simple Case Study Layout)
-                if (sectionsContainer && Array.isArray(project.caseStudySections)) {
+                if (sectionsContainer && hasWalkthroughSections) {
+                    // Travis Cruz Barkadash Layout (duo-crop, fade-loop, single, text-only)
+                    sectionsContainer.style.display = 'block';
+                    sectionsContainer.className = 'tc-walkthrough-stack';
+
+                    sectionsContainer.innerHTML = project.sections.map((sec, idx) => {
+                        let mediaMarkup = '';
+
+                        if (sec.layout === 'duo-crop' && Array.isArray(sec.images) && sec.images.length >= 2) {
+                            mediaMarkup = `
+                                <div class="tc-duo-crop-card">
+                                    <div class="tc-duo-crop-row">
+                                        <div class="tc-duo-crop-col open-case-study-lightbox" data-img="${sec.images[0]}" data-title="${sec.title} (Screen 1)" tabindex="0" role="button" aria-label="Inspect ${sec.title} Screen 1">
+                                            <img src="${sec.images[0]}" alt="${sec.title} Screen 1" class="tc-duo-crop-img" loading="lazy">
+                                        </div>
+                                        <div class="tc-duo-crop-col open-case-study-lightbox" data-img="${sec.images[1]}" data-title="${sec.title} (Screen 2)" tabindex="0" role="button" aria-label="Inspect ${sec.title} Screen 2">
+                                            <img src="${sec.images[1]}" alt="${sec.title} Screen 2" class="tc-duo-crop-img" loading="lazy">
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        } else if (sec.layout === 'fade-loop' && Array.isArray(sec.images) && sec.images.length > 0) {
+                            const total = sec.images.length;
+                            mediaMarkup = `
+                                <div class="tc-fade-loop-card" data-fade-loop-idx="${idx}">
+                                    <div class="tc-fade-loop-stage open-case-study-lightbox" data-title="${sec.title}" tabindex="0" role="button" aria-label="Inspect ${sec.title}">
+                                        ${sec.images.map((img, sIdx) => `
+                                            <img src="${img}" alt="${sec.title} Slide ${sIdx + 1}" class="tc-fade-loop-slide ${sIdx === 0 ? 'is-active' : ''}" data-slide-idx="${sIdx}" loading="lazy">
+                                        `).join('')}
+                                    </div>
+                                    <div class="tc-fade-loop-badge">
+                                        <i data-lucide="layers" style="width:12px;height:12px;"></i>
+                                        <span class="tc-fade-loop-counter">1 / ${total}</span>
+                                    </div>
+                                    <button type="button" class="tc-fade-loop-btn" aria-label="Next slide" title="Next slide">
+                                        <svg viewBox="0 0 32 32" class="tc-ring-svg">
+                                            <circle cx="16" cy="16" r="10" stroke="rgba(255,255,255,0.25)" stroke-width="2.5" fill="none"></circle>
+                                            <circle cx="16" cy="16" r="10" stroke="#ffffff" stroke-width="2.5" fill="none" class="tc-ring-progress" stroke-dasharray="62.83" stroke-dashoffset="${(62.83 * (1 - 1/total)).toFixed(2)}"></circle>
+                                        </svg>
+                                    </button>
+                                </div>
+                            `;
+                        } else if (sec.layout === 'single' && Array.isArray(sec.images) && sec.images.length > 0) {
+                            mediaMarkup = `
+                                <div class="tc-single-card open-case-study-lightbox" data-img="${sec.images[0]}" data-title="${sec.title}" tabindex="0" role="button" aria-label="Inspect ${sec.title}">
+                                    <img src="${sec.images[0]}" alt="${sec.title}" class="tc-single-img" loading="lazy">
+                                </div>
+                            `;
+                        }
+
+                        return `
+                            <hr class="tc-divider">
+                            <article class="tc-section-block" id="${sec.id || `section-${idx}`}">
+                                <div class="tc-section-header">
+                                    <h3 class="tc-sec-title">${sec.title}</h3>
+                                    <p class="tc-sec-desc">${sec.description}</p>
+                                </div>
+                                ${mediaMarkup}
+                            </article>
+                        `;
+                    }).join('');
+
+                    // Attach Lightbox Handlers
+                    sectionsContainer.querySelectorAll('.open-case-study-lightbox').forEach(el => {
+                        el.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            if (el.classList.contains('tc-fade-loop-stage')) {
+                                const activeImg = el.querySelector('.tc-fade-loop-slide.is-active');
+                                if (activeImg) {
+                                    openCustomLightbox(activeImg.src, `${activeImg.alt} — ${project.shortTitle}`, 'SPECIAL FEATURE', true);
+                                }
+                            } else {
+                                const imgSrc = el.getAttribute('data-img');
+                                const title = el.getAttribute('data-title') || project.shortTitle;
+                                if (imgSrc) {
+                                    openCustomLightbox(imgSrc, `${title} — ${project.shortTitle}`, 'SCREENSHOT', true);
+                                }
+                            }
+                        });
+                    });
+
+                    // Initialize Fade-Loop Interactive Carousels
+                    sectionsContainer.querySelectorAll('.tc-fade-loop-card').forEach(card => {
+                        const slides = card.querySelectorAll('.tc-fade-loop-slide');
+                        const counter = card.querySelector('.tc-fade-loop-counter');
+                        const nextBtn = card.querySelector('.tc-fade-loop-btn');
+                        const progressRing = card.querySelector('.tc-ring-progress');
+                        const total = slides.length;
+                        if (total <= 1) return;
+
+                        let current = 0;
+                        const circumference = 2 * Math.PI * 10; // ~62.83
+
+                        function showSlide(idx) {
+                            slides[current].classList.remove('is-active');
+                            current = (idx + total) % total;
+                            slides[current].classList.add('is-active');
+                            if (counter) counter.textContent = `${current + 1} / ${total}`;
+                            if (progressRing) {
+                                const offset = circumference * (1 - (current + 1) / total);
+                                progressRing.style.strokeDashoffset = offset;
+                            }
+                        }
+
+                        let autoTimer = setInterval(() => showSlide(current + 1), 2400);
+
+                        if (nextBtn) {
+                            nextBtn.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                clearInterval(autoTimer);
+                                showSlide(current + 1);
+                                autoTimer = setInterval(() => showSlide(current + 1), 2400);
+                            });
+                        }
+                    });
+
+                } else if (sectionsContainer && hasLegacyCaseStudy) {
+                    // Legacy Module Layout (e.g. Ani-Grow)
                     sectionsContainer.style.display = 'flex';
+                    sectionsContainer.className = 'tc-sections-container';
                     sectionsContainer.innerHTML = project.caseStudySections.map((sec, idx) => `
                         <article class="tc-section-item" id="${sec.id || `section-${idx}`}">
                             <div class="tc-section-content">
@@ -554,17 +741,18 @@
                     builtWithCard.style.display = 'block';
                     if (chipsGrid) {
                         chipsGrid.innerHTML = project.builtWith.map(chip => `
-                            <span class="tc-chip"><i data-lucide="cpu" style="width:12px;height:12px;color:var(--text-muted);"></i> ${chip}</span>
+                            <span class="tc-role-badge">${chip}</span>
                         `).join('');
                     }
                 }
 
                 if (outcomeCard && project.outcome) {
                     outcomeCard.style.display = 'block';
-                    if (outcomeTitle) outcomeTitle.textContent = project.outcome.title || 'The Outcome & Validation';
-                    if (outcomeNarrative) outcomeNarrative.textContent = project.outcome.narrative;
+                    if (outcomeTitle) outcomeTitle.textContent = project.outcome.title || 'The Outcome';
+                    if (outcomeNarrative) outcomeNarrative.textContent = project.outcome.description || project.outcome.narrative || '';
 
                     if (outcomeBullets && Array.isArray(project.outcome.stats)) {
+                        outcomeBullets.style.display = 'flex';
                         outcomeBullets.innerHTML = project.outcome.stats.map(st => `
                             <li class="tc-outcome-bullet-item">
                                 <span class="tc-bullet-symbol">•</span>
@@ -575,10 +763,17 @@
                                 </div>
                             </li>
                         `).join('');
+                    } else if (outcomeBullets) {
+                        outcomeBullets.style.display = 'none';
                     }
 
                     if (outcomeClosing) {
-                        outcomeClosing.textContent = 'Swine growth telemetry and feeding trials from a consulted commercial operator also confirmed the modular IoT and AI architecture extends seamlessly beyond poultry to livestock operations.';
+                        if (project.id === 'anigrow') {
+                            outcomeClosing.style.display = 'block';
+                            outcomeClosing.textContent = 'Swine growth telemetry and feeding trials from a consulted commercial operator also confirmed the modular IoT and AI architecture extends seamlessly beyond poultry to livestock operations.';
+                        } else {
+                            outcomeClosing.style.display = 'none';
+                        }
                     }
                 }
             } else {
@@ -589,6 +784,7 @@
                 if (challengeBox) challengeBox.style.display = 'none';
                 if (builtWithCard) builtWithCard.style.display = 'none';
                 if (outcomeCard) outcomeCard.style.display = 'none';
+                if (floatingDock) floatingDock.style.display = 'none';
             }
 
             // ── Screenshots & Gallery Engine ──────────────────────────────────
@@ -620,7 +816,7 @@
 
             function openCustomLightbox(src, title, badge, isMobile = false) {
                 if (!lbModal) return;
-                const isMobileScreen = isMobile || (src && (src.includes('hero_showcase') || src.includes('mobile')));
+                const isMobileScreen = isMobile || (src && (src.includes('Tourgo') || src.includes('hero_showcase') || src.includes('mobile')));
 
                 if (isMobileScreen) {
                     if (laptopDisplayWrap) laptopDisplayWrap.style.display = 'none';

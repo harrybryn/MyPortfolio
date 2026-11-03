@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -24,18 +24,26 @@
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
 
-    <!-- Immediate Theme Initialization (Eliminates flash & supports System/Light/Dark) -->
+    <!-- Immediate Theme Initialization (Defaults to Dark) & Splash Check -->
     <script>
         (function () {
-            var p = 'system';
-            try { p = localStorage.getItem('portfolio-theme') || 'system'; } catch (e) { }
-            var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
-            var isDark = p === 'dark' || (p === 'system' && !!mq && mq.matches);
+            var p = 'dark';
+            try { p = localStorage.getItem('portfolio-theme') || 'dark'; } catch (e) { }
+            var isDark = p !== 'light';
             document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+
+            // Check if splash already shown once
+            try {
+                var urlParams = new URLSearchParams(window.location.search);
+                var forceReplay = urlParams.get('replay') === '1' || urlParams.get('splash') === '1';
+                if (!forceReplay && (sessionStorage.getItem('portfolio_splash_seen') || localStorage.getItem('portfolio_splash_seen'))) {
+                    document.documentElement.classList.add('splash-already-seen');
+                }
+            } catch (e) { }
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=130">
+    <link rel="stylesheet" href="styles.css?v=131">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -185,7 +193,8 @@
                     </div>
 
                     <div class="hero-intro-text">
-                        <h1 class="hero-name"><span class="hero-typewriter-text" id="heroNameTypewriter">Harry Sevilla</span><span class="hero-cursor" aria-hidden="true">|</span></h1>
+                        <h1 class="hero-name"><span class="hero-typewriter-text" id="heroNameTypewriter">Harry
+                                Sevilla</span><span class="hero-cursor" aria-hidden="true">|</span></h1>
                         <p class="hero-role">Full-Stack Developer &amp; IT Student</p>
 
                         <div class="hero-bio">
@@ -201,13 +210,15 @@
                             </p>
 
                             <div class="hero-bio-actions">
-                                <a href="assets/HarryBryanSevilla_Resume.pdf" target="_blank" rel="noopener noreferrer" class="hero-bio-toggle-btn hero-resume-btn" title="View Harry Bryan Sevilla's Resume">
+                                <a href="assets/HarryBryanSevilla_Resume.pdf" target="_blank" rel="noopener noreferrer"
+                                    class="hero-bio-toggle-btn hero-resume-btn"
+                                    title="View Harry Bryan Sevilla's Resume">
                                     <i data-lucide="file-text"></i>
                                     <span>View Resume</span>
                                     <i data-lucide="arrow-up-right"></i>
                                 </a>
-                                <a href="about.html" class="hero-bio-toggle-btn"
-                                    id="heroBioLink" title="Read more about Harry Sevilla">
+                                <a href="about.html" class="hero-bio-toggle-btn" id="heroBioLink"
+                                    title="Read more about Harry Sevilla">
                                     <span>See more about me</span>
                                     <i data-lucide="arrow-right"></i>
                                 </a>
@@ -354,11 +365,13 @@
                                     </div>
 
                                     <div class="cf-card-body">
-                                        <p class="cf-card-desc">AI guidance and telemetry platform for livestock operations with automated sorting gates and feeding dispensers.</p>
+                                        <p class="cf-card-desc">AI guidance and telemetry platform for livestock
+                                            operations with automated sorting gates and feeding dispensers.</p>
                                     </div>
 
                                     <div class="cf-card-meta-bottom">
-                                        <a href="project-detail.html?id=anigrow" class="cf-card-cta" title="View ANI-GROW Project Showcase">
+                                        <a href="project-detail.html?id=anigrow" class="cf-card-cta"
+                                            title="View ANI-GROW Project Showcase">
                                             <span>View Project</span>
                                             <i data-lucide="arrow-right"></i>
                                         </a>
@@ -386,14 +399,17 @@
                                     </div>
 
                                     <div class="cf-card-body">
-                                        <p class="cf-card-desc">Cross-platform mobile application for group trips featuring join-code enrollment, expense splitting, and Gemini AI itinerary planning.</p>
+                                        <p class="cf-card-desc">Cross-platform mobile application for group trips
+                                            featuring join-code enrollment, expense splitting, and Gemini AI itinerary
+                                            planning.</p>
                                     </div>
 
                                     <div class="cf-card-meta-bottom">
-                                        <span class="cf-card-cta is-locked" title="Project details currently locked">
-                                            <span>View Details</span>
-                                            <i data-lucide="lock"></i>
-                                        </span>
+                                        <a href="project-detail.html?id=tourgo" class="cf-card-cta"
+                                            title="View TOURGO Project Showcase">
+                                            <span>View Project</span>
+                                            <i data-lucide="arrow-right"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -418,7 +434,8 @@
                                     </div>
 
                                     <div class="cf-card-body">
-                                        <p class="cf-card-desc">Full-scale lights and sound booking system with 4 specialized portals for clients, crew, administrators, and affiliates.</p>
+                                        <p class="cf-card-desc">Full-scale lights and sound booking system with 4
+                                            specialized portals for clients, crew, administrators, and affiliates.</p>
                                     </div>
 
                                     <div class="cf-card-meta-bottom">
@@ -450,7 +467,8 @@
                                     </div>
 
                                     <div class="cf-card-body">
-                                        <p class="cf-card-desc">Institutional staff records and personnel management web platform managing institutional directory, leave filing, and approvals.</p>
+                                        <p class="cf-card-desc">Institutional staff records and personnel management web
+                                            platform managing institutional directory, leave filing, and approvals.</p>
                                     </div>
 
                                     <div class="cf-card-meta-bottom">

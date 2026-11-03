@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -16,10 +16,9 @@
     <!-- Immediate Theme Initialization (Eliminates flash & supports System/Light/Dark) -->
     <script>
         (function() {
-            var p = 'system';
-            try { p = localStorage.getItem('portfolio-theme') || 'system'; } catch (e) {}
-            var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
-            var isDark = p === 'dark' || (p === 'system' && !!mq && mq.matches);
+            var p = 'dark';
+            try { p = localStorage.getItem('portfolio-theme') || 'dark'; } catch (e) {}
+            var isDark = p !== 'light';
             document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
         })();
     </script>
@@ -224,17 +223,20 @@
         let animT;
 
         function getPref() {
-            try {
-                const v = localStorage.getItem(KEY);
-                return (v === 'dark' || v === 'light' || v === 'system') ? v : 'system';
-            } catch (e) {
-                return 'system';
+                try {
+                    const v = localStorage.getItem(KEY);
+                    return (v === 'dark' || v === 'light' || v === 'system') ? v : 'dark';
+                } catch (e) {
+                    return 'dark';
+                }
             }
         }
 
         function isDarkTheme(p) {
-            return p === 'dark' || (p === 'system' && !!mq && mq.matches);
-        }
+                if (p === 'light') return false;
+                if (p === 'dark') return true;
+                return !(mq && !mq.matches);
+            }
 
         function syncThemeUI(p) {
             const dark = isDarkTheme(p);
