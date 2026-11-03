@@ -23,7 +23,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=144">
+    <link rel="stylesheet" href="styles.css?v=145">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -35,9 +35,9 @@
     <div class="subpage-container">
         <!-- Subpage Header Navigation -->
         <header class="subpage-header-nav">
-            <a href="./#projects" class="subpage-back-link" title="Return to main portfolio">
+            <a href="index.html" class="subpage-back-link" title="Return to main portfolio">
                 <i data-lucide="arrow-left"></i>
-                <span>Back to Overview</span>
+                <span>Back</span>
             </a>
 
             <div class="nav-right">
@@ -64,1066 +64,340 @@
         </header>
 
         <!-- Main Content -->
-        <main class="subpage-main">
-            <!-- Header Title -->
-            <section class="subpage-title-section">
-                <div class="subpage-badge-row">
-                    <span class="subpage-counter-badge">11 DELIVERED PROJECTS</span>
-                    <span class="subpage-year-range">2023 — 2026</span>
+        <main class="tc-dev-page-container">
+            <div class="tc-dev-header-block">
+                <div class="tc-dev-title-row">
+                    <h1 class="tc-dev-heading">Development</h1>
+                    <span class="tc-dev-total-count">11 projects</span>
                 </div>
-                <h1 class="subpage-heading">Featured Systems &amp; Software Archive</h1>
-                <p class="subpage-subheading">
-                    A comprehensive index of 11 full-stack applications, mobile platforms, and database-driven software systems built from 2023 to present. Click any project row to view technical architecture, UI screen mockups, and deliverables.
-                </p>
-            </section>
-
-            <!-- Search & Filter Controls -->
-            <div class="subpage-controls">
-                <div class="subpage-search-wrap">
-                    <i data-lucide="search" class="subpage-search-icon"></i>
-                    <input type="text" id="subpageSearch" class="subpage-search-input" placeholder="Search by name, tech stack, or keyword..." autocomplete="off">
-                </div>
-                <div class="subpage-filter-pills" id="subpageFilters">
-                    <button class="subpage-filter-btn active" data-filter="all">All (11)</button>
-                    <button class="subpage-filter-btn" data-filter="mobile">Mobile Apps</button>
-                    <button class="subpage-filter-btn" data-filter="web">Web Systems</button>
-                    <button class="subpage-filter-btn" data-filter="iot">IoT &amp; AI</button>
-                    <button class="subpage-filter-btn" data-filter="enterprise">Enterprise</button>
-                </div>
+                <p class="tc-dev-subheading">Selected mobile, web, and full-stack software applications built from research to production.</p>
             </div>
 
-            <!-- Project Archive List (Clean List Rows with Expandable Showcases) -->
-            <div class="subpage-archive-list" id="subpageList">
-
-                <!-- Group 01: The 3 Main Flagship Case Studies -->
-                <div class="subpage-group-header">
-                    <div class="subpage-group-title-row">
-                        <span class="subpage-group-badge">FLAGSHIP WORKS</span>
-                        <h2 class="subpage-group-title">Primary Featured Works</h2>
-                    </div>
-                    <p class="subpage-group-desc">Comprehensive case studies featuring interactive device walkthroughs, system telemetry, and architectural blueprints.</p>
+            <!-- 01. FEATURED PROJECTS -->
+            <section class="tc-dev-section">
+                <div class="tc-dev-section-head">
+                    <span class="tc-dev-section-label">Featured Projects</span>
+                    <span class="tc-dev-section-count">3</span>
                 </div>
 
-                <!-- ANI-GROW -->
-                <article class="subpage-item is-featured" id="project-anigrow" data-project-id="anigrow" data-category="mobile iot" data-search="ani-grow poultry livestock farming guide react native iot ai">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/anigrow_logo.png" alt="ANI-GROW" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">ANI-GROW</h3>
-                        </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-featured-badge"><i data-lucide="sparkles"></i> FEATURED CASE STUDY</span>
-                            <span class="subpage-item-category">MOBILE · IOT · AI ANALYTICS</span>
-                            <p class="subpage-item-desc">AI guidance and telemetry platform for livestock operations with automated sorting gates and feeding dispensers.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <a href="project-detail.html?id=anigrow" class="subpage-view-details-pill is-featured-pill" title="View Full Project Case Study"><span>View Case Study</span><i data-lucide="arrow-right"></i></a>
-                        </div>
+                <!-- 1. ANI-GROW -->
+                <article class="tc-dev-item" id="project-anigrow">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Poultry &amp; Livestock Farming Guide</span>
+                        <span class="tc-dev-item-year">2026</span>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/anigrow_screen_1.png" data-title="ANI-GROW: AI-Powered Poultry & Livestock Farming Guide" data-sub="Poultry & Livestock Analytics" data-logo="assets/anigrow_logo.png" data-url="https://anigrow.vercel.app" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/anigrow_screen_1.png" alt="ANI-GROW Screen Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="tc-dev-item-main">
+                        <div class="tc-dev-brand">
+                            <div class="tc-dev-logo-box">
+                                <img src="assets/anigrow_logo.png" alt="Ani-Grow" class="tc-dev-logo">
                             </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/anigrow_logo.png" alt="ANI-GROW" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">ANI-GROW</h3>
-                                            <span class="cf-info-badge">Poultry & Livestock Analytics</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2026</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    A mobile application that helps farm animal caretakers manage poultry and livestock operations using AI guidance and data analytics. Supports and integrates with custom IoT machines for weight-based segregation and automated feeding of farm animals.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>Real-time animal weight telemetry and automatic sorting gates</li>
-                                            <li>Automated scheduling and dosage controls for feeding dispensers</li>
-                                            <li>Offline-first mobile data sync for farm field workers</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            Built with a cross-platform React Native frontend communicating with sensor hubs via REST & MQTT protocols. Backend processes real-time feed analytics and stores event logs in a normalized schema.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">React Native</span>
-                                        <span class="tag">IoT Integration</span>
-                                        <span class="tag">AI Analytics</span>
-                                        <span class="tag">Agricultural Tech</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="tc-dev-titles">
+                                <h2 class="tc-dev-item-title" style="color: #15803d;">Ani-Grow</h2>
+                                <p class="tc-dev-item-sub">AI-Powered Poultry &amp; Livestock Farming Guide with Data Analytics</p>
                             </div>
                         </div>
+                        <a href="project-detail.html?id=anigrow" class="tc-dev-view-btn">
+                            <span>View</span>
+                            <span class="tc-dev-arrow">&#8599;</span>
+                        </a>
+                    </div>
+                    <p class="tc-dev-item-desc">
+                        Contributed to the design and development of an AI-powered poultry and livestock farming guide for Golden Nutriharvest, Inc., a San Miguel Foods grower partner with over 15 years in the industry. The system combines IoT prototypes, an Android app for caretakers, and a web dashboard for farm administrators.
+                    </p>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">React Native (Expo)</span>
+                        <span class="tc-dev-tech-pill">React (Vite)</span>
+                        <span class="tc-dev-tech-pill">TypeScript</span>
+                        <span class="tc-dev-tech-pill">Tailwind CSS</span>
+                        <span class="tc-dev-tech-pill">Supabase</span>
+                        <span class="tc-dev-tech-pill">Firebase</span>
+                        <span class="tc-dev-tech-pill">Claude API</span>
+                        <span class="tc-dev-tech-pill">ESP32</span>
+                        <span class="tc-dev-tech-pill">IoT</span>
                     </div>
                 </article>
 
-                <!-- TOURGO -->
-                <article class="subpage-item is-featured" id="project-tourgo" data-project-id="tourgo" data-category="mobile" data-search="tourgo collaborative group travel platform react native google gemini ai expo group travel itinerary">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/TourGoAppLogo.png" alt="TOURGO" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">TOURGO</h3>
-                        </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-featured-badge"><i data-lucide="sparkles"></i> FEATURED CASE STUDY</span>
-                            <span class="subpage-item-category">MOBILE PLATFORM · AI</span>
-                            <p class="subpage-item-desc">Collaborative mobile group travel planner with 1-day AI itineraries, live safety radar, and transparent expense splitting.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <a href="project-detail.html?id=tourgo" class="subpage-view-details-pill is-featured-pill" title="View Full Project Case Study"><span>View Case Study</span><i data-lucide="arrow-right"></i></a>
-                        </div>
+                <div class="tc-dev-divider"></div>
+
+                <!-- 2. TOURGO -->
+                <article class="tc-dev-item" id="project-tourgo">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Trip Planning Guide</span>
+                        <span class="tc-dev-item-year">2026</span>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_tourgo.png" data-title="TOURGO: Collaborative Group Travel Platform" data-sub="Group Travel & Itinerary Platform" data-logo="assets/TourGoAppLogo.png" data-url="https://tourgo.internal" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_tourgo.png" alt="TOURGO Screen Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="tc-dev-item-main">
+                        <div class="tc-dev-brand">
+                            <div class="tc-dev-logo-box">
+                                <img src="assets/TourGoAppLogo.png" alt="Tourgo" class="tc-dev-logo">
                             </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/TourGoAppLogo.png" alt="TOURGO" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">TOURGO</h3>
-                                            <span class="cf-info-badge">Group Travel & Itinerary Platform</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2026</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    A cross-platform mobile application for group trip planning featuring join-code enrollment, collaborative itineraries, real-time chat, polls, and shared expense splitting. Integrates Google Gemini AI for personalized day-plan generation and Expo push notifications.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>6-digit join-code trip onboarding with real-time room chat and polls</li>
-                                            <li>Automated group expense split calculator with multi-currency balance tracking</li>
-                                            <li>AI itinerary generator powered by Google Gemini 1.5 Flash</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            Engineered with React Native / Expo utilizing client-side optimistic UI updates for real-time messaging, paired with cloud functions orchestrating Gemini AI prompts.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">React Native</span>
-                                        <span class="tag">Google Gemini AI</span>
-                                        <span class="tag">Expo Push</span>
-                                        <span class="tag">Real-Time Chat</span>
-                                        <span class="tag">Travel Tech</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=tourgo" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="tc-dev-titles">
+                                <h2 class="tc-dev-item-title" style="color: #007aff;">Tourgo</h2>
+                                <p class="tc-dev-item-sub">Group Travel &amp; Shared Itinerary Mobile App</p>
                             </div>
                         </div>
+                        <a href="project-detail.html?id=tourgo" class="tc-dev-view-btn">
+                            <span>View</span>
+                            <span class="tc-dev-arrow">&#8599;</span>
+                        </a>
+                    </div>
+                    <p class="tc-dev-item-desc">
+                        A collaborative mobile application for Filipino friend groups, unifying destination voting, shared daily itineraries, receipt OCR expense splitting, live Radar tracking, and an AI travel assistant into one seamless platform.
+                    </p>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">React Native (Expo)</span>
+                        <span class="tc-dev-tech-pill">Supabase</span>
+                        <span class="tc-dev-tech-pill">Tailwind CSS</span>
+                        <span class="tc-dev-tech-pill">Google Gemini</span>
+                        <span class="tc-dev-tech-pill">Groq</span>
                     </div>
                 </article>
 
-                <!-- Binhi -->
-                <article class="subpage-item is-featured" id="project-binhi" data-project-id="binhi" data-category="web" data-search="binhi concept lights sounds booking management system react multi-portal otp paymongo supabase">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/Binhi/binhi_logo.png" alt="BINHI Concept" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">BINHI Concept</h3>
-                        </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-featured-badge"><i data-lucide="sparkles"></i> FEATURED CASE STUDY</span>
-                            <span class="subpage-item-category">EVENT SERVICES · MULTI-PORTAL SYSTEM</span>
-                            <p class="subpage-item-desc">Centralized e-commerce and gear operations platform coordinating event bookings, PayMongo checkout, and serial-level warehouse inventory.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <a href="project-detail.html?id=binhi" class="subpage-view-details-pill is-featured-pill" title="View Full Project Case Study"><span>View Case Study</span><i data-lucide="arrow-right"></i></a>
-                        </div>
+                <div class="tc-dev-divider"></div>
+
+                <!-- 3. BINHI CONCEPT -->
+                <article class="tc-dev-item" id="project-binhi">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Event Services Booking System</span>
+                        <span class="tc-dev-item-year">2026</span>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/Binhi/admin_dashboard.webp" data-title="BINHI CONCEPT: Event Services Booking & Operations Hub" data-sub="Event Production Suite" data-logo="assets/Binhi/binhi_logo.png" data-url="project-detail.html?id=binhi" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/Binhi/admin_dashboard.webp" alt="Binhi Admin Dashboard Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="tc-dev-item-main">
+                        <div class="tc-dev-brand">
+                            <div class="tc-dev-logo-box">
+                                <img src="assets/Binhi/binhi_logo.png" alt="BINHI Concept" class="tc-dev-logo">
                             </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/Binhi/binhi_logo.png" alt="BINHI Concept" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">BINHI Concept</h3>
-                                            <span class="cf-info-badge">Event Production Suite</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2026</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    Designed and developed a centralized e-commerce and operations platform for BINHI Concept, a lights, sounds, and event styling service in Malolos, Bulacan. Unifies public package browsing, calendar availability validation, PayMongo checkout, physical serial-level equipment allocation, and role-based workflows across clients, administrators, warehouse managers, and rigging technicians.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>Customer reservation portal with package configuration & PayMongo checkout</li>
-                                            <li>Real-time master calendar preventing gear clashes across overlapping dates</li>
-                                            <li>Two-tier inventory architecture tracking serial numbers, barcodes, and maintenance states</li>
-                                            <li>Field-crew mobile portal with equipment manifests and digital setup checklists</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            React 18 frontend with TypeScript and Vite, backed by Supabase PostgreSQL for transactional inventory locks and real-time reservation updates, TanStack Query for state caching, and PayMongo for checkout processing.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">React 18</span>
-                                        <span class="tag">TypeScript</span>
-                                        <span class="tag">Vite</span>
-                                        <span class="tag">Supabase</span>
-                                        <span class="tag">PayMongo</span>
-                                        <span class="tag">TanStack Query</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=binhi" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                            <div class="tc-dev-titles">
+                                <h2 class="tc-dev-item-title">BINHI Concept</h2>
+                                <p class="tc-dev-item-sub">Event Services Booking and Management System</p>
                             </div>
                         </div>
+                        <a href="project-detail.html?id=binhi" class="tc-dev-view-btn">
+                            <span>View</span>
+                            <span class="tc-dev-arrow">&#8599;</span>
+                        </a>
+                    </div>
+                    <p class="tc-dev-item-desc">
+                        Centralized e-commerce and resource operations platform for lights, sounds, and event styling services in Malolos, Bulacan. Connects real-time client reservations directly with warehouse equipment inventory, PayMongo checkout, transit turnaround windows, and role-based staff portals.
+                    </p>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">React 18</span>
+                        <span class="tc-dev-tech-pill">TypeScript</span>
+                        <span class="tc-dev-tech-pill">Vite</span>
+                        <span class="tc-dev-tech-pill">Tailwind CSS</span>
+                        <span class="tc-dev-tech-pill">Supabase</span>
+                        <span class="tc-dev-tech-pill">TanStack Query</span>
+                        <span class="tc-dev-tech-pill">PayMongo</span>
                     </div>
                 </article>
+            </section>
 
-                <!-- Group 02: Additional Systems & Architecture Archive -->
-                <div class="subpage-group-header subpage-group-archive">
-                    <div class="subpage-group-title-row">
-                        <span class="subpage-group-badge subpage-badge-muted">PORTFOLIO ARCHIVE</span>
-                        <h2 class="subpage-group-title">Additional Systems &amp; Software</h2>
-                    </div>
-                    <p class="subpage-group-desc">Enterprise management portals, institutional databases, and specialized client platforms.</p>
+            <div class="tc-dev-divider tc-dev-section-divider"></div>
+
+            <!-- 02. OTHER PROJECTS -->
+            <section class="tc-dev-section">
+                <div class="tc-dev-section-head">
+                    <span class="tc-dev-section-label">Other Projects</span>
+                    <span class="tc-dev-section-count">8</span>
                 </div>
 
                 <!-- COLM Pulilan -->
-                <article class="subpage-item" id="project-colm" data-project-id="colm" data-category="enterprise web" data-search="colm pulilan college of our lady of mercy employee management system staff database institutional hr react php mysql deployment">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/COLM_Pulilan_logo.png" alt="COLM Pulilan" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">COLM Pulilan</h3>
+                <article class="tc-dev-other-item" id="project-colm">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Institutional HR &amp; Records</span>
+                        <span class="tc-dev-item-year">2026</span>
+                    </div>
+                    <div class="tc-dev-brand">
+                        <div class="tc-dev-logo-box">
+                            <img src="assets/COLM_Pulilan_logo.png" alt="COLM Pulilan" class="tc-dev-logo">
                         </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-item-category">ENTERPRISE · HR & RECORDS</span>
-                            <p class="subpage-item-desc">Institutional staff records management portal managing directory, leave tracking, and administrative approvals.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <span class="subpage-archive-expand-btn">
-                                <span class="subpage-archive-expand-text">Overview</span>
-                                <i data-lucide="chevron-down" class="subpage-chevron-icon"></i>
-                            </span>
+                        <div class="tc-dev-titles">
+                            <h3 class="tc-dev-other-title">COLM Pulilan</h3>
+                            <p class="tc-dev-item-sub">Employee Management &amp; Institutional Records Portal</p>
                         </div>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_colm.png" data-title="COLM Pulilan: Employee Management & Institutional Records Portal" data-sub="Institutional Client · Deployment Phase" data-logo="assets/COLM_Pulilan_logo.png" data-url="https://colm.edu.ph/portal" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_colm.png" alt="COLM Pulilan Screen Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/COLM_Pulilan_logo.png" alt="COLM Pulilan" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">COLM Pulilan</h3>
-                                            <span class="cf-info-badge">Institutional Client · Deployment Phase</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2026</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    A staff records and personnel management web system commissioned for College of Our Lady of Mercy (Pulilan, Bulacan). Currently in final preparations for official production deployment, maintaining employee profiles, department taxonomy, digital leave request pipelines, and administrative reporting.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>Centralized employee personnel database with department taxonomy</li>
-                                            <li>Digital leave request filing with multi-tier administrative approvals</li>
-                                            <li>Audit logging for employee record updates and administrative actions</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            React frontend architecture paired with secure PHP RESTful endpoints and PDO prepared MySQL transactions for institutional data integrity.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">React</span>
-                                        <span class="tag">PHP</span>
-                                        <span class="tag">MySQL</span>
-                                        <span class="tag">Institutional Client</span>
-                                        <span class="tag">Live Deployment</span>
-                                        <span class="tag">Admin Portal</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">React</span>
+                        <span class="tc-dev-tech-pill">PHP</span>
+                        <span class="tc-dev-tech-pill">MySQL</span>
+                        <span class="tc-dev-tech-pill">Admin Portal</span>
                     </div>
                 </article>
+
+                <div class="tc-dev-other-divider"></div>
 
                 <!-- RNF Fleet -->
-                <article class="subpage-item" id="project-rnf" data-project-id="rnf" data-category="enterprise web" data-search="rnf trucking fleet dispatch logistics management cargo php mysql">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/rnftrucking.png" alt="RNF Trucking" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">RNF Trucking</h3>
+                <article class="tc-dev-other-item" id="project-rnf">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Fleet Dispatch &amp; Logistics</span>
+                        <span class="tc-dev-item-year">2025</span>
+                    </div>
+                    <div class="tc-dev-brand">
+                        <div class="tc-dev-logo-box">
+                            <img src="assets/rnftrucking.png" alt="RNF Fleet" class="tc-dev-logo">
                         </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-item-category">LOGISTICS & SUPPLY CHAIN</span>
-                            <p class="subpage-item-desc">Freight and dispatch operations management platform with real-time cargo status tracking and driver manifest logging.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <span class="subpage-archive-expand-btn">
-                                <span class="subpage-archive-expand-text">Overview</span>
-                                <i data-lucide="chevron-down" class="subpage-chevron-icon"></i>
-                            </span>
+                        <div class="tc-dev-titles">
+                            <h3 class="tc-dev-other-title">RNF Fleet</h3>
+                            <p class="tc-dev-item-sub">Trucking Logistics &amp; Cargo Dispatch System</p>
                         </div>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_rnf.svg" data-title="RNF Fleet: Logistics Fleet Dispatch & Maintenance Platform" data-sub="Fleet Dispatch & Logistics Management" data-logo="assets/rnftrucking.png" data-url="https://rnf-logistics.internal/dispatch" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_rnf.svg" alt="RNF Fleet Screen Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/rnftrucking.png" alt="RNF Fleet" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">RNF Fleet</h3>
-                                            <span class="cf-info-badge">Fleet Dispatch & Logistics Management</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2023</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    An end-to-end logistics platform managing cargo delivery schedules, truck maintenance tracking, driver assignments, client shipment status updates, and fuel expenditure logs.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>Fleet maintenance calendar with automated mileage and inspection alerts</li>
-                                            <li>Driver dispatch assignment with cargo shipment manifest tracking</li>
-                                            <li>Fuel consumption audit logging and route expense reconciliation</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            Structured PHP relational web application with normalized MySQL tables indexing drivers, vehicles, maintenance logs, and financial records.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">PHP</span>
-                                        <span class="tag">MySQL</span>
-                                        <span class="tag">Fleet Dispatch</span>
-                                        <span class="tag">Cargo Logistics</span>
-                                        <span class="tag">Relational DB</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">PHP</span>
+                        <span class="tc-dev-tech-pill">MySQL</span>
+                        <span class="tc-dev-tech-pill">Bootstrap</span>
+                        <span class="tc-dev-tech-pill">Fleet Telemetry</span>
                     </div>
                 </article>
+
+                <div class="tc-dev-other-divider"></div>
 
                 <!-- WanderLocal -->
-                <article class="subpage-item" id="project-wanderlocal" data-project-id="wanderlocal" data-category="web" data-search="wanderlocal destination discovery localized itinerary planner travel tourism react">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/WanderLocalLogo.png" alt="WanderLocal" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">WanderLocal</h3>
+                <article class="tc-dev-other-item" id="project-wanderlocal">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Travel Discovery &amp; Itinerary</span>
+                        <span class="tc-dev-item-year">2024</span>
+                    </div>
+                    <div class="tc-dev-brand">
+                        <div class="tc-dev-logo-box">
+                            <img src="assets/WanderLocalLogo.png" alt="WanderLocal" class="tc-dev-logo">
                         </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-item-category">TOURISM & EXPLORATION</span>
-                            <p class="subpage-item-desc">Community travel discovery directory and curated local destination guide with interactive points of interest.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <span class="subpage-archive-expand-btn">
-                                <span class="subpage-archive-expand-text">Overview</span>
-                                <i data-lucide="chevron-down" class="subpage-chevron-icon"></i>
-                            </span>
+                        <div class="tc-dev-titles">
+                            <h3 class="tc-dev-other-title">WanderLocal</h3>
+                            <p class="tc-dev-item-sub">Localized Travel Guide &amp; Destination Portal</p>
                         </div>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_wanderlocal.svg" data-title="WanderLocal: Localized Itinerary & Tourism Discovery Engine" data-sub="Tourism & Itinerary Engine" data-logo="assets/WanderLocalLogo.png" data-url="https://wanderlocal.app/explore" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_wanderlocal.svg" alt="WanderLocal Screen Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/WanderLocalLogo.png" alt="WanderLocal" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">WanderLocal</h3>
-                                            <span class="cf-info-badge">Tourism & Itinerary Engine</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2024</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    A destination discovery and itinerary planning application that curates localized attractions and creates custom daily travel itineraries based on user travel preferences.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>Interactive destination matcher based on travel style preferences</li>
-                                            <li>Daily chronological itinerary builder with waypoint mapping</li>
-                                            <li>Local cultural tips, budget calculators, and transit recommendations</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            React frontend utilizing client-side state machine for step-by-step trip customization paired with geolocation-based attraction ranking.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">React</span>
-                                        <span class="tag">Itinerary Generator</span>
-                                        <span class="tag">Geolocation API</span>
-                                        <span class="tag">Tourism Tech</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">React</span>
+                        <span class="tc-dev-tech-pill">Node.js</span>
+                        <span class="tc-dev-tech-pill">Express</span>
+                        <span class="tc-dev-tech-pill">MongoDB</span>
+                        <span class="tc-dev-tech-pill">Leaflet</span>
                     </div>
                 </article>
+
+                <div class="tc-dev-other-divider"></div>
 
                 <!-- Together -->
-                <article class="subpage-item" id="project-together" data-project-id="together" data-category="mobile" data-search="together collaborative planning group events meetup invitations shared schedule">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/TogetherLogo.png" alt="Together" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">Together</h3>
+                <article class="tc-dev-other-item" id="project-together">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Collaborative Event Meetups</span>
+                        <span class="tc-dev-item-year">2024</span>
+                    </div>
+                    <div class="tc-dev-brand">
+                        <div class="tc-dev-logo-box">
+                            <img src="assets/TogetherLogo.png" alt="Together" class="tc-dev-logo">
                         </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-item-category">COMMUNITY & EVENTS</span>
-                            <p class="subpage-item-desc">Collaborative events planning and social meetup coordinator with schedule sync and guest RSVP management.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <span class="subpage-archive-expand-btn">
-                                <span class="subpage-archive-expand-text">Overview</span>
-                                <i data-lucide="chevron-down" class="subpage-chevron-icon"></i>
-                            </span>
+                        <div class="tc-dev-titles">
+                            <h3 class="tc-dev-other-title">Together</h3>
+                            <p class="tc-dev-item-sub">Group Hangout &amp; Event Planning App</p>
                         </div>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_together.svg" data-title="Together: Collaborative Group Event & Meetup Coordination" data-sub="Collaborative Event Planning Hub" data-logo="assets/TogetherLogo.png" data-url="https://together.internal/events" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_together.svg" alt="Together Screen Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/TogetherLogo.png" alt="Together" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">Together</h3>
-                                            <span class="cf-info-badge">Collaborative Event Planning Hub</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2024</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    A collaborative planning application designed for coordinating shared group events, managing invitations, scheduling activities, and keeping all participants in sync.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>Group event creation with RSVP status tracking and shared calendar</li>
-                                            <li>Interactive polling module for voting on dates, locations, and activities</li>
-                                            <li>Automated split-expense settlement with instant GCash link generation</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            React Native mobile client with asynchronous event queue and push notification hooks for real-time attendee updates.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">React Native</span>
-                                        <span class="tag">Expo Push</span>
-                                        <span class="tag">Real-Time Sync</span>
-                                        <span class="tag">Expense Split</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">Flutter</span>
+                        <span class="tc-dev-tech-pill">Dart</span>
+                        <span class="tc-dev-tech-pill">Firebase</span>
+                        <span class="tc-dev-tech-pill">Cloud Messaging</span>
                     </div>
                 </article>
+
+                <div class="tc-dev-other-divider"></div>
 
                 <!-- Grammar Galaxy -->
-                <article class="subpage-item" id="project-grammargalaxy" data-project-id="grammargalaxy" data-category="web" data-search="grammar galaxy educational gamified programming coding quest syntax challenges web">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/grammargalaxy.png" alt="Grammar Galaxy" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">Grammar Galaxy</h3>
+                <article class="tc-dev-other-item" id="project-grammargalaxy">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Gamified Learning Platform</span>
+                        <span class="tc-dev-item-year">2024</span>
+                    </div>
+                    <div class="tc-dev-brand">
+                        <div class="tc-dev-logo-box">
+                            <img src="assets/grammargalaxy.png" alt="Grammar Galaxy" class="tc-dev-logo">
                         </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-item-category">EDTECH · GAMIFIED LEARNING</span>
-                            <p class="subpage-item-desc">Interactive educational web game reinforcing language mechanics and syntactic grammar through spaced repetition.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <span class="subpage-archive-expand-btn">
-                                <span class="subpage-archive-expand-text">Overview</span>
-                                <i data-lucide="chevron-down" class="subpage-chevron-icon"></i>
-                            </span>
+                        <div class="tc-dev-titles">
+                            <h3 class="tc-dev-other-title">Grammar Galaxy</h3>
+                            <p class="tc-dev-item-sub">Educational Interactive Grammar Quest System</p>
                         </div>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_grammargalaxy.svg" data-title="Grammar Galaxy: Gamified Programming Syntax Learning Quest" data-sub="Gamified Coding Education" data-logo="assets/grammargalaxy.png" data-url="https://grammargalaxy.edu/quest" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_grammargalaxy.svg" alt="Grammar Galaxy Screen Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/grammargalaxy.png" alt="Grammar Galaxy" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">Grammar Galaxy</h3>
-                                            <span class="cf-info-badge">Gamified Coding Education</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2023</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    An educational web platform that teaches web development and programming syntax through gamified quest modules, interactive coding challenges, and progress milestones.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>In-browser interactive code editor with live syntax verification</li>
-                                            <li>Gamified progress roadmap with level unlocks, badges, and XP counters</li>
-                                            <li>Step-by-step interactive debugging exercises with instant automated feedback</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            Client-side sandboxed code execution environment running automated test assertions against user code solutions with zero latency.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">Web Platform</span>
-                                        <span class="tag">Gamified Coding</span>
-                                        <span class="tag">JavaScript Engine</span>
-                                        <span class="tag">EdTech</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">JavaScript</span>
+                        <span class="tc-dev-tech-pill">HTML5 Canvas</span>
+                        <span class="tc-dev-tech-pill">PHP</span>
+                        <span class="tc-dev-tech-pill">MySQL</span>
                     </div>
                 </article>
 
-                <!-- BoyCold POS -->
-                <article class="subpage-item" id="project-boycold" data-project-id="boycold" data-category="enterprise web" data-search="boycold cafe point of sale pos kitchen inventory dynamic pricing thermal receipts">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/boycoldlogo.png" alt="Boy Cold Cafe POS" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">Boy Cold Cafe POS</h3>
+                <div class="tc-dev-other-divider"></div>
+
+                <!-- Boy Cold Cafe POS -->
+                <article class="tc-dev-other-item" id="project-boycold">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Hospitality POS &amp; Inventory</span>
+                        <span class="tc-dev-item-year">2023</span>
+                    </div>
+                    <div class="tc-dev-brand">
+                        <div class="tc-dev-logo-box">
+                            <img src="assets/boycoldlogo.png" alt="Boy Cold Cafe POS" class="tc-dev-logo">
                         </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-item-category">RETAIL · POS & INVENTORY</span>
-                            <p class="subpage-item-desc">Specialty coffee shop point-of-sale terminal with real-time stock deductions, order queues, and receipt generation.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <span class="subpage-archive-expand-btn">
-                                <span class="subpage-archive-expand-text">Overview</span>
-                                <i data-lucide="chevron-down" class="subpage-chevron-icon"></i>
-                            </span>
+                        <div class="tc-dev-titles">
+                            <h3 class="tc-dev-other-title">Boy Cold Cafe POS</h3>
+                            <p class="tc-dev-item-sub">Point of Sale &amp; Real-Time Kitchen Inventory Management</p>
                         </div>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_boycold.svg" data-title="BoyCold POS: Commercial Point-of-Sale & Kitchen Inventory" data-sub="Cafe POS & Kitchen Inventory" data-logo="assets/boycoldlogo.png" data-url="https://boycold.internal/pos" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_boycold.svg" alt="BoyCold POS Screen Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/boycoldlogo.png" alt="BoyCold POS" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">BoyCold POS</h3>
-                                            <span class="cf-info-badge">Cafe POS & Kitchen Inventory</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2023</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    A comprehensive point-of-sale and kitchen inventory system developed for cafe operations. Manages dynamic menu pricing, cashier billing, barcode scanning, stock level deductions, and automated thermal receipt printing.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>Touchscreen-optimized cashier billing terminal with barcode scanning</li>
-                                            <li>Real-time kitchen inventory deduction linked to ordered menu ingredients</li>
-                                            <li>End-of-day sales reconciliation reports and thermal ESC/POS receipt generation</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            PHP backend utilizing ACID transactional queries to guarantee atomic stock deduction upon transaction confirmation.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">PHP</span>
-                                        <span class="tag">MySQL</span>
-                                        <span class="tag">Point of Sale</span>
-                                        <span class="tag">Inventory Deductions</span>
-                                        <span class="tag">Thermal Receipt</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">React</span>
+                        <span class="tc-dev-tech-pill">Electron</span>
+                        <span class="tc-dev-tech-pill">Node.js</span>
+                        <span class="tc-dev-tech-pill">SQLite</span>
                     </div>
                 </article>
+
+                <div class="tc-dev-other-divider"></div>
 
                 <!-- PsychGuide -->
-                <article class="subpage-item" id="project-psychguide" data-project-id="psychguide" data-category="web" data-search="psychguide student concern counseling ticketing portal appointments confidentiality">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/psychguide.png" alt="PsychGuide" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">PsychGuide</h3>
+                <article class="tc-dev-other-item" id="project-psychguide">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Counseling &amp; Case Records</span>
+                        <span class="tc-dev-item-year">2023</span>
+                    </div>
+                    <div class="tc-dev-brand">
+                        <div class="tc-dev-logo-box">
+                            <img src="assets/psychguide.png" alt="PsychGuide" class="tc-dev-logo">
                         </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-item-category">HEALTHCARE · TELECONSULT</span>
-                            <p class="subpage-item-desc">Mental health consultation appointment scheduler and secure patient case notes portal for clinical counselors.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <span class="subpage-archive-expand-btn">
-                                <span class="subpage-archive-expand-text">Overview</span>
-                                <i data-lucide="chevron-down" class="subpage-chevron-icon"></i>
-                            </span>
+                        <div class="tc-dev-titles">
+                            <h3 class="tc-dev-other-title">PsychGuide</h3>
+                            <p class="tc-dev-item-sub">Mental Health Student Appointment &amp; Ticket System</p>
                         </div>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_psychguide.svg" data-title="PsychGuide: Student Guidance & Counseling Ticketing Portal" data-sub="Student Guidance & Counseling Portal" data-logo="assets/psychguide.png" data-url="https://psychguide.internal/consult" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_psychguide.svg" alt="PsychGuide Screen Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/psychguide.png" alt="PsychGuide" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">PsychGuide</h3>
-                                            <span class="cf-info-badge">Student Guidance & Counseling Portal</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2023</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    A student concern management and counseling ticketing portal. Facilitates confidential student inquiries, counselor appointment scheduling, and case follow-up tracking.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>Confidential ticket submission with encrypted student identity protection</li>
-                                            <li>Counselor calendar scheduler with automated appointment confirmation</li>
-                                            <li>Counselor case notes management with role-based access security</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            Secure PHP architecture with parameterized queries and encrypted record fields for sensitive student counseling consultations.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">PHP</span>
-                                        <span class="tag">MySQL</span>
-                                        <span class="tag">Counseling Portal</span>
-                                        <span class="tag">Case Management</span>
-                                        <span class="tag">Health Tech</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">PHP</span>
+                        <span class="tc-dev-tech-pill">MySQL</span>
+                        <span class="tc-dev-tech-pill">JavaScript</span>
+                        <span class="tc-dev-tech-pill">Tailwind CSS</span>
                     </div>
                 </article>
+
+                <div class="tc-dev-other-divider"></div>
 
                 <!-- Ever Gotesco -->
-                <article class="subpage-item" id="project-evergotesco" data-project-id="evergotesco" data-category="web" data-search="ever gotesco mall information store locator floor plan directories promo events commonwealth">
-                    <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
-                        <div class="subpage-item-title-col">
-                            <img src="assets/evergotescologo.png" alt="Ever Gotesco" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">Ever Gotesco</h3>
+                <article class="tc-dev-other-item" id="project-evergotesco">
+                    <div class="tc-dev-item-meta">
+                        <span class="tc-dev-item-cat">Commercial Mall Directory</span>
+                        <span class="tc-dev-item-year">2023</span>
+                    </div>
+                    <div class="tc-dev-brand">
+                        <div class="tc-dev-logo-box">
+                            <img src="assets/evergotescologo.png" alt="Ever Gotesco" class="tc-dev-logo">
                         </div>
-                        <div class="subpage-item-meta-col">
-                            <span class="subpage-item-category">COMMERCIAL · MALL DIRECTORY</span>
-                            <p class="subpage-item-desc">Digital tenant navigation and commercial center directory kiosk interface with store catalog indexing.</p>
-                        </div>
-                        <div class="subpage-item-toggle-wrap">
-                            <span class="subpage-archive-expand-btn">
-                                <span class="subpage-archive-expand-text">Overview</span>
-                                <i data-lucide="chevron-down" class="subpage-chevron-icon"></i>
-                            </span>
+                        <div class="tc-dev-titles">
+                            <h3 class="tc-dev-other-title">Ever Gotesco Commonwealth</h3>
+                            <p class="tc-dev-item-sub">Tenant Directory &amp; Store Locator Kiosk Interface</p>
                         </div>
                     </div>
-                    <div class="subpage-item-detail" hidden>
-                        <div class="subpage-showcase-card">
-                            <!-- Left: Interactive UI Showcase Stage -->
-                            <div class="subpage-card-stage">
-                                <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_evergotesco.svg" data-title="Ever Gotesco: Mall Directory & Interactive Store Locator" data-sub="Mall Directory & Tenant Locator" data-logo="assets/evergotescologo.png" data-url="https://evergotesco.com.ph/directory" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_evergotesco.svg" alt="Ever Gotesco Screen Preview" class="cf-showcase-img" loading="lazy">
-                                        <div class="cf-showcase-overlay">
-                                            <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Right: Detailed Dossier & Deliverables -->
-                            <div class="subpage-card-info">
-                                <div class="cf-info-header">
-                                    <div class="cf-info-header-left">
-                                        <div class="cf-info-logo-box">
-                                            <img src="assets/evergotescologo.png" alt="Ever Gotesco" class="cf-info-logo">
-                                        </div>
-                                        <div>
-                                            <h3 class="cf-info-title">Ever Gotesco</h3>
-                                            <span class="cf-info-badge">Mall Directory & Tenant Locator</span>
-                                        </div>
-                                    </div>
-                                    <span class="cf-info-year">2023</span>
-                                </div>
-                                <p class="cf-info-desc">
-                                    A web-based mall information and store locator system for Ever Gotesco Commonwealth. Features interactive floor plan directories, tenant categorization, mall promo event calendars, and visitor navigation.
-                                </p>
-
-                                <!-- Technical Deliverables & Architecture -->
-                                <div class="subpage-detail-row">
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Key Deliverables</span>
-                                        <ul class="cf-detail-list">
-                                            <li>Interactive SVG floor plan directory with tenant unit click-to-highlight</li>
-                                            <li>Keyword and category search for stores, restaurants, and service centers</li>
-                                            <li>Admin portal for mall marketing teams to update events and promo banners</li>
-                                        </ul>
-                                    </div>
-                                    <div class="cf-detail-col">
-                                        <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
-                                        <p class="cf-detail-text">
-                                            Normalized MySQL relational database indexing tenants, categories, and floor unit coordinates paired with interactive DOM SVG floorplan rendering.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="subpage-card-footer">
-                                    <div class="cf-info-tags">
-                                        <span class="tag">PHP</span>
-                                        <span class="tag">MySQL</span>
-                                        <span class="tag">Directory Search</span>
-                                        <span class="tag">Interactive Floor Plan</span>
-                                        <span class="tag">Retail Tech</span>
-                                    </div>
-                                    <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Case Study</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="cf-subpage-link open-contact-modal">
-                                            <span>Inquire about project</span>
-                                            <i data-lucide="arrow-right"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tc-dev-tech-pills">
+                        <span class="tc-dev-tech-pill">HTML5</span>
+                        <span class="tc-dev-tech-pill">CSS3</span>
+                        <span class="tc-dev-tech-pill">JavaScript</span>
+                        <span class="tc-dev-tech-pill">JSON API</span>
                     </div>
                 </article>
-            </div>
-
-            <!-- Empty Search State -->
-            <div id="noResultsState" class="subpage-no-results" style="display: none;">
-                <p>No projects match your search query.</p>
-                <button type="button" class="subpage-filter-btn" id="clearSearchBtn">Clear Search Filters</button>
-            </div>
+            </section>
         </main>
 
         <!-- Footer -->
@@ -1137,32 +411,6 @@
                 <a href="#" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">back to top ↑</a>
             </div>
         </footer>
-    </div>
-
-    <!-- Project Screen Lightbox Modal -->
-    <div class="cf-lightbox-modal" id="subpageLightboxModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="subpageLightboxTitle">
-        <div class="cf-lightbox-backdrop" id="subpageLightboxBackdrop"></div>
-        <div class="cf-lightbox-dialog">
-            <div class="cf-lightbox-header">
-                <div class="cf-lightbox-title-box">
-                    <img src="assets/anigrow_logo.png" alt="" id="subpageLightboxLogo" class="cf-lightbox-logo">
-                    <div>
-                        <h3 id="subpageLightboxTitle" class="cf-lightbox-title">Project Screen Showcase</h3>
-                        <span id="subpageLightboxSub" class="cf-lightbox-sub">Architecture &amp; Interface Preview</span>
-                    </div>
-                </div>
-                <div class="cf-lightbox-actions">
-                    <button type="button" id="subpageLightboxClose" class="cf-lightbox-close" aria-label="Close Preview">
-                        <i data-lucide="x"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="cf-lightbox-body">
-                <div class="cf-lightbox-img-wrap">
-                    <img src="assets/screen_anigrow.png" alt="Project Full Screen Preview" id="subpageLightboxImg" class="cf-lightbox-img">
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Contact Modal Dialog -->
@@ -1315,149 +563,15 @@
                 });
             }
 
-            // ── Project Row Direct Navigation & Accordion ──
-            document.querySelectorAll('.subpage-item .subpage-item-header').forEach(header => {
-                header.addEventListener('click', (e) => {
-                    if (e.target.closest('a')) return;
-                    const item = header.closest('.subpage-item');
-                    if (item && item.classList.contains('is-featured')) {
-                        // The 3 main flagship projects navigate directly to their full interactive case studies
-                        const link = item.querySelector('.subpage-view-details-pill');
-                        if (link && link.href) {
-                            window.location.href = link.href;
-                            return;
-                        }
+            // Smooth hash scrolling if navigated to an anchor (e.g. #project-colm)
+            if (window.location.hash) {
+                setTimeout(() => {
+                    const targetEl = document.querySelector(window.location.hash);
+                    if (targetEl) {
+                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
-                    const detail = item ? item.querySelector('.subpage-item-detail') : null;
-                    if (!detail) return;
-                    const isOpen = !detail.hidden;
-                    detail.hidden = isOpen;
-                    header.setAttribute('aria-expanded', !isOpen);
-                    item.classList.toggle('is-expanded', !isOpen);
-                    if (window.lucide) lucide.createIcons();
-                });
-            });
-
-            const items = Array.from(document.querySelectorAll('.subpage-item'));
-
-            // Filter pills & Search
-            const filterBtns = document.querySelectorAll('.subpage-filter-btn');
-            const searchInput = document.getElementById('subpageSearch');
-            const noResults = document.getElementById('noResultsState');
-            const clearSearchBtn = document.getElementById('clearSearchBtn');
-            let currentFilter = 'all';
-
-            function applyFilters() {
-                const query = (searchInput.value || '').toLowerCase().trim();
-                let visibleCount = 0;
-
-                items.forEach(item => {
-                    const category = item.getAttribute('data-category') || '';
-                    const searchData = item.getAttribute('data-search') || '';
-
-                    const matchesFilter = (currentFilter === 'all') || category.includes(currentFilter);
-                    const matchesSearch = !query || searchData.toLowerCase().includes(query);
-
-                    if (matchesFilter && matchesSearch) {
-                        item.style.display = '';
-                        visibleCount++;
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-
-                const featuredHeader = document.querySelector('.subpage-group-header:not(.subpage-group-archive)');
-                const archiveHeader = document.querySelector('.subpage-group-header.subpage-group-archive');
-                if (featuredHeader) {
-                    const hasFeatured = items.some(it => it.classList.contains('is-featured') && it.style.display !== 'none');
-                    featuredHeader.style.display = hasFeatured ? '' : 'none';
-                }
-                if (archiveHeader) {
-                    const hasArchive = items.some(it => !it.classList.contains('is-featured') && it.style.display !== 'none');
-                    archiveHeader.style.display = hasArchive ? '' : 'none';
-                }
-
-                if (noResults) {
-                    noResults.style.display = visibleCount === 0 ? 'block' : 'none';
-                }
+                }, 100);
             }
-
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    currentFilter = btn.getAttribute('data-filter') || 'all';
-                    applyFilters();
-                });
-            });
-
-            if (searchInput) {
-                searchInput.addEventListener('input', applyFilters);
-            }
-
-            if (clearSearchBtn && searchInput) {
-                clearSearchBtn.addEventListener('click', () => {
-                    searchInput.value = '';
-                    currentFilter = 'all';
-                    filterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-filter') === 'all'));
-                    applyFilters();
-                });
-            }
-
-            // Subpage Screen Lightbox Controller
-            const lightbox = document.getElementById('subpageLightboxModal');
-            const lightboxImg = document.getElementById('subpageLightboxImg');
-            const lightboxTitle = document.getElementById('subpageLightboxTitle');
-            const lightboxSub = document.getElementById('subpageLightboxSub');
-            const lightboxLogo = document.getElementById('subpageLightboxLogo');
-            const lightboxUrl = document.getElementById('subpageLightboxUrl');
-            const lightboxLive = document.getElementById('subpageLightboxLive');
-            const lightboxClose = document.getElementById('subpageLightboxClose');
-            const lightboxBackdrop = document.getElementById('subpageLightboxBackdrop');
-
-            function openLightbox(screen, title, sub, logo, url) {
-                if (!lightbox) return;
-                if (lightboxImg) lightboxImg.src = screen;
-                if (lightboxTitle) lightboxTitle.textContent = title;
-                if (lightboxSub) lightboxSub.textContent = sub;
-                if (lightboxLogo) lightboxLogo.src = logo;
-                if (lightboxUrl) lightboxUrl.textContent = url;
-                if (lightboxLive) {
-                    lightboxLive.href = url;
-                    lightboxLive.style.display = (url && url.startsWith('http')) ? 'inline-flex' : 'none';
-                }
-                lightbox.classList.add('is-open');
-                lightbox.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-                if (window.lucide) lucide.createIcons();
-            }
-
-            function closeLightbox() {
-                if (!lightbox) return;
-                lightbox.classList.remove('is-open');
-                lightbox.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
-            }
-
-            document.querySelectorAll('.open-subpage-lightbox').forEach(el => {
-                el.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const screen = el.getAttribute('data-screen');
-                    const title = el.getAttribute('data-title');
-                    const sub = el.getAttribute('data-sub');
-                    const logo = el.getAttribute('data-logo');
-                    const url = el.getAttribute('data-url');
-                    openLightbox(screen, title, sub, logo, url);
-                });
-            });
-
-            if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-            if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
-            window.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && lightbox && lightbox.classList.contains('is-open')) {
-                    closeLightbox();
-                }
-            });
 
             // Contact Modal Controller
             const contactModal = document.getElementById('contactModal');
