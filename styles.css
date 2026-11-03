@@ -8392,6 +8392,16 @@ body.splash-revealed .header {
   transform: scale(1.02);
 }
 
+.tc-hero-card.tc-hero-card-laptop {
+  max-width: 860px;
+  padding: 2.25rem 1.5rem;
+}
+
+.tc-hero-card.tc-hero-card-laptop .actual-laptop-frame {
+  max-width: 780px;
+  width: 100%;
+}
+
 /* ── 2. Duo-Crop Overlapping Showcase Card ── */
 .tc-duo-crop-card {
   border-radius: 28px;
@@ -8462,6 +8472,34 @@ body.splash-revealed .header {
   .tc-duo-crop-col .tc-phone-screen {
     border-radius: 26px;
   }
+}
+
+/* Duo-Crop for Laptop / Dashboard screens */
+.tc-duo-crop-card.is-laptop-duo {
+  max-width: 860px;
+  padding: 2.25rem 1.5rem;
+}
+
+.tc-duo-crop-card.is-laptop-duo .tc-duo-crop-row {
+  gap: 1.5rem;
+}
+
+.tc-duo-crop-card.is-laptop-duo .tc-duo-crop-col {
+  width: 48%;
+  max-width: 48%;
+}
+
+.tc-laptop-duo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.4));
+}
+
+.tc-duo-crop-card.is-laptop-duo .tc-duo-crop-col:hover .tc-laptop-duo-img {
+  transform: scale(1.035);
 }
 
 /* ── 3. Fade-Loop Interactive Carousel Card ── */
@@ -8580,6 +8618,42 @@ body.splash-revealed .header {
   transform: rotate(-90deg);
 }
 
+/* ── Fade-Loop for Laptop / Dashboard screens ── */
+.tc-fade-loop-card.is-laptop-loop {
+  max-width: 860px;
+  padding: 2.25rem 1.5rem 2rem 1.5rem;
+}
+
+.tc-fade-loop-card.is-laptop-loop .tc-fade-loop-stage {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.tc-laptop-loop-screen {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tc-fade-loop-card.is-laptop-loop .tc-fade-loop-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.45));
+  opacity: 0;
+  transition: opacity 0.45s ease-in-out;
+}
+
+.tc-fade-loop-card.is-laptop-loop .tc-fade-loop-slide.is-active {
+  position: relative;
+  opacity: 1;
+}
+
 /* ── 4. Single Mockup Card ── */
 .tc-single-card {
   border-radius: 28px;
@@ -8615,6 +8689,49 @@ body.splash-revealed .header {
 
 .tc-single-card:hover .tc-phone-mockup-single {
   transform: translateY(-5px) scale(1.02);
+}
+
+/* ── Laptop / Desktop Showcase Cards (Travis Cruz Style for Web Projects like Ani-Grow) ── */
+.tc-laptop-card {
+  border-radius: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 2.25rem 1.5rem;
+  max-width: 860px;
+  margin: 0.5rem auto 0 auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+  user-select: none;
+  width: 100%;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  position: relative;
+  transition: border-color 0.2s ease, transform 0.3s ease;
+}
+
+[data-theme="dark"] .tc-laptop-card {
+  background: #181817;
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+.tc-laptop-card:hover {
+  border-color: var(--border-hover);
+}
+
+.tc-laptop-card-img {
+  width: 100%;
+  max-width: 780px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.45));
+}
+
+.tc-laptop-card:hover .tc-laptop-card-img {
+  transform: scale(1.025);
 }
 
 /* ── 5. Lightbox Modal Mobile Phone ── */
