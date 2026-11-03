@@ -23,7 +23,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=137">
+    <link rel="stylesheet" href="styles.css?v=139">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -33,14 +33,31 @@
     <div class="bg-dots-pattern"></div>
 
     <div class="subpage-container pdetail-wide-container">
-        <!-- Subpage Header Navigation -->
-        <header class="subpage-header-nav">
-            <a href="projects.html" class="subpage-back-link" title="Return to all projects archive">
-                <i data-lucide="arrow-left"></i>
-                <span>Back to Projects</span>
-            </a>
+        <!-- Subpage Header Navigation (Travis Cruz Style Floating Nav Pill) -->
+        <header class="subpage-header-nav tc-header-nav">
+            <div class="tc-nav-pill-wrapper">
+                <nav class="tc-nav-pill" aria-label="Project Navigation">
+                    <a href="projects.html" class="tc-nav-pill-item tc-nav-pill-back" id="tcNavBackBtn" title="Back to all projects" onclick="if (document.referrer && document.referrer.includes(window.location.host)) { window.history.back(); return false; }">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="m15 18-6-6 6-6"/>
+                        </svg>
+                        <span>Back</span>
+                    </a>
+                    <span class="tc-nav-pill-divider" aria-hidden="true"></span>
+                    <span class="tc-nav-pill-title" id="tcNavProjectTitle">PROJECT</span>
+                    <span class="tc-nav-pill-divider" aria-hidden="true"></span>
+                    <button type="button" class="tc-nav-pill-item tc-nav-pill-top" id="tcNavTopBtn" title="Scroll to top of case study" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        <span>Top</span>
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="m18 15-6-6-6 6"/>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
 
-            <div class="nav-right">
+            <div class="nav-right tc-nav-right">
+                <a href="https://github.com/harrybryn" target="_blank" rel="noopener noreferrer" class="tc-nav-social-link">github</a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="tc-nav-social-link">linkedin</a>
                 <button type="button" class="nav-bored-btn" id="openArcadeBtn" title="Test your developer skills & reflexes" aria-label="Test your Skills">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="4" width="20" height="16" rx="2"></rect>
@@ -110,13 +127,14 @@
                 </div>
             </div>
 
-            <!-- Mobile Phone Hero Stage (TOURGO Device Presentation) -->
+            <!-- Mobile Phone Hero Stage (Device Presentation) -->
             <div class="tc-hero-card" id="tcMobileHeroCard" style="display: none;" tabindex="0" role="button" aria-label="Inspect Mobile App Showcase">
-                <div class="tc-phone-mockup tc-phone-mockup-hero">
+                <div class="tc-phone-mockup tc-phone-mockup-hero" id="tcMobilePhoneMockup">
                     <div class="tc-phone-screen">
-                        <img src="assets/Tourgo/Home.jpg" alt="TOURGO Mobile App Showcase" class="tc-hero-card-img" id="tcMobileHeroImg">
+                        <img src="assets/Tourgo/Home.jpg" alt="Mobile App Showcase" class="tc-hero-card-img" id="tcMobileHeroImg">
                     </div>
                 </div>
+                <img src="assets/anigrow_hero_showcase.webp" alt="Mobile App Showcase" class="tc-standalone-device-img" id="tcMobileStandaloneImg" style="display: none;">
                 <div class="pdetail-mockup-overlay">
                     <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click to expand</span>
                 </div>
@@ -345,7 +363,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=15"></script>
+    <script src="projects-data.js?v=17"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -448,6 +466,10 @@
             document.getElementById('pdetailCategory').textContent = project.category;
             document.getElementById('pdetailYear').textContent = project.year;
             document.getElementById('pdetailTitle').textContent = project.title;
+            const navTitleEl = document.getElementById('tcNavProjectTitle');
+            if (navTitleEl) {
+                navTitleEl.textContent = (project.shortTitle || project.title || 'PROJECT').toUpperCase();
+            }
 
             // Tagline & Live Site Button
             const taglineEl = document.getElementById('pdetailTagline');
@@ -519,14 +541,32 @@
                 if (heroShowcase) {
                     heroShowcase.style.display = 'block';
 
-                    const isMobileHero = project.id === 'tourgo' || (project.overview && project.overview.heroImage) || project.category.includes('Trip');
+                    const isMobileHero = project.id === 'tourgo' || project.id === 'anigrow' || (project.overview && project.overview.heroImage && (project.overview.heroImage.includes('Tourgo') || project.overview.heroImage.includes('hero_showcase') || project.overview.heroImage.includes('hero_device'))) || project.category.includes('Trip');
 
                     if (isMobileHero) {
                         if (laptopStageWrap) laptopStageWrap.style.display = 'none';
-                        if (mobileHeroCard && mobileHeroImg) {
+                        if (mobileHeroCard) {
                             const heroSrc = (project.overview && project.overview.heroImage) || project.screen || 'assets/Tourgo/Home.jpg';
-                            mobileHeroImg.src = heroSrc;
-                            mobileHeroImg.alt = `${project.shortTitle} Mobile Showcase`;
+                            const isStandalone = heroSrc.includes('hero_showcase') || heroSrc.includes('hero_device');
+                            const phoneMockup = document.getElementById('tcMobilePhoneMockup');
+                            const standaloneImg = document.getElementById('tcMobileStandaloneImg');
+
+                            if (isStandalone) {
+                                if (phoneMockup) phoneMockup.style.display = 'none';
+                                if (standaloneImg) {
+                                    standaloneImg.src = heroSrc;
+                                    standaloneImg.alt = `${project.shortTitle} Mobile Showcase`;
+                                    standaloneImg.style.display = 'block';
+                                }
+                            } else {
+                                if (standaloneImg) standaloneImg.style.display = 'none';
+                                if (phoneMockup) phoneMockup.style.display = 'flex';
+                                if (mobileHeroImg) {
+                                    mobileHeroImg.src = heroSrc;
+                                    mobileHeroImg.alt = `${project.shortTitle} Mobile Showcase`;
+                                }
+                            }
+
                             mobileHeroCard.style.display = 'flex';
                             mobileHeroCard.onclick = () => {
                                 openCustomLightbox(heroSrc, `${project.shortTitle} — Mobile Showcase`, 'MOBILE APP', true);

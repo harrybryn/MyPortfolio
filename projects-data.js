@@ -24,7 +24,7 @@ const PROJECTS_DATA = [
         overview: {
             title: 'Farming with Data, Not Guesswork',
             description: 'Contributed to the design and development of an AI-powered poultry and livestock farming guide for Golden Nutriharvest, Inc., a San Miguel Foods grower partner with over 15 years in the industry. The system combines IoT prototypes, an Android app for caretakers, and a web dashboard for farm administrators. A project grounded in on-site research, hardware prototyping, and expert evaluation.',
-            heroImage: 'assets/Ani-Grow/6_nobg.png'
+            heroImage: 'assets/anigrow_hero_showcase.webp'
         },
         challenge: 'Caretakers at Golden Nutriharvest weighed only a small sample of chickens once a week and used the average to represent the whole flock. Sorting out underweight "rejects" was done by eye, and feed was fixed to general standards instead of actual weight. The goal was to replace this with continuous, objective weight monitoring and growth-based decisions.',
         desc: 'A mobile application that helps farm animal caretakers manage poultry and livestock operations using AI guidance and data analytics. Supports and integrates with custom IoT machines for weight-based segregation and automated feeding of farm animals.',
@@ -54,64 +54,57 @@ const PROJECTS_DATA = [
         sections: [
             {
                 id: 'the-challenge',
-                title: 'The Challenge',
+                title: 'The Challenge: Beyond Sample-Weighing & Guesswork',
                 badge: 'PROBLEM STATEMENT',
-                description: 'Caretakers at Golden Nutriharvest weighed only a small sample of chickens once a week and used the average to represent the whole flock. Sorting out underweight "rejects" was done by eye, and feed was fixed to general standards instead of actual weight. The goal was to replace this with continuous, objective weight monitoring and growth-based decisions.',
+                description: 'Caretakers at Golden Nutriharvest weighed only a small sample of chickens once a week and used the average to represent the whole flock. Sorting out underweight "rejects" was done by eye, and feed was fixed to general standards instead of actual weight. The goal was to replace this with continuous, objective weight monitoring and growth-based decisions directly on handheld mobile devices in the pens.',
+                images: ['assets/anigrow_hero_showcase.webp'],
+                layout: 'single',
+                device: 'standalone'
+            },
+            {
+                id: 'animal-registration-logging',
+                title: 'Animal Registration & Daily Observations',
+                badge: 'CARETAKER MOBILE WORKFLOW',
+                description: 'Caretakers create a digital profile for each animal or flock batch (species, age, pen) and log daily observations such as feeding times, biometric progression, and health status directly from the handheld mobile interface.',
+                images: ['assets/anigrow_hero_device.png'],
+                layout: 'single',
+                device: 'standalone'
+            },
+            {
+                id: 'automated-feeding-sorting',
+                title: 'Automated Feeder Controls & IoT Sorting Gates',
+                badge: 'MOBILE IOT MACHINE INTEGRATION',
+                description: 'Feed can be dispensed on automated schedules or triggered on demand from the caretaker mobile app. The ESP32-controlled dispenser logs every dispensing event to Supabase in real time, while linear sorting gates direct livestock into designated pens based on live weight telemetry.',
+                images: ['assets/screen_anigrow.png'],
+                layout: 'single',
+                device: 'standalone'
+            },
+            {
+                id: 'ai-care-guide',
+                title: 'AI Diagnostic Guide & Care Roadmap',
+                badge: 'CLAUDE API INTELLIGENCE',
+                description: 'Conditioned on real-time weight trajectories, the mobile companion delivers Claude-powered care guides customized to each batch lifecycle stage, delivering dynamic daily verification checklists for feeding, temperature, and disease prevention.',
+                images: ['assets/anigrow_hero_showcase.webp'],
+                layout: 'single',
+                device: 'standalone'
+            },
+            {
+                id: 'admin-web-dashboard',
+                title: 'Admin Operations Web Dashboard & Housing Control',
+                badge: 'FARM COMMAND WEB DASHBOARD',
+                description: 'A comprehensive React web dashboard engineered for farm owners and administrative staff. Aggregates data from every housing unit, flock population, and caretaker log into an executive view of active pens, headcounts, and capacity utilization.',
                 images: ['assets/Ani-Grow/6_nobg.png'],
                 layout: 'single',
                 device: 'laptop'
             },
             {
-                id: 'animal-management-growth',
-                title: 'Animal Management & Growth Benchmarking',
-                badge: 'FARM COMMAND & BENCHMARKING',
-                description: 'Caretakers and administrators monitor housings, flock populations, and mortality records across Broiler and Swine pens in real time. Continuous growth benchmarks track actual flock weights against breed standards, projecting market-ready harvest dates and milestone variances.',
-                images: ['assets/Ani-Grow/6_nobg.png', 'assets/Ani-Grow/2_nobg.png'],
+                id: 'predictive-analytics-biometrics',
+                title: 'Predictive Growth Benchmarking & Biometric Compliance Audit',
+                badge: 'PREDICTIVE MODELING & SAN MIGUEL FOODS AUDIT',
+                description: 'Predictive 140-day growth curves, harvest readiness dates, and benchmark tracking against breed standards, paired with formatted export and print-ready biometric performance audits compliant with San Miguel Foods grower standards.',
+                images: ['assets/Ani-Grow/2_nobg.png', 'assets/Ani-Grow/1_nobg.png'],
                 layout: 'duo-crop',
                 device: 'laptop'
-            },
-            {
-                id: 'dashboard-walkthrough',
-                title: 'All-in-One Farm Intelligence — Interactive Dashboard Walkthrough',
-                badge: 'SPECIAL FEATURE · SYSTEM WALKTHROUGH',
-                description: 'A unified web dashboard providing farm operators with complete visibility across housings, predictive 140-day harvest curves, flock weight distribution, automated care roadmaps, IoT load cell scales, and compliance audit reports.',
-                images: [
-                    'assets/Ani-Grow/6_nobg.png',
-                    'assets/Ani-Grow/2_nobg.png',
-                    'assets/Ani-Grow/3_nobg.png',
-                    'assets/Ani-Grow/5_nobg.png',
-                    'assets/Ani-Grow/4_nobg.png',
-                    'assets/Ani-Grow/1_nobg.png'
-                ],
-                layout: 'fade-loop',
-                device: 'laptop'
-            },
-            {
-                id: 'ai-care-guide',
-                title: 'Actionable Guide & Lifecycle Roadmap',
-                badge: 'CLAUDE API INTELLIGENCE',
-                description: 'AI-tailored feeding ratios, temperature recommendations, and milestone guidelines customized to each batch lifecycle stage, delivering dynamic daily task verification for field caretakers.',
-                images: ['assets/Ani-Grow/5_nobg.png'],
-                layout: 'single',
-                device: 'laptop'
-            },
-            {
-                id: 'iot-telemetry-audit',
-                title: 'IoT Scale Telemetry & Official Biometric Audit',
-                badge: 'IOT & SAN MIGUEL FOODS AUDIT',
-                description: 'Direct telemetry synchronization with load cell hardware scales, logging day-by-day weight logs alongside formatted export and print-ready biometric audits for compliance with San Miguel Foods grower standards.',
-                images: ['assets/Ani-Grow/4_nobg.png', 'assets/Ani-Grow/1_nobg.png'],
-                layout: 'duo-crop',
-                device: 'laptop'
-            },
-            {
-                id: 'caretaker-mobile-app',
-                title: 'Caretaker Mobile Companion Application',
-                badge: 'MOBILE APPLICATION',
-                description: 'An Android app built for field caretakers to monitor automated feeder hoppers, log daily biometric observations, and receive push notifications for low feed and harvest readiness — running directly on handheld devices in the pens.',
-                images: ['assets/anigrow_hero_showcase.webp'],
-                layout: 'single',
-                device: 'standalone'
             }
         ],
         outcome: {
