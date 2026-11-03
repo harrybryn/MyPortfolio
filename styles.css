@@ -8096,24 +8096,26 @@ body.splash-revealed .header {
   max-width: 1220px !important;
 }
 
-/* Device Dialog Stage (Unboxed, transparent) */
+/* Device Dialog Stage (Unboxed, transparent, zero cropping) */
+.tc-device-lightbox-modal .cf-lightbox-dialog.tc-lightbox-device-dialog,
 .tc-lightbox-device-dialog {
   position: relative;
   z-index: 100000;
-  width: 100%;
-  max-width: 1240px;
-  max-height: 94vh;
+  width: auto !important;
+  max-width: 96vw !important;
+  max-height: 90vh !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   border-radius: 0 !important;
   padding: 0 !important;
+  overflow: visible !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transform: scale(0.96) translateY(10px);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: auto;
 }
 
@@ -8121,23 +8123,26 @@ body.splash-revealed .header {
   transform: scale(1) translateY(0);
 }
 
-/* Transparent Laptop Showcase Presentation in Lightbox (Bigger) */
+/* Transparent Laptop Showcase Presentation in Lightbox (Full view, no cut) */
 .tc-laptop-display-wrap {
   position: relative;
-  width: 100%;
-  max-width: 1220px;
+  width: auto;
+  max-width: 95vw;
+  max-height: 88vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 }
 
 .tc-laptop-display-img {
-  width: 100%;
+  width: auto;
   height: auto;
-  max-height: 90vh;
+  max-width: min(1440px, 92vw);
+  max-height: 85vh;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 40px 90px rgba(0, 0, 0, 0.95));
+  filter: drop-shadow(0 35px 80px rgba(0, 0, 0, 0.95));
   transition: transform 0.3s ease;
 }
 
@@ -8160,25 +8165,28 @@ body.splash-revealed .header {
   filter: drop-shadow(0 35px 85px rgba(0, 0, 0, 0.95));
 }
 
-/* Standalone Device Presentation in Lightbox (HD 3D Pre-rendered Mockups) */
+/* Standalone Device Presentation in Lightbox (HD 3D Pre-rendered Mockups: Laptops & Phones) */
 .tc-standalone-display-wrap {
   position: relative;
-  width: 100%;
-  max-width: 900px;
+  width: auto;
+  max-width: 95vw;
+  max-height: 88vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0;
+  overflow: visible;
 }
 
 .tc-standalone-lightbox-img {
   width: auto;
   height: auto;
-  max-width: 92vw;
-  max-height: 86vh;
+  max-width: min(1440px, 92vw);
+  max-height: 85vh;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 30px 70px rgba(0, 0, 0, 0.9));
+  filter: drop-shadow(0 35px 80px rgba(0, 0, 0, 0.95));
+  transition: transform 0.25s ease;
 }
 
 @media (max-width: 768px) {

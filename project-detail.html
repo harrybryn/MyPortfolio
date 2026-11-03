@@ -23,7 +23,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=142">
+    <link rel="stylesheet" href="styles.css?v=143">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -553,7 +553,9 @@
                             const laptopSrc = (project.overview && project.overview.heroImage) || project.screen || 'assets/Ani-Grow/6_nobg.png';
                             if (actualLaptopImg) actualLaptopImg.src = laptopSrc;
                             laptopStageWrap.onclick = () => {
-                                openCustomLightbox(laptopSrc, `${project.shortTitle} — Farm Overview & Analytics`, 'FARM COMMAND', false);
+                                const heroTitle = (project.overview && project.overview.title) || `${project.shortTitle} — Overview`;
+                                const heroBadge = project.badge || 'DASHBOARD';
+                                openCustomLightbox(laptopSrc, `${project.shortTitle} — ${heroTitle}`, heroBadge, false);
                             };
                         }
                     }
@@ -916,7 +918,7 @@
 
             function openCustomLightbox(src, title, badge, isMobile = false) {
                 if (!lbModal) return;
-                const isStandalone = src && (src.includes('Ani-Grow') || src.includes('Barkadash') || src.includes('hero_showcase') || src.includes('hero_device') || src.endsWith('.webp'));
+                const isStandalone = src && (src.includes('Ani-Grow') || src.includes('Barkadash') || src.includes('Binhi') || src.includes('binhi') || src.includes('hero_showcase') || src.includes('hero_device') || src.endsWith('.webp'));
                 const isMobileScreen = isMobile || (src && (src.includes('Tourgo') || src.includes('mobile')));
                 const modalStandalone = document.getElementById('tcModalStandalone');
                 const standaloneLbImg = document.getElementById('pdetailStandaloneLightboxImg');
