@@ -110,9 +110,15 @@
                 </div>
             </div>
 
-            <!-- Mobile Phone Hero Stage (Travis Cruz Barkadash / TOURGO presentation) -->
+            <!-- Mobile Phone Hero Stage (TOURGO Device Presentation) -->
             <div class="tc-hero-card" id="tcMobileHeroCard" style="display: none;" tabindex="0" role="button" aria-label="Inspect Mobile App Showcase">
-                <img src="assets/Tourgo/Home.jpg" alt="TOURGO Mobile App Showcase" class="tc-hero-card-img" id="tcMobileHeroImg">
+                <div class="tc-phone-mockup tc-phone-mockup-hero">
+                    <div class="tc-phone-island"></div>
+                    <div class="tc-phone-screen">
+                        <img src="assets/Tourgo/Home.jpg" alt="TOURGO Mobile App Showcase" class="tc-hero-card-img" id="tcMobileHeroImg">
+                    </div>
+                    <div class="tc-phone-home-bar"></div>
+                </div>
                 <div class="pdetail-mockup-overlay">
                     <span class="pdetail-inspect-hint"><i data-lucide="zoom-in"></i> Click to expand</span>
                 </div>
@@ -288,9 +294,15 @@
                 <img src="assets/Ani-Grow/6_nobg.png" alt="Ani-Grow Laptop Preview" id="pdetailLightboxImg" class="tc-laptop-display-img">
             </div>
 
-            <!-- Mobile Phone Display in Lightbox (No Box, Pure Transparent Phone) -->
+            <!-- Mobile Phone Display in Lightbox (Realistic Device Frame) -->
             <div class="tc-mobile-display-wrap" id="tcModalMobile" style="display: none;">
-                <img src="assets/anigrow_hero_showcase.webp" alt="Mobile App Screen Preview" id="pdetailMobileLightboxImg" class="tc-mobile-display-img">
+                <div class="tc-phone-mockup tc-phone-mockup-lightbox">
+                    <div class="tc-phone-island"></div>
+                    <div class="tc-phone-screen">
+                        <img src="assets/anigrow_hero_showcase.webp" alt="Mobile App Screen Preview" id="pdetailMobileLightboxImg" class="tc-mobile-display-img">
+                    </div>
+                    <div class="tc-phone-home-bar"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -588,7 +600,7 @@
 
                 // Section-by-Section Walkthrough (Elegant & Simple Case Study Layout)
                 if (sectionsContainer && hasWalkthroughSections) {
-                    // Travis Cruz Barkadash Layout (duo-crop, fade-loop, single, text-only)
+                    // Tourgo Case Study Device Layout (duo-crop, fade-loop, single, text-only)
                     sectionsContainer.style.display = 'block';
                     sectionsContainer.className = 'tc-walkthrough-stack';
 
@@ -600,10 +612,22 @@
                                 <div class="tc-duo-crop-card">
                                     <div class="tc-duo-crop-row">
                                         <div class="tc-duo-crop-col open-case-study-lightbox" data-img="${sec.images[0]}" data-title="${sec.title} (Screen 1)" tabindex="0" role="button" aria-label="Inspect ${sec.title} Screen 1">
-                                            <img src="${sec.images[0]}" alt="${sec.title} Screen 1" class="tc-duo-crop-img" loading="lazy">
+                                            <div class="tc-phone-mockup">
+                                                <div class="tc-phone-island"></div>
+                                                <div class="tc-phone-screen">
+                                                    <img src="${sec.images[0]}" alt="${sec.title} Screen 1" class="tc-duo-crop-img" loading="lazy">
+                                                </div>
+                                                <div class="tc-phone-home-bar"></div>
+                                            </div>
                                         </div>
                                         <div class="tc-duo-crop-col open-case-study-lightbox" data-img="${sec.images[1]}" data-title="${sec.title} (Screen 2)" tabindex="0" role="button" aria-label="Inspect ${sec.title} Screen 2">
-                                            <img src="${sec.images[1]}" alt="${sec.title} Screen 2" class="tc-duo-crop-img" loading="lazy">
+                                            <div class="tc-phone-mockup">
+                                                <div class="tc-phone-island"></div>
+                                                <div class="tc-phone-screen">
+                                                    <img src="${sec.images[1]}" alt="${sec.title} Screen 2" class="tc-duo-crop-img" loading="lazy">
+                                                </div>
+                                                <div class="tc-phone-home-bar"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -613,9 +637,15 @@
                             mediaMarkup = `
                                 <div class="tc-fade-loop-card" data-fade-loop-idx="${idx}">
                                     <div class="tc-fade-loop-stage open-case-study-lightbox" data-title="${sec.title}" tabindex="0" role="button" aria-label="Inspect ${sec.title}">
-                                        ${sec.images.map((img, sIdx) => `
-                                            <img src="${img}" alt="${sec.title} Slide ${sIdx + 1}" class="tc-fade-loop-slide ${sIdx === 0 ? 'is-active' : ''}" data-slide-idx="${sIdx}" loading="lazy">
-                                        `).join('')}
+                                        <div class="tc-phone-mockup tc-phone-mockup-loop">
+                                            <div class="tc-phone-island"></div>
+                                            <div class="tc-phone-screen">
+                                                ${sec.images.map((img, sIdx) => `
+                                                    <img src="${img}" alt="${sec.title} Slide ${sIdx + 1}" class="tc-fade-loop-slide ${sIdx === 0 ? 'is-active' : ''}" data-slide-idx="${sIdx}" loading="lazy">
+                                                `).join('')}
+                                            </div>
+                                            <div class="tc-phone-home-bar"></div>
+                                        </div>
                                     </div>
                                     <div class="tc-fade-loop-badge">
                                         <i data-lucide="layers" style="width:12px;height:12px;"></i>
@@ -632,7 +662,13 @@
                         } else if (sec.layout === 'single' && Array.isArray(sec.images) && sec.images.length > 0) {
                             mediaMarkup = `
                                 <div class="tc-single-card open-case-study-lightbox" data-img="${sec.images[0]}" data-title="${sec.title}" tabindex="0" role="button" aria-label="Inspect ${sec.title}">
-                                    <img src="${sec.images[0]}" alt="${sec.title}" class="tc-single-img" loading="lazy">
+                                    <div class="tc-phone-mockup tc-phone-mockup-single">
+                                        <div class="tc-phone-island"></div>
+                                        <div class="tc-phone-screen">
+                                            <img src="${sec.images[0]}" alt="${sec.title}" class="tc-single-img" loading="lazy">
+                                        </div>
+                                        <div class="tc-phone-home-bar"></div>
+                                    </div>
                                 </div>
                             `;
                         }

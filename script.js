@@ -32,6 +32,129 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // ── Splash Sound & Speech Engine ──
+        let audioCtx = null;
+        function getAudioContext() {
+            if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume().catch(() => {});
+            }
+            return audioCtx;
+        }
+
+        function speakHarrySevilla() {
+            if ('speechSynthesis' in window) {
+                try {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance('Harry Sevilla');
+                    utterance.rate = 0.95;
+                    utterance.pitch = 1.0;
+                    utterance.volume = 0.95;
+                    const voices = window.speechSynthesis.getVoices();
+                    const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Daniel') || v.name.includes('David') || v.name.includes('en-US')));
+                    if (englishVoice) utterance.voice = englishVoice;
+                    window.speechSynthesis.speak(utterance);
+                } catch (e) {}
+            }
+        }
+
+        // Ambient Reveal Chime (300ms)
+        function playRevealChime() {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            [261.63, 392.00, 523.25].forEach((freq, i) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now + i * 0.04);
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.08, now + 0.15 + i * 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.6);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now + i * 0.04);
+                osc.stop(now + 1.8);
+            });
+        }
+
+        // Transition Collapse Whoosh SFX (2200ms)
+        function playCollapseWhoosh() {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            
+            // 1. Noise buffer for airy whoosh
+            const bufferSize = ctx.sampleRate * 0.45;
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            const noise = ctx.createBufferSource();
+            noise.buffer = buffer;
+            
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.setValueAtTime(1400, now);
+            filter.frequency.exponentialRampToValueAtTime(260, now + 0.42);
+            filter.Q.setValueAtTime(3.5, now);
+            
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.12, now + 0.12);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.44);
+            
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            noise.start(now);
+            noise.stop(now + 0.45);
+
+            // 2. Resonant sub-drop
+            const osc = ctx.createOscillator();
+            const oscGain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(380, now);
+            osc.frequency.exponentialRampToValueAtTime(120, now + 0.38);
+            oscGain.gain.setValueAtTime(0.06, now);
+            oscGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.38);
+            osc.connect(oscGain);
+            oscGain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.4);
+        }
+
+        // Transition Reveal Resolve Chord (4800ms)
+        function playExitTransition() {
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            const now = ctx.currentTime;
+            [329.63, 440.00, 659.25, 880.00].forEach((freq, idx) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, now + idx * 0.05);
+                gain.gain.setValueAtTime(0, now);
+                gain.gain.linearRampToValueAtTime(0.07, now + 0.1 + idx * 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now + idx * 0.05);
+                osc.stop(now + 1.4);
+            });
+        }
+
+        const unlockAudio = () => {
+            getAudioContext();
+            window.removeEventListener('pointerdown', unlockAudio);
+            window.removeEventListener('keydown', unlockAudio);
+        };
+        window.addEventListener('pointerdown', unlockAudio, { once: true });
+        window.addEventListener('keydown', unlockAudio, { once: true });
+
         function runSequence() {
             clearScheduledTimeouts();
             isComplete = false;
@@ -45,12 +168,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Step 1: Fade in full name (300ms)
             timeouts.push(setTimeout(() => {
-                if (!isComplete) splash.classList.add('step-reveal');
+                if (!isComplete) {
+                    splash.classList.add('step-reveal');
+                    playRevealChime();
+                    speakHarrySevilla();
+                }
             }, 300));
 
             // Step 2: Collapse into initials (2200ms)
             timeouts.push(setTimeout(() => {
-                if (!isComplete) splash.classList.add('step-collapsed');
+                if (!isComplete) {
+                    splash.classList.add('step-collapsed');
+                    playCollapseWhoosh();
+                }
             }, 2200));
 
             // Step 3: Fade out splash (4800ms)
@@ -58,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!isComplete) {
                     splash.classList.add('step-fadeout');
                     document.body.classList.add('splash-revealed');
+                    playExitTransition();
                 }
             }, 4800));
 

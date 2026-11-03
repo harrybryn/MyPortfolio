@@ -184,7 +184,7 @@ const PROJECTS_DATA = [
         year: '2026',
         timeline: '2025 – 2026',
         role: 'Mobile Application Developer',
-        tagline: 'A new way for barkadas to plan trips together.',
+        tagline: 'A new way for travel groups to plan trips together.',
         repoUrl: 'https://github.com/harrybryn',
         siteUrl: 'https://github.com/harrybryn',
         roles: ['Research', 'UX', 'UI', 'Mobile Development', 'Backend & AI'],
@@ -195,13 +195,13 @@ const PROJECTS_DATA = [
         },
         overviewHeadline: 'Planning with Intent',
         overviewDesc: 'Designed and built a collaborative mobile app for Filipino friend groups, bringing destination voting, a shared itinerary, expense splitting, live member tracking, and an AI travel assistant into one platform. A project grounded in real group-travel problems, iteration, and hands-on testing.',
-        challenge: 'Barkadas planning a trip usually juggle endless chat debates, scattered itineraries, spreadsheets, and unsettled shared expenses. The goal was to replace all of that with a single, synchronized mobile experience that takes a group from "saan tayo?" to the post-trip recap.',
-        desc: 'A collaborative mobile application for Filipino friend groups and travel barkadas designed to streamline group trips, featuring destination voting, shared 1-day AI itineraries, live location radar, transparent expense splitting, and post-trip scrapbooks.',
+        challenge: 'Travel groups planning a trip usually juggle endless chat debates, scattered itineraries, spreadsheets, and unsettled shared expenses. The goal was to replace all of that with a single, synchronized mobile experience that takes a group from initial idea to the post-trip recap.',
+        desc: 'A collaborative mobile application for friend groups and travel communities designed to streamline group trips, featuring destination voting, shared 1-day AI itineraries, live location radar, transparent expense splitting, and post-trip scrapbooks.',
         deliverables: [
             'Instant group onboarding via 6-digit join codes and real-time chat sync',
             'Special Feature: 1-Day AI Itinerary Builder powered by Google Gemini',
             'Fair, transparent group expense ledger with multi-party settlement',
-            'Barkada live safety radar and digital roll call checkpoints',
+            'Live group safety radar and digital roll call checkpoints',
             'Interactive travel scrapbook and community destination guide'
         ],
         architecture: 'Cross-platform React Native (Expo) architecture backed by Supabase PostgreSQL for real-time trip synchronization, Google Gemini & Groq APIs for intelligent itinerary synthesis, and OpenWeather API for localized travel route forecasts.',
@@ -222,7 +222,7 @@ const PROJECTS_DATA = [
                 id: 'the-challenge',
                 title: 'The Challenge',
                 badge: 'PROBLEM STATEMENT',
-                description: 'Barkadas planning a trip usually juggle endless chat debates, scattered itineraries, spreadsheets, and unsettled shared expenses. The goal was to replace all of that with a single, synchronized mobile experience that takes a group from "saan tayo?" to the post-trip recap.',
+                description: 'Travel groups planning a trip usually juggle endless chat debates, scattered itineraries, spreadsheets, and unsettled shared expenses. The goal was to replace all of that with a single, synchronized mobile experience that takes a group from initial idea to the post-trip recap.',
                 images: ['assets/Tourgo/Home.jpg'],
                 layout: 'single'
             },
@@ -257,8 +257,7 @@ const PROJECTS_DATA = [
                 layout: 'single'
             },
             {
-                id: 'barkada-radar',
-                title: 'Barkada Radar & Trip Safety',
+                id: 'group-radar', title: 'Group Radar & Trip Safety',
                 badge: 'TRIPS SAFETY & LOCATION',
                 description: 'Opt-in, trip-scoped live location radar and battery status shown on a map only during the trip\'s finalized dates. Paired with a digital Roll Call tool to account for everyone before departures, designed for safety and coordination without compromising privacy.',
                 images: ['assets/Tourgo/Trips_Safety_Location.jpg', 'assets/Tourgo/Trips_Safety_RollCall.jpg'],
@@ -284,7 +283,7 @@ const PROJECTS_DATA = [
                 id: 'weather-forecast',
                 title: 'Real-Time Weather Forecast',
                 badge: 'ROUTE ADVISORY',
-                description: 'Integrated live weather forecast and precipitation monitoring for all scheduled destinations, allowing barkadas to plan outdoor activities around sunny conditions and avoid rain delays.',
+                description: 'Integrated live weather forecast and precipitation monitoring for all scheduled destinations, allowing travelers to plan outdoor activities around sunny conditions and avoid rain delays.',
                 images: ['assets/Tourgo/WeatherForcast.jpg'],
                 layout: 'single'
             },
@@ -329,7 +328,7 @@ const PROJECTS_DATA = [
             },
             {
                 src: 'assets/Tourgo/Trips_Safety_Location.jpg',
-                title: 'Barkada Radar & Live Location',
+                title: 'Group Radar & Live Location',
                 badge: 'SAFETY RADAR',
                 desc: 'Trip-scoped live member location and battery status for coordinated exploration.'
             },
