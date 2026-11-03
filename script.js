@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     window.speechSynthesis.cancel();
                     const utterance = new SpeechSynthesisUtterance('Harry Sevilla');
-                    utterance.rate = 0.92;
+                    utterance.rate = 1.15;
                     utterance.pitch = 1.0;
                     utterance.volume = 1.0;
                     
@@ -61,12 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     };
                     pickVoice();
-                    if (!utterance.voice && window.speechSynthesis.onvoiceschanged !== undefined) {
-                        window.speechSynthesis.onvoiceschanged = () => {
-                            pickVoice();
-                            window.speechSynthesis.speak(utterance);
-                        };
-                    }
                     window.speechSynthesis.speak(utterance);
                 } catch (e) {}
             }
@@ -178,40 +172,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
             renderLetters();
 
+            // Pre-trigger voice & sound immediately so speech aligns right as letters reveal (300ms) with zero latency
+            speakHarrySevilla();
+            playRevealChime();
+
             // Step 1: Fade in full name (300ms)
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-reveal');
-                    playRevealChime();
-                    speakHarrySevilla();
                 }
             }, 300));
 
-            // Step 2: Collapse into initials (2200ms)
+            // Step 2: Collapse into initials (2100ms) — sound leads right into the collapse motion
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-collapsed');
                     playCollapseWhoosh();
                 }
-            }, 2200));
+            }, 2100));
 
-            // Step 3: Fade out splash (4800ms)
+            // Step 3: Fade out splash (4500ms)
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-fadeout');
                     document.body.classList.add('splash-revealed');
                     playExitTransition();
                 }
-            }, 4800));
+            }, 4500));
 
-            // Step 4: Complete & cleanup (5600ms)
+            // Step 4: Complete & cleanup (5200ms)
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     isComplete = true;
                     splash.classList.add('is-hidden');
                     document.body.classList.remove('splash-locked', 'splash-pending-reveal');
                 }
-            }, 5600));
+            }, 5200));
         }
 
         // Start sequence (Bypassed ONLY on subpage back-navigation, plays on refresh or direct entry)
