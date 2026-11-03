@@ -457,24 +457,127 @@ const PROJECTS_DATA = [
     },
     {
         id: 'binhi',
-        title: 'Binhi: Lights & Sounds Production Booking System',
-        shortTitle: 'Binhi Concept',
-        logo: 'assets/BINHI Concept Logo.webp',
-        screen: 'assets/screen_binhi.png',
-        category: 'WEB SYSTEM · MULTI-PORTAL',
-        badge: 'Lights & Sounds Booking',
+        title: 'BINHI Concept: Event Services Booking & Operations Hub',
+        shortTitle: 'BINHI Concept',
+        logo: 'assets/Binhi/binhi_logo.png',
+        screen: 'assets/Binhi/admin_dashboard.webp',
+        category: 'Event Services Booking System',
+        badge: 'Event Services & Inventory Logistics',
+        accentColor: '#ededec',
         year: '2026',
         timeline: '2025 – 2026',
-        role: 'Lead Full-Stack Web Developer',
-        desc: 'Full-scale events management and equipment booking web platform serving clients, crew, administrators, and affiliates. Features an automated quotation builder, crew scheduling, and SMS OTP verification.',
+        role: 'Full-Stack Web & Logistics Developer',
+        tagline: 'Event Services Booking and Management System',
+        client: 'BINHI Concept Lights, Sounds & Event Styling (Malolos, Bulacan)',
+        repoUrl: 'https://github.com/harrybryn',
+        siteUrl: '',
+        roles: ['Full-Stack Development', 'UI/UX Design', 'Database Architecture', 'E-Commerce', 'Inventory Logistics', 'Capstone'],
+        overviewHeadline: 'Connecting Bookings with Real-Time Gear Inventory',
+        overviewDesc: 'Designed and developed a centralized e-commerce and operations platform for BINHI Concept, a lights, sounds, and event styling service in Malolos, Bulacan. Built with an Iterative Waterfall methodology, the system unifies public package browsing, calendar availability validation, PayMongo checkout, physical serial-level equipment allocation, and role-based workflows across clients, administrators, warehouse managers, and rigging technicians.',
+        overview: {
+            title: 'Connecting Bookings with Real-Time Gear Inventory',
+            description: 'Designed and developed a centralized e-commerce and operations platform for BINHI Concept, a lights, sounds, and event styling service in Malolos, Bulacan. Built with an Iterative Waterfall methodology, the system unifies public package browsing, calendar availability validation, PayMongo checkout, physical serial-level equipment allocation, and role-based workflows across clients, administrators, warehouse managers, and rigging technicians.',
+            heroImage: 'assets/Binhi/admin_dashboard.webp'
+        },
+        challenge: 'Event production businesses handle high-value audio rigs, subwoofers, moving lights, and microphones that must be scheduled across overlapping event dates. BINHI Concept previously relied on fragmented inquiries, manual spreadsheet reservations, and verbal equipment checks, creating double-booking risks and uncertain logistics fee calculations. The challenge was to connect real-time customer reservations directly with physical warehouse unit availability and automated transit turnaround windows.',
+        desc: 'Centralized e-commerce and resource operations platform for lights, sounds, and event styling services in Malolos, Bulacan. Connects real-time client reservations directly with warehouse equipment inventory, PayMongo checkout, transit turnaround windows, and role-based staff portals.',
         deliverables: [
-            '4 distinct role-based access portals (Client, Crew, Admin, Affiliate)',
-            'Live package configuration & custom equipment pricing engine',
-            'Automated booking confirmations via SMS OTP verification',
-            'Calendar-based equipment clash prevention system'
+            'Customer reservation portal with dynamic package selection and calendar lock',
+            'Secure payment gateway integration via PayMongo for reservation down payments',
+            'Real-time master calendar preventing gear clashes across overlapping dates',
+            'Two-tier inventory architecture tracking serial numbers, barcodes, and maintenance states',
+            'Field-crew mobile portal with equipment manifests, checklists, and route navigation'
         ],
-        architecture: 'Single-page React web application backed by PHP REST services and MySQL database with strict transaction isolation and RBAC security.',
-        tags: ['React', 'PHP', 'MySQL', 'Tailwind CSS', 'REST API', 'SMS Gateway']
+        architecture: 'React 18 frontend with TypeScript and Vite, backed by Supabase PostgreSQL for transactional inventory locks and real-time reservation updates, TanStack Query for state caching, and PayMongo for checkout processing.',
+        tags: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'Supabase', 'TanStack Query', 'PayMongo', 'Row-Level Security'],
+        builtWith: [
+            'React 18',
+            'TypeScript',
+            'Vite',
+            'Tailwind CSS',
+            'Supabase (PostgreSQL, Auth, Storage, Realtime)',
+            'TanStack Query (React Query)',
+            'PayMongo',
+            'Row-Level Security (RLS)',
+            'Vercel'
+        ],
+        sections: [
+            {
+                id: 'the-challenge',
+                title: 'The Challenge',
+                badge: 'PROBLEM STATEMENT',
+                description: 'Event production businesses handle high-value audio rigs, subwoofers, moving lights, and microphones that must be scheduled across overlapping event dates. BINHI Concept previously relied on fragmented inquiries, manual spreadsheet reservations, and verbal equipment checks, creating double-booking risks and uncertain logistics fee calculations. The challenge was to connect real-time customer reservations directly with physical warehouse unit availability and automated transit turnaround windows.',
+                images: ['assets/Binhi/admin_dashboard.webp'],
+                layout: 'single',
+                device: 'standalone'
+            },
+            {
+                id: 'customer-portal',
+                title: 'Customer Portal & Online Reservations',
+                badge: 'CLIENT BOOKING & RESERVATIONS',
+                description: 'Designed for event hosts, clients can browse signature lighting and audio packages, inspect exact gear inclusions, verify calendar dates in real time, and submit reservations with secure online down payments via PayMongo. Customers track active bookings in real time, view quotation breakdowns, manage reservations, and exchange accumulated loyalty points for monetary discounts.',
+                images: [
+                    'assets/Binhi/customer_services.webp',
+                    'assets/Binhi/customer_date.webp',
+                    'assets/Binhi/customer_loyalty.webp'
+                ],
+                layout: 'fade-loop',
+                device: 'standalone'
+            },
+            {
+                id: 'admin-hub',
+                title: 'Admin Operations Hub & Master Calendar',
+                badge: 'OPERATIONS CONTROL CENTER',
+                description: 'A centralized command center giving administrators full operational visibility. Features an executive KPI overview, a master production calendar with automated transit turnaround validation, a signature package builder mapping physical equipment models, regional transport fee rule matrices, and dynamic affiliate commission payout tracking.',
+                images: [
+                    'assets/Binhi/admin_dashboard.webp',
+                    'assets/Binhi/admin_calendar.webp',
+                    'assets/Binhi/admin_package_builder.webp',
+                    'assets/Binhi/admin_affiliate.webp'
+                ],
+                layout: 'fade-loop',
+                device: 'standalone'
+            },
+            {
+                id: 'inventory-management',
+                title: 'Multi-Layer Inventory & Equipment Allocation',
+                badge: 'WAREHOUSE LOGISTICS ENGINE',
+                description: 'A two-tier inventory architecture built for warehouse logistics. Layer 1 maintains master equipment models and technical specifications (audio production, lighting fixtures, atmospheric stage effects). Layer 2 tracks individual physical serial numbers, barcode labels, and maintenance states. Physical units are automatically reserved per confirmed booking, preventing scheduling conflicts before gear leaves the warehouse.',
+                images: ['assets/Binhi/inventory_dashboard.webp'],
+                layout: 'single',
+                device: 'standalone'
+            },
+            {
+                id: 'crew-logistics',
+                title: 'On-Site Event Crew & Rigging Logistics',
+                badge: 'FIELD CREW & MOBILE PORTAL',
+                description: 'Tailored for field technicians and staging crew, this mobile-optimized portal provides real-time access to assigned event schedules, venue call times, client contact info, and GPS navigation routes. Interactive digital checklists guide crew members through equipment setup, sound/light checks, and post-event teardown verification to ensure all physical units return safely.',
+                images: ['assets/Binhi/crew_dashboard.webp'],
+                layout: 'single',
+                device: 'standalone'
+            }
+        ],
+        outcome: {
+            title: 'The Outcome',
+            narrative: 'The result: an integrated, production-grade online booking and event management platform delivered over a 12-week development lifecycle using the Iterative Waterfall methodology. By synchronizing client reservations directly with warehouse serial tags and transit turnaround windows, BINHI Concept eliminated double-booking risks and streamlined client communication from initial package browsing to final balance settlement.',
+            stats: [
+                {
+                    value: '100%',
+                    label: 'Clash Elimination',
+                    sub: 'Zero double-booking across concurrent audio/lighting gigs'
+                },
+                {
+                    value: '12 Weeks',
+                    label: 'Lifecycle Duration',
+                    sub: 'Production-ready delivery via Iterative Waterfall'
+                },
+                {
+                    value: '4 Roles',
+                    label: 'Dedicated Portals',
+                    sub: 'Clients, Administrators, Warehouse, and Field Crew'
+                }
+            ]
+        }
     },
     {
         id: 'colm',

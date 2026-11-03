@@ -23,7 +23,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=140">
+    <link rel="stylesheet" href="styles.css?v=141">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -277,18 +277,18 @@
                 </article>
 
                 <!-- Binhi -->
-                <article class="subpage-item is-locked" id="project-binhi" data-project-id="binhi" data-category="web" data-search="binhi concept lights sounds booking management system react multi-portal otp">
+                <article class="subpage-item" id="project-binhi" data-project-id="binhi" data-category="web" data-search="binhi concept lights sounds booking management system react multi-portal otp paymongo supabase">
                     <div class="subpage-item-header" tabindex="0" role="button" aria-expanded="false">
                         <div class="subpage-item-title-col">
-                            <img src="assets/BINHI Concept Logo.webp" alt="Binhi" class="subpage-item-logo">
-                            <h3 class="subpage-item-title">Binhi</h3>
+                            <img src="assets/Binhi/binhi_logo.png" alt="BINHI Concept" class="subpage-item-logo">
+                            <h3 class="subpage-item-title">BINHI Concept</h3>
                         </div>
                         <div class="subpage-item-meta-col">
-                            <span class="subpage-item-category">WEB SYSTEM · MULTI-PORTAL</span>
-                            <p class="subpage-item-desc">Comprehensive lights and sounds booking system with 4 distinct portals for clients, crew, admins, and affiliates.</p>
+                            <span class="subpage-item-category">EVENT SERVICES · MULTI-PORTAL SYSTEM</span>
+                            <p class="subpage-item-desc">Centralized e-commerce and gear operations platform coordinating event bookings, PayMongo checkout, and serial-level warehouse inventory.</p>
                         </div>
                         <div class="subpage-item-toggle-wrap">
-                            <i data-lucide="lock"></i></span>
+                            <a href="project-detail.html?id=binhi" class="subpage-view-details-pill" title="View Full Case Study & All Screenshots"><span>View Project</span><i data-lucide="arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="subpage-item-detail" hidden>
@@ -296,8 +296,8 @@
                             <!-- Left: Interactive UI Showcase Stage -->
                             <div class="subpage-card-stage">
                                 <div class="cf-showcase-browser-frame">
-                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/screen_binhi.png" data-title="BINHI CONCEPT: Lights and Sounds Booking Management System" data-sub="Event Production Suite" data-logo="assets/BINHI Concept Logo.webp" data-url="https://traviscruz.vercel.app/project/binhiconcept" tabindex="0" role="button" aria-label="Click to enlarge project screen">
-                                        <img src="assets/screen_binhi.png" alt="Binhi Screen Preview" class="cf-showcase-img" loading="lazy">
+                                    <div class="cf-showcase-viewport open-subpage-lightbox" data-screen="assets/Binhi/admin_dashboard.webp" data-title="BINHI CONCEPT: Event Services Booking & Operations Hub" data-sub="Event Production Suite" data-logo="assets/Binhi/binhi_logo.png" data-url="project-detail.html?id=binhi" tabindex="0" role="button" aria-label="Click to enlarge project screen">
+                                        <img src="assets/Binhi/admin_dashboard.webp" alt="Binhi Admin Dashboard Preview" class="cf-showcase-img" loading="lazy">
                                         <div class="cf-showcase-overlay">
                                             <span class="cf-showcase-hint"><i data-lucide="zoom-in"></i> Click to inspect</span>
                                         </div>
@@ -310,17 +310,17 @@
                                 <div class="cf-info-header">
                                     <div class="cf-info-header-left">
                                         <div class="cf-info-logo-box">
-                                            <img src="assets/BINHI Concept Logo.webp" alt="Binhi" class="cf-info-logo">
+                                            <img src="assets/Binhi/binhi_logo.png" alt="BINHI Concept" class="cf-info-logo">
                                         </div>
                                         <div>
-                                            <h3 class="cf-info-title">Binhi</h3>
+                                            <h3 class="cf-info-title">BINHI Concept</h3>
                                             <span class="cf-info-badge">Event Production Suite</span>
                                         </div>
                                     </div>
                                     <span class="cf-info-year">2026</span>
                                 </div>
                                 <p class="cf-info-desc">
-                                    A complete website for lights and sound booking and management, with separate portals for admins, crew, customers/clients, and affiliates. Includes automated booking pipeline, interactive price builder, customer Wishlist, and SMS OTP verification.
+                                    Designed and developed a centralized e-commerce and operations platform for BINHI Concept, a lights, sounds, and event styling service in Malolos, Bulacan. Unifies public package browsing, calendar availability validation, PayMongo checkout, physical serial-level equipment allocation, and role-based workflows across clients, administrators, warehouse managers, and rigging technicians.
                                 </p>
 
                                 <!-- Technical Deliverables & Architecture -->
@@ -328,30 +328,32 @@
                                     <div class="cf-detail-col">
                                         <span class="cf-detail-label">Key Deliverables</span>
                                         <ul class="cf-detail-list">
-                                            <li>Four dedicated portals: Admin, Field Crew, Client, and Affiliate dashboards</li>
-                                            <li>Interactive live package quotation & custom equipment price builder</li>
-                                            <li>Automated booking reservation timeline with SMS OTP verification</li>
+                                            <li>Customer reservation portal with package configuration & PayMongo checkout</li>
+                                            <li>Real-time master calendar preventing gear clashes across overlapping dates</li>
+                                            <li>Two-tier inventory architecture tracking serial numbers, barcodes, and maintenance states</li>
+                                            <li>Field-crew mobile portal with equipment manifests and digital setup checklists</li>
                                         </ul>
                                     </div>
                                     <div class="cf-detail-col">
                                         <span class="cf-detail-label">Architecture &amp; Data Pipeline</span>
                                         <p class="cf-detail-text">
-                                            Modular React web architecture paired with RESTful backend endpoints, SMS gateway webhooks, and transactional booking status management.
+                                            React 18 frontend with TypeScript and Vite, backed by Supabase PostgreSQL for transactional inventory locks and real-time reservation updates, TanStack Query for state caching, and PayMongo for checkout processing.
                                         </p>
                                     </div>
                                 </div>
 
                                 <div class="subpage-card-footer">
                                     <div class="cf-info-tags">
-                                        <span class="tag">React</span>
-                                        <span class="tag">React Native</span>
-                                        <span class="tag">Backend Architecture</span>
-                                        <span class="tag">Price Builder</span>
-                                        <span class="tag">SMS OTP</span>
+                                        <span class="tag">React 18</span>
+                                        <span class="tag">TypeScript</span>
+                                        <span class="tag">Vite</span>
+                                        <span class="tag">Supabase</span>
+                                        <span class="tag">PayMongo</span>
+                                        <span class="tag">TanStack Query</span>
                                     </div>
                                     <div class="subpage-card-actions">
-                                        <a href="project-detail.html?id=anigrow" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
-                                            <span>View Full Dossier</span>
+                                        <a href="project-detail.html?id=binhi" class="cf-subpage-link" style="color: var(--text-main); font-weight: 600;">
+                                            <span>View Full Case Study</span>
                                             <i data-lucide="arrow-right"></i>
                                         </a>
                                         <button type="button" class="cf-subpage-link open-contact-modal">

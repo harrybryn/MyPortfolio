@@ -23,7 +23,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=140">
+    <link rel="stylesheet" href="styles.css?v=141">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -368,7 +368,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="projects-data.js?v=18"></script>
+    <script src="projects-data.js?v=19"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Theme Engine
@@ -611,7 +611,7 @@
 
                     sectionsContainer.innerHTML = project.sections.map((sec, idx) => {
                         let mediaMarkup = '';
-                        const isStandaloneMockup = sec.device === 'standalone' || (sec.images && sec.images.some(img => img.includes('Ani-Grow') || img.includes('Barkadash') || img.includes('hero_showcase') || img.includes('hero_device')));
+                        const isStandaloneMockup = sec.device === 'standalone' || (sec.images && sec.images.some(img => img.includes('Ani-Grow') || img.includes('Barkadash') || img.includes('Binhi') || img.includes('binhi') || img.includes('hero_showcase') || img.includes('hero_device') || img.endsWith('.webp')));
                         const isPhoneSec = !isStandaloneMockup && (sec.device === 'phone' || (!sec.device && (project.id === 'tourgo' || (sec.images && sec.images.some(img => img.includes('Tourgo'))))));
 
                         if (sec.layout === 'duo-crop' && Array.isArray(sec.images) && sec.images.length >= 2) {
