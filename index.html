@@ -56,36 +56,42 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=153">
+    <link rel="stylesheet" href="styles.css?v=154">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body class="splash-locked splash-pending-reveal">
     <!-- =====================================================================
-         XYRUS DARCEN INSPIRED SPLASH SCREEN TRANSITION
-         Fredoka Typography: Full Name -> Initials Organic Collapse
+         DEVELOPER PROGRAMMER SPLASH SCREEN TRANSITION (< HARRY SEVILLA /> -> < HS />)
          ===================================================================== -->
     <div id="splashScreen" class="splash-screen" role="dialog" aria-modal="true" aria-label="Loading portfolio">
-        <canvas id="splashCanvas" class="splash-canvas"></canvas>
         <audio id="splashAudio" src="assets/ta-dum.wav" preload="auto"></audio>
-        <div class="splash-audiowide-center">
-            <div id="splashLetterContainer" class="splash-letter-container">
-                <span class="xrd-char is-initial">H</span>
-                <span class="xrd-char">A</span>
-                <span class="xrd-char">R</span>
-                <span class="xrd-char">R</span>
-                <span class="xrd-char">Y</span>
-                <span class="xrd-char is-space">&nbsp;</span>
-                <span class="xrd-char is-initial">S</span>
-                <span class="xrd-char">E</span>
-                <span class="xrd-char">V</span>
-                <span class="xrd-char">I</span>
-                <span class="xrd-char">L</span>
-                <span class="xrd-char">L</span>
-                <span class="xrd-char">A</span>
+        
+        <div class="splash-coder-stage">
+            <div class="splash-coder-logo" id="splashCoderLogo">
+                <span class="code-bracket bracket-left">&lt;</span>
+                <div id="splashLetterContainer" class="splash-letter-container">
+                    <span class="xrd-char is-initial">H</span>
+                    <span class="xrd-char">A</span>
+                    <span class="xrd-char">R</span>
+                    <span class="xrd-char">R</span>
+                    <span class="xrd-char">Y</span>
+                    <span class="xrd-char is-space">&nbsp;</span>
+                    <span class="xrd-char is-initial">S</span>
+                    <span class="xrd-char">E</span>
+                    <span class="xrd-char">V</span>
+                    <span class="xrd-char">I</span>
+                    <span class="xrd-char">L</span>
+                    <span class="xrd-char">L</span>
+                    <span class="xrd-char">A</span>
+                </div>
+                <span class="code-slash">/</span>
+                <span class="code-bracket bracket-right">&gt;</span>
+                <span class="code-cursor">_</span>
             </div>
         </div>
+
         <div class="splash-sound-hint" id="splashSoundHint" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -1052,7 +1058,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=84"></script>
+    <script src="script.js?v=85"></script>
     <script src="arcade.js?v=26"></script>
     <script>
         if (window.lucide) {

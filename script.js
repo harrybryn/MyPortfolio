@@ -1,308 +1,89 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
-    // 0. Bespoke 3D Isometric Boxes Splash Screen Controller (Exact 4.0s)
-    // Dynamic Cube Matrix Shockwave, Elevating 3D Pedestal, & Guaranteed Ta-Dum Audio
+    // 0. Minimalist Programmer Logo Splash Screen Controller (Exact 4.0s)
+    // Zero Background Clutter — Developer Code Brandmark (< HARRY SEVILLA /> -> < HS />_)
     // ==========================================================================
     (() => {
         const splash = document.getElementById('splashScreen');
         if (!splash) return;
 
         const container = document.getElementById('splashLetterContainer');
-        const canvas = document.getElementById('splashCanvas');
         const soundHint = document.getElementById('splashSoundHint');
         const splashAudio = document.getElementById('splashAudio') || new Audio('assets/ta-dum.wav');
 
-        const NAME = "HARRY SEVILLA";
+        const FULL_TEXT = "HARRY SEVILLA";
         const INITIALS = [0, 6]; // 'H' at 0, 'S' at 6
+        const CODE_GLYPHS = ['0', '1', '{', '}', '<', '>', '/', '$', '_', '#', '*', '!', ';', '='];
 
         let timeouts = [];
         let isComplete = false;
         let soundHasPlayed = false;
-        let animFrameId = null;
+        let scrambleInterval = null;
 
         function clearScheduledTimeouts() {
             timeouts.forEach(t => clearTimeout(t));
             timeouts = [];
+            if (scrambleInterval) {
+                clearInterval(scrambleInterval);
+                scrambleInterval = null;
+            }
         }
 
-        function renderLetters() {
+        function renderInitialLetters() {
             if (!container) return;
             container.innerHTML = '';
-            NAME.split('').forEach((char, i) => {
+            FULL_TEXT.split('').forEach((char, i) => {
                 const isInitial = INITIALS.includes(i);
                 const isSpace = char === ' ';
                 const span = document.createElement('span');
                 span.className = 'xrd-char' + (isInitial ? ' is-initial' : '') + (isSpace ? ' is-space' : '');
                 span.textContent = isSpace ? '\u00a0' : char;
+                span.setAttribute('data-target-char', isSpace ? '\u00a0' : char);
                 container.appendChild(span);
             });
         }
 
-        // ── 3D Isometric Boxes Canvas Engine (Bespoke to Harry Sevilla Background) ──
-        let sCtx = null;
-        let cWidth = 0;
-        let cHeight = 0;
-        let cDpr = Math.min(window.devicePixelRatio || 1, 2);
+        // Developer code decryption scramble effect
+        function runCodeScramble() {
+            if (!container) return;
+            const spans = container.querySelectorAll('.xrd-char:not(.is-space)');
+            const startTime = performance.now();
+            const duration = 180; // snappy 180ms code compile scramble
 
-        // Exact isometric cube geometry from bgInteractiveCanvas
-        const R = 44; // Outer radius of isometric cube
-        const dx = R * 0.8660254; // R * cos(30 deg)
-        const dy = R * 0.5;       // R * sin(30 deg)
-        const stepX = dx * 2;     // Column spacing
-        const stepY = R * 1.5;    // Row spacing
-        const LINE_SPACING = 4.2; // Fine hatched spacing inside each face
+            if (scrambleInterval) clearInterval(scrambleInterval);
 
-        let splashCubes = [];
-        let splashParticles = [];
-        let shockwaveRadius = 0;
-        let shockwaveActive = false;
-        let shockwaveStartTime = 0;
-        let isImpact = false;
-        let isCollapsed = false;
-        let isBloom = false;
+            scrambleInterval = setInterval(() => {
+                const elapsed = performance.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
 
-        function initSplashCanvas() {
-            if (!canvas) return;
-            sCtx = canvas.getContext('2d');
-            if (!sCtx) return;
+                spans.forEach((span, idx) => {
+                    const targetChar = span.getAttribute('data-target-char');
+                    // Reveal letters progressively
+                    if (progress > (idx / spans.length) * 0.8) {
+                        span.textContent = targetChar;
+                    } else {
+                        span.textContent = CODE_GLYPHS[Math.floor(Math.random() * CODE_GLYPHS.length)];
+                    }
+                });
 
-            cWidth = window.innerWidth;
-            cHeight = window.innerHeight;
-            canvas.width = Math.floor(cWidth * cDpr);
-            canvas.height = Math.floor(cHeight * cDpr);
-            canvas.style.width = cWidth + 'px';
-            canvas.style.height = cHeight + 'px';
-            sCtx.setTransform(cDpr, 0, 0, cDpr, 0, 0);
-
-            const cols = Math.ceil(cWidth / stepX) + 3;
-            const rows = Math.ceil(cHeight / stepY) + 3;
-
-            splashCubes = [];
-            splashParticles = [];
-            shockwaveActive = false;
-            shockwaveRadius = 0;
-            isImpact = false;
-            isCollapsed = false;
-            isBloom = false;
-
-            const midX = cWidth / 2;
-            const midY = cHeight / 2;
-
-            for (let r = -2; r < rows; r++) {
-                const isOdd = (Math.abs(r) % 2 === 1);
-                const xOffset = isOdd ? dx : 0;
-                for (let c = -2; c < cols; c++) {
-                    const cx = c * stepX + xOffset;
-                    const cy = r * stepY;
-                    const distFromCenter = Math.hypot(cx - midX, cy - midY);
-                    splashCubes.push({
-                        cx,
-                        cy,
-                        r,
-                        c,
-                        distFromCenter,
-                        glow: 0,
-                        elevation: 0,
-                        targetElevation: 0,
-                        targetGlow: 0,
-                        baseElevation: 0
+                if (progress >= 1) {
+                    clearInterval(scrambleInterval);
+                    scrambleInterval = null;
+                    spans.forEach(span => {
+                        span.textContent = span.getAttribute('data-target-char');
                     });
                 }
-            }
+            }, 30);
         }
 
-        // Draw individual face with fine directional hatching & borders
-        function drawSplashFace(p1, p2, p3, p4, angle, lineSpacing, strokeColor, borderColor, fillColor, hatchWidth = 0.7, borderWidth = 0.9) {
-            sCtx.save();
-            sCtx.beginPath();
-            sCtx.moveTo(p1.x, p1.y);
-            sCtx.lineTo(p2.x, p2.y);
-            sCtx.lineTo(p3.x, p3.y);
-            sCtx.lineTo(p4.x, p4.y);
-            sCtx.closePath();
-
-            if (fillColor) {
-                sCtx.fillStyle = fillColor;
-                sCtx.fill();
-            }
-
-            sCtx.clip();
-
-            sCtx.beginPath();
-            sCtx.lineWidth = hatchWidth;
-            sCtx.strokeStyle = strokeColor;
-
-            const minX = Math.min(p1.x, p2.x, p3.x, p4.x) - 4;
-            const maxX = Math.max(p1.x, p2.x, p3.x, p4.x) + 4;
-            const minY = Math.min(p1.y, p2.y, p3.y, p4.y) - 4;
-            const maxY = Math.max(p1.y, p2.y, p3.y, p4.y) + 4;
-
-            if (angle === Math.PI / 2) {
-                // Vertical lines (Left face)
-                for (let x = minX; x <= maxX; x += lineSpacing) {
-                    sCtx.moveTo(x, minY);
-                    sCtx.lineTo(x, maxY);
-                }
-            } else {
-                // Angled lines (Top and Right faces)
-                const cosA = Math.cos(angle);
-                const sinA = Math.sin(angle);
-                const normX = -sinA;
-                const normY = cosA;
-
-                const pts = [p1, p2, p3, p4];
-                let minD = Infinity;
-                let maxD = -Infinity;
-                for (let i = 0; i < 4; i++) {
-                    const d = pts[i].x * normX + pts[i].y * normY;
-                    if (d < minD) minD = d;
-                    if (d > maxD) maxD = d;
-                }
-
-                const lineLen = Math.hypot(maxX - minX, maxY - minY) * 1.5;
-                for (let d = minD - lineSpacing; d <= maxD + lineSpacing; d += lineSpacing) {
-                    const px = d * normX;
-                    const py = d * normY;
-                    sCtx.moveTo(px - lineLen * cosA, py - lineLen * sinA);
-                    sCtx.lineTo(px + lineLen * cosA, py + lineLen * sinA);
-                }
-            }
-            sCtx.stroke();
-            sCtx.restore();
-
-            if (borderColor) {
-                sCtx.beginPath();
-                sCtx.moveTo(p1.x, p1.y);
-                sCtx.lineTo(p2.x, p2.y);
-                sCtx.lineTo(p3.x, p3.y);
-                sCtx.lineTo(p4.x, p4.y);
-                sCtx.closePath();
-                sCtx.strokeStyle = borderColor;
-                sCtx.lineWidth = borderWidth;
-                sCtx.stroke();
-            }
-        }
-
-        function triggerCubeShockwave() {
-            shockwaveActive = true;
-            isImpact = true;
-            shockwaveStartTime = performance.now();
-        }
-
-        let lastFrameTime = performance.now();
-        function renderSplashCanvas(now) {
-            if (isComplete) return;
-            const dt = Math.min((now - lastFrameTime) / 1000, 0.05);
-            lastFrameTime = now;
-
-            if (sCtx) {
-                // Clear with deep obsidian tint
-                sCtx.fillStyle = 'rgba(9, 9, 9, 0.32)';
-                sCtx.fillRect(0, 0, cWidth, cHeight);
-
-                // Central ambient white light glow
-                const centerGlow = sCtx.createRadialGradient(
-                    cWidth / 2, cHeight / 2, 0,
-                    cWidth / 2, cHeight / 2, cWidth * 0.55
-                );
-                centerGlow.addColorStop(0, isImpact ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255, 255, 255, 0.03)');
-                centerGlow.addColorStop(0.5, 'rgba(255, 255, 255, 0.015)');
-                centerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-                sCtx.fillStyle = centerGlow;
-                sCtx.fillRect(0, 0, cWidth, cHeight);
-
-                // Shockwave radius expands smoothly across the grid
-                if (shockwaveActive) {
-                    const elapsed = (now - shockwaveStartTime) / 1000;
-                    shockwaveRadius = elapsed * 1050;
-                    if (shockwaveRadius > Math.max(cWidth, cHeight) * 1.25) {
-                        shockwaveActive = false;
-                    }
-                }
-
-                // Render each 3D Isometric Cube in Pure Monochrome Silver/White
-                const maxDim = Math.max(cWidth, cHeight) * 0.85;
-
-                for (let i = 0; i < splashCubes.length; i++) {
-                    const cube = splashCubes[i];
-                    const dist = cube.distFromCenter;
-
-                    // Light wave calculation: Gentle elevation & white illumination
-                    if (shockwaveActive) {
-                        const waveDist = Math.abs(dist - shockwaveRadius);
-                        if (waveDist < 90) {
-                            const waveFactor = 1 - waveDist / 90;
-                            const peakElevation = waveFactor * 5.5 * Math.max(0.2, 1 - dist / maxDim);
-                            cube.elevation = Math.max(cube.elevation, peakElevation);
-                            cube.glow = Math.max(cube.glow, waveFactor * 0.85);
-                        }
-                    }
-
-                    // HS Monogram Pedestal: Cubes directly under monogram hold gentle elevation
-                    if (isCollapsed) {
-                        if (dist < 140) {
-                            cube.elevation += (4.5 - cube.elevation) * 0.12;
-                            cube.glow += (0.6 - cube.glow) * 0.12;
-                        }
-                    }
-
-                    // Bloom: Harmonic breathing wave
-                    if (isBloom && dist < 260) {
-                        cube.glow += 0.06 * Math.sin(now * 0.005 + dist * 0.02);
-                    }
-
-                    // Smooth natural decay (matches site's hover decay)
-                    if (!isCollapsed || dist >= 140) {
-                        cube.elevation = Math.max(0, cube.elevation - dt * 10);
-                        cube.glow = Math.max(0, cube.glow - dt * 0.55);
-                    }
-
-                    // Vertices
-                    const cx = cube.cx;
-                    const cy = cube.cy - cube.elevation;
-                    const C = { x: cx, y: cy };
-                    const V_top = { x: cx, y: cy - R };
-                    const V_tr = { x: cx + dx, y: cy - dy };
-                    const V_br = { x: cx + dx, y: cy + dy };
-                    const V_bot = { x: cx, y: cy + R };
-                    const V_bl = { x: cx - dx, y: cy + dy };
-                    const V_tl = { x: cx - dx, y: cy - dy };
-
-                    // Pure Monochrome Styling (White & Charcoal — Identical to bgInteractiveCanvas)
-                    const g = Math.min(1, Math.max(0, cube.glow));
-                    let strokeColor, borderColor, fillColor;
-                    const hlw = 0.55 + g * 0.35;
-                    const blw = 0.7 + g * 0.45;
-
-                    if (g > 0.01) {
-                        strokeColor = `rgba(255, 255, 255, ${(0.025 + g * 0.22).toFixed(3)})`;
-                        borderColor = `rgba(255, 255, 255, ${(0.045 + g * 0.32).toFixed(3)})`;
-                        fillColor = `rgba(255, 255, 255, ${(g * 0.07).toFixed(3)})`;
-                    } else {
-                        strokeColor = 'rgba(255, 255, 255, 0.025)';
-                        borderColor = 'rgba(255, 255, 255, 0.045)';
-                        fillColor = null;
-                    }
-
-                    // Draw 3 Isometric Faces
-                    // 1. Top Face
-                    drawSplashFace(C, V_tl, V_top, V_tr, Math.PI / 6, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
-                    // 2. Left Face (Vertical hatching)
-                    drawSplashFace(C, V_bl, V_bot, V_tl, Math.PI / 2, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
-                    // 3. Right Face (Angled hatching)
-                    drawSplashFace(C, V_bot, V_br, V_tr, -Math.PI / 6, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
-                }
-            }
-
-            animFrameId = requestAnimationFrame(renderSplashCanvas);
-        }
-
-        // ── Guaranteed Dual-Engine Audio: Native WAV + Web Audio ──
+        // Web Audio API Synthesizer (Studio "Ta-Dum" Dual Fallback)
         let audioCtx = null;
-
         function getAudioContext() {
-            if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (!audioCtx) {
+                const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioCtxClass) {
+                    audioCtx = new AudioCtxClass();
+                }
             }
             return audioCtx;
         }
@@ -321,33 +102,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Web Audio Synthesizer Layer
         function synthesizeWebAudio(ctx) {
-            const t0 = ctx.currentTime + 0.015;
+            const now = ctx.currentTime;
             const master = ctx.createGain();
-            master.gain.setValueAtTime(0.95, t0);
+            master.gain.setValueAtTime(0.9, now);
             master.connect(ctx.destination);
 
-            // Strike 1: "Ta" (t0 + 0.08)
-            const tTa = t0 + 0.08;
+            // Strike 1: "Ta" knock (0.10s)
             try {
-                const taOsc = ctx.createOscillator();
-                const taGain = ctx.createGain();
-                taOsc.type = 'triangle';
-                taOsc.frequency.setValueAtTime(460, tTa);
-                taOsc.frequency.exponentialRampToValueAtTime(140, tTa + 0.07);
-                taGain.gain.setValueAtTime(0.5, tTa);
-                taGain.gain.exponentialRampToValueAtTime(0.001, tTa + 0.075);
-                taOsc.connect(taGain);
-                taGain.connect(master);
-                taOsc.start(tTa);
-                taOsc.stop(tTa + 0.08);
+                const osc1 = ctx.createOscillator();
+                const gain1 = ctx.createGain();
+                osc1.type = 'sine';
+                osc1.frequency.setValueAtTime(82, now);
+                osc1.frequency.exponentialRampToValueAtTime(42, now + 0.16);
+                gain1.gain.setValueAtTime(0.55, now);
+                gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                osc1.connect(gain1);
+                gain1.connect(master);
+                osc1.start(now);
+                osc1.stop(now + 0.22);
             } catch (e) {}
 
-            // Strike 2: "DUMMMM" (t0 + 0.32)
-            const tDum = t0 + 0.32;
+            // Strike 2: "DUMMMM" heavy resonance (0.34s)
+            const tDum = now + 0.24;
             try {
-                // Sub-bass
                 const sub = ctx.createOscillator();
                 const subG = ctx.createGain();
                 sub.type = 'sine';
@@ -362,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 sub.start(tDum);
                 sub.stop(tDum + 2.6);
 
-                // Mid-body punch for laptop speakers
                 const mid = ctx.createOscillator();
                 const midG = ctx.createGain();
                 mid.type = 'sawtooth';
@@ -475,56 +252,42 @@ document.addEventListener('DOMContentLoaded', () => {
             splash.classList.remove('is-hidden', 'step-reveal', 'step-impact', 'step-collapsed', 'step-bloom', 'step-fadeout');
             splash.style.display = 'flex';
 
-            renderLetters();
-            initSplashCanvas();
-            lastFrameTime = performance.now();
-            if (!animFrameId) {
-                animFrameId = requestAnimationFrame(renderSplashCanvas);
-            }
+            renderInitialLetters();
 
             // Total Duration: Exactly 4.0 Seconds
             // 0ms: Obsidian stillness
 
-            // Step 1: 100ms — Strike 1 ("Ta") + Full Name Appears + Central Boxes Ignite
+            // Step 1: 100ms — Strike 1 ("Ta") + Programmer Code Scramble Decrypt < HARRY SEVILLA />_
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-reveal');
-                    // Light up central cubes with subtle white radiance
-                    splashCubes.forEach(cube => {
-                        if (cube.distFromCenter < 240) {
-                            cube.elevation = 3.5;
-                            cube.glow = 0.45;
-                        }
-                    });
+                    runCodeScramble();
                     playTaDumSound();
                 }
             }, 100));
 
-            // Step 1.5: 340ms — Strike 2 ("DUMMMM") + 3D Isometric Boxes Kinetic Shockwave!
+            // Step 1.5: 340ms — Strike 2 ("DUMMMM") + Developer Compile Flash Pulse
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-impact');
-                    triggerCubeShockwave();
                 }
             }, 340));
 
-            // Step 2: 1800ms — Smooth Collapse into "HS" Initials Monogram + Elevated Pedestal of Cubes
+            // Step 2: 1800ms — Collapse to Programmer Monogram < HS />_
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-collapsed');
-                    isCollapsed = true;
                 }
             }, 1800));
 
-            // Step 2.5: 2800ms — Monogram Radiance / Harmonic Box Bloom
+            // Step 2.5: 2800ms — Monogram Radiance Bloom
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-bloom');
-                    isBloom = true;
                 }
             }, 2800));
 
-            // Step 3: 3400ms — Cinematic 600ms Fade-out into Portfolio Homepage
+            // Step 3: 3400ms — Smooth 600ms Fade-out into Portfolio Homepage
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-fadeout');
@@ -539,10 +302,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     isComplete = true;
                     splash.classList.add('is-hidden');
                     document.body.classList.remove('splash-locked', 'splash-pending-reveal');
-                    if (animFrameId) {
-                        cancelAnimationFrame(animFrameId);
-                        animFrameId = null;
-                    }
                 }
             }, 4000));
         }
