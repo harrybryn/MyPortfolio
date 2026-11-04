@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // 0. Minimalist Programmer Typing & Monogram Splash Screen (Exact 8.0s)
-    // Tactile Mechanical Keyboard Typing -> Seamless Morph into < HS /> Monogram
-    // 100% Automatic Sound with Zero Tap UI & Zero Highlight Artifacts
+    // Authentic Real Mechanical Keyboard Switch Audio Imported from Open Source Clatterbox
+    // Zero-Highlight, Pure Typography, and Automatic Audio Activation
     // ==========================================================================
     (() => {
         const splash = document.getElementById('splashScreen');
@@ -11,18 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('splashLetterContainer');
         const splashAudio = document.getElementById('splashAudio') || new Audio('assets/ta-dum.wav');
 
-        // Preload Mechanical Keyboard Switch Audio Files
+        // Preload Real Mechanical Switch Audio Files (Imported Tactile MP3s)
         const mechAudios = {
             keys: [
-                new Audio('assets/mech-key1.wav'),
-                new Audio('assets/mech-key2.wav'),
-                new Audio('assets/mech-key3.wav')
+                new Audio('assets/mech-1.mp3'),
+                new Audio('assets/mech-2.mp3'),
+                new Audio('assets/mech-3.mp3'),
+                new Audio('assets/mech-4.mp3')
             ],
-            space: new Audio('assets/mech-space.wav')
+            space: new Audio('assets/mech-space.mp3')
         };
-        mechAudios.keys.forEach(a => { a.preload = 'auto'; a.volume = 0.85; });
+        mechAudios.keys.forEach(a => { a.preload = 'auto'; a.volume = 0.9; });
         mechAudios.space.preload = 'auto';
-        mechAudios.space.volume = 0.9;
+        mechAudios.space.volume = 0.95;
 
         const FULL_NAME = "Harry Sevilla";
         // 'H' is at index 0, 'S' is at index 6
@@ -71,23 +72,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
             try {
-                const [b1, b2, b3, bs] = await Promise.all([
-                    loadBuf('assets/mech-key1.wav'),
-                    loadBuf('assets/mech-key2.wav'),
-                    loadBuf('assets/mech-key3.wav'),
-                    loadBuf('assets/mech-space.wav')
+                const [b1, b2, b3, b4, bs] = await Promise.all([
+                    loadBuf('assets/mech-1.mp3'),
+                    loadBuf('assets/mech-2.mp3'),
+                    loadBuf('assets/mech-3.mp3'),
+                    loadBuf('assets/mech-4.mp3'),
+                    loadBuf('assets/mech-space.mp3')
                 ]);
                 if (b1) keyBuffers.push(b1);
                 if (b2) keyBuffers.push(b2);
                 if (b3) keyBuffers.push(b3);
+                if (b4) keyBuffers.push(b4);
                 if (bs) spaceBuffer = bs;
             } catch (e) {}
         }
         preloadMechAudioBuffers();
 
-        // Play authentic mechanical keyboard click (dual-engine: audio buffer + synthesized snap)
+        // Play authentic mechanical keyboard click (dual-engine: audio buffer + audio element)
         function playMechanicalKeyClick(isSpace) {
-            // 1. Play real mechanical audio sample via Web Audio Buffer (if unlocked)
+            // 1. Play real mechanical audio sample via Web Audio Buffer (if running)
             const ctx = getAudioContext();
             if (ctx && ctx.state === 'running') {
                 try {
@@ -96,26 +99,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         const src = ctx.createBufferSource();
                         const gain = ctx.createGain();
                         src.buffer = buf;
-                        // Subtle natural pitch variance (0.96x - 1.04x)
-                        src.playbackRate.value = 0.96 + Math.random() * 0.08;
-                        gain.gain.value = isSpace ? 0.95 : 0.85;
+                        // Subtle natural pitch variance (0.97x - 1.03x)
+                        src.playbackRate.value = 0.97 + Math.random() * 0.06;
+                        gain.gain.value = isSpace ? 0.95 : 0.88;
                         src.connect(gain);
                         gain.connect(ctx.destination);
                         src.start(0);
-                    } else {
-                        synthesizeTactileSwitch(ctx, isSpace);
                     }
-                } catch (e) {
-                    synthesizeTactileSwitch(ctx, isSpace);
-                }
+                } catch (e) {}
             }
 
-            // 2. Play HTML5 Audio as companion/fallback
+            // 2. Play HTML5 Audio element
             try {
                 const audioEl = isSpace ? mechAudios.space : mechAudios.keys[mechKeyCounter % mechAudios.keys.length];
                 if (audioEl) {
                     const clone = audioEl.cloneNode();
-                    clone.volume = isSpace ? 0.9 : 0.82;
+                    clone.volume = isSpace ? 0.95 : 0.85;
                     clone.play().catch(() => {});
                 }
             } catch (e) {}
@@ -123,39 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mechKeyCounter++;
         }
 
-        // High-precision synthesized switch fallback
-        function synthesizeTactileSwitch(ctx, isSpace) {
-            try {
-                const t = ctx.currentTime;
-                const snap = ctx.createOscillator();
-                const snapG = ctx.createGain();
-                const freq = isSpace ? 1150 : (2100 + (Math.random() * 300 - 150));
-                snap.type = isSpace ? 'sine' : 'triangle';
-                snap.frequency.setValueAtTime(freq, t);
-                snap.frequency.exponentialRampToValueAtTime(320, t + 0.015);
-                snapG.gain.setValueAtTime(isSpace ? 0.25 : 0.22, t);
-                snapG.gain.exponentialRampToValueAtTime(0.001, t + 0.018);
-                snap.connect(snapG);
-                snapG.connect(ctx.destination);
-                snap.start(t);
-                snap.stop(t + 0.02);
-
-                const thock = ctx.createOscillator();
-                const thockG = ctx.createGain();
-                const thockFreq = isSpace ? 140 : (240 + (Math.random() * 40 - 20));
-                thock.type = 'sine';
-                thock.frequency.setValueAtTime(thockFreq, t);
-                thock.frequency.exponentialRampToValueAtTime(65, t + 0.03);
-                thockG.gain.setValueAtTime(isSpace ? 0.35 : 0.25, t);
-                thockG.gain.exponentialRampToValueAtTime(0.001, t + 0.035);
-                thock.connect(thockG);
-                thockG.connect(ctx.destination);
-                thock.start(t);
-                thock.stop(t + 0.038);
-            } catch (e) {}
-        }
-
-        // Studio "Ta-Dum" Audio
+        // Studio "Ta-Dum" Audio Synthesizer Layer
         function synthesizeWebAudio(ctx) {
             const now = ctx.currentTime;
             const master = ctx.createGain();
@@ -256,17 +223,16 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (e) {}
         }
 
-        // Invisible Automatic Audio Unlock:
-        // Silently activates AudioContext on any natural mouse movement, scroll, or touch
-        const unlockAudioSilently = () => {
+        // Automatic audio unlock on any natural interaction
+        const unlockAudio = () => {
             const ctx = getAudioContext();
             if (ctx && ctx.state === 'suspended') {
                 ctx.resume().catch(() => {});
             }
         };
 
-        ['pointermove', 'mousemove', 'wheel', 'scroll', 'touchstart', 'pointerdown', 'keydown', 'focus'].forEach(evt => {
-            window.addEventListener(evt, unlockAudioSilently, { passive: true, once: false });
+        ['pointerdown', 'touchstart', 'mousedown', 'keydown', 'click'].forEach(evt => {
+            window.addEventListener(evt, unlockAudio, { passive: true });
         });
 
         // Attempt immediate initialization
@@ -297,11 +263,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     span.textContent = isSpace ? '\u00a0' : char;
                     container.appendChild(span);
 
-                    // Mechanical switch sound on every keystroke
+                    // Real mechanical switch sound on every keystroke
                     playMechanicalKeyClick(isSpace);
 
                     charIndex++;
-                    // Natural human typing speed (~190ms - 240ms)
+                    // Natural human typing rhythm (~190ms - 240ms)
                     const jitter = isSpace ? 250 : Math.floor(190 + Math.random() * 50);
                     typingTimeout = setTimeout(typeNext, jitter);
                 } else {
@@ -334,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 200));
 
-            // 800ms: Start automatic typing of "Harry Sevilla"
+            // 800ms: Start automatic typing of "Harry Sevilla" with real mechanical switch sounds
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     startTypingSequence();
