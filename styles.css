@@ -8290,61 +8290,33 @@ body.splash-locked {
   50% { opacity: 0; }
 }
 
-/* Sound Hint Floating Pill — Visible on First Visit when Browser Blocks Autoplay */
-.splash-sound-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 30;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.45rem 1.15rem;
-  border-radius: 999px;
-  background: rgba(18, 18, 22, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.75), 0 0 15px rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  color: #ededec;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  opacity: 0;
-  pointer-events: auto;
-  cursor: pointer;
-  transition: opacity 0.4s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  user-select: none;
-  animation: soundHintGentlyFloat 2.6s ease-in-out infinite;
+/* ── Pure Clean Zero-Highlight & Zero-Box Reset ── */
+.splash-screen,
+.splash-screen * {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
 }
 
-@keyframes soundHintGentlyFloat {
-  0%, 100% {
-    transform: translateX(-50%) translateY(0);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.75), 0 0 12px rgba(255, 255, 255, 0.05);
-  }
-  50% {
-    transform: translateX(-50%) translateY(-3px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85), 0 0 20px rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.35);
-  }
+.splash-screen *::selection,
+.splash-screen *::-moz-selection {
+  background: transparent !important;
+  color: inherit !important;
 }
 
-.splash-sound-hint:hover {
-  border-color: rgba(255, 255, 255, 0.55);
-  transform: translateX(-50%) translateY(-3px);
-  color: #ffffff;
-}
-
-.splash-sound-hint.is-visible {
-  opacity: 1;
-}
-
-.splash-sound-hint.is-hidden {
-  opacity: 0 !important;
-  pointer-events: none !important;
+.splash-coder-stage,
+.splash-coder-logo,
+.splash-letter-container,
+.xrd-char,
+.xrd-char.is-initial {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .splash-letter-container {
@@ -8355,6 +8327,7 @@ body.splash-locked {
   margin: 0;
   max-width: 100%;
   overflow: visible;
+  background: transparent !important;
 }
 
 /* ─── Individual Character — Monospace Code Typography ─────────────────── */
@@ -8430,9 +8403,12 @@ body.splash-locked {
   font-weight: 700 !important;
   font-style: normal !important;
   color: #ffffff !important;
-  text-shadow:
-    0 0 35px rgba(255, 255, 255, 0.6),
-    0 0 70px rgba(255, 255, 255, 0.25) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.45) !important;
   transform: scale(1.08) !important;
 }
 

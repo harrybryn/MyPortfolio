@@ -56,7 +56,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=155">
+    <link rel="stylesheet" href="styles.css?v=156">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -67,6 +67,10 @@
          ===================================================================== -->
     <div id="splashScreen" class="splash-screen" role="dialog" aria-modal="true" aria-label="Loading portfolio">
         <audio id="splashAudio" src="assets/ta-dum.wav" preload="auto"></audio>
+        <audio id="mechKey1" src="assets/mech-key1.wav" preload="auto"></audio>
+        <audio id="mechKey2" src="assets/mech-key2.wav" preload="auto"></audio>
+        <audio id="mechKey3" src="assets/mech-key3.wav" preload="auto"></audio>
+        <audio id="mechSpace" src="assets/mech-space.wav" preload="auto"></audio>
         
         <div class="splash-coder-stage">
             <div class="splash-coder-logo" id="splashCoderLogo">
@@ -76,15 +80,6 @@
                 <span class="code-bracket bracket-right">&gt;</span>
                 <span class="code-cursor">_</span>
             </div>
-        </div>
-
-        <div class="splash-sound-hint" id="splashSoundHint" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-            </svg>
-            <span>Tap anywhere for sound</span>
         </div>
     </div>
 
@@ -1044,7 +1039,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=86"></script>
+    <script src="script.js?v=87"></script>
     <script src="arcade.js?v=26"></script>
     <script>
         if (window.lucide) {
