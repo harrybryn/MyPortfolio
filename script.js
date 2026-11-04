@@ -32,8 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // ── Splash Sound & Speech Engine ──
+        // ── Authentic Netflix "Ta-Dum" Web Audio Synthesizer ──
         let audioCtx = null;
+        let soundHasPlayed = false;
+
         function getAudioContext() {
             if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -44,120 +46,236 @@ document.addEventListener('DOMContentLoaded', () => {
             return audioCtx;
         }
 
-        function speakHarrySevilla() {
-            if ('speechSynthesis' in window) {
+        // Soft-clipping waveshaper for analog warmth & saturated harmonics
+        function createSaturator(ctx, amount = 16) {
+            const k = amount;
+            const samples = 44100;
+            const curve = new Float32Array(samples);
+            const deg = Math.PI / 180;
+            for (let i = 0; i < samples; ++i) {
+                const x = (i * 2) / samples - 1;
+                curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
+            }
+            const shaper = ctx.createWaveShaper();
+            shaper.curve = curve;
+            shaper.oversample = '4x';
+            return shaper;
+        }
+
+        function playNetflixTaDum() {
+            if (soundHasPlayed) return;
+            const ctx = getAudioContext();
+            if (!ctx) return;
+            soundHasPlayed = true;
+
+            const t0 = ctx.currentTime;
+
+            // Master Gain
+            const masterGain = ctx.createGain();
+            masterGain.gain.setValueAtTime(0.92, t0);
+            masterGain.connect(ctx.destination);
+
+            const saturator = createSaturator(ctx, 18);
+            saturator.connect(masterGain);
+
+            // ============================================================
+            // STRIKE 1: "TA" (at t0 + 0.08s)
+            // Crisp percussive knock (wood cabinet + metallic anvil rim)
+            // ============================================================
+            const tTa = t0 + 0.08;
+
+            // 1a. Transient Wood/Cabinet Knock (shaped noise impulse)
+            try {
+                const noiseBuf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.08), ctx.sampleRate);
+                const outData = noiseBuf.getChannelData(0);
+                for (let i = 0; i < noiseBuf.length; i++) {
+                    outData[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.012));
+                }
+                const noiseSrc = ctx.createBufferSource();
+                noiseSrc.buffer = noiseBuf;
+
+                const taBpf = ctx.createBiquadFilter();
+                taBpf.type = 'bandpass';
+                taBpf.frequency.setValueAtTime(1900, tTa);
+                taBpf.Q.setValueAtTime(2.8, tTa);
+
+                const taNoiseGain = ctx.createGain();
+                taNoiseGain.gain.setValueAtTime(0.55, tTa);
+                taNoiseGain.gain.exponentialRampToValueAtTime(0.001, tTa + 0.065);
+
+                noiseSrc.connect(taBpf);
+                taBpf.connect(taNoiseGain);
+                taNoiseGain.connect(saturator);
+                noiseSrc.start(tTa);
+            } catch (e) {}
+
+            // 1b. Anvil rim transient tap
+            try {
+                const rimOsc = ctx.createOscillator();
+                const rimGain = ctx.createGain();
+                rimOsc.type = 'triangle';
+                rimOsc.frequency.setValueAtTime(440, tTa);
+                rimOsc.frequency.exponentialRampToValueAtTime(130, tTa + 0.07);
+
+                rimGain.gain.setValueAtTime(0.42, tTa);
+                rimGain.gain.exponentialRampToValueAtTime(0.001, tTa + 0.075);
+
+                rimOsc.connect(rimGain);
+                rimGain.connect(saturator);
+                rimOsc.start(tTa);
+                rimOsc.stop(tTa + 0.08);
+            } catch (e) {}
+
+            // ============================================================
+            // STRIKE 2: "DUMMMM" (at t0 + 0.32s)
+            // Massive Sub-bass (56Hz -> 36Hz) + Saturated Anvil & Mid Thump
+            // ============================================================
+            const tDum = t0 + 0.32;
+
+            // 2a. Deep Sub-Bass Fundamental
+            try {
+                const subOsc = ctx.createOscillator();
+                const subGain = ctx.createGain();
+                subOsc.type = 'sine';
+                subOsc.frequency.setValueAtTime(56, tDum);
+                subOsc.frequency.exponentialRampToValueAtTime(36, tDum + 0.55);
+
+                subGain.gain.setValueAtTime(0, tDum);
+                subGain.gain.linearRampToValueAtTime(0.95, tDum + 0.02);
+                subGain.gain.exponentialRampToValueAtTime(0.4, tDum + 0.45);
+                subGain.gain.exponentialRampToValueAtTime(0.0001, tDum + 2.5);
+
+                subOsc.connect(subGain);
+                subGain.connect(masterGain); // Direct to master for pristine low end
+                subOsc.start(tDum);
+                subOsc.stop(tDum + 2.6);
+            } catch (e) {}
+
+            // 2b. Saturated Anvil & Electric Mid Body Thump
+            try {
+                const midOsc = ctx.createOscillator();
+                const midGain = ctx.createGain();
+                midOsc.type = 'sawtooth';
+                midOsc.frequency.setValueAtTime(190, tDum);
+                midOsc.frequency.exponentialRampToValueAtTime(58, tDum + 0.26);
+
+                const midLpf = ctx.createBiquadFilter();
+                midLpf.type = 'lowpass';
+                midLpf.frequency.setValueAtTime(650, tDum);
+                midLpf.frequency.exponentialRampToValueAtTime(110, tDum + 0.32);
+
+                midGain.gain.setValueAtTime(0.65, tDum);
+                midGain.gain.exponentialRampToValueAtTime(0.001, tDum + 0.34);
+
+                midOsc.connect(midLpf);
+                midLpf.connect(midGain);
+                midGain.connect(saturator);
+                midOsc.start(tDum);
+                midOsc.stop(tDum + 0.36);
+            } catch (e) {}
+
+            // 2c. Tactile Front Click / Impact
+            try {
+                const clickOsc = ctx.createOscillator();
+                const clickGain = ctx.createGain();
+                clickOsc.type = 'triangle';
+                clickOsc.frequency.setValueAtTime(280, tDum);
+                clickOsc.frequency.exponentialRampToValueAtTime(45, tDum + 0.11);
+
+                clickGain.gain.setValueAtTime(0.75, tDum);
+                clickGain.gain.exponentialRampToValueAtTime(0.001, tDum + 0.11);
+
+                clickOsc.connect(clickGain);
+                clickGain.connect(saturator);
+                clickOsc.start(tDum);
+                clickOsc.stop(tDum + 0.12);
+            } catch (e) {}
+
+            // ============================================================
+            // STAGE 3: THE ETHEREAL SHIMMER / BLOOM TRAIL (0.34s to 3.2s)
+            // Multi-voice harmonic chord with stereo spread & analog roll-off
+            // ============================================================
+            const chordVoices = [
+                { freq: 146.83, pan: -0.25 }, // D3
+                { freq: 220.00, pan:  0.25 }, // A3
+                { freq: 293.66, pan: -0.40 }, // D4
+                { freq: 349.23, pan:  0.35 }, // F4
+                { freq: 440.00, pan: -0.15 }, // A4
+                { freq: 523.25, pan:  0.42 }, // C5
+                { freq: 659.25, pan: -0.30 }  // E5
+            ];
+
+            chordVoices.forEach((voice, i) => {
                 try {
-                    window.speechSynthesis.cancel();
-                    const utterance = new SpeechSynthesisUtterance('Harry Sevilla');
-                    utterance.rate = 1.2;
-                    utterance.pitch = 1.02;
-                    utterance.volume = 1.0;
-                    
-                    const pickVoice = () => {
-                        const voices = window.speechSynthesis.getVoices();
-                        if (voices && voices.length > 0) {
-                            const v = voices.find(vo => vo.lang.startsWith('en') && (vo.name.includes('Natural') || vo.name.includes('Google') || vo.name.includes('Daniel') || vo.name.includes('David') || vo.name.includes('en-US')));
-                            if (v) utterance.voice = v;
-                        }
-                    };
-                    pickVoice();
-                    if (window.speechSynthesis.onvoiceschanged !== undefined) {
-                        window.speechSynthesis.onvoiceschanged = pickVoice;
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    const detune = (i % 2 === 0 ? 1 : -1) * (5 + i * 1.8);
+
+                    osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+                    osc.frequency.setValueAtTime(voice.freq, tDum + 0.04);
+                    osc.detune.setValueAtTime(detune, tDum + 0.04);
+
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(1300, tDum);
+                    filter.frequency.exponentialRampToValueAtTime(340, tDum + 2.7);
+
+                    gain.gain.setValueAtTime(0.0001, tDum);
+                    gain.gain.linearRampToValueAtTime(0.08 / (1 + i * 0.14), tDum + 0.24);
+                    gain.gain.setValueAtTime(0.07 / (1 + i * 0.14), tDum + 1.1);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, tDum + 2.85);
+
+                    osc.connect(filter);
+                    filter.connect(gain);
+
+                    if (ctx.createStereoPanner) {
+                        const panner = ctx.createStereoPanner();
+                        panner.pan.setValueAtTime(voice.pan, tDum);
+                        gain.connect(panner);
+                        panner.connect(masterGain);
+                    } else {
+                        gain.connect(masterGain);
                     }
-                    window.speechSynthesis.speak(utterance);
+
+                    osc.start(tDum + 0.02);
+                    osc.stop(tDum + 2.95);
                 } catch (e) {}
-            }
-        }
-
-        // Ambient Reveal Chime (300ms)
-        function playRevealChime() {
-            const ctx = getAudioContext();
-            if (!ctx) return;
-            const now = ctx.currentTime;
-            [261.63, 392.00, 523.25].forEach((freq, i) => {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, now + i * 0.04);
-                gain.gain.setValueAtTime(0, now);
-                gain.gain.linearRampToValueAtTime(0.08, now + 0.15 + i * 0.04);
-                gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.6);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start(now + i * 0.04);
-                osc.stop(now + 1.8);
             });
-        }
 
-        // Transition Collapse Whoosh SFX (2200ms)
-        function playCollapseWhoosh() {
-            const ctx = getAudioContext();
-            if (!ctx) return;
-            const now = ctx.currentTime;
-            
-            // 1. Noise buffer for airy whoosh
-            const bufferSize = ctx.sampleRate * 0.45;
-            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
-            const noise = ctx.createBufferSource();
-            noise.buffer = buffer;
-            
-            const filter = ctx.createBiquadFilter();
-            filter.type = 'bandpass';
-            filter.frequency.setValueAtTime(1400, now);
-            filter.frequency.exponentialRampToValueAtTime(260, now + 0.42);
-            filter.Q.setValueAtTime(3.5, now);
-            
-            const gain = ctx.createGain();
-            gain.gain.setValueAtTime(0.001, now);
-            gain.gain.linearRampToValueAtTime(0.12, now + 0.12);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.44);
-            
-            noise.connect(filter);
-            filter.connect(gain);
-            gain.connect(ctx.destination);
-            noise.start(now);
-            noise.stop(now + 0.45);
+            // 3b. Shimmer Air Swell (Lush cinematic high-frequency atmosphere)
+            try {
+                const airLen = Math.floor(ctx.sampleRate * 2.2);
+                const airBuf = ctx.createBuffer(1, airLen, ctx.sampleRate);
+                const airData = airBuf.getChannelData(0);
+                for (let i = 0; i < airLen; i++) {
+                    airData[i] = (Math.random() * 2 - 1) * 0.08;
+                }
+                const airSrc = ctx.createBufferSource();
+                airSrc.buffer = airBuf;
 
-            // 2. Resonant sub-drop
-            const osc = ctx.createOscillator();
-            const oscGain = ctx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(380, now);
-            osc.frequency.exponentialRampToValueAtTime(120, now + 0.38);
-            oscGain.gain.setValueAtTime(0.06, now);
-            oscGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.38);
-            osc.connect(oscGain);
-            oscGain.connect(ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.4);
-        }
+                const airFilter = ctx.createBiquadFilter();
+                airFilter.type = 'bandpass';
+                airFilter.frequency.setValueAtTime(2200, tDum + 0.1);
+                airFilter.frequency.exponentialRampToValueAtTime(750, tDum + 2.3);
+                airFilter.Q.setValueAtTime(2.2, tDum);
 
-        // Transition Reveal Resolve Chord (4800ms)
-        function playExitTransition() {
-            const ctx = getAudioContext();
-            if (!ctx) return;
-            const now = ctx.currentTime;
-            [329.63, 440.00, 659.25, 880.00].forEach((freq, idx) => {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, now + idx * 0.05);
-                gain.gain.setValueAtTime(0, now);
-                gain.gain.linearRampToValueAtTime(0.07, now + 0.1 + idx * 0.05);
-                gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start(now + idx * 0.05);
-                osc.stop(now + 1.4);
-            });
+                const airGain = ctx.createGain();
+                airGain.gain.setValueAtTime(0.0001, tDum + 0.05);
+                airGain.gain.linearRampToValueAtTime(0.045, tDum + 0.45);
+                airGain.gain.exponentialRampToValueAtTime(0.0001, tDum + 2.4);
+
+                airSrc.connect(airFilter);
+                airFilter.connect(airGain);
+                airGain.connect(masterGain);
+                airSrc.start(tDum + 0.08);
+            } catch (e) {}
         }
 
         const unlockAudio = () => {
             getAudioContext();
+            if (!soundHasPlayed && !isComplete) {
+                playNetflixTaDum();
+            }
             window.removeEventListener('pointerdown', unlockAudio);
             window.removeEventListener('keydown', unlockAudio);
         };
@@ -167,48 +285,63 @@ document.addEventListener('DOMContentLoaded', () => {
         function runSequence() {
             clearScheduledTimeouts();
             isComplete = false;
+            soundHasPlayed = false;
 
             document.body.classList.add('splash-locked', 'splash-pending-reveal');
             document.body.classList.remove('splash-revealed');
-            splash.classList.remove('is-hidden', 'step-reveal', 'step-collapsed', 'step-fadeout');
+            splash.classList.remove('is-hidden', 'step-reveal', 'step-impact', 'step-collapsed', 'step-bloom', 'step-fadeout');
             splash.style.display = 'flex';
 
             renderLetters();
 
-            // Step 1: Immediate synchronized reveal & speech (100ms)
+            // Total Duration: Exactly 4.0 Seconds (Canonical Netflix Intro Length)
+            // 0ms: Pitch black screen
+
+            // Step 1: 100ms — Strike 1 ("Ta") + Full Name Appears
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-reveal');
-                    playRevealChime();
-                    speakHarrySevilla();
+                    playNetflixTaDum();
                 }
             }, 100));
 
-            // Step 2: Smooth collapse into initials right as speech concludes (1250ms)
+            // Step 1.5: 340ms — Strike 2 ("DUMMMM") + Red Radial Bloom & Impact Micro-Punch
+            timeouts.push(setTimeout(() => {
+                if (!isComplete) {
+                    splash.classList.add('step-impact');
+                }
+            }, 340));
+
+            // Step 2: 1800ms — Smooth Cinematic Collapse into "HS" Initials Monogram
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-collapsed');
-                    playCollapseWhoosh();
                 }
-            }, 1250));
+            }, 1800));
 
-            // Step 3: Fade out splash with warm transition chord (2650ms)
+            // Step 2.5: 2800ms — Monogram Radiance / Aura Bloom as Chord Shimmer Peeks
+            timeouts.push(setTimeout(() => {
+                if (!isComplete) {
+                    splash.classList.add('step-bloom');
+                }
+            }, 2800));
+
+            // Step 3: 3400ms — Cinematic 600ms Fade-out into Portfolio Homepage
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-fadeout');
                     document.body.classList.add('splash-revealed');
-                    playExitTransition();
                 }
-            }, 2650));
+            }, 3400));
 
-            // Step 4: Complete & cleanup (3350ms)
+            // Step 4: 4000ms — Full Unlock & Sequence Complete
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     isComplete = true;
                     splash.classList.add('is-hidden');
                     document.body.classList.remove('splash-locked', 'splash-pending-reveal');
                 }
-            }, 3350));
+            }, 4000));
         }
 
         // Start sequence (Bypassed ONLY on subpage back-navigation, plays on refresh or direct entry)
@@ -245,8 +378,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Pointerdown / click listener on splash to ensure sound triggers if browser blocked initial autoplay
         splash.addEventListener('pointerdown', () => {
             getAudioContext();
-            if (window.speechSynthesis && !window.speechSynthesis.speaking) {
-                speakHarrySevilla();
+            if (!soundHasPlayed && !isComplete) {
+                playNetflixTaDum();
             }
         });
 
