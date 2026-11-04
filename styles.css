@@ -8213,10 +8213,9 @@ body.splash-locked {
   height: 100vh !important;
 }
 
-/* ── Standing Vertical Typing & Monogram Stage (Zero HTML brackets, Pure Typography) ── */
-.splash-standing-stage {
+/* ── Clean Horizontal Typing & HS Monogram Stage (Zero HTML brackets, Pure Typography) ── */
+.splash-stage {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -8225,9 +8224,8 @@ body.splash-locked {
   pointer-events: none !important;
 }
 
-.splash-standing-logo {
-  display: flex;
-  flex-direction: column;
+.splash-logo {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -8255,9 +8253,9 @@ body.splash-locked {
   color: inherit !important;
 }
 
-.splash-standing-stage,
-.splash-standing-logo,
-.splash-name-row,
+.splash-stage,
+.splash-logo,
+.splash-letter-container,
 .xrd-char,
 .xrd-char.is-initial {
   background: transparent !important;
@@ -8269,15 +8267,15 @@ body.splash-locked {
   pointer-events: none !important;
 }
 
-.splash-name-row {
+.splash-letter-container {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  line-height: 1.1;
-  position: relative;
-  min-height: clamp(2.5rem, 6vw, 4.8rem);
-  transition: line-height 600ms cubic-bezier(0.16, 1, 0.3, 1),
-              min-height 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  overflow: visible;
+  background: transparent !important;
   pointer-events: none !important;
 }
 
@@ -8285,9 +8283,9 @@ body.splash-locked {
 .xrd-char {
   display: inline-block;
   font-family: 'JetBrains Mono', 'Inter', -apple-system, sans-serif;
-  font-size: clamp(2.4rem, 6.5vw, 5rem);
+  font-size: clamp(2rem, 5.2vw, 4.2rem);
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1.15;
   padding: 0 0.04em;
   max-width: 1.6em;
   margin: 0;
@@ -8309,37 +8307,37 @@ body.splash-locked {
   pointer-events: none !important;
 }
 
-/* Blinking cursor */
+/* ── Standing Vertical Blinking Cursor Line (|) ── */
 .splash-cursor {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(2.4rem, 6.5vw, 5rem);
-  font-weight: 600;
-  color: #ffffff;
   display: inline-block;
-  line-height: 1.1;
-  margin-left: 0.05em;
+  width: clamp(2.5px, 0.35vw, 4px);
+  height: clamp(2.2rem, 5vw, 4rem);
+  background-color: #ffffff;
+  vertical-align: middle;
+  margin-left: 0.12em;
   opacity: 1;
-  animation: codeBlink 1s step-start infinite;
+  border-radius: 1px;
+  animation: standingCursorBlink 0.9s step-start infinite;
   pointer-events: none !important;
 }
 
-@keyframes codeBlink {
+@keyframes standingCursorBlink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
 /* Step 1.5 (5400ms): Compile pulse */
-.splash-screen.step-impact .splash-standing-logo {
-  animation: standingCompilePulse 420ms cubic-bezier(0.12, 0.9, 0.24, 1) forwards;
+.splash-screen.step-impact .splash-logo {
+  animation: logoCompilePulse 420ms cubic-bezier(0.12, 0.9, 0.24, 1) forwards;
 }
 
-@keyframes standingCompilePulse {
+@keyframes logoCompilePulse {
   0% { transform: scale(1); }
   35% { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
 
-/* Step 2 (5200ms): Smooth Collapse into Standing Monogram H / S */
+/* Step 2 (5000ms): Smooth Collapse into HS Monogram */
 .splash-screen.step-collapsed .xrd-char:not(.is-initial) {
   max-width: 0 !important;
   padding: 0 !important;
@@ -8353,20 +8351,14 @@ body.splash-locked {
   display: none !important;
 }
 
-.splash-screen.step-collapsed .splash-name-row {
-  line-height: 0.92 !important;
-  min-height: auto !important;
-}
-
 .splash-screen.step-collapsed .xrd-char.is-initial {
   font-family: 'JetBrains Mono', 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif !important;
-  font-size: clamp(3.8rem, 11vw, 7.5rem) !important;
-  padding: 0 !important;
-  letter-spacing: 0.02em !important;
+  font-size: clamp(3.8rem, 10vw, 7.5rem) !important;
+  padding: 0 0.04em !important;
+  letter-spacing: 0.06em !important;
   font-weight: 700 !important;
   font-style: normal !important;
   color: #ffffff !important;
-  line-height: 0.92 !important;
   background: transparent !important;
   border: none !important;
   outline: none !important;

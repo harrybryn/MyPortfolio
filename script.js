@@ -1,15 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
-    // 0. Standing Vertical Typing & Monogram Splash Screen (Exact 8.0s)
-    // Pure Typography (Zero HTML tags/brackets) — Vertical Stack (Harry / Sevilla -> H / S)
-    // Authentic Real Mechanical Keyboard Switch Audio & Studio Ta-Dum
+    // 0. Developer Programmer Splash Screen (Exact 8.0s)
+    // Pure Typography (Zero HTML brackets) — Single Horizontal Typing Line
+    // Standing Vertical Blinking Bar Cursor (|) + Authentic Mechanical Keyboard Audio + Studio Ta-Dum
     // ==========================================================================
     (() => {
         const splash = document.getElementById('splashScreen');
         if (!splash) return;
 
-        const rowFirst = document.getElementById('splashRowFirst');
-        const rowSecond = document.getElementById('splashRowSecond');
+        const letterContainer = document.getElementById('splashLetterContainer');
         const cursor = document.getElementById('splashCursor');
         const splashAudio = document.getElementById('splashAudio') || new Audio('assets/ta-dum.wav');
 
@@ -27,8 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mechAudios.space.preload = 'auto';
         mechAudios.space.volume = 0.95;
 
-        const ROW_1 = "Harry";
-        const ROW_2 = "Sevilla";
+        const FULL_NAME = "Harry Sevilla";
 
         let timeouts = [];
         let typingTimeout = null;
@@ -219,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (e) {}
         }
 
-        // Automatic audio unlock on any user gesture
+        // Automatic audio unlock on ANY user gesture (even mouse move, touch, or scroll)
         const unlockAudio = () => {
             const ctx = getAudioContext();
             if (ctx && ctx.state === 'suspended') {
@@ -227,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        ['pointerdown', 'touchstart', 'mousedown', 'keydown', 'click'].forEach(evt => {
+        ['pointerdown', 'touchstart', 'mousedown', 'keydown', 'click', 'pointermove', 'mousemove', 'wheel', 'scroll'].forEach(evt => {
             window.addEventListener(evt, unlockAudio, { passive: true });
         });
 
@@ -239,30 +237,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (e) {}
 
-        // Type a word character by character into a row container with cursor tracking
-        function typeWord(rowEl, word, isInitialRow, onComplete) {
+        // Type full name character-by-character on one line with standing vertical cursor tracking
+        function typeFullText(container, text, onComplete) {
             let i = 0;
-            const letters = word.split('');
+            const letters = text.split('');
 
             function nextChar() {
                 if (isComplete) return;
                 if (i < letters.length) {
                     const char = letters[i];
-                    const span = document.createElement('span');
-                    span.className = 'xrd-char' + (i === 0 ? ' is-initial' : '');
-                    span.textContent = char;
+                    const isSpace = (char === ' ');
+                    const isInitial = (i === 0 || i === 6); // 'H' at 0, 'S' at 6
 
-                    if (cursor && cursor.parentNode === rowEl) {
-                        rowEl.insertBefore(span, cursor);
+                    const span = document.createElement('span');
+                    let classNames = 'xrd-char';
+                    if (isInitial) classNames += ' is-initial';
+                    if (isSpace) classNames += ' is-space';
+                    span.className = classNames;
+                    span.textContent = isSpace ? '\u00A0' : char;
+
+                    if (cursor && cursor.parentNode === container) {
+                        container.insertBefore(span, cursor);
                     } else {
-                        rowEl.appendChild(span);
-                        if (cursor) rowEl.appendChild(cursor);
+                        container.appendChild(span);
+                        if (cursor) container.appendChild(cursor);
                     }
 
-                    playMechanicalKeyClick(false);
+                    playMechanicalKeyClick(isSpace);
                     i++;
 
-                    const jitter = Math.floor(180 + Math.random() * 50);
+                    // Tactile mechanical typing cadence (190ms - 240ms per stroke)
+                    const jitter = isSpace ? 280 : Math.floor(190 + Math.random() * 45);
                     typingTimeout = setTimeout(nextChar, jitter);
                 } else {
                     if (typeof onComplete === 'function') onComplete();
@@ -282,9 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
             splash.classList.remove('is-hidden', 'step-reveal', 'step-impact', 'step-collapsed', 'step-bloom', 'step-fadeout');
             splash.style.display = 'flex';
 
-            if (rowFirst) rowFirst.innerHTML = '';
-            if (rowSecond) rowSecond.innerHTML = '';
-            if (cursor && rowFirst) rowFirst.appendChild(cursor);
+            if (letterContainer) letterContainer.innerHTML = '';
+            if (cursor && letterContainer) letterContainer.appendChild(cursor);
 
             // Timeline: Exactly 8.0 Seconds
             // 0ms - 200ms: Obsidian stillness
@@ -294,30 +298,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 200));
 
-            // 600ms: Row 1 types "Harry"
+            // 500ms: Types "Harry Sevilla" with standing vertical blinking bar cursor (|)
             timeouts.push(setTimeout(() => {
-                if (!isComplete) {
-                    typeWord(rowFirst, ROW_1, true, () => {
-                        // Pause then move cursor down to Row 2
-                        timeouts.push(setTimeout(() => {
-                            if (!isComplete && cursor && rowSecond) {
-                                rowSecond.appendChild(cursor);
-                                playMechanicalKeyClick(true); // Space/carriage return sound
-                            }
-                            // 2000ms: Row 2 types "Sevilla"
-                            timeouts.push(setTimeout(() => {
-                                if (!isComplete) {
-                                    typeWord(rowSecond, ROW_2, false, () => {
-                                        // Both rows complete and stand vertically
-                                    });
-                                }
-                            }, 200));
-                        }, 250));
+                if (!isComplete && letterContainer) {
+                    typeFullText(letterContainer, FULL_NAME, () => {
+                        // All 13 letters typed smoothly by ~3.4s; vertical cursor blinks beside it
                     });
                 }
-            }, 600));
+            }, 500));
 
-            // 5000ms: Smooth collapse from Harry / Sevilla -> H / S (Standing Vertical Monogram)
+            // 5000ms: Smooth collapse from Harry Sevilla -> HS (Monogram)
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-collapsed');
