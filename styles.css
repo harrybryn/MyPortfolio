@@ -3732,7 +3732,7 @@ html.theme-anim *::after {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #38bdf8;
+  color: var(--text-muted);
 }
 
 .dev-section-kicker.muted {
