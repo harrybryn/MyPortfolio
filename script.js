@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
-    // 0. Minimalist Programmer Logo Splash Screen Controller (Exact 4.0s)
-    // Zero Background Clutter — Developer Code Brandmark (< HARRY SEVILLA /> -> < HS />_)
+    // 0. Minimalist Programmer Typing & Monogram Splash Screen (Exact 8.0s)
+    // Tactile Mechanical Keystroke Typing -> Seamless Morph into < HS /> Monogram
+    // With Bulletproof First-Visit Audio Unlock & Studio Ta-Dum
     // ==========================================================================
     (() => {
         const splash = document.getElementById('splashScreen');
@@ -11,72 +12,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const soundHint = document.getElementById('splashSoundHint');
         const splashAudio = document.getElementById('splashAudio') || new Audio('assets/ta-dum.wav');
 
-        const FULL_TEXT = "HARRY SEVILLA";
-        const INITIALS = [0, 6]; // 'H' at 0, 'S' at 6
-        const CODE_GLYPHS = ['0', '1', '{', '}', '<', '>', '/', '$', '_', '#', '*', '!', ';', '='];
+        const FULL_NAME = "Harry Sevilla";
+        // 'H' is at index 0, 'S' is at index 6
+        const INITIAL_INDICES = [0, 6];
 
         let timeouts = [];
+        let typingTimeout = null;
         let isComplete = false;
         let soundHasPlayed = false;
-        let scrambleInterval = null;
+        let audioPermissionGranted = false;
 
         function clearScheduledTimeouts() {
             timeouts.forEach(t => clearTimeout(t));
             timeouts = [];
-            if (scrambleInterval) {
-                clearInterval(scrambleInterval);
-                scrambleInterval = null;
+            if (typingTimeout) {
+                clearTimeout(typingTimeout);
+                typingTimeout = null;
             }
         }
 
-        function renderInitialLetters() {
-            if (!container) return;
-            container.innerHTML = '';
-            FULL_TEXT.split('').forEach((char, i) => {
-                const isInitial = INITIALS.includes(i);
-                const isSpace = char === ' ';
-                const span = document.createElement('span');
-                span.className = 'xrd-char' + (isInitial ? ' is-initial' : '') + (isSpace ? ' is-space' : '');
-                span.textContent = isSpace ? '\u00a0' : char;
-                span.setAttribute('data-target-char', isSpace ? '\u00a0' : char);
-                container.appendChild(span);
-            });
-        }
-
-        // Developer code decryption scramble effect
-        function runCodeScramble() {
-            if (!container) return;
-            const spans = container.querySelectorAll('.xrd-char:not(.is-space)');
-            const startTime = performance.now();
-            const duration = 180; // snappy 180ms code compile scramble
-
-            if (scrambleInterval) clearInterval(scrambleInterval);
-
-            scrambleInterval = setInterval(() => {
-                const elapsed = performance.now() - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-
-                spans.forEach((span, idx) => {
-                    const targetChar = span.getAttribute('data-target-char');
-                    // Reveal letters progressively
-                    if (progress > (idx / spans.length) * 0.8) {
-                        span.textContent = targetChar;
-                    } else {
-                        span.textContent = CODE_GLYPHS[Math.floor(Math.random() * CODE_GLYPHS.length)];
-                    }
-                });
-
-                if (progress >= 1) {
-                    clearInterval(scrambleInterval);
-                    scrambleInterval = null;
-                    spans.forEach(span => {
-                        span.textContent = span.getAttribute('data-target-char');
-                    });
-                }
-            }, 30);
-        }
-
-        // Web Audio API Synthesizer (Studio "Ta-Dum" Dual Fallback)
+        // Web Audio API Context (Lazily created, resumes on any gesture)
         let audioCtx = null;
         function getAudioContext() {
             if (!audioCtx) {
@@ -88,27 +43,55 @@ document.addEventListener('DOMContentLoaded', () => {
             return audioCtx;
         }
 
-        function showSoundHint() {
-            if (soundHint && !soundHasPlayed && !isComplete) {
-                soundHint.classList.remove('is-hidden');
-                soundHint.classList.add('is-visible');
-            }
+        // Synthesize hyper-realistic mechanical keyboard click (Tactile Switch Profile)
+        function playMechanicalKeyClick(isSpace) {
+            const ctx = getAudioContext();
+            if (!ctx || ctx.state !== 'running') return;
+            try {
+                const t = ctx.currentTime;
+
+                // 1. Transient click snap (high-frequency tactile bump)
+                const snap = ctx.createOscillator();
+                const snapGain = ctx.createGain();
+                const snapFreq = isSpace ? 1100 : (1900 + (Math.random() * 400 - 200));
+                snap.type = isSpace ? 'sine' : 'triangle';
+                snap.frequency.setValueAtTime(snapFreq, t);
+                snap.frequency.exponentialRampToValueAtTime(320, t + 0.015);
+
+                snapGain.gain.setValueAtTime(isSpace ? 0.22 : 0.18, t);
+                snapGain.gain.exponentialRampToValueAtTime(0.001, t + 0.018);
+
+                snap.connect(snapGain);
+                snapGain.connect(ctx.destination);
+                snap.start(t);
+                snap.stop(t + 0.02);
+
+                // 2. Body "thock" (resonant chassis/bottom-out tone)
+                const thock = ctx.createOscillator();
+                const thockGain = ctx.createGain();
+                const thockFreq = isSpace ? 175 : (260 + (Math.random() * 50 - 25));
+                thock.type = 'sine';
+                thock.frequency.setValueAtTime(thockFreq, t);
+                thock.frequency.exponentialRampToValueAtTime(65, t + 0.03);
+
+                thockGain.gain.setValueAtTime(isSpace ? 0.28 : 0.2, t);
+                thockGain.gain.exponentialRampToValueAtTime(0.001, t + 0.035);
+
+                thock.connect(thockGain);
+                thockGain.connect(ctx.destination);
+                thock.start(t);
+                thock.stop(t + 0.038);
+            } catch (e) {}
         }
 
-        function hideSoundHint() {
-            if (soundHint) {
-                soundHint.classList.remove('is-visible');
-                soundHint.classList.add('is-hidden');
-            }
-        }
-
+        // Studio "Ta-Dum" Audio Synthesizer Layer
         function synthesizeWebAudio(ctx) {
             const now = ctx.currentTime;
             const master = ctx.createGain();
-            master.gain.setValueAtTime(0.9, now);
+            master.gain.setValueAtTime(0.95, now);
             master.connect(ctx.destination);
 
-            // Strike 1: "Ta" knock (0.10s)
+            // Strike 1: "Ta" knock
             try {
                 const osc1 = ctx.createOscillator();
                 const gain1 = ctx.createGain();
@@ -123,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 osc1.stop(now + 0.22);
             } catch (e) {}
 
-            // Strike 2: "DUMMMM" heavy resonance (0.34s)
+            // Strike 2: "DUMMMM" heavy cinematic sub-bass resonance
             const tDum = now + 0.24;
             try {
                 const sub = ctx.createOscillator();
@@ -158,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mid.stop(tDum + 0.38);
             } catch (e) {}
 
-            // Blossom Shimmer Chord (0.34s - 3.2s)
+            // Blossom Shimmer Chord (harmonious high-end tail)
             [146.83, 220, 293.66, 349.23, 440, 523.25, 659.25].forEach((freq, idx) => {
                 try {
                     const osc = ctx.createOscillator();
@@ -199,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // 2. Play Web Audio Synthesizer layer if running
+            // 2. Play Web Audio Synthesizer layer in sync
             try {
                 const ctx = getAudioContext();
                 if (ctx) {
@@ -218,16 +201,35 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (e) {}
         }
 
-        // Guaranteed unlock on ANY user gesture
+        function showSoundHint() {
+            if (soundHint && !audioPermissionGranted && !isComplete) {
+                soundHint.classList.remove('is-hidden');
+                soundHint.classList.add('is-visible');
+            }
+        }
+
+        function hideSoundHint() {
+            if (soundHint) {
+                soundHint.classList.remove('is-visible');
+                soundHint.classList.add('is-hidden');
+            }
+        }
+
+        // Bulletproof audio unlock on ANY user touch, click, or keypress anywhere on screen
         const handleUserGesture = () => {
+            audioPermissionGranted = true;
+            hideSoundHint();
+
             const ctx = getAudioContext();
             if (ctx && ctx.state === 'suspended') {
-                ctx.resume().catch(() => {});
+                ctx.resume().then(() => {
+                    playMechanicalKeyClick(false);
+                }).catch(() => {});
             }
-            if (!soundHasPlayed && !isComplete) {
-                playTaDumSound();
-            } else if (splashAudio && splashAudio.paused && !isComplete) {
-                splashAudio.play().then(() => hideSoundHint()).catch(() => {});
+
+            // If audio was pending during Ta-Dum window, trigger
+            if (splashAudio && splashAudio.paused && soundHasPlayed && !isComplete) {
+                splashAudio.play().catch(() => {});
             }
         };
 
@@ -242,6 +244,47 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // Organic Typing Animation of "Harry Sevilla" inside the developer tags
+        function startTypingSequence(onComplete) {
+            if (!container) return;
+            container.innerHTML = '';
+
+            let charIndex = 0;
+            const chars = FULL_NAME.split('');
+
+            function typeNext() {
+                if (isComplete) return;
+                if (charIndex < chars.length) {
+                    const char = chars[charIndex];
+                    const isInitial = INITIAL_INDICES.includes(charIndex);
+                    const isSpace = char === ' ';
+
+                    const span = document.createElement('span');
+                    span.className = 'xrd-char' + (isInitial ? ' is-initial' : '') + (isSpace ? ' is-space' : '');
+                    span.textContent = isSpace ? '\u00a0' : char;
+                    container.appendChild(span);
+
+                    // Force reflow for smooth scale/opacity pop
+                    span.style.opacity = '1';
+                    span.style.transform = 'scale(1)';
+
+                    // Tactile mechanical key click sound
+                    playMechanicalKeyClick(isSpace);
+
+                    charIndex++;
+                    // Natural human typing rhythm (180ms to 240ms with slight variation)
+                    const jitter = isSpace ? 250 : Math.floor(190 + Math.random() * 50);
+                    typingTimeout = setTimeout(typeNext, jitter);
+                } else {
+                    if (typeof onComplete === 'function') {
+                        onComplete();
+                    }
+                }
+            }
+
+            typeNext();
+        }
+
         function runSequence() {
             clearScheduledTimeouts();
             isComplete = false;
@@ -252,61 +295,77 @@ document.addEventListener('DOMContentLoaded', () => {
             splash.classList.remove('is-hidden', 'step-reveal', 'step-impact', 'step-collapsed', 'step-bloom', 'step-fadeout');
             splash.style.display = 'flex';
 
-            renderInitialLetters();
+            if (container) container.innerHTML = '';
 
-            // Total Duration: Exactly 4.0 Seconds
-            // 0ms: Obsidian stillness
+            // Check if audio needs gesture unlock (first-time visit)
+            const ctx = getAudioContext();
+            if (ctx && ctx.state === 'suspended') {
+                // Show hint so the user knows tapping enables sound
+                timeouts.push(setTimeout(() => {
+                    if (!audioPermissionGranted) showSoundHint();
+                }, 350));
+            }
 
-            // Step 1: 100ms — Strike 1 ("Ta") + Programmer Code Scramble Decrypt < HARRY SEVILLA />_
+            // Timeline: Exactly 8.0 Seconds
+            // 0ms - 600ms: Obsidian stillness, syntax brackets fade in
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-reveal');
-                    runCodeScramble();
-                    playTaDumSound();
                 }
-            }, 100));
+            }, 200));
 
-            // Step 1.5: 340ms — Strike 2 ("DUMMMM") + Developer Compile Flash Pulse
+            // 800ms: Start typing "Harry Sevilla" with mechanical keyboard clicks
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
-                    splash.classList.add('step-impact');
+                    startTypingSequence(() => {
+                        // Typing completes around ~3.6s - 3.8s
+                        // Hold full name comfortably until 5.2s
+                    });
                 }
-            }, 340));
+            }, 800));
 
-            // Step 2: 1800ms — Collapse to Programmer Monogram < HS />_
+            // 5200ms: Smooth collapse from < Harry Sevilla /> -> < HS />
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-collapsed');
                 }
-            }, 1800));
+            }, 5200));
 
-            // Step 2.5: 2800ms — Monogram Radiance Bloom
+            // 5400ms: Brandmark Lock + Compile Flash + Signature Ta-Dum Sound!
+            timeouts.push(setTimeout(() => {
+                if (!isComplete) {
+                    splash.classList.add('step-impact');
+                    playTaDumSound();
+                }
+            }, 5400));
+
+            // 6400ms: Monogram Radiance Bloom
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-bloom');
                 }
-            }, 2800));
+            }, 6400));
 
-            // Step 3: 3400ms — Smooth 600ms Fade-out into Portfolio Homepage
+            // 7200ms: Smooth 800ms Fade-out into Portfolio Homepage
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-fadeout');
                     document.body.classList.add('splash-revealed');
                     hideSoundHint();
                 }
-            }, 3400));
+            }, 7200));
 
-            // Step 4: 4000ms — Full Unlock & Sequence Complete
+            // 8000ms: Complete and Unlock
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     isComplete = true;
                     splash.classList.add('is-hidden');
                     document.body.classList.remove('splash-locked', 'splash-pending-reveal');
                 }
-            }, 4000));
+            }, 8000));
         }
 
-        // Start sequence: ALWAYS runs on reload/refresh or direct visit.
+        // Always run on refresh / reload / direct URL visit.
         // Bypassed ONLY if specifically coming from internal subpages with skip token.
         const urlParams = new URLSearchParams(window.location.search);
         const forceReplay = urlParams.get('replay') === '1' || urlParams.get('splash') === '1';
@@ -326,10 +385,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Pointerdown / click listener on splash
         splash.addEventListener('pointerdown', handleUserGesture);
 
-        // Always launch sequence
         runSequence();
     })();
 
