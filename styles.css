@@ -8188,8 +8188,8 @@ html.theme-anim *::after {
 }
 
 /* ==========================================================================
-   BESPOKE 3D ISOMETRIC CUBES SPLASH SCREEN (Exact 4.0s Choreography)
-   Dynamic Matrix Shockwave, Elevating 3D Cubes, & Guaranteed Ta-Dum Audio
+   MINIMALIST MONOCHROME ISOMETRIC SPLASH SCREEN (Exact 4.0s Choreography)
+   Pure Obsidian & Silver Typography, Subtle White Light Grid Wave
    ========================================================================== */
 .splash-screen {
   position: fixed;
@@ -8209,7 +8209,7 @@ html.theme-anim *::after {
   will-change: opacity;
 }
 
-/* 3D Isometric Boxes Canvas in Splash Background */
+/* Isometric Boxes Canvas in Splash Background */
 .splash-canvas {
   position: absolute;
   inset: 0;
@@ -8220,14 +8220,14 @@ html.theme-anim *::after {
   display: block;
 }
 
-/* Emerald radial glow behind the title on "DUM" strike */
+/* Subtle white ambient glow behind title */
 .splash-screen::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.28) 0%, rgba(16, 185, 129, 0.08) 35%, rgba(9, 9, 9, 0) 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 40%, rgba(9, 9, 9, 0) 70%);
   opacity: 0;
-  transform: scale(0.85);
+  transform: scale(0.9);
   transition: opacity 400ms ease-out, transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   z-index: 2;
@@ -8235,18 +8235,18 @@ html.theme-anim *::after {
 
 .splash-screen.step-impact::before {
   opacity: 1;
-  transform: scale(1.18);
+  transform: scale(1.15);
 }
 
 .splash-screen.step-collapsed::before {
-  opacity: 0.35;
+  opacity: 0.4;
   transform: scale(0.96);
   transition: opacity 800ms ease, transform 800ms ease;
 }
 
 .splash-screen.step-bloom::before {
-  opacity: 0.6;
-  transform: scale(1.35);
+  opacity: 0.65;
+  transform: scale(1.25);
   transition: opacity 600ms ease-out, transform 700ms ease-out;
 }
 
@@ -8262,7 +8262,7 @@ body.splash-locked {
   width: 100%;
 }
 
-/* Sound Hint Floating Pill */
+/* Sound Hint Floating Pill — Clean Monochrome */
 .splash-sound-hint {
   position: absolute;
   bottom: 28px;
@@ -8274,8 +8274,8 @@ body.splash-locked {
   gap: 0.45rem;
   padding: 0.38rem 0.9rem;
   border-radius: 999px;
-  background: rgba(15, 15, 18, 0.85);
-  border: 1px solid rgba(16, 185, 129, 0.45);
+  background: rgba(18, 18, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -8291,7 +8291,7 @@ body.splash-locked {
 }
 
 .splash-sound-hint:hover {
-  border-color: rgba(16, 185, 129, 0.85);
+  border-color: rgba(255, 255, 255, 0.45);
   transform: translateX(-50%) translateY(-2px);
   color: #ffffff;
 }
@@ -8348,7 +8348,7 @@ body.splash-locked {
   opacity: 1;
 }
 
-/* Step 1.5 (340ms): "DUMMMM" impact micro-punch with Emerald Box Glow */
+/* Step 1.5 (340ms): "DUMMMM" impact micro-punch with Pure White Light Glow */
 .splash-screen.step-impact .xrd-char {
   animation: netflixImpact 420ms cubic-bezier(0.12, 0.9, 0.24, 1) forwards;
 }
@@ -8358,8 +8358,8 @@ body.splash-locked {
     transform: scale(1);
   }
   32% {
-    transform: scale(1.06);
-    text-shadow: 0 0 28px rgba(16, 185, 129, 0.85), 2px 2px 0px #000;
+    transform: scale(1.05);
+    text-shadow: 0 0 26px rgba(255, 255, 255, 0.75), 2px 2px 0px #000;
   }
   100% {
     transform: scale(1);
@@ -8388,7 +8388,7 @@ body.splash-locked {
   text-shadow:
     3px 3px 0px #000,
     -2px -2px 0px #000,
-    0 0 35px rgba(16, 185, 129, 0.45) !important;
+    0 0 35px rgba(255, 255, 255, 0.35) !important;
   background: none !important;
   -webkit-background-clip: unset !important;
   background-clip: unset !important;
@@ -8402,7 +8402,7 @@ body.splash-locked {
   text-shadow:
     3px 3px 0px #000,
     -2px -2px 0px #000,
-    0 0 55px rgba(16, 185, 129, 0.8) !important;
+    0 0 45px rgba(255, 255, 255, 0.6) !important;
   transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1), text-shadow 600ms ease-out;
 }
 

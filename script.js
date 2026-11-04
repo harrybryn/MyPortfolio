@@ -187,23 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
             shockwaveActive = true;
             isImpact = true;
             shockwaveStartTime = performance.now();
-
-            // Burst floating 3D voxel particles / cube sparkles outward from center
-            for (let i = 0; i < 40; i++) {
-                const angle = Math.random() * Math.PI * 2;
-                const spd = Math.random() * 320 + 90;
-                splashParticles.push({
-                    x: cWidth / 2,
-                    y: cHeight / 2,
-                    vx: Math.cos(angle) * spd,
-                    vy: Math.sin(angle) * spd - 40,
-                    size: Math.random() * 6 + 3,
-                    alpha: 1,
-                    life: Math.random() * 0.8 + 0.6,
-                    age: 0,
-                    color: Math.random() > 0.4 ? '#10b981' : '#ffffff'
-                });
-            }
         }
 
         let lastFrameTime = performance.now();
@@ -214,64 +197,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (sCtx) {
                 // Clear with deep obsidian tint
-                sCtx.fillStyle = 'rgba(9, 9, 9, 0.38)';
+                sCtx.fillStyle = 'rgba(9, 9, 9, 0.32)';
                 sCtx.fillRect(0, 0, cWidth, cHeight);
 
-                // Central ambient emerald glow
+                // Central ambient white light glow
                 const centerGlow = sCtx.createRadialGradient(
                     cWidth / 2, cHeight / 2, 0,
-                    cWidth / 2, cHeight / 2, cWidth * 0.6
+                    cWidth / 2, cHeight / 2, cWidth * 0.55
                 );
-                centerGlow.addColorStop(0, isImpact ? 'rgba(16, 185, 129, 0.22)' : 'rgba(16, 185, 129, 0.06)');
-                centerGlow.addColorStop(0.55, 'rgba(16, 185, 129, 0.03)');
+                centerGlow.addColorStop(0, isImpact ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255, 255, 255, 0.03)');
+                centerGlow.addColorStop(0.5, 'rgba(255, 255, 255, 0.015)');
                 centerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
                 sCtx.fillStyle = centerGlow;
                 sCtx.fillRect(0, 0, cWidth, cHeight);
 
-                // Shockwave radius expands across the grid
+                // Shockwave radius expands smoothly across the grid
                 if (shockwaveActive) {
                     const elapsed = (now - shockwaveStartTime) / 1000;
-                    shockwaveRadius = elapsed * 1100;
-                    if (shockwaveRadius > Math.max(cWidth, cHeight) * 1.2) {
+                    shockwaveRadius = elapsed * 1050;
+                    if (shockwaveRadius > Math.max(cWidth, cHeight) * 1.25) {
                         shockwaveActive = false;
                     }
                 }
 
-                // Render each 3D Isometric Cube
+                // Render each 3D Isometric Cube in Pure Monochrome Silver/White
                 const maxDim = Math.max(cWidth, cHeight) * 0.85;
 
                 for (let i = 0; i < splashCubes.length; i++) {
                     const cube = splashCubes[i];
                     const dist = cube.distFromCenter;
 
-                    // Wave calculation: Kinetic elevation wave
+                    // Light wave calculation: Gentle elevation & white illumination
                     if (shockwaveActive) {
                         const waveDist = Math.abs(dist - shockwaveRadius);
-                        if (waveDist < 80) {
-                            const waveFactor = 1 - waveDist / 80;
-                            const peakElevation = waveFactor * 24 * Math.max(0.2, 1 - dist / maxDim);
+                        if (waveDist < 90) {
+                            const waveFactor = 1 - waveDist / 90;
+                            const peakElevation = waveFactor * 5.5 * Math.max(0.2, 1 - dist / maxDim);
                             cube.elevation = Math.max(cube.elevation, peakElevation);
-                            cube.glow = Math.max(cube.glow, waveFactor * 0.95);
+                            cube.glow = Math.max(cube.glow, waveFactor * 0.85);
                         }
                     }
 
-                    // HS Monogram Pedestal: Cubes directly under monogram stay elevated
+                    // HS Monogram Pedestal: Cubes directly under monogram hold gentle elevation
                     if (isCollapsed) {
-                        if (dist < 135) {
-                            cube.elevation += (16 - cube.elevation) * 0.12;
-                            cube.glow += (0.82 - cube.glow) * 0.12;
+                        if (dist < 140) {
+                            cube.elevation += (4.5 - cube.elevation) * 0.12;
+                            cube.glow += (0.6 - cube.glow) * 0.12;
                         }
                     }
 
                     // Bloom: Harmonic breathing wave
-                    if (isBloom && dist < 280) {
-                        cube.glow += 0.08 * Math.sin(now * 0.006 + dist * 0.02);
+                    if (isBloom && dist < 260) {
+                        cube.glow += 0.06 * Math.sin(now * 0.005 + dist * 0.02);
                     }
 
-                    // Smooth return decay
-                    if (!isCollapsed || dist >= 135) {
-                        cube.elevation = Math.max(0, cube.elevation - dt * 28);
-                        cube.glow = Math.max(0, cube.glow - dt * 0.75);
+                    // Smooth natural decay (matches site's hover decay)
+                    if (!isCollapsed || dist >= 140) {
+                        cube.elevation = Math.max(0, cube.elevation - dt * 10);
+                        cube.glow = Math.max(0, cube.glow - dt * 0.55);
                     }
 
                     // Vertices
@@ -285,21 +268,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     const V_bl = { x: cx - dx, y: cy + dy };
                     const V_tl = { x: cx - dx, y: cy - dy };
 
-                    // Colors & Hatches based on Elevation / Glow
+                    // Pure Monochrome Styling (White & Charcoal — Identical to bgInteractiveCanvas)
                     const g = Math.min(1, Math.max(0, cube.glow));
                     let strokeColor, borderColor, fillColor;
-                    const hlw = 0.55 + g * 0.45;
-                    const blw = 0.75 + g * 0.65;
+                    const hlw = 0.55 + g * 0.35;
+                    const blw = 0.7 + g * 0.45;
 
-                    if (g > 0.02) {
-                        // High-tech emerald & obsidian glow
-                        strokeColor = `rgba(255, 255, 255, ${(0.08 + g * 0.55).toFixed(3)})`;
-                        borderColor = `rgba(16, 185, 129, ${(0.15 + g * 0.75).toFixed(3)})`;
-                        fillColor = `rgba(16, 185, 129, ${(g * 0.16).toFixed(3)})`;
+                    if (g > 0.01) {
+                        strokeColor = `rgba(255, 255, 255, ${(0.025 + g * 0.22).toFixed(3)})`;
+                        borderColor = `rgba(255, 255, 255, ${(0.045 + g * 0.32).toFixed(3)})`;
+                        fillColor = `rgba(255, 255, 255, ${(g * 0.07).toFixed(3)})`;
                     } else {
-                        // Calm obsidian rest state
-                        strokeColor = 'rgba(255, 255, 255, 0.028)';
-                        borderColor = 'rgba(255, 255, 255, 0.05)';
+                        strokeColor = 'rgba(255, 255, 255, 0.025)';
+                        borderColor = 'rgba(255, 255, 255, 0.045)';
                         fillColor = null;
                     }
 
@@ -310,37 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     drawSplashFace(C, V_bl, V_bot, V_tl, Math.PI / 2, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
                     // 3. Right Face (Angled hatching)
                     drawSplashFace(C, V_bot, V_br, V_tr, -Math.PI / 6, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
-                }
-
-                // Render Floating 3D Voxel Sparks
-                for (let i = splashParticles.length - 1; i >= 0; i--) {
-                    const p = splashParticles[i];
-                    p.age += dt;
-                    if (p.age >= p.life) {
-                        splashParticles.splice(i, 1);
-                        continue;
-                    }
-                    p.x += p.vx * dt;
-                    p.y += p.vy * dt;
-                    p.vy += 45 * dt; // gravity
-                    const progress = p.age / p.life;
-                    const a = (1 - progress) * p.alpha;
-
-                    sCtx.save();
-                    sCtx.fillStyle = p.color;
-                    sCtx.globalAlpha = a;
-                    sCtx.shadowColor = p.color;
-                    sCtx.shadowBlur = 10;
-                    // Draw micro isometric diamond
-                    const sz = p.size * (1 - progress * 0.4);
-                    sCtx.beginPath();
-                    sCtx.moveTo(p.x, p.y - sz);
-                    sCtx.lineTo(p.x + sz * 0.86, p.y);
-                    sCtx.lineTo(p.x, p.y + sz);
-                    sCtx.lineTo(p.x - sz * 0.86, p.y);
-                    sCtx.closePath();
-                    sCtx.fill();
-                    sCtx.restore();
                 }
             }
 
@@ -539,11 +489,11 @@ document.addEventListener('DOMContentLoaded', () => {
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-reveal');
-                    // Light up central cubes
+                    // Light up central cubes with subtle white radiance
                     splashCubes.forEach(cube => {
                         if (cube.distFromCenter < 240) {
-                            cube.elevation = 8;
-                            cube.glow = 0.65;
+                            cube.elevation = 3.5;
+                            cube.glow = 0.45;
                         }
                     });
                     playTaDumSound();
