@@ -1,17 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
-    // 0. Minimalist Programmer Typing & Monogram Splash Screen (Exact 8.0s)
-    // Authentic Real Mechanical Keyboard Switch Audio Imported from Open Source Clatterbox
-    // Zero-Highlight, Pure Typography, and Automatic Audio Activation
+    // 0. Standing Vertical Typing & Monogram Splash Screen (Exact 8.0s)
+    // Pure Typography (Zero HTML tags/brackets) — Vertical Stack (Harry / Sevilla -> H / S)
+    // Authentic Real Mechanical Keyboard Switch Audio & Studio Ta-Dum
     // ==========================================================================
     (() => {
         const splash = document.getElementById('splashScreen');
         if (!splash) return;
 
-        const container = document.getElementById('splashLetterContainer');
+        const rowFirst = document.getElementById('splashRowFirst');
+        const rowSecond = document.getElementById('splashRowSecond');
+        const cursor = document.getElementById('splashCursor');
         const splashAudio = document.getElementById('splashAudio') || new Audio('assets/ta-dum.wav');
 
-        // Preload Real Mechanical Switch Audio Files (Imported Tactile MP3s)
+        // Preload Real Mechanical Switch Audio Files
         const mechAudios = {
             keys: [
                 new Audio('assets/mech-1.mp3'),
@@ -25,9 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         mechAudios.space.preload = 'auto';
         mechAudios.space.volume = 0.95;
 
-        const FULL_NAME = "Harry Sevilla";
-        // 'H' is at index 0, 'S' is at index 6
-        const INITIAL_INDICES = [0, 6];
+        const ROW_1 = "Harry";
+        const ROW_2 = "Sevilla";
 
         let timeouts = [];
         let typingTimeout = null;
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return audioCtx;
         }
 
-        // Preload Web Audio Buffers for Zero-Latency Mechanical Clicks
+        // Preload Web Audio Buffers for Zero-Latency Real Mechanical Clicks
         let keyBuffers = [];
         let spaceBuffer = null;
         async function preloadMechAudioBuffers() {
@@ -88,9 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         preloadMechAudioBuffers();
 
-        // Play authentic mechanical keyboard click (dual-engine: audio buffer + audio element)
+        // Play authentic mechanical keyboard click
         function playMechanicalKeyClick(isSpace) {
-            // 1. Play real mechanical audio sample via Web Audio Buffer (if running)
             const ctx = getAudioContext();
             if (ctx && ctx.state === 'running') {
                 try {
@@ -99,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         const src = ctx.createBufferSource();
                         const gain = ctx.createGain();
                         src.buffer = buf;
-                        // Subtle natural pitch variance (0.97x - 1.03x)
                         src.playbackRate.value = 0.97 + Math.random() * 0.06;
                         gain.gain.value = isSpace ? 0.95 : 0.88;
                         src.connect(gain);
@@ -109,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 } catch (e) {}
             }
 
-            // 2. Play HTML5 Audio element
             try {
                 const audioEl = isSpace ? mechAudios.space : mechAudios.keys[mechKeyCounter % mechAudios.keys.length];
                 if (audioEl) {
@@ -199,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (soundHasPlayed) return;
             soundHasPlayed = true;
 
-            // 1. Play native studio WAV
             if (splashAudio) {
                 try {
                     splashAudio.currentTime = 0;
@@ -208,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 } catch (e) {}
             }
 
-            // 2. Play Web Audio layer
             try {
                 const ctx = getAudioContext();
                 if (ctx) {
@@ -223,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (e) {}
         }
 
-        // Automatic audio unlock on any natural interaction
+        // Automatic audio unlock on any user gesture
         const unlockAudio = () => {
             const ctx = getAudioContext();
             if (ctx && ctx.state === 'suspended') {
@@ -243,41 +239,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (e) {}
 
-        // Organic Typing Animation of "Harry Sevilla"
-        function startTypingSequence(onComplete) {
-            if (!container) return;
-            container.innerHTML = '';
+        // Type a word character by character into a row container with cursor tracking
+        function typeWord(rowEl, word, isInitialRow, onComplete) {
+            let i = 0;
+            const letters = word.split('');
 
-            let charIndex = 0;
-            const chars = FULL_NAME.split('');
-
-            function typeNext() {
+            function nextChar() {
                 if (isComplete) return;
-                if (charIndex < chars.length) {
-                    const char = chars[charIndex];
-                    const isInitial = INITIAL_INDICES.includes(charIndex);
-                    const isSpace = char === ' ';
-
+                if (i < letters.length) {
+                    const char = letters[i];
                     const span = document.createElement('span');
-                    span.className = 'xrd-char' + (isInitial ? ' is-initial' : '') + (isSpace ? ' is-space' : '');
-                    span.textContent = isSpace ? '\u00a0' : char;
-                    container.appendChild(span);
+                    span.className = 'xrd-char' + (i === 0 ? ' is-initial' : '');
+                    span.textContent = char;
 
-                    // Real mechanical switch sound on every keystroke
-                    playMechanicalKeyClick(isSpace);
-
-                    charIndex++;
-                    // Natural human typing rhythm (~190ms - 240ms)
-                    const jitter = isSpace ? 250 : Math.floor(190 + Math.random() * 50);
-                    typingTimeout = setTimeout(typeNext, jitter);
-                } else {
-                    if (typeof onComplete === 'function') {
-                        onComplete();
+                    if (cursor && cursor.parentNode === rowEl) {
+                        rowEl.insertBefore(span, cursor);
+                    } else {
+                        rowEl.appendChild(span);
+                        if (cursor) rowEl.appendChild(cursor);
                     }
+
+                    playMechanicalKeyClick(false);
+                    i++;
+
+                    const jitter = Math.floor(180 + Math.random() * 50);
+                    typingTimeout = setTimeout(nextChar, jitter);
+                } else {
+                    if (typeof onComplete === 'function') onComplete();
                 }
             }
 
-            typeNext();
+            nextChar();
         }
 
         function runSequence() {
@@ -290,7 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
             splash.classList.remove('is-hidden', 'step-reveal', 'step-impact', 'step-collapsed', 'step-bloom', 'step-fadeout');
             splash.style.display = 'flex';
 
-            if (container) container.innerHTML = '';
+            if (rowFirst) rowFirst.innerHTML = '';
+            if (rowSecond) rowSecond.innerHTML = '';
+            if (cursor && rowFirst) rowFirst.appendChild(cursor);
 
             // Timeline: Exactly 8.0 Seconds
             // 0ms - 200ms: Obsidian stillness
@@ -300,21 +294,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 200));
 
-            // 800ms: Start automatic typing of "Harry Sevilla" with real mechanical switch sounds
+            // 600ms: Row 1 types "Harry"
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
-                    startTypingSequence();
+                    typeWord(rowFirst, ROW_1, true, () => {
+                        // Pause then move cursor down to Row 2
+                        timeouts.push(setTimeout(() => {
+                            if (!isComplete && cursor && rowSecond) {
+                                rowSecond.appendChild(cursor);
+                                playMechanicalKeyClick(true); // Space/carriage return sound
+                            }
+                            // 2000ms: Row 2 types "Sevilla"
+                            timeouts.push(setTimeout(() => {
+                                if (!isComplete) {
+                                    typeWord(rowSecond, ROW_2, false, () => {
+                                        // Both rows complete and stand vertically
+                                    });
+                                }
+                            }, 200));
+                        }, 250));
+                    });
                 }
-            }, 800));
+            }, 600));
 
-            // 5200ms: Smooth collapse from < Harry Sevilla /> -> < HS />
+            // 5000ms: Smooth collapse from Harry / Sevilla -> H / S (Standing Vertical Monogram)
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-collapsed');
                 }
-            }, 5200));
+            }, 5000));
 
-            // 5400ms: Brandmark Lock + Compile Flash + Signature Ta-Dum Sound!
+            // 5400ms: Monogram Lock + Compile Pulse + Signature Studio Ta-Dum Sound!
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-impact');

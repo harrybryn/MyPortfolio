@@ -8213,8 +8213,8 @@ body.splash-locked {
   height: 100vh !important;
 }
 
-/* ── Central Developer Logo Stage ── */
-.splash-coder-stage {
+/* ── Standing Vertical Typing & Monogram Stage (Zero HTML brackets, Pure Typography) ── */
+.splash-standing-stage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8222,72 +8222,17 @@ body.splash-locked {
   position: relative;
   z-index: 10;
   text-align: center;
+  pointer-events: none !important;
 }
 
-.splash-coder-logo {
-  display: inline-flex;
+.splash-standing-logo {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1rem;
   position: relative;
   transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Developer Syntax Brackets & Slash */
-.code-bracket,
-.code-slash {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 500;
-  color: #71717a;
-  user-select: none;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 1;
-  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0;
-}
-
-.splash-screen.step-reveal .code-bracket,
-.splash-screen.step-reveal .code-slash {
-  opacity: 1;
-}
-
-.code-bracket.bracket-left {
-  margin-right: 0.15em;
-  color: #a1a1aa;
-}
-
-.code-slash {
-  color: #52525b;
-  margin-left: 0.08em;
-}
-
-.code-bracket.bracket-right {
-  margin-left: 0.04em;
-  color: #a1a1aa;
-}
-
-/* Blinking IDE Terminal Cursor */
-.code-cursor {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 600;
-  color: #ffffff;
-  display: inline-block;
-  line-height: 1;
-  margin-left: 0.08em;
-  opacity: 0;
-  animation: codeBlink 1s step-start infinite;
-}
-
-.splash-screen.step-reveal .code-cursor {
-  opacity: 1;
-}
-
-@keyframes codeBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  pointer-events: none !important;
 }
 
 /* ── Pure Clean Zero-Highlight & Zero-Box Reset ── */
@@ -8310,9 +8255,9 @@ body.splash-locked {
   color: inherit !important;
 }
 
-.splash-coder-stage,
-.splash-coder-logo,
-.splash-letter-container,
+.splash-standing-stage,
+.splash-standing-logo,
+.splash-name-row,
 .xrd-char,
 .xrd-char.is-initial {
   background: transparent !important;
@@ -8320,105 +8265,119 @@ body.splash-locked {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
-  pointer-events: none !important; /* Impossible to select or highlight text */
+  text-shadow: none !important;
+  pointer-events: none !important;
 }
 
-.splash-letter-container {
+.splash-name-row {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.08em;
-  margin: 0;
-  max-width: 100%;
-  overflow: visible;
-  background: transparent !important;
+  line-height: 1.1;
+  position: relative;
+  min-height: clamp(2.5rem, 6vw, 4.8rem);
+  transition: line-height 600ms cubic-bezier(0.16, 1, 0.3, 1),
+              min-height 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none !important;
 }
 
 /* ─── Individual Character — Monospace Code Typography ─────────────────── */
 .xrd-char {
   display: inline-block;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: clamp(2rem, 5.2vw, 4.2rem);
+  font-family: 'JetBrains Mono', 'Inter', -apple-system, sans-serif;
+  font-size: clamp(2.4rem, 6.5vw, 5rem);
   font-weight: 600;
-  line-height: 1.2;
-  padding: 0 0.06em;
+  line-height: 1.1;
+  padding: 0 0.04em;
   max-width: 1.6em;
   margin: 0;
   white-space: nowrap;
   vertical-align: middle;
-  letter-spacing: 0.03em;
-  opacity: 0;
+  letter-spacing: 0.04em;
+  opacity: 1;
   overflow: hidden;
   color: #ffffff;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  transform: scale(0.85);
-  transition: all 650ms cubic-bezier(0.16, 1, 0.3, 1),
-              padding 650ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity, max-width;
-}
-
-/* Step 1: Characters reveal / pop */
-.splash-screen.step-reveal .xrd-char {
-  opacity: 1;
   transform: scale(1);
+  transition: max-width 650ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 500ms ease,
+              padding 650ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, max-width;
+  pointer-events: none !important;
 }
 
-/* Step 1.5 (5400ms): "Ta-Dum" compile pulse */
-.splash-screen.step-impact .splash-coder-logo {
-  animation: coderCompileFlash 450ms cubic-bezier(0.12, 0.9, 0.24, 1) forwards;
+/* Blinking cursor */
+.splash-cursor {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(2.4rem, 6.5vw, 5rem);
+  font-weight: 600;
+  color: #ffffff;
+  display: inline-block;
+  line-height: 1.1;
+  margin-left: 0.05em;
+  opacity: 1;
+  animation: codeBlink 1s step-start infinite;
+  pointer-events: none !important;
 }
 
-@keyframes coderCompileFlash {
-  0% {
-    transform: scale(1);
-  }
-  30% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+@keyframes codeBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-/* Step 2 (5200ms): Smooth Collapse into Initials Monogram < HS /> */
+/* Step 1.5 (5400ms): Compile pulse */
+.splash-screen.step-impact .splash-standing-logo {
+  animation: standingCompilePulse 420ms cubic-bezier(0.12, 0.9, 0.24, 1) forwards;
+}
+
+@keyframes standingCompilePulse {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* Step 2 (5200ms): Smooth Collapse into Standing Monogram H / S */
 .splash-screen.step-collapsed .xrd-char:not(.is-initial) {
   max-width: 0 !important;
   padding: 0 !important;
   opacity: 0 !important;
   margin: 0 !important;
-  transform: scale(0.4) translateY(3px) !important;
+  transform: scale(0.3) translateY(4px) !important;
 }
 
-.splash-screen.step-collapsed .code-bracket,
-.splash-screen.step-collapsed .code-slash,
-.splash-screen.step-collapsed .code-cursor {
-  font-size: clamp(3.2rem, 8vw, 6rem) !important;
-  color: #a1a1aa !important;
+.splash-screen.step-collapsed .splash-cursor {
+  opacity: 0 !important;
+  display: none !important;
+}
+
+.splash-screen.step-collapsed .splash-name-row {
+  line-height: 0.92 !important;
+  min-height: auto !important;
 }
 
 .splash-screen.step-collapsed .xrd-char.is-initial {
   font-family: 'JetBrains Mono', 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif !important;
-  font-size: clamp(3.6rem, 9vw, 6.8rem) !important;
-  padding: 0 0.08em !important;
-  letter-spacing: 0.08em !important;
+  font-size: clamp(3.8rem, 11vw, 7.5rem) !important;
+  padding: 0 !important;
+  letter-spacing: 0.02em !important;
   font-weight: 700 !important;
   font-style: normal !important;
   color: #ffffff !important;
+  line-height: 0.92 !important;
   background: transparent !important;
-  background-color: transparent !important;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
   text-shadow: none !important;
-  transform: scale(1.08) !important;
+  transform: scale(1) !important;
 }
 
 /* Step 2.5 (6400ms): Monogram radiance bloom */
 .splash-screen.step-bloom .xrd-char.is-initial {
-  transform: scale(1.12) !important;
+  transform: scale(1.05) !important;
   transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -8427,7 +8386,7 @@ body.splash-locked {
   opacity: 0 !important;
 }
 
-/* Step 4 (4000ms): Fully hidden & unlocked */
+/* Step 4 (8000ms): Fully hidden & unlocked */
 .splash-screen.is-hidden {
   display: none !important;
   pointer-events: none !important;

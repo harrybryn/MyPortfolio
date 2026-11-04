@@ -56,7 +56,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=157">
+    <link rel="stylesheet" href="styles.css?v=158">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -73,13 +73,11 @@
         <audio id="mechKey4" src="assets/mech-4.mp3" preload="auto"></audio>
         <audio id="mechSpace" src="assets/mech-space.mp3" preload="auto"></audio>
         
-        <div class="splash-coder-stage">
-            <div class="splash-coder-logo" id="splashCoderLogo">
-                <span class="code-bracket bracket-left">&lt;</span>
-                <div id="splashLetterContainer" class="splash-letter-container"></div>
-                <span class="code-slash">/</span>
-                <span class="code-bracket bracket-right">&gt;</span>
-                <span class="code-cursor">_</span>
+        <div class="splash-standing-stage">
+            <div class="splash-standing-logo" id="splashStandingLogo">
+                <div class="splash-name-row" id="splashRowFirst"></div>
+                <div class="splash-name-row" id="splashRowSecond"></div>
+                <span class="splash-cursor" id="splashCursor">_</span>
             </div>
         </div>
     </div>
@@ -1040,7 +1038,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=88"></script>
+    <script src="script.js?v=89"></script>
     <script src="arcade.js?v=26"></script>
     <script>
         if (window.lucide) {
