@@ -32,35 +32,31 @@
             var isDark = p !== 'light';
             document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 
-            // Splash Screen: Allow replay on Refresh (F5 / Reload) or on ?replay=1; bypass ONLY on subpage back-navigation
+            // Splash Screen: ALWAYS triggers on direct entry, reload/refresh (F5), or ?replay=1.
+            // Bypassed ONLY when returning back from an internal subpage (e.g. project-detail).
             try {
                 var urlParams = new URLSearchParams(window.location.search);
                 var forceSplash = urlParams.has('replay') || urlParams.has('splash');
-                var navEntries = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation');
-                var isReload = (navEntries && navEntries.length > 0 && navEntries[0].type === 'reload') ||
-                               (window.performance && window.performance.navigation && window.performance.navigation.type === 1);
+                var isFromSubpage = document.referrer && (
+                    document.referrer.indexOf('project-detail') !== -1 ||
+                    document.referrer.indexOf('projects.html') !== -1 ||
+                    document.referrer.indexOf('about.html') !== -1 ||
+                    document.referrer.indexOf('certifications.html') !== -1 ||
+                    document.referrer.indexOf('experience.html') !== -1
+                );
 
-                if (isReload || forceSplash) {
-                    sessionStorage.removeItem('portfolio_splash_seen');
-                    localStorage.removeItem('portfolio_splash_seen');
+                if (!forceSplash && isFromSubpage && sessionStorage.getItem('subpage_return_skip')) {
+                    document.documentElement.classList.add('splash-already-seen');
                 } else {
-                    var seen = sessionStorage.getItem('portfolio_splash_seen');
-                    var isFromSubpage = document.referrer && (
-                        document.referrer.indexOf('project-detail') !== -1 ||
-                        document.referrer.indexOf('projects.html') !== -1 ||
-                        document.referrer.indexOf('about.html') !== -1 ||
-                        document.referrer.indexOf('certifications.html') !== -1 ||
-                        document.referrer.indexOf('experience.html') !== -1
-                    );
-                    if (seen && isFromSubpage) {
-                        document.documentElement.classList.add('splash-already-seen');
-                    }
+                    document.documentElement.classList.remove('splash-already-seen');
+                    sessionStorage.removeItem('subpage_return_skip');
+                    sessionStorage.removeItem('portfolio_splash_seen');
                 }
             } catch (e) { }
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=151">
+    <link rel="stylesheet" href="styles.css?v=152">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -72,6 +68,7 @@
          ===================================================================== -->
     <div id="splashScreen" class="splash-screen" role="dialog" aria-modal="true" aria-label="Loading portfolio">
         <canvas id="splashCanvas" class="splash-canvas"></canvas>
+        <audio id="splashAudio" src="assets/ta-dum.wav" preload="auto"></audio>
         <div class="splash-audiowide-center">
             <div id="splashLetterContainer" class="splash-letter-container">
                 <span class="xrd-char is-initial">H</span>
@@ -1055,7 +1052,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=82"></script>
+    <script src="script.js?v=83"></script>
     <script src="arcade.js?v=26"></script>
     <script>
         if (window.lucide) {

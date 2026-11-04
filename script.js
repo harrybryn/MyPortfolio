@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
-    // 0. Netflix-Inspired Cinematic Splash Screen Controller (Exact 4.0s)
-    // 3D Light Ribbon Background Canvas + Guaranteed Web Audio "Ta-Dum" Synthesizer
+    // 0. Bespoke 3D Isometric Boxes Splash Screen Controller (Exact 4.0s)
+    // Dynamic Cube Matrix Shockwave, Elevating 3D Pedestal, & Guaranteed Ta-Dum Audio
     // ==========================================================================
     (() => {
         const splash = document.getElementById('splashScreen');
@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('splashLetterContainer');
         const canvas = document.getElementById('splashCanvas');
         const soundHint = document.getElementById('splashSoundHint');
+        const splashAudio = document.getElementById('splashAudio') || new Audio('assets/ta-dum.wav');
 
         const NAME = "HARRY SEVILLA";
         const INITIALS = [0, 6]; // 'H' at 0, 'S' at 6
@@ -37,23 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // ── 3D Netflix Light Ribbon Canvas Background ──
+        // ── 3D Isometric Boxes Canvas Engine (Bespoke to Harry Sevilla Background) ──
         let sCtx = null;
         let cWidth = 0;
         let cHeight = 0;
         let cDpr = Math.min(window.devicePixelRatio || 1, 2);
-        let ribbons = [];
-        let shockwaves = [];
-        let sparks = [];
-        let ribbonActive = false;
-        let impactTriggered = false;
-        let ribbonSpeedMultiplier = 1;
 
-        const NETFLIX_PALETTE = [
-            '#E50914', '#E50914', '#B81D24', '#FF2A35', 
-            '#9B1B5A', '#FF4D4D', '#7B1FA2', '#FF0055', 
-            '#00B4D8', '#FFD166', '#E50914', '#B81D24'
-        ];
+        // Exact isometric cube geometry from bgInteractiveCanvas
+        const R = 44; // Outer radius of isometric cube
+        const dx = R * 0.8660254; // R * cos(30 deg)
+        const dy = R * 0.5;       // R * sin(30 deg)
+        const stepX = dx * 2;     // Column spacing
+        const stepY = R * 1.5;    // Row spacing
+        const LINE_SPACING = 4.2; // Fine hatched spacing inside each face
+
+        let splashCubes = [];
+        let splashParticles = [];
+        let shockwaveRadius = 0;
+        let shockwaveActive = false;
+        let shockwaveStartTime = 0;
+        let isImpact = false;
+        let isCollapsed = false;
+        let isBloom = false;
 
         function initSplashCanvas() {
             if (!canvas) return;
@@ -68,55 +74,134 @@ document.addEventListener('DOMContentLoaded', () => {
             canvas.style.height = cHeight + 'px';
             sCtx.setTransform(cDpr, 0, 0, cDpr, 0, 0);
 
-            ribbons = [];
-            shockwaves = [];
-            sparks = [];
-            impactTriggered = false;
-            ribbonSpeedMultiplier = 1;
+            const cols = Math.ceil(cWidth / stepX) + 3;
+            const rows = Math.ceil(cHeight / stepY) + 3;
 
-            const ribbonCount = 52;
-            for (let i = 0; i < ribbonCount; i++) {
-                ribbons.push({
-                    x: (Math.random() - 0.5) * cWidth * 1.5,
-                    y: (Math.random() - 0.5) * cHeight * 0.5,
-                    z: Math.random() * 850 + 80,
-                    speedZ: Math.random() * 320 + 260,
-                    width: Math.random() * 18 + 5,
-                    length: Math.random() * cHeight * 0.8 + cHeight * 0.45,
-                    color: NETFLIX_PALETTE[i % NETFLIX_PALETTE.length],
-                    alpha: Math.random() * 0.55 + 0.35
-                });
+            splashCubes = [];
+            splashParticles = [];
+            shockwaveActive = false;
+            shockwaveRadius = 0;
+            isImpact = false;
+            isCollapsed = false;
+            isBloom = false;
+
+            const midX = cWidth / 2;
+            const midY = cHeight / 2;
+
+            for (let r = -2; r < rows; r++) {
+                const isOdd = (Math.abs(r) % 2 === 1);
+                const xOffset = isOdd ? dx : 0;
+                for (let c = -2; c < cols; c++) {
+                    const cx = c * stepX + xOffset;
+                    const cy = r * stepY;
+                    const distFromCenter = Math.hypot(cx - midX, cy - midY);
+                    splashCubes.push({
+                        cx,
+                        cy,
+                        r,
+                        c,
+                        distFromCenter,
+                        glow: 0,
+                        elevation: 0,
+                        targetElevation: 0,
+                        targetGlow: 0,
+                        baseElevation: 0
+                    });
+                }
             }
         }
 
-        function triggerCanvasImpact() {
-            impactTriggered = true;
-            ribbonSpeedMultiplier = 2.4;
-            
-            // Shockwave ring expanding across the background
-            shockwaves.push({
-                x: cWidth / 2,
-                y: cHeight / 2,
-                radius: 12,
-                maxRadius: Math.max(cWidth, cHeight) * 0.88,
-                alpha: 0.9,
-                speed: Math.max(cWidth, cHeight) * 1.15
-            });
+        // Draw individual face with fine directional hatching & borders
+        function drawSplashFace(p1, p2, p3, p4, angle, lineSpacing, strokeColor, borderColor, fillColor, hatchWidth = 0.7, borderWidth = 0.9) {
+            sCtx.save();
+            sCtx.beginPath();
+            sCtx.moveTo(p1.x, p1.y);
+            sCtx.lineTo(p2.x, p2.y);
+            sCtx.lineTo(p3.x, p3.y);
+            sCtx.lineTo(p4.x, p4.y);
+            sCtx.closePath();
 
-            // Explosive spark particles
-            for (let i = 0; i < 45; i++) {
+            if (fillColor) {
+                sCtx.fillStyle = fillColor;
+                sCtx.fill();
+            }
+
+            sCtx.clip();
+
+            sCtx.beginPath();
+            sCtx.lineWidth = hatchWidth;
+            sCtx.strokeStyle = strokeColor;
+
+            const minX = Math.min(p1.x, p2.x, p3.x, p4.x) - 4;
+            const maxX = Math.max(p1.x, p2.x, p3.x, p4.x) + 4;
+            const minY = Math.min(p1.y, p2.y, p3.y, p4.y) - 4;
+            const maxY = Math.max(p1.y, p2.y, p3.y, p4.y) + 4;
+
+            if (angle === Math.PI / 2) {
+                // Vertical lines (Left face)
+                for (let x = minX; x <= maxX; x += lineSpacing) {
+                    sCtx.moveTo(x, minY);
+                    sCtx.lineTo(x, maxY);
+                }
+            } else {
+                // Angled lines (Top and Right faces)
+                const cosA = Math.cos(angle);
+                const sinA = Math.sin(angle);
+                const normX = -sinA;
+                const normY = cosA;
+
+                const pts = [p1, p2, p3, p4];
+                let minD = Infinity;
+                let maxD = -Infinity;
+                for (let i = 0; i < 4; i++) {
+                    const d = pts[i].x * normX + pts[i].y * normY;
+                    if (d < minD) minD = d;
+                    if (d > maxD) maxD = d;
+                }
+
+                const lineLen = Math.hypot(maxX - minX, maxY - minY) * 1.5;
+                for (let d = minD - lineSpacing; d <= maxD + lineSpacing; d += lineSpacing) {
+                    const px = d * normX;
+                    const py = d * normY;
+                    sCtx.moveTo(px - lineLen * cosA, py - lineLen * sinA);
+                    sCtx.lineTo(px + lineLen * cosA, py + lineLen * sinA);
+                }
+            }
+            sCtx.stroke();
+            sCtx.restore();
+
+            if (borderColor) {
+                sCtx.beginPath();
+                sCtx.moveTo(p1.x, p1.y);
+                sCtx.lineTo(p2.x, p2.y);
+                sCtx.lineTo(p3.x, p3.y);
+                sCtx.lineTo(p4.x, p4.y);
+                sCtx.closePath();
+                sCtx.strokeStyle = borderColor;
+                sCtx.lineWidth = borderWidth;
+                sCtx.stroke();
+            }
+        }
+
+        function triggerCubeShockwave() {
+            shockwaveActive = true;
+            isImpact = true;
+            shockwaveStartTime = performance.now();
+
+            // Burst floating 3D voxel particles / cube sparkles outward from center
+            for (let i = 0; i < 40; i++) {
                 const angle = Math.random() * Math.PI * 2;
-                const spd = Math.random() * 380 + 120;
-                sparks.push({
+                const spd = Math.random() * 320 + 90;
+                splashParticles.push({
                     x: cWidth / 2,
                     y: cHeight / 2,
                     vx: Math.cos(angle) * spd,
-                    vy: Math.sin(angle) * spd,
+                    vy: Math.sin(angle) * spd - 40,
+                    size: Math.random() * 6 + 3,
                     alpha: 1,
-                    life: Math.random() * 0.75 + 0.55,
+                    life: Math.random() * 0.8 + 0.6,
                     age: 0,
-                    size: Math.random() * 2.8 + 1.2,
-                    color: Math.random() > 0.28 ? '#E50914' : '#FFD700'
+                    color: Math.random() > 0.4 ? '#10b981' : '#ffffff'
                 });
             }
         }
@@ -128,97 +213,132 @@ document.addEventListener('DOMContentLoaded', () => {
             lastFrameTime = now;
 
             if (sCtx) {
-                // Motion-blur semi-transparent clear for light trails
-                sCtx.fillStyle = 'rgba(0, 0, 0, 0.26)';
+                // Clear with deep obsidian tint
+                sCtx.fillStyle = 'rgba(9, 9, 9, 0.38)';
                 sCtx.fillRect(0, 0, cWidth, cHeight);
 
-                // Central ambient glow
+                // Central ambient emerald glow
                 const centerGlow = sCtx.createRadialGradient(
                     cWidth / 2, cHeight / 2, 0,
-                    cWidth / 2, cHeight / 2, cWidth * 0.55
+                    cWidth / 2, cHeight / 2, cWidth * 0.6
                 );
-                centerGlow.addColorStop(0, impactTriggered ? 'rgba(229, 9, 20, 0.28)' : 'rgba(229, 9, 20, 0.08)');
-                centerGlow.addColorStop(0.5, 'rgba(184, 29, 39, 0.06)');
+                centerGlow.addColorStop(0, isImpact ? 'rgba(16, 185, 129, 0.22)' : 'rgba(16, 185, 129, 0.06)');
+                centerGlow.addColorStop(0.55, 'rgba(16, 185, 129, 0.03)');
                 centerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
                 sCtx.fillStyle = centerGlow;
                 sCtx.fillRect(0, 0, cWidth, cHeight);
 
-                // Draw shockwaves
-                for (let i = shockwaves.length - 1; i >= 0; i--) {
-                    const sw = shockwaves[i];
-                    sw.radius += sw.speed * dt;
-                    sw.alpha -= dt * 0.85;
-
-                    if (sw.alpha <= 0 || sw.radius >= sw.maxRadius) {
-                        shockwaves.splice(i, 1);
-                        continue;
+                // Shockwave radius expands across the grid
+                if (shockwaveActive) {
+                    const elapsed = (now - shockwaveStartTime) / 1000;
+                    shockwaveRadius = elapsed * 1100;
+                    if (shockwaveRadius > Math.max(cWidth, cHeight) * 1.2) {
+                        shockwaveActive = false;
                     }
-
-                    sCtx.save();
-                    sCtx.beginPath();
-                    sCtx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
-                    sCtx.strokeStyle = `rgba(229, 9, 20, ${Math.max(0, sw.alpha)})`;
-                    sCtx.lineWidth = 4.5 * (1 - sw.radius / sw.maxRadius) + 1;
-                    sCtx.shadowColor = '#E50914';
-                    sCtx.shadowBlur = 18;
-                    sCtx.stroke();
-                    sCtx.restore();
                 }
 
-                // Draw 3D Light Ribbons streaming through space
-                if (impactTriggered) {
-                    const fov = 380;
-                    for (let i = 0; i < ribbons.length; i++) {
-                        const r = ribbons[i];
-                        r.z -= r.speedZ * ribbonSpeedMultiplier * dt;
-                        if (r.z <= 12) {
-                            r.z = 820;
-                            r.x = (Math.random() - 0.5) * cWidth * 1.5;
-                            r.y = (Math.random() - 0.5) * cHeight * 0.5;
+                // Render each 3D Isometric Cube
+                const maxDim = Math.max(cWidth, cHeight) * 0.85;
+
+                for (let i = 0; i < splashCubes.length; i++) {
+                    const cube = splashCubes[i];
+                    const dist = cube.distFromCenter;
+
+                    // Wave calculation: Kinetic elevation wave
+                    if (shockwaveActive) {
+                        const waveDist = Math.abs(dist - shockwaveRadius);
+                        if (waveDist < 80) {
+                            const waveFactor = 1 - waveDist / 80;
+                            const peakElevation = waveFactor * 24 * Math.max(0.2, 1 - dist / maxDim);
+                            cube.elevation = Math.max(cube.elevation, peakElevation);
+                            cube.glow = Math.max(cube.glow, waveFactor * 0.95);
                         }
-
-                        const scale = fov / (fov + r.z);
-                        const sx = cWidth / 2 + r.x * scale;
-                        const sy = cHeight / 2 + r.y * scale;
-                        const sw = r.width * scale;
-                        const sl = r.length * scale;
-
-                        const grad = sCtx.createLinearGradient(sx, sy - sl / 2, sx, sy + sl / 2);
-                        grad.addColorStop(0, 'rgba(0, 0, 0, 0)');
-                        grad.addColorStop(0.3, r.color);
-                        grad.addColorStop(0.5, '#ffffff');
-                        grad.addColorStop(0.7, r.color);
-                        grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-                        sCtx.save();
-                        sCtx.globalAlpha = Math.min(1, r.alpha * (scale * 1.4));
-                        sCtx.fillStyle = grad;
-                        sCtx.fillRect(sx - sw / 2, sy - sl / 2, sw, sl);
-                        sCtx.restore();
                     }
+
+                    // HS Monogram Pedestal: Cubes directly under monogram stay elevated
+                    if (isCollapsed) {
+                        if (dist < 135) {
+                            cube.elevation += (16 - cube.elevation) * 0.12;
+                            cube.glow += (0.82 - cube.glow) * 0.12;
+                        }
+                    }
+
+                    // Bloom: Harmonic breathing wave
+                    if (isBloom && dist < 280) {
+                        cube.glow += 0.08 * Math.sin(now * 0.006 + dist * 0.02);
+                    }
+
+                    // Smooth return decay
+                    if (!isCollapsed || dist >= 135) {
+                        cube.elevation = Math.max(0, cube.elevation - dt * 28);
+                        cube.glow = Math.max(0, cube.glow - dt * 0.75);
+                    }
+
+                    // Vertices
+                    const cx = cube.cx;
+                    const cy = cube.cy - cube.elevation;
+                    const C = { x: cx, y: cy };
+                    const V_top = { x: cx, y: cy - R };
+                    const V_tr = { x: cx + dx, y: cy - dy };
+                    const V_br = { x: cx + dx, y: cy + dy };
+                    const V_bot = { x: cx, y: cy + R };
+                    const V_bl = { x: cx - dx, y: cy + dy };
+                    const V_tl = { x: cx - dx, y: cy - dy };
+
+                    // Colors & Hatches based on Elevation / Glow
+                    const g = Math.min(1, Math.max(0, cube.glow));
+                    let strokeColor, borderColor, fillColor;
+                    const hlw = 0.55 + g * 0.45;
+                    const blw = 0.75 + g * 0.65;
+
+                    if (g > 0.02) {
+                        // High-tech emerald & obsidian glow
+                        strokeColor = `rgba(255, 255, 255, ${(0.08 + g * 0.55).toFixed(3)})`;
+                        borderColor = `rgba(16, 185, 129, ${(0.15 + g * 0.75).toFixed(3)})`;
+                        fillColor = `rgba(16, 185, 129, ${(g * 0.16).toFixed(3)})`;
+                    } else {
+                        // Calm obsidian rest state
+                        strokeColor = 'rgba(255, 255, 255, 0.028)';
+                        borderColor = 'rgba(255, 255, 255, 0.05)';
+                        fillColor = null;
+                    }
+
+                    // Draw 3 Isometric Faces
+                    // 1. Top Face
+                    drawSplashFace(C, V_tl, V_top, V_tr, Math.PI / 6, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
+                    // 2. Left Face (Vertical hatching)
+                    drawSplashFace(C, V_bl, V_bot, V_tl, Math.PI / 2, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
+                    // 3. Right Face (Angled hatching)
+                    drawSplashFace(C, V_bot, V_br, V_tr, -Math.PI / 6, LINE_SPACING, strokeColor, borderColor, fillColor, hlw, blw);
                 }
 
-                // Draw Sparks / Embers
-                for (let i = sparks.length - 1; i >= 0; i--) {
-                    const sp = sparks[i];
-                    sp.age += dt;
-                    if (sp.age >= sp.life) {
-                        sparks.splice(i, 1);
+                // Render Floating 3D Voxel Sparks
+                for (let i = splashParticles.length - 1; i >= 0; i--) {
+                    const p = splashParticles[i];
+                    p.age += dt;
+                    if (p.age >= p.life) {
+                        splashParticles.splice(i, 1);
                         continue;
                     }
-                    sp.x += sp.vx * dt;
-                    sp.y += sp.vy * dt;
-                    sp.vy += 60 * dt; // gravity
-                    const progress = sp.age / sp.life;
-                    const a = (1 - progress) * sp.alpha;
+                    p.x += p.vx * dt;
+                    p.y += p.vy * dt;
+                    p.vy += 45 * dt; // gravity
+                    const progress = p.age / p.life;
+                    const a = (1 - progress) * p.alpha;
 
                     sCtx.save();
-                    sCtx.fillStyle = sp.color;
+                    sCtx.fillStyle = p.color;
                     sCtx.globalAlpha = a;
-                    sCtx.shadowColor = sp.color;
-                    sCtx.shadowBlur = 8;
+                    sCtx.shadowColor = p.color;
+                    sCtx.shadowBlur = 10;
+                    // Draw micro isometric diamond
+                    const sz = p.size * (1 - progress * 0.4);
                     sCtx.beginPath();
-                    sCtx.arc(sp.x, sp.y, sp.size * (1 - progress * 0.5), 0, Math.PI * 2);
+                    sCtx.moveTo(p.x, p.y - sz);
+                    sCtx.lineTo(p.x + sz * 0.86, p.y);
+                    sCtx.lineTo(p.x, p.y + sz);
+                    sCtx.lineTo(p.x - sz * 0.86, p.y);
+                    sCtx.closePath();
                     sCtx.fill();
                     sCtx.restore();
                 }
@@ -227,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
             animFrameId = requestAnimationFrame(renderSplashCanvas);
         }
 
-        // ── Web Audio Synthesizer: Netflix "Ta-Dum" (Guaranteed Output) ──
+        // ── Guaranteed Dual-Engine Audio: Native WAV + Web Audio ──
         let audioCtx = null;
 
         function getAudioContext() {
@@ -235,21 +355,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
             return audioCtx;
-        }
-
-        function createSaturator(ctx, amount = 18) {
-            const k = amount;
-            const samples = 44100;
-            const curve = new Float32Array(samples);
-            const deg = Math.PI / 180;
-            for (let i = 0; i < samples; ++i) {
-                const x = (i * 2) / samples - 1;
-                curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
-            }
-            const shaper = ctx.createWaveShaper();
-            shaper.curve = curve;
-            shaper.oversample = '4x';
-            return shaper;
         }
 
         function showSoundHint() {
@@ -266,250 +371,136 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        function synthesizeNetflixTaDum(ctx) {
-            // Evaluated at exact current time + safety offset
+        // Web Audio Synthesizer Layer
+        function synthesizeWebAudio(ctx) {
             const t0 = ctx.currentTime + 0.015;
+            const master = ctx.createGain();
+            master.gain.setValueAtTime(0.95, t0);
+            master.connect(ctx.destination);
 
-            // Master Output
-            const masterGain = ctx.createGain();
-            masterGain.gain.setValueAtTime(0.96, t0);
-            masterGain.connect(ctx.destination);
-
-            const saturator = createSaturator(ctx, 20);
-            saturator.connect(masterGain);
-
-            // ============================================================
-            // STRIKE 1: "TA" (at t0 + 0.08s)
-            // Wood/Cabinet Knock + Metallic Anvil Rim Tap
-            // ============================================================
+            // Strike 1: "Ta" (t0 + 0.08)
             const tTa = t0 + 0.08;
-
             try {
-                // 1a. Wood knock transient
-                const noiseBuf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.08), ctx.sampleRate);
-                const outData = noiseBuf.getChannelData(0);
-                for (let i = 0; i < noiseBuf.length; i++) {
-                    outData[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.012));
-                }
-                const noiseSrc = ctx.createBufferSource();
-                noiseSrc.buffer = noiseBuf;
-
-                const taBpf = ctx.createBiquadFilter();
-                taBpf.type = 'bandpass';
-                taBpf.frequency.setValueAtTime(1800, tTa);
-                taBpf.Q.setValueAtTime(2.6, tTa);
-
-                const taNoiseGain = ctx.createGain();
-                taNoiseGain.gain.setValueAtTime(0.65, tTa);
-                taNoiseGain.gain.exponentialRampToValueAtTime(0.001, tTa + 0.065);
-
-                noiseSrc.connect(taBpf);
-                taBpf.connect(taNoiseGain);
-                taNoiseGain.connect(saturator);
-                noiseSrc.start(tTa);
+                const taOsc = ctx.createOscillator();
+                const taGain = ctx.createGain();
+                taOsc.type = 'triangle';
+                taOsc.frequency.setValueAtTime(460, tTa);
+                taOsc.frequency.exponentialRampToValueAtTime(140, tTa + 0.07);
+                taGain.gain.setValueAtTime(0.5, tTa);
+                taGain.gain.exponentialRampToValueAtTime(0.001, tTa + 0.075);
+                taOsc.connect(taGain);
+                taGain.connect(master);
+                taOsc.start(tTa);
+                taOsc.stop(tTa + 0.08);
             } catch (e) {}
 
-            try {
-                // 1b. Anvil rim tap
-                const rimOsc = ctx.createOscillator();
-                const rimGain = ctx.createGain();
-                rimOsc.type = 'triangle';
-                rimOsc.frequency.setValueAtTime(460, tTa);
-                rimOsc.frequency.exponentialRampToValueAtTime(140, tTa + 0.07);
-
-                rimGain.gain.setValueAtTime(0.5, tTa);
-                rimGain.gain.exponentialRampToValueAtTime(0.001, tTa + 0.075);
-
-                rimOsc.connect(rimGain);
-                rimGain.connect(saturator);
-                rimOsc.start(tTa);
-                rimOsc.stop(tTa + 0.08);
-            } catch (e) {}
-
-            // ============================================================
-            // STRIKE 2: "DUMMMM" (at t0 + 0.32s)
-            // Heavy Sub-bass + Mid Harmonics (Audible on Laptops/Phones)
-            // ============================================================
+            // Strike 2: "DUMMMM" (t0 + 0.32)
             const tDum = t0 + 0.32;
-
             try {
-                // 2a. Sub-Bass Fundamental (64Hz -> 36Hz)
-                const subOsc = ctx.createOscillator();
-                const subGain = ctx.createGain();
-                subOsc.type = 'sine';
-                subOsc.frequency.setValueAtTime(64, tDum);
-                subOsc.frequency.exponentialRampToValueAtTime(36, tDum + 0.55);
+                // Sub-bass
+                const sub = ctx.createOscillator();
+                const subG = ctx.createGain();
+                sub.type = 'sine';
+                sub.frequency.setValueAtTime(62, tDum);
+                sub.frequency.exponentialRampToValueAtTime(36, tDum + 0.55);
+                subG.gain.setValueAtTime(0, tDum);
+                subG.gain.linearRampToValueAtTime(0.98, tDum + 0.02);
+                subG.gain.exponentialRampToValueAtTime(0.4, tDum + 0.45);
+                subG.gain.exponentialRampToValueAtTime(0.0001, tDum + 2.5);
+                sub.connect(subG);
+                subG.connect(master);
+                sub.start(tDum);
+                sub.stop(tDum + 2.6);
 
-                subGain.gain.setValueAtTime(0, tDum);
-                subGain.gain.linearRampToValueAtTime(0.98, tDum + 0.02);
-                subGain.gain.exponentialRampToValueAtTime(0.42, tDum + 0.45);
-                subGain.gain.exponentialRampToValueAtTime(0.0001, tDum + 2.5);
-
-                subOsc.connect(subGain);
-                subGain.connect(masterGain);
-                subOsc.start(tDum);
-                subOsc.stop(tDum + 2.6);
+                // Mid-body punch for laptop speakers
+                const mid = ctx.createOscillator();
+                const midG = ctx.createGain();
+                mid.type = 'sawtooth';
+                mid.frequency.setValueAtTime(160, tDum);
+                mid.frequency.exponentialRampToValueAtTime(65, tDum + 0.28);
+                const lpf = ctx.createBiquadFilter();
+                lpf.type = 'lowpass';
+                lpf.frequency.setValueAtTime(750, tDum);
+                lpf.frequency.exponentialRampToValueAtTime(140, tDum + 0.35);
+                midG.gain.setValueAtTime(0.7, tDum);
+                midG.gain.exponentialRampToValueAtTime(0.001, tDum + 0.36);
+                mid.connect(lpf);
+                lpf.connect(midG);
+                midG.connect(master);
+                mid.start(tDum);
+                mid.stop(tDum + 0.38);
             } catch (e) {}
 
-            try {
-                // 2b. Mid-Bass Body (140Hz -> 65Hz) — Vital for Laptop/Phone Speakers!
-                const midOsc = ctx.createOscillator();
-                const midGain = ctx.createGain();
-                midOsc.type = 'sawtooth';
-                midOsc.frequency.setValueAtTime(160, tDum);
-                midOsc.frequency.exponentialRampToValueAtTime(62, tDum + 0.28);
-
-                const midLpf = ctx.createBiquadFilter();
-                midLpf.type = 'lowpass';
-                midLpf.frequency.setValueAtTime(750, tDum);
-                midLpf.frequency.exponentialRampToValueAtTime(140, tDum + 0.35);
-
-                midGain.gain.setValueAtTime(0.72, tDum);
-                midGain.gain.exponentialRampToValueAtTime(0.001, tDum + 0.36);
-
-                midOsc.connect(midLpf);
-                midLpf.connect(midGain);
-                midGain.connect(saturator);
-                midOsc.start(tDum);
-                midOsc.stop(tDum + 0.38);
-            } catch (e) {}
-
-            try {
-                // 2c. Slap/Click Punch
-                const clickOsc = ctx.createOscillator();
-                const clickGain = ctx.createGain();
-                clickOsc.type = 'triangle';
-                clickOsc.frequency.setValueAtTime(320, tDum);
-                clickOsc.frequency.exponentialRampToValueAtTime(50, tDum + 0.1);
-
-                clickGain.gain.setValueAtTime(0.8, tDum);
-                clickGain.gain.exponentialRampToValueAtTime(0.001, tDum + 0.1);
-
-                clickOsc.connect(clickGain);
-                clickGain.connect(saturator);
-                clickOsc.start(tDum);
-                clickOsc.stop(tDum + 0.11);
-            } catch (e) {}
-
-            // ============================================================
-            // STAGE 3: THE ETHEREAL SHIMMER / BLOOM TRAIL (0.34s to 3.2s)
-            // Multi-voice harmonic chord with stereo spread & warm roll-off
-            // ============================================================
-            const chordVoices = [
-                { freq: 146.83, pan: -0.28 }, // D3
-                { freq: 220.00, pan:  0.28 }, // A3
-                { freq: 293.66, pan: -0.42 }, // D4
-                { freq: 349.23, pan:  0.38 }, // F4
-                { freq: 440.00, pan:  0.00 }, // A4
-                { freq: 523.25, pan:  0.45 }, // C5
-                { freq: 659.25, pan: -0.35 }  // E5
-            ];
-
-            chordVoices.forEach((voice, i) => {
+            // Blossom Shimmer Chord (0.34s - 3.2s)
+            [146.83, 220, 293.66, 349.23, 440, 523.25, 659.25].forEach((freq, idx) => {
                 try {
                     const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    const detune = (i % 2 === 0 ? 1 : -1) * (5 + i * 1.8);
-
-                    osc.type = i % 2 === 0 ? 'sine' : 'triangle';
-                    osc.frequency.setValueAtTime(voice.freq, tDum + 0.04);
-                    osc.detune.setValueAtTime(detune, tDum + 0.04);
-
-                    const filter = ctx.createBiquadFilter();
-                    filter.type = 'lowpass';
-                    filter.frequency.setValueAtTime(1400, tDum);
-                    filter.frequency.exponentialRampToValueAtTime(320, tDum + 2.7);
-
-                    gain.gain.setValueAtTime(0.0001, tDum);
-                    gain.gain.linearRampToValueAtTime(0.085 / (1 + i * 0.13), tDum + 0.22);
-                    gain.gain.setValueAtTime(0.075 / (1 + i * 0.13), tDum + 1.15);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, tDum + 2.85);
-
-                    osc.connect(filter);
-                    filter.connect(gain);
-
-                    if (ctx.createStereoPanner) {
-                        const panner = ctx.createStereoPanner();
-                        panner.pan.setValueAtTime(voice.pan, tDum);
-                        gain.connect(panner);
-                        panner.connect(masterGain);
-                    } else {
-                        gain.connect(masterGain);
-                    }
-
+                    const g = ctx.createGain();
+                    osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+                    osc.frequency.setValueAtTime(freq, tDum + 0.04);
+                    g.gain.setValueAtTime(0.0001, tDum);
+                    g.gain.linearRampToValueAtTime(0.08 / (1 + idx * 0.15), tDum + 0.22);
+                    g.gain.setValueAtTime(0.07 / (1 + idx * 0.15), tDum + 1.15);
+                    g.gain.exponentialRampToValueAtTime(0.0001, tDum + 2.85);
+                    osc.connect(g);
+                    g.connect(master);
                     osc.start(tDum + 0.02);
                     osc.stop(tDum + 2.95);
                 } catch (e) {}
             });
+        }
 
-            // Shimmer Air Swell
-            try {
-                const airLen = Math.floor(ctx.sampleRate * 2.2);
-                const airBuf = ctx.createBuffer(1, airLen, ctx.sampleRate);
-                const airData = airBuf.getChannelData(0);
-                for (let i = 0; i < airLen; i++) {
-                    airData[i] = (Math.random() * 2 - 1) * 0.08;
+        function playTaDumSound() {
+            if (soundHasPlayed) return;
+            soundHasPlayed = true;
+
+            // 1. Play Studio WAV file
+            if (splashAudio) {
+                try {
+                    splashAudio.currentTime = 0;
+                    splashAudio.volume = 1.0;
+                    const playPromise = splashAudio.play();
+                    if (playPromise && playPromise.then) {
+                        playPromise.then(() => {
+                            hideSoundHint();
+                        }).catch(() => {
+                            showSoundHint();
+                        });
+                    }
+                } catch (e) {
+                    showSoundHint();
                 }
-                const airSrc = ctx.createBufferSource();
-                airSrc.buffer = airBuf;
+            }
 
-                const airFilter = ctx.createBiquadFilter();
-                airFilter.type = 'bandpass';
-                airFilter.frequency.setValueAtTime(2200, tDum + 0.1);
-                airFilter.frequency.exponentialRampToValueAtTime(700, tDum + 2.3);
-                airFilter.Q.setValueAtTime(2.0, tDum);
-
-                const airGain = ctx.createGain();
-                airGain.gain.setValueAtTime(0.0001, tDum + 0.05);
-                airGain.gain.linearRampToValueAtTime(0.05, tDum + 0.42);
-                airGain.gain.exponentialRampToValueAtTime(0.0001, tDum + 2.4);
-
-                airSrc.connect(airFilter);
-                airFilter.connect(airGain);
-                airGain.connect(masterGain);
-                airSrc.start(tDum + 0.08);
+            // 2. Play Web Audio Synthesizer layer if running
+            try {
+                const ctx = getAudioContext();
+                if (ctx) {
+                    if (ctx.state === 'running') {
+                        synthesizeWebAudio(ctx);
+                        hideSoundHint();
+                    } else {
+                        ctx.resume().then(() => {
+                            if (ctx.state === 'running') {
+                                synthesizeWebAudio(ctx);
+                                hideSoundHint();
+                            }
+                        }).catch(() => {});
+                    }
+                }
             } catch (e) {}
         }
 
-        function triggerAudioPlayback() {
-            if (soundHasPlayed) return;
-            const ctx = getAudioContext();
-            if (!ctx) return;
-
-            if (ctx.state === 'running') {
-                soundHasPlayed = true;
-                synthesizeNetflixTaDum(ctx);
-                hideSoundHint();
-            } else {
-                ctx.resume().then(() => {
-                    if (ctx.state === 'running' && !soundHasPlayed) {
-                        soundHasPlayed = true;
-                        synthesizeNetflixTaDum(ctx);
-                        hideSoundHint();
-                    } else if (ctx.state !== 'running') {
-                        showSoundHint();
-                    }
-                }).catch(() => {
-                    showSoundHint();
-                });
-            }
-        }
-
-        // User interaction listeners for guaranteed sound unlock
+        // Guaranteed unlock on ANY user gesture
         const handleUserGesture = () => {
             const ctx = getAudioContext();
             if (ctx && ctx.state === 'suspended') {
-                ctx.resume().then(() => {
-                    if (ctx.state === 'running' && !soundHasPlayed && !isComplete) {
-                        soundHasPlayed = true;
-                        synthesizeNetflixTaDum(ctx);
-                        hideSoundHint();
-                    }
-                }).catch(() => {});
-            } else if (ctx && ctx.state === 'running' && !soundHasPlayed && !isComplete) {
-                soundHasPlayed = true;
-                synthesizeNetflixTaDum(ctx);
-                hideSoundHint();
+                ctx.resume().catch(() => {});
+            }
+            if (!soundHasPlayed && !isComplete) {
+                playTaDumSound();
+            } else if (splashAudio && splashAudio.paused && !isComplete) {
+                splashAudio.play().then(() => hideSoundHint()).catch(() => {});
             }
         };
 
@@ -541,37 +532,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 animFrameId = requestAnimationFrame(renderSplashCanvas);
             }
 
-            // Total Duration: Exactly 4.0 Seconds (Canonical Netflix Intro Length)
-            // 0ms: Pitch black screen with background canvas warming up
+            // Total Duration: Exactly 4.0 Seconds
+            // 0ms: Obsidian stillness
 
-            // Step 1: 100ms — Strike 1 ("Ta") + Full Name Appears
+            // Step 1: 100ms — Strike 1 ("Ta") + Full Name Appears + Central Boxes Ignite
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-reveal');
-                    triggerAudioPlayback();
+                    // Light up central cubes
+                    splashCubes.forEach(cube => {
+                        if (cube.distFromCenter < 240) {
+                            cube.elevation = 8;
+                            cube.glow = 0.65;
+                        }
+                    });
+                    playTaDumSound();
                 }
             }, 100));
 
-            // Step 1.5: 340ms — Strike 2 ("DUMMMM") + Background Detonates 3D Light Ribbons
+            // Step 1.5: 340ms — Strike 2 ("DUMMMM") + 3D Isometric Boxes Kinetic Shockwave!
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-impact');
-                    triggerCanvasImpact();
+                    triggerCubeShockwave();
                 }
             }, 340));
 
-            // Step 2: 1800ms — Smooth Cinematic Collapse into "HS" Initials Monogram
+            // Step 2: 1800ms — Smooth Collapse into "HS" Initials Monogram + Elevated Pedestal of Cubes
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-collapsed');
-                    ribbonSpeedMultiplier = 3.6; // Warp speed light ribbons streaming
+                    isCollapsed = true;
                 }
             }, 1800));
 
-            // Step 2.5: 2800ms — Monogram Radiance / Aura Bloom as Chord Shimmer Peeks
+            // Step 2.5: 2800ms — Monogram Radiance / Harmonic Box Bloom
             timeouts.push(setTimeout(() => {
                 if (!isComplete) {
                     splash.classList.add('step-bloom');
+                    isBloom = true;
                 }
             }, 2800));
 
@@ -598,40 +597,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 4000));
         }
 
-        // Start sequence (Bypassed ONLY on subpage back-navigation, plays on refresh or direct entry)
-        const SPLASH_KEY = 'portfolio_splash_seen';
+        // Start sequence: ALWAYS runs on reload/refresh or direct visit.
+        // Bypassed ONLY if specifically coming from internal subpages with skip token.
         const urlParams = new URLSearchParams(window.location.search);
         const forceReplay = urlParams.get('replay') === '1' || urlParams.get('splash') === '1';
-        const navEntries = window.performance && window.performance.getEntriesByType && window.performance.getEntriesByType('navigation');
-        const isReload = (navEntries && navEntries.length > 0 && navEntries[0].type === 'reload') ||
-                         (window.performance && window.performance.navigation && window.performance.navigation.type === 1);
+        const isFromSubpage = document.referrer && (
+            document.referrer.includes('project-detail') ||
+            document.referrer.includes('projects.html') ||
+            document.referrer.includes('about.html') ||
+            document.referrer.includes('certifications.html') ||
+            document.referrer.includes('experience.html')
+        );
 
-        try {
-            if (isReload || forceReplay) {
-                sessionStorage.removeItem(SPLASH_KEY);
-                localStorage.removeItem(SPLASH_KEY);
-            } else {
-                const isFromSubpage = document.referrer && (
-                    document.referrer.includes('project-detail') ||
-                    document.referrer.includes('projects.html') ||
-                    document.referrer.includes('about.html') ||
-                    document.referrer.includes('certifications.html') ||
-                    document.referrer.includes('experience.html')
-                );
-                if (sessionStorage.getItem(SPLASH_KEY) && isFromSubpage) {
-                    splash.classList.add('is-hidden');
-                    splash.style.display = 'none';
-                    document.body.classList.remove('splash-locked', 'splash-pending-reveal');
-                    document.body.classList.add('splash-revealed');
-                    return;
-                }
-            }
-            sessionStorage.setItem(SPLASH_KEY, 'true');
-        } catch (e) {}
+        if (!forceReplay && isFromSubpage && sessionStorage.getItem('subpage_return_skip')) {
+            splash.classList.add('is-hidden');
+            splash.style.display = 'none';
+            document.body.classList.remove('splash-locked', 'splash-pending-reveal');
+            document.body.classList.add('splash-revealed');
+            return;
+        }
 
-        // Pointerdown / click listener on splash to ensure sound triggers if browser blocked initial autoplay
+        // Pointerdown / click listener on splash
         splash.addEventListener('pointerdown', handleUserGesture);
 
+        // Always launch sequence
         runSequence();
     })();
 

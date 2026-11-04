@@ -8188,14 +8188,15 @@ html.theme-anim *::after {
 }
 
 /* ==========================================================================
-   NETFLIX-INSPIRED CINEMATIC SPLASH SCREEN (Exact 4.0s Choreography)
+   BESPOKE 3D ISOMETRIC CUBES SPLASH SCREEN (Exact 4.0s Choreography)
+   Dynamic Matrix Shockwave, Elevating 3D Cubes, & Guaranteed Ta-Dum Audio
    ========================================================================== */
 .splash-screen {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #000000;
+  background-color: #090909;
   z-index: 100000;
   display: flex;
   align-items: center;
@@ -8208,7 +8209,7 @@ html.theme-anim *::after {
   will-change: opacity;
 }
 
-/* Netflix 3D Light Ribbons Canvas in Splash Background */
+/* 3D Isometric Boxes Canvas in Splash Background */
 .splash-canvas {
   position: absolute;
   inset: 0;
@@ -8219,12 +8220,12 @@ html.theme-anim *::after {
   display: block;
 }
 
-/* Netflix cinematic red bloom behind the title on "DUM" strike */
+/* Emerald radial glow behind the title on "DUM" strike */
 .splash-screen::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.42) 0%, rgba(184, 29, 39, 0.16) 35%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.28) 0%, rgba(16, 185, 129, 0.08) 35%, rgba(9, 9, 9, 0) 70%);
   opacity: 0;
   transform: scale(0.85);
   transition: opacity 400ms ease-out, transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -8234,18 +8235,18 @@ html.theme-anim *::after {
 
 .splash-screen.step-impact::before {
   opacity: 1;
-  transform: scale(1.15);
+  transform: scale(1.18);
 }
 
 .splash-screen.step-collapsed::before {
-  opacity: 0.3;
+  opacity: 0.35;
   transform: scale(0.96);
   transition: opacity 800ms ease, transform 800ms ease;
 }
 
 .splash-screen.step-bloom::before {
-  opacity: 0.55;
-  transform: scale(1.3);
+  opacity: 0.6;
+  transform: scale(1.35);
   transition: opacity 600ms ease-out, transform 700ms ease-out;
 }
 
@@ -8273,8 +8274,8 @@ body.splash-locked {
   gap: 0.45rem;
   padding: 0.38rem 0.9rem;
   border-radius: 999px;
-  background: rgba(15, 15, 18, 0.78);
-  border: 1px solid rgba(229, 9, 20, 0.35);
+  background: rgba(15, 15, 18, 0.85);
+  border: 1px solid rgba(16, 185, 129, 0.45);
   box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -8290,7 +8291,7 @@ body.splash-locked {
 }
 
 .splash-sound-hint:hover {
-  border-color: rgba(229, 9, 20, 0.75);
+  border-color: rgba(16, 185, 129, 0.85);
   transform: translateX(-50%) translateY(-2px);
   color: #ffffff;
 }
@@ -8347,7 +8348,7 @@ body.splash-locked {
   opacity: 1;
 }
 
-/* Step 1.5 (340ms): "DUMMMM" impact micro-punch */
+/* Step 1.5 (340ms): "DUMMMM" impact micro-punch with Emerald Box Glow */
 .splash-screen.step-impact .xrd-char {
   animation: netflixImpact 420ms cubic-bezier(0.12, 0.9, 0.24, 1) forwards;
 }
@@ -8358,7 +8359,7 @@ body.splash-locked {
   }
   32% {
     transform: scale(1.06);
-    text-shadow: 0 0 25px rgba(229, 9, 20, 0.8), 2px 2px 0px #000;
+    text-shadow: 0 0 28px rgba(16, 185, 129, 0.85), 2px 2px 0px #000;
   }
   100% {
     transform: scale(1);
@@ -8387,7 +8388,7 @@ body.splash-locked {
   text-shadow:
     3px 3px 0px #000,
     -2px -2px 0px #000,
-    0 0 35px rgba(229, 9, 20, 0.35) !important;
+    0 0 35px rgba(16, 185, 129, 0.45) !important;
   background: none !important;
   -webkit-background-clip: unset !important;
   background-clip: unset !important;
@@ -8401,7 +8402,7 @@ body.splash-locked {
   text-shadow:
     3px 3px 0px #000,
     -2px -2px 0px #000,
-    0 0 55px rgba(229, 9, 20, 0.7) !important;
+    0 0 55px rgba(16, 185, 129, 0.8) !important;
   transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1), text-shadow 600ms ease-out;
 }
 
