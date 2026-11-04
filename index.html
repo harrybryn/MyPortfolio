@@ -60,7 +60,7 @@
         })();
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=150">
+    <link rel="stylesheet" href="styles.css?v=151">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -71,6 +71,7 @@
          Fredoka Typography: Full Name -> Initials Organic Collapse
          ===================================================================== -->
     <div id="splashScreen" class="splash-screen" role="dialog" aria-modal="true" aria-label="Loading portfolio">
+        <canvas id="splashCanvas" class="splash-canvas"></canvas>
         <div class="splash-audiowide-center">
             <div id="splashLetterContainer" class="splash-letter-container">
                 <span class="xrd-char is-initial">H</span>
@@ -88,7 +89,14 @@
                 <span class="xrd-char">A</span>
             </div>
         </div>
-
+        <div class="splash-sound-hint" id="splashSoundHint" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+            <span>Tap anywhere for sound</span>
+        </div>
     </div>
 
     <!-- Interactive Geometric Canvas Background -->
@@ -1047,7 +1055,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="script.js?v=81"></script>
+    <script src="script.js?v=82"></script>
     <script src="arcade.js?v=26"></script>
     <script>
         if (window.lucide) {
